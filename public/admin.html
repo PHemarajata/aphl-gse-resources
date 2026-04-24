@@ -40,6 +40,9 @@
         <span id="authStatusText" class="ml-1 text-red-700">Not signed in</span>
       </div>
       <div class="flex items-center gap-2">
+        <button id="configureAuthBtn" class="px-3 py-2 rounded bg-yellow-100 text-yellow-900 hover:bg-yellow-200 text-sm">
+          <i class="fas fa-key mr-1"></i> Configure Auth
+        </button>
         <button id="signInBtn" class="px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm">
           <i class="fab fa-google mr-1"></i> Sign in with Google
         </button>
@@ -277,6 +280,30 @@
       <p>Developed by <strong>Peera (P) Hemarajata, M.D., Ph.D., D(ABMM)</strong></p>
     </div>
   </footer>
+
+  <div id="authConfigModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="min-h-screen flex items-center justify-center px-4">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold">Configure Firebase Auth</h3>
+          <button id="closeAuthConfigBtn" class="text-gray-500 hover:text-gray-700 text-xl leading-none">&times;</button>
+        </div>
+        <p class="text-sm text-gray-600 mb-4">Enter Firebase Web App config values. This is stored in your browser only.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <label class="text-sm">API Key<input id="cfgApiKey" class="mt-1 w-full border rounded px-3 py-2" placeholder="AIza..."></label>
+          <label class="text-sm">Auth Domain<input id="cfgAuthDomain" class="mt-1 w-full border rounded px-3 py-2" placeholder="project-id.firebaseapp.com"></label>
+          <label class="text-sm">Project ID<input id="cfgProjectId" class="mt-1 w-full border rounded px-3 py-2" placeholder="project-id"></label>
+          <label class="text-sm">App ID (optional)<input id="cfgAppId" class="mt-1 w-full border rounded px-3 py-2" placeholder="1:123:web:abc"></label>
+          <label class="text-sm md:col-span-2">Storage Bucket (optional)<input id="cfgStorageBucket" class="mt-1 w-full border rounded px-3 py-2" placeholder="project-id.appspot.com"></label>
+        </div>
+        <div class="mt-5 flex flex-wrap justify-end gap-2">
+          <button id="clearAuthConfigBtn" class="px-3 py-2 rounded bg-gray-200 text-gray-900 hover:bg-gray-300 text-sm">Clear Stored Config</button>
+          <button id="testAuthConfigBtn" class="px-3 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 text-sm">Test Config</button>
+          <button id="saveAuthConfigBtn" class="px-3 py-2 rounded bg-green-600 text-white hover:bg-green-700 text-sm">Save & Reload</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="validation.js"></script>
   <script src="resources-data.js"></script>

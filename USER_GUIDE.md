@@ -177,9 +177,13 @@ Do not rely on client-side allowlists alone for security.
 ### Firebase Google auth setup checklist
 1. Enable **Google** sign-in provider in Firebase Authentication.
 2. Configure Firebase web config and inject it at runtime as `window.__FIREBASE_CONFIG__`.
-3. Set approved domain and email allowlist in `public/admin-auth.js`.
-4. Enforce server-side token verification for `/api/saveResources`.
-5. Prefer custom claims (e.g., `admin: true`) for long-term authorization control.
+3. If auth status shows *not configured*, click **Configure Auth** in Admin and paste Firebase Web Config JSON (stored locally in browser).
+4. Configure `window.__ADMIN_AUTH_POLICY__` in deployment config:
+   - `allowedDomains: []`
+   - `allowedEmails: []`
+   - `allowDomainOrEmailFallback: false` (recommended default).
+5. Enforce server-side token verification for `/api/saveResources`.
+6. Prefer custom claims (e.g., `admin: true`) for long-term authorization control.
 
 ---
 
