@@ -20,36 +20,30 @@ const enumRules = {
   topics: ['surveillance', 'implementation', 'policy', 'qms', 'bioinformatics', 'training', 'costing', 'prioritization']
 };
 
-const requiredArrayFields = Object.keys(enumRules);
-const requiredScalarFields = ['id', 'title', 'description', 'organization', 'url'];
-
-function createIssue({
-  severity,
-  check,
-  message,
-  resourceId = null,
-  field = null,
-  details = null
-}) {
-  return { severity, check, message, resourceId, field, details };
-}
+const requiredArrays = Object.keys(enumRules);
+const criticalChecks = new Set([
+  'duplicate-id',
+  'broken-enum',
+  'malformed-url',
+  'missing-required-array',
+  'related-resource-missing'
+]);
 
 function loadResourcesDatabase() {
   const source = fs.readFileSync(dataFilePath, 'utf8');
   const context = { window: {}, globalThis: {} };
   vm.createContext(context);
-  vm.runInContext(`${source};globalThis.__resourcesDatabase = resourcesDatabase;`, context, {
-    filename: dataFilePath
-  });
-
-  return context.globalThis.__resourcesDatabase;
+  vm.runInContext(`${source};globalThis.__resourcesDatabase = resourcesDatabase;`, context, { filename: dataFilePath });
+  const database = context.globalThis.__resourcesDatabase;
+  if (!database) {
+    throw new Error(`Unable to parse resources database from ${dataFilePath}`);
+  }
+  return database;
 }
 
-function isValidHttpUrl(value) {
-  if (typeof value !== 'string' || value.trim() === '') return false;
-
-  // Allow legacy placeholder links currently used by dataset.
-  if (value === '#') return true;
+function isLikelyUrl(value) {
+  if (typeof value !== 'string') return false;
+  if (!value.trim() || value === '#') return true;
 
   try {
     const parsed = new URL(value);
@@ -59,42 +53,16 @@ function isValidHttpUrl(value) {
   }
 }
 
-function validate(resourcesDatabase) {
+function createIssue({ severity, check, resourceId = null, field = null, message, details = null }) {
+  return { severity, check, resourceId, field, message, details };
+}
+
+function validate(resources) {
   const issues = [];
-
-  if (!resourcesDatabase || typeof resourcesDatabase !== 'object' || Array.isArray(resourcesDatabase)) {
-    issues.push(createIssue({
-      severity: 'error',
-      check: 'invalid-internal-structure',
-      message: 'resourcesDatabase must be an object containing a resources array.'
-    }));
-    return { issues, resources: [] };
-  }
-
-  if (!Array.isArray(resourcesDatabase.resources)) {
-    issues.push(createIssue({
-      severity: 'error',
-      check: 'invalid-internal-structure',
-      field: 'resources',
-      message: 'resourcesDatabase.resources must be an array.'
-    }));
-    return { issues, resources: [] };
-  }
-
-  const resources = resourcesDatabase.resources;
   const idCounts = new Map();
 
   for (const resource of resources) {
-    if (!resource || typeof resource !== 'object' || Array.isArray(resource)) {
-      issues.push(createIssue({
-        severity: 'error',
-        check: 'invalid-internal-structure',
-        message: 'Each resource must be an object.'
-      }));
-      continue;
-    }
-
-    if (typeof resource.id === 'string' && resource.id.trim()) {
+    if (resource?.id) {
       idCounts.set(resource.id, (idCounts.get(resource.id) ?? 0) + 1);
     }
   }
@@ -102,7 +70,7 @@ function validate(resourcesDatabase) {
   for (const [id, count] of idCounts.entries()) {
     if (count > 1) {
       issues.push(createIssue({
-        severity: 'error',
+        severity: 'critical',
         check: 'duplicate-id',
         resourceId: id,
         field: 'id',
@@ -112,33 +80,16 @@ function validate(resourcesDatabase) {
     }
   }
 
-  const resourceIds = new Set(resources.map((resource) => resource?.id).filter(Boolean));
+  const resourceIds = new Set(resources.map((resource) => resource.id).filter(Boolean));
 
   for (const resource of resources) {
-    if (!resource || typeof resource !== 'object' || Array.isArray(resource)) {
-      continue;
-    }
+    const resourceId = resource?.id ?? '(missing-id)';
 
-    const resourceId = resource.id || '(missing-id)';
-
-    for (const field of requiredScalarFields) {
-      const value = resource[field];
-      if (typeof value !== 'string' || value.trim() === '') {
-        issues.push(createIssue({
-          severity: 'error',
-          check: 'missing-required-field',
-          resourceId,
-          field,
-          message: `Required field "${field}" is missing or empty.`
-        }));
-      }
-    }
-
-    for (const field of requiredArrayFields) {
-      const value = resource[field];
+    for (const field of requiredArrays) {
+      const value = resource?.[field];
       if (!Array.isArray(value) || value.length === 0) {
         issues.push(createIssue({
-          severity: 'error',
+          severity: 'critical',
           check: 'missing-required-array',
           resourceId,
           field,
@@ -151,7 +102,7 @@ function validate(resourcesDatabase) {
       const invalidValues = value.filter((entry) => !validValues.includes(entry));
       if (invalidValues.length > 0) {
         issues.push(createIssue({
-          severity: 'warning',
+          severity: 'critical',
           check: 'broken-enum',
           resourceId,
           field,
@@ -164,31 +115,21 @@ function validate(resourcesDatabase) {
       }
     }
 
-    if (!isValidHttpUrl(resource.url)) {
+    if (!isLikelyUrl(resource?.url)) {
       issues.push(createIssue({
-        severity: 'warning',
+        severity: 'critical',
         check: 'malformed-url',
         resourceId,
         field: 'url',
-        message: `URL is not a valid http(s) URL: "${resource.url}".`
+        message: `Malformed URL detected: "${resource?.url}".`
       }));
     }
 
-    if (resource.relatedResources !== undefined && !Array.isArray(resource.relatedResources)) {
-      issues.push(createIssue({
-        severity: 'error',
-        check: 'invalid-internal-structure',
-        resourceId,
-        field: 'relatedResources',
-        message: 'Field "relatedResources" must be an array when provided.'
-      }));
-    }
-
-    if (Array.isArray(resource.relatedResources)) {
+    if (Array.isArray(resource?.relatedResources)) {
       const missingReferences = resource.relatedResources.filter((id) => !resourceIds.has(id));
       if (missingReferences.length > 0) {
         issues.push(createIssue({
-          severity: 'warning',
+          severity: 'critical',
           check: 'related-resource-missing',
           resourceId,
           field: 'relatedResources',
@@ -199,36 +140,30 @@ function validate(resourcesDatabase) {
     }
   }
 
-  return { issues, resources };
+  return issues;
 }
 
-function summarizeIssues(issues) {
-  const blockingErrors = issues.filter((issue) => issue.severity === 'error');
+function buildReport(resources, issues) {
+  const generatedAt = new Date().toISOString();
+  const criticalIssues = issues.filter((issue) => issue.severity === 'critical');
   const warnings = issues.filter((issue) => issue.severity === 'warning');
-  const checks = issues.reduce((acc, issue) => {
+  const groupedByCheck = issues.reduce((acc, issue) => {
     acc[issue.check] = (acc[issue.check] ?? 0) + 1;
     return acc;
   }, {});
 
-  return {
-    totalIssues: issues.length,
-    blockingErrors: blockingErrors.length,
-    warnings: warnings.length,
-    checks
-  };
-}
-
-function buildReport(resourcesCount, issues) {
-  const summary = summarizeIssues(issues);
-  const blocked = summary.blockingErrors > 0;
+  const blocked = criticalIssues.some((issue) => criticalChecks.has(issue.check));
 
   return {
-    generatedAt: new Date().toISOString(),
+    generatedAt,
     sourceFile: path.relative(repoRoot, dataFilePath),
     blocked,
     summary: {
-      totalResources: resourcesCount,
-      ...summary
+      totalResources: resources.length,
+      totalIssues: issues.length,
+      criticalIssues: criticalIssues.length,
+      warnings: warnings.length,
+      checks: groupedByCheck
     },
     issues
   };
@@ -247,7 +182,7 @@ function writeReports(report) {
   lines.push('');
   lines.push('## Totals');
   lines.push(`- Resources checked: ${report.summary.totalResources}`);
-  lines.push(`- Blocking errors: ${report.summary.blockingErrors}`);
+  lines.push(`- Critical issues: ${report.summary.criticalIssues}`);
   lines.push(`- Warnings: ${report.summary.warnings}`);
   lines.push(`- Total issues: ${report.summary.totalIssues}`);
   lines.push('');
@@ -262,32 +197,16 @@ function writeReports(report) {
     }
   }
 
-  const blockingErrors = report.issues.filter((issue) => issue.severity === 'error');
-  const warnings = report.issues.filter((issue) => issue.severity === 'warning');
-
   lines.push('');
-  lines.push('## First 25 blocking errors');
+  lines.push('## First 25 issues');
 
-  if (blockingErrors.length === 0) {
-    lines.push('- None');
+  if (report.issues.length === 0) {
+    lines.push('- No issues found.');
   } else {
-    for (const issue of blockingErrors.slice(0, 25)) {
+    for (const issue of report.issues.slice(0, 25)) {
       const location = issue.resourceId ? `resource=${issue.resourceId}` : 'resource=n/a';
       const field = issue.field ? ` field=${issue.field}` : '';
-      lines.push(`- [error] ${issue.check} (${location}${field}) ${issue.message}`);
-    }
-  }
-
-  lines.push('');
-  lines.push('## First 25 warnings');
-
-  if (warnings.length === 0) {
-    lines.push('- None');
-  } else {
-    for (const issue of warnings.slice(0, 25)) {
-      const location = issue.resourceId ? `resource=${issue.resourceId}` : 'resource=n/a';
-      const field = issue.field ? ` field=${issue.field}` : '';
-      lines.push(`- [warning] ${issue.check} (${location}${field}) ${issue.message}`);
+      lines.push(`- [${issue.severity}] ${issue.check} (${location}${field}) ${issue.message}`);
     }
   }
 
@@ -295,49 +214,25 @@ function writeReports(report) {
 }
 
 function main() {
-  const allowBlocking = process.argv.includes('--allow-critical') || process.argv.includes('--allow-blocking');
+  const allowCritical = process.argv.includes('--allow-critical');
+  const resourcesDatabase = loadResourcesDatabase();
+  const resources = resourcesDatabase?.resources;
 
-  let resourcesDatabase;
-  let issues = [];
-  let resourcesCount = 0;
-
-  try {
-    resourcesDatabase = loadResourcesDatabase();
-  } catch (error) {
-    issues.push(createIssue({
-      severity: 'error',
-      check: 'malformed-javascript',
-      message: `Failed to load ${path.relative(repoRoot, dataFilePath)}: ${error.message}`
-    }));
-
-    const report = buildReport(resourcesCount, issues);
-    writeReports(report);
-
-    console.log('Validation status: BLOCKED');
-    console.log(`Machine report: ${path.relative(repoRoot, machineReportPath)}`);
-    console.log(`Summary report: ${path.relative(repoRoot, humanReportPath)}`);
-    console.log(`Blocking errors: ${report.summary.blockingErrors}`);
-
-    if (!allowBlocking) {
-      process.exitCode = 1;
-    }
-    return;
+  if (!Array.isArray(resources)) {
+    throw new Error('resourcesDatabase.resources must be an array.');
   }
 
-  const result = validate(resourcesDatabase);
-  issues = result.issues;
-  resourcesCount = result.resources.length;
-
-  const report = buildReport(resourcesCount, issues);
+  const issues = validate(resources);
+  const report = buildReport(resources, issues);
   writeReports(report);
 
-  console.log(`Validation status: ${report.blocked ? 'BLOCKED' : 'PASS'}`);
+  const status = report.blocked ? 'BLOCKED' : 'PASS';
+  console.log(`Validation status: ${status}`);
   console.log(`Machine report: ${path.relative(repoRoot, machineReportPath)}`);
   console.log(`Summary report: ${path.relative(repoRoot, humanReportPath)}`);
-  console.log(`Blocking errors: ${report.summary.blockingErrors}`);
-  console.log(`Warnings: ${report.summary.warnings}`);
+  console.log(`Critical issues: ${report.summary.criticalIssues}`);
 
-  if (report.blocked && !allowBlocking) {
+  if (report.blocked && !allowCritical) {
     process.exitCode = 1;
   }
 }
