@@ -1011,21 +1011,12 @@ class AdminApp {
         summary
       });
 
-      // Create updated database with metadata
-      const updatedDatabase = {
-        metadata: {
-          version: "1.8.1",
-          currentVersionId: versionId,
-          lastUpdated: nowIso,
-          totalResources: final.length,
-          lastValidated: this.lastValidationTime,
-          validatedResources: Array.from(this.validatedIds),
-          generatedBy: "APHL Admin Panel v1.8",
-          versionHistory: existingHistory,
-          auditLog: existingAudit
-        },
-        resources: final
-      };
+      const updatedDatabase = this.buildCurrentDatabaseSnapshot(final, {
+        versionId,
+        lastUpdated: nowIso,
+        versionHistory: existingHistory,
+        auditLog: existingAudit
+      });
       
       const backupName = `resources-data-backup-${new Date().toISOString().replace(/[:.]/g,'-')}.js`;
       const backupText = toJS(this.original);
@@ -1060,6 +1051,28 @@ if (typeof window !== 'undefined') {
       this.renderVersionHistory();
       this.enableValidationIfAny(); // Update button state
       alert(`Database saved as ${versionId} with immutable version history and validation stats.`);
+    }
+
+    buildCurrentDatabaseSnapshot(resourcesOverride, options = {}){
+      const resources = Array.isArray(resourcesOverride) ? resourcesOverride : this.data;
+      const metadata = this.database?.metadata || {};
+      const versionHistory = Array.isArray(options.versionHistory) ? options.versionHistory : (Array.isArray(metadata.versionHistory) ? deepClone(metadata.versionHistory) : []);
+      const auditLog = Array.isArray(options.auditLog) ? options.auditLog : (Array.isArray(metadata.auditLog) ? deepClone(metadata.auditLog) : []);
+
+      return {
+        metadata: {
+          version: "1.8.1",
+          currentVersionId: options.versionId || metadata.currentVersionId || null,
+          lastUpdated: options.lastUpdated || new Date().toISOString(),
+          totalResources: resources.length,
+          lastValidated: this.lastValidationTime,
+          validatedResources: Array.from(this.validatedIds),
+          generatedBy: "APHL Admin Panel v1.8",
+          versionHistory,
+          auditLog
+        },
+        resources: deepClone(resources)
+      };
     }
   }
 
