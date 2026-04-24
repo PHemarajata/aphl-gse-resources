@@ -16,6 +16,124 @@
     return div.innerHTML;
   }
 
+
+  const RESOURCE_SCHEMA = {
+    idPattern: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+    requiredFields: ['id', 'title', 'organization', 'description', 'url'],
+    enumFields: {
+      audiences: ['laboratorians', 'epidemiologists', 'bioinformaticians', 'policymakers'],
+      stages: ['planning', 'implementation', 'optimization'],
+      types: ['guide', 'tool', 'training', 'policy'],
+      geography: ['global', 'africa', 'asia', 'lmic'],
+      topics: ['surveillance', 'implementation', 'policy', 'qms', 'bioinformatics', 'training', 'costing', 'prioritization']
+    },
+    requiredArrays: ['audiences', 'stages', 'types', 'geography', 'topics'],
+    optionalArrays: ['keyFeatures', 'relatedResources'],
+    urlPattern: /^https:\/\//i
+  };
+
+  function formatValidationMessage(issue){
+    return `[${issue.severity.toUpperCase()}] ${issue.source} | field: ${issue.field} | expected: ${issue.expected} | actual: ${issue.actual} | fix: ${issue.hint}`;
+  }
+
+  function validateResourceRecord(record, context = {}) {
+    const issues = [];
+    const source = context.source || 'record';
+
+    const pushIssue = (severity, field, expected, actual, hint) => {
+      issues.push({ severity, source, field, expected, actual, hint });
+    };
+
+    RESOURCE_SCHEMA.requiredFields.forEach((field) => {
+      const value = record[field];
+      if (typeof value !== 'string' || value.trim() === '') {
+        pushIssue('critical', field, 'non-empty string', JSON.stringify(value), `Provide a value for ${field}.`);
+      }
+    });
+
+    if (record.id && !RESOURCE_SCHEMA.idPattern.test(record.id)) {
+      pushIssue('critical', 'id', 'kebab-case lowercase ID (e.g., who-global-strategy)', JSON.stringify(record.id), 'Use lowercase letters/numbers with single hyphens and no spaces/underscores.');
+    }
+
+    if (record.url && record.url !== '#' && !RESOURCE_SCHEMA.urlPattern.test(record.url)) {
+      pushIssue('critical', 'url', 'URL must be "#" or start with https://', JSON.stringify(record.url), 'Use a secure https:// URL or "#" if unavailable.');
+    }
+
+    RESOURCE_SCHEMA.requiredArrays.forEach((field) => {
+      const value = record[field];
+      if (!Array.isArray(value) || value.length === 0) {
+        pushIssue('critical', field, 'array with at least 1 value', JSON.stringify(value), `Select at least one ${field} value.`);
+        return;
+      }
+
+      const allowed = RESOURCE_SCHEMA.enumFields[field] || [];
+      const invalid = value.filter((entry) => !allowed.includes(entry));
+      if (invalid.length > 0) {
+        pushIssue('critical', field, `only allowed values: ${allowed.join(', ')}`, JSON.stringify(invalid), `Replace invalid values in ${field} with allowed enum values.`);
+      }
+
+      const uniqueCount = new Set(value).size;
+      if (uniqueCount !== value.length) {
+        pushIssue('warning', field, 'array values should be unique', JSON.stringify(value), `Remove duplicate values from ${field}.`);
+      }
+    });
+
+    RESOURCE_SCHEMA.optionalArrays.forEach((field) => {
+      const value = record[field];
+      if (value !== undefined && !Array.isArray(value)) {
+        pushIssue('critical', field, 'array value', JSON.stringify(value), `Convert ${field} to an array.`);
+      }
+    });
+
+    if (Array.isArray(record.keyFeatures) && record.keyFeatures.length === 0) {
+      pushIssue('warning', 'keyFeatures', 'at least one key feature recommended', JSON.stringify(record.keyFeatures), 'Add one or more key features to improve discoverability.');
+    }
+
+    if (!record.practicalUse || String(record.practicalUse).trim() === '') {
+      pushIssue('warning', 'practicalUse', 'recommended non-empty description', JSON.stringify(record.practicalUse), 'Add a practical use note to help users apply the resource.');
+    }
+
+    return {
+      source,
+      issues,
+      critical: issues.filter((i) => i.severity === 'critical'),
+      warnings: issues.filter((i) => i.severity === 'warning')
+    };
+  }
+
+  function validateResourceSet(records, sourceLabel = 'dataset') {
+    const issues = [];
+    const seenIds = new Map();
+
+    records.forEach((record, idx) => {
+      const source = `${sourceLabel} row/index ${idx + 1}`;
+      const rowResult = validateResourceRecord(record, { source });
+      issues.push(...rowResult.issues);
+
+      if (record.id) {
+        const existingIndex = seenIds.get(record.id);
+        if (existingIndex !== undefined) {
+          issues.push({
+            severity: 'critical',
+            source,
+            field: 'id',
+            expected: 'unique ID across all records',
+            actual: `duplicate of row/index ${existingIndex + 1} (${record.id})`,
+            hint: 'Use a unique ID for each resource.'
+          });
+        } else {
+          seenIds.set(record.id, idx);
+        }
+      }
+    });
+
+    return {
+      issues,
+      critical: issues.filter((i) => i.severity === 'critical'),
+      warnings: issues.filter((i) => i.severity === 'warning')
+    };
+  }
+
   // Converters
   function toTSV(resources){
     const headers = ['id','title','organization','description','url','audiences','stages','types','geography','topics','keyFeatures','practicalUse','relatedResources'];
@@ -116,6 +234,14 @@ function parseJS(text) {
     throw error;
   }
 }
+
+
+  function parseJSON(text){
+    const parsed = JSON.parse(text);
+    const records = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.resources) ? parsed.resources : null);
+    if (!records) throw new Error('JSON must be an array of resources or an object with a resources array');
+    return records.map(normalize);
+  }
   function normalize(o){
     const list = v => Array.isArray(v) ? v : String(v||'').split(';').map(s=>s.trim()).filter(Boolean);
     
@@ -226,6 +352,7 @@ class AdminApp {
     const file = this.q('#fileInputHidden');
     this.on('#importTsvBtn', 'click', () => { file.accept = '.tsv,.txt'; file.onchange = e => this.importFile(e, 'tsv'); file.click(); });
     this.on('#importJsBtn', 'click', () => { file.accept = '.js'; file.onchange = e => this.importFile(e, 'js'); file.click(); });
+    this.on('#importJsonBtn', 'click', () => { file.accept = '.json'; file.onchange = e => this.importFile(e, 'json'); file.click(); });
 
     this.on('#exportJsonBtn', 'click', () => downloadText('resources-data.js', toJS(this.data)));
     this.on('#exportTsvBtn', 'click', () => downloadText('genomic-epi-resources.tsv', toTSV(this.data)));
@@ -417,6 +544,30 @@ class AdminApp {
               throw new Error('Could not parse JS file: ' + error.message + ' (Fallback: ' + fallbackError.message + ')');
             }
           }
+        } else if (kind==='json') {
+          inc = parseJSON(text);
+        }
+
+        const validationSource = kind === 'tsv' ? 'TSV import' : kind === 'json' ? 'JSON import' : 'JS import';
+        const validation = validateResourceSet(inc, validationSource);
+        if (validation.critical.length > 0) {
+          const message = [
+            `Import rejected: ${validation.critical.length} critical validation error(s).`,
+            '',
+            ...validation.critical.slice(0, 12).map(formatValidationMessage),
+            validation.critical.length > 12 ? `...and ${validation.critical.length - 12} more.` : ''
+          ].filter(Boolean).join('\n');
+          return alert(message);
+        }
+        if (validation.warnings.length > 0) {
+          const proceed = confirm([
+            `Import has ${validation.warnings.length} warning(s).`,
+            'Continue import?',
+            '',
+            ...validation.warnings.slice(0, 8).map(formatValidationMessage),
+            validation.warnings.length > 8 ? `...and ${validation.warnings.length - 8} more.` : ''
+          ].join('\n'));
+          if (!proceed) return;
         }
         
         // Track imported resources for validation
@@ -467,10 +618,23 @@ class AdminApp {
       };
     }
     validateForm(d){
-      const req = ['id','title','description','organization'];
-      const reqArr = ['audiences','stages','types','geography','topics'];
-      for (let k of req){ if(!d[k]) { alert(k+' is required'); return false; } }
-      for (let k of reqArr){ if(!Array.isArray(d[k]) || !d[k].length){ alert('At least one '+k+' required'); return false; } }
+      const result = validateResourceRecord(d, { source: 'Admin form row/index 1' });
+      if (result.critical.length > 0) {
+        alert([
+          `Save blocked: ${result.critical.length} critical validation error(s).`,
+          '',
+          ...result.critical.map(formatValidationMessage)
+        ].join('\n'));
+        return false;
+      }
+      if (result.warnings.length > 0) {
+        const proceed = confirm([
+          `This record has ${result.warnings.length} warning(s). Save anyway?`,
+          '',
+          ...result.warnings.map(formatValidationMessage)
+        ].join('\n'));
+        if (!proceed) return false;
+      }
       return true;
     }
     saveFromForm(){
@@ -616,6 +780,27 @@ class AdminApp {
         const map = new Map(this.original.map(r=>[r.id,r]));
         this.data.forEach(r=> map.set(r.id,r));
         final = Array.from(map.values());
+      }
+
+      const gate = validateResourceSet(final, 'Pre-publish/save gate');
+      if (gate.critical.length > 0) {
+        alert([
+          `Save blocked: ${gate.critical.length} critical validation error(s) found in pre-publish/save gate.`,
+          '',
+          ...gate.critical.slice(0, 20).map(formatValidationMessage),
+          gate.critical.length > 20 ? `...and ${gate.critical.length - 20} more.` : ''
+        ].filter(Boolean).join('\n'));
+        return;
+      }
+      if (gate.warnings.length > 0) {
+        const proceed = confirm([
+          `Pre-publish/save gate found ${gate.warnings.length} warning(s).`,
+          'Do you want to continue saving?',
+          '',
+          ...gate.warnings.slice(0, 12).map(formatValidationMessage),
+          gate.warnings.length > 12 ? `...and ${gate.warnings.length - 12} more.` : ''
+        ].filter(Boolean).join('\n'));
+        if (!proceed) return;
       }
       
       // Create updated database with metadata
