@@ -174,6 +174,13 @@ The repository contains Firebase auth scaffolding intended for protected publish
 
 Do not rely on client-side allowlists alone for security.
 
+### Firebase Google auth setup checklist
+1. Enable **Google** sign-in provider in Firebase Authentication.
+2. Configure Firebase web config and inject it at runtime as `window.__FIREBASE_CONFIG__`.
+3. Set approved domain and email allowlist in `public/admin-auth.js`.
+4. Enforce server-side token verification for `/api/saveResources`.
+5. Prefer custom claims (e.g., `admin: true`) for long-term authorization control.
+
 ---
 
 ## 3) Data standards for curators
@@ -248,4 +255,3 @@ Before release, confirm:
 7. Save to database.
 8. Compare against prior version.
 9. Publish and archive reports.
-

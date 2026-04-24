@@ -33,6 +33,22 @@
       <a href="index.html" class="text-white hover:underline"><i class="fas fa-home mr-1"></i>View Website</a>
     </div>
   </nav>
+  <div class="bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+      <div class="text-sm text-gray-700">
+        <span class="font-semibold">Admin Access:</span>
+        <span id="authStatusText" class="ml-1 text-red-700">Not signed in</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="signInBtn" class="px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm">
+          <i class="fab fa-google mr-1"></i> Sign in with Google
+        </button>
+        <button id="signOutBtn" class="px-3 py-2 rounded bg-gray-300 text-gray-900 hover:bg-gray-400 text-sm hidden">
+          <i class="fas fa-sign-out-alt mr-1"></i> Sign out
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Dashboard Section -->
   <div class="bg-white border-b shadow-sm">
@@ -218,6 +234,9 @@
   <button id="saveDatabaseBtn" class="w-full mt-3 px-4 py-3 rounded bg-green-600 text-white hover:bg-green-700">
     <i class="fas fa-database mr-2"></i> Save to Database (backup + write resources-data.js)
   </button>
+  <button id="publishBtn" class="w-full mt-2 px-4 py-3 rounded bg-blue-600 text-white hover:bg-blue-700">
+    <i class="fas fa-cloud-upload-alt mr-2"></i> Publish to Live
+  </button>
 </div>
 
 <div class="bg-white rounded-lg shadow p-6 space-y-3">
@@ -261,69 +280,9 @@
 
   <script src="validation.js"></script>
   <script src="resources-data.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="admin.js"></script>
+  <script src="admin-auth.js"></script>
 </body>
 </html>
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-<script>
-  // TODO: paste your Firebase web config here
-  firebase.initializeApp({
-    apiKey: "…", authDomain: "…", projectId: "…"
-  });
-
-  const allowed = new Set(["you@yourorg.gov","colleague@yourorg.gov"]);
-
-  async function requireSignIn() {
-    return new Promise((resolve, reject) => {
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if (!user) {
-          const provider = new firebase.auth.GoogleAuthProvider();
-          try { await firebase.auth().signInWithPopup(provider); }
-          catch (e) { return reject(e); }
-          return; // wait for next state change
-        }
-        if (!allowed.has(user.email)) return reject("Not authorized");
-        resolve(user);
-      });
-    });
-  }
-
-  async function publishToLive(resourcesDatabase){
-    const user = await requireSignIn();
-    const token = await user.getIdToken();
-    const resp = await fetch("/api/saveResources", {
-      method: "POST",
-      headers: { "Content-Type":"application/json", "Authorization": "Bearer " + token },
-      body: JSON.stringify({ resourcesDatabase })
-    });
-    if (!resp.ok) throw new Error((await resp.json()).error || "Publish failed");
-    alert("Published! Live site now serves the new data.");
-  }
-
-  // Hook your existing "Save to Database" flow:
-  // after AdminApp assembles updatedDatabase we can publish it.
-  // Easiest: add a new button in admin.html next to Save:
-  // <button id="publishBtn" class="w-full mt-2 px-4 py-3 rounded bg-blue-600 text-white">Publish to Live</button>
-  document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("publishBtn");
-    if (btn) {
-      btn.addEventListener("click", async () => {
-        // admin.database holds latest state; build the same object admin.js writes:
-        const updated = {
-          metadata: {
-            version: "1.8.1",
-            lastUpdated: new Date().toISOString(),
-            totalResources: admin.data.length,
-            lastValidated: admin.lastValidationTime,
-            validatedResources: Array.from(admin.validatedIds),
-            generatedBy: "APHL Admin Panel v1.8"
-          },
-          resources: admin.data
-        };
-        await publishToLive(updated);
-      });
-    }
-  });
-</script>
