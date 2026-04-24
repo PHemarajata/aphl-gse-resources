@@ -158,6 +158,32 @@
   function toJS(resources){
     return `// Auto-generated\nconst resourcesData = ${JSON.stringify(resources, null, 2)};`;
   }
+
+  function deepClone(obj){
+    return JSON.parse(JSON.stringify(obj));
+  }
+
+  function computeResourceSummary(previousResources, nextResources){
+    const prevMap = new Map((previousResources || []).map((r) => [r.id, r]));
+    const nextMap = new Map((nextResources || []).map((r) => [r.id, r]));
+    let added = 0;
+    let updated = 0;
+    let deleted = 0;
+
+    nextMap.forEach((value, id) => {
+      if (!prevMap.has(id)) {
+        added += 1;
+      } else if (JSON.stringify(prevMap.get(id)) !== JSON.stringify(value)) {
+        updated += 1;
+      }
+    });
+
+    prevMap.forEach((_, id) => {
+      if (!nextMap.has(id)) deleted += 1;
+    });
+
+    return { added, updated, deleted };
+  }
   function parseTSV(tsv){
     const rows = tsv.trim().split(/\r?\n/);
     const header = rows.shift().split('\t');
@@ -287,6 +313,7 @@ class AdminApp {
         this.database = dbData;
         this.original = JSON.parse(JSON.stringify(dbData.resources));
         this.data = JSON.parse(JSON.stringify(dbData.resources));
+        this.ensureMetadataCollections();
         // Load validation status from metadata if available
         if (dbData.metadata && dbData.metadata.validatedResources) {
           this.validatedIds = new Set(dbData.metadata.validatedResources);
@@ -304,7 +331,9 @@ class AdminApp {
             totalResources: arr.length,
             lastValidated: null,
             validatedResources: [],
-            generatedBy: "APHL Admin Panel v1.8"
+            generatedBy: "APHL Admin Panel v1.8",
+            versionHistory: [],
+            auditLog: []
           },
           resources: arr
         };
@@ -314,6 +343,7 @@ class AdminApp {
       this.bind();
       this.renderList();
       this.updateDashboard();
+      this.renderVersionHistory();
       window.admin = this; window.Admin = this;
       this.enableValidationIfAny();
     };
@@ -363,6 +393,7 @@ class AdminApp {
       this.on('#validateBtn','click', ()=> this.validateNewResources());
       this.on('#validateAllBtn','click', ()=> this.validateAll());
       this.on('#saveDatabaseBtn','click', ()=> this.saveDatabase());
+      this.on('#compareVersionsBtn', 'click', () => this.compareVersions());
 
       this.on('#clearForm','click', ()=> this.clearForm());
       this.on('#resourceForm','submit', (e)=>{ e.preventDefault(); this.saveFromForm(); });
@@ -394,6 +425,16 @@ class AdminApp {
           return message;
         } 
       });
+
+      const savedByInput = this.q('#savedByInput');
+      if (savedByInput) {
+        const remembered = localStorage.getItem('aphlAdminSavedBy');
+        if (remembered) savedByInput.value = remembered;
+        savedByInput.addEventListener('change', () => {
+          const normalized = String(savedByInput.value || '').trim();
+          if (normalized) localStorage.setItem('aphlAdminSavedBy', normalized);
+        });
+      }
     }
 
     q(sel){ return document.querySelector(sel); }
@@ -502,6 +543,138 @@ class AdminApp {
     updateCounts(){
       // Keep for backward compatibility, but now just calls updateDashboard
       this.updateDashboard();
+    }
+
+    ensureMetadataCollections(){
+      this.database = this.database || {};
+      this.database.metadata = this.database.metadata || {};
+      if (!Array.isArray(this.database.metadata.versionHistory)) this.database.metadata.versionHistory = [];
+      if (!Array.isArray(this.database.metadata.auditLog)) this.database.metadata.auditLog = [];
+    }
+
+    getSavedBy(){
+      const fromInput = String(this.q('#savedByInput')?.value || '').trim();
+      return fromInput || localStorage.getItem('aphlAdminSavedBy') || 'unknown-admin';
+    }
+
+    renderVersionHistory(){
+      this.ensureMetadataCollections();
+      const list = this.q('#versionHistoryList');
+      if (!list) return;
+
+      const history = [...this.database.metadata.versionHistory].sort((a,b) => (b.savedAt || '').localeCompare(a.savedAt || ''));
+      if (history.length === 0) {
+        list.innerHTML = '<div class="text-xs text-gray-500">No versions saved yet.</div>';
+      } else {
+        list.innerHTML = history.map((v) => {
+          const summary = v.summary || {};
+          const val = v.validationStats || {};
+          const savedAt = v.savedAt ? new Date(v.savedAt).toLocaleString() : 'Unknown';
+          return `
+            <div class="border rounded p-2 bg-gray-50">
+              <div class="font-semibold text-xs">${escapeHtml(v.versionId || 'unknown-version')}</div>
+              <div class="text-[11px] text-gray-600">${escapeHtml(savedAt)} • ${escapeHtml(v.savedBy || 'unknown-admin')}</div>
+              <div class="text-[11px] mt-1">Δ +${summary.added||0} / ~${summary.updated||0} / -${summary.deleted||0}</div>
+              <div class="text-[11px]">Validation: ${val.validatedCount||0} validated, ${val.pendingCount||0} pending</div>
+              <button class="mt-2 px-2 py-1 text-xs rounded bg-red-600 text-white hover:bg-red-700" data-rollback="${escapeHtml(v.versionId || '')}">
+                Rollback to this version
+              </button>
+            </div>
+          `;
+        }).join('');
+      }
+
+      list.querySelectorAll('[data-rollback]').forEach((btn) => {
+        btn.addEventListener('click', () => this.rollbackToVersion(btn.getAttribute('data-rollback')));
+      });
+      this.populateCompareSelectors();
+    }
+
+    populateCompareSelectors(){
+      const a = this.q('#compareVersionA');
+      const b = this.q('#compareVersionB');
+      if (!a || !b) return;
+
+      this.ensureMetadataCollections();
+      const versions = [...this.database.metadata.versionHistory].sort((x,y) => (y.savedAt || '').localeCompare(x.savedAt || ''));
+      const options = versions.map((v) => `<option value="${escapeHtml(v.versionId || '')}">${escapeHtml(v.versionId || '')} — ${escapeHtml(v.savedAt || '')}</option>`).join('');
+
+      a.innerHTML = `<option value="">Select older version</option>${options}`;
+      b.innerHTML = `<option value="">Select newer version</option>${options}`;
+      if (versions.length >= 2) {
+        a.value = versions[1].versionId;
+        b.value = versions[0].versionId;
+      }
+    }
+
+    compareVersions(){
+      const output = this.q('#versionCompareResult');
+      const versionA = this.q('#compareVersionA')?.value;
+      const versionB = this.q('#compareVersionB')?.value;
+      if (!output) return;
+      if (!versionA || !versionB) {
+        output.textContent = 'Select two versions to compare.';
+        return;
+      }
+
+      const history = this.database?.metadata?.versionHistory || [];
+      const a = history.find((item) => item.versionId === versionA);
+      const b = history.find((item) => item.versionId === versionB);
+      if (!a || !b) {
+        output.textContent = 'Selected versions were not found in history.';
+        return;
+      }
+
+      const summaryA = a.summary || {};
+      const summaryB = b.summary || {};
+      const validationA = a.validationStats || {};
+      const validationB = b.validationStats || {};
+      output.textContent = [
+        `Comparing ${a.versionId} -> ${b.versionId}`,
+        `Saved by: ${a.savedBy || 'unknown'} -> ${b.savedBy || 'unknown'}`,
+        `Saved at: ${a.savedAt || 'unknown'} -> ${b.savedAt || 'unknown'}`,
+        `Resources total: ${(a.totalResources ?? 0)} -> ${(b.totalResources ?? 0)} (Δ ${(b.totalResources ?? 0) - (a.totalResources ?? 0)})`,
+        `Summary added: ${(summaryA.added ?? 0)} -> ${(summaryB.added ?? 0)}`,
+        `Summary updated: ${(summaryA.updated ?? 0)} -> ${(summaryB.updated ?? 0)}`,
+        `Summary deleted: ${(summaryA.deleted ?? 0)} -> ${(summaryB.deleted ?? 0)}`,
+        `Validated count: ${(validationA.validatedCount ?? 0)} -> ${(validationB.validatedCount ?? 0)}`,
+        `Pending validation: ${(validationA.pendingCount ?? 0)} -> ${(validationB.pendingCount ?? 0)}`
+      ].join('\n');
+    }
+
+    rollbackToVersion(versionId){
+      this.ensureMetadataCollections();
+      const version = (this.database.metadata.versionHistory || []).find((entry) => entry.versionId === versionId);
+      if (!version) return alert('Version not found.');
+      const savedBy = this.getSavedBy();
+      const confirmed = confirm(`Rollback to ${versionId}? This will replace the in-memory admin dataset. Save again to persist to file.`);
+      if (!confirmed) return;
+
+      const snapshot = version.snapshot || {};
+      const snapshotResources = Array.isArray(snapshot.resources) ? deepClone(snapshot.resources) : [];
+      const snapshotValidated = Array.isArray(snapshot.validatedResources) ? snapshot.validatedResources : [];
+      this.data = deepClone(snapshotResources);
+      this.original = deepClone(snapshotResources);
+      this.validatedIds = new Set(snapshotValidated);
+      this.lastValidationTime = snapshot.lastValidated || null;
+      this.newOrModifiedIds.clear();
+      this.dirty = true;
+
+      this.database.metadata.auditLog.push({
+        action: 'rollback',
+        fromVersionId: this.database?.metadata?.currentVersionId || null,
+        toVersionId: versionId,
+        rolledBackAt: new Date().toISOString(),
+        rolledBackBy: savedBy
+      });
+
+      this.database.metadata.currentVersionId = versionId;
+      this.database.resources = deepClone(snapshotResources);
+      this.renderList();
+      this.updateDashboard();
+      this.renderVersionHistory();
+      this.enableValidationIfAny();
+      alert(`Rolled back to ${versionId}. Click "Save to Database" to persist rollback.`);
     }
     enableValidationIfAny(){
       const btn=this.q('#validateBtn'); if(!btn) return;
@@ -803,15 +976,53 @@ class AdminApp {
         if (!proceed) return;
       }
       
+      const nowIso = new Date().toISOString();
+      const savedBy = this.getSavedBy();
+      const summary = computeResourceSummary(this.original, final);
+      const validationStats = {
+        validatedCount: this.data.filter(r => this.validatedIds.has(r.id)).length,
+        pendingCount: Math.max(0, final.length - this.data.filter(r => this.validatedIds.has(r.id)).length),
+        lastValidated: this.lastValidationTime,
+        validatedResourceIds: Array.from(this.validatedIds)
+      };
+      const versionId = `v-${nowIso.replace(/[:.]/g, '-')}`;
+      const versionRecord = {
+        versionId,
+        savedBy,
+        savedAt: nowIso,
+        totalResources: final.length,
+        summary,
+        validationStats,
+        snapshot: {
+          resources: deepClone(final),
+          validatedResources: Array.from(this.validatedIds),
+          lastValidated: this.lastValidationTime
+        }
+      };
+
+      const existingHistory = Array.isArray(this.database?.metadata?.versionHistory) ? deepClone(this.database.metadata.versionHistory) : [];
+      const existingAudit = Array.isArray(this.database?.metadata?.auditLog) ? deepClone(this.database.metadata.auditLog) : [];
+      existingHistory.push(versionRecord);
+      existingAudit.push({
+        action: 'save',
+        versionId,
+        savedBy,
+        savedAt: nowIso,
+        summary
+      });
+
       // Create updated database with metadata
       const updatedDatabase = {
         metadata: {
           version: "1.8.1",
-          lastUpdated: new Date().toISOString(),
+          currentVersionId: versionId,
+          lastUpdated: nowIso,
           totalResources: final.length,
           lastValidated: this.lastValidationTime,
           validatedResources: Array.from(this.validatedIds),
-          generatedBy: "APHL Admin Panel v1.8"
+          generatedBy: "APHL Admin Panel v1.8",
+          versionHistory: existingHistory,
+          auditLog: existingAudit
         },
         resources: final
       };
@@ -846,8 +1057,9 @@ if (typeof window !== 'undefined') {
       this.dirty = false; 
       this.newOrModifiedIds.clear(); // Clear tracking since everything is now saved
       this.updateDashboard();
+      this.renderVersionHistory();
       this.enableValidationIfAny(); // Update button state
-      alert('Database saved with metadata and validation tracking.');
+      alert(`Database saved as ${versionId} with immutable version history and validation stats.`);
     }
   }
 
