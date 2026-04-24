@@ -67,3 +67,7 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# Generated validation outputs
+validation-reports/*.json
+validation-reports/*.md
