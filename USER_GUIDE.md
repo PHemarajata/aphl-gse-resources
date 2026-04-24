@@ -238,14 +238,6 @@ Before release, confirm:
 - Cause: save/export is local workflow; publish may require separate authenticated backend action.
 - Fix: verify publish endpoint + auth + deployment integration.
 
-### Issue: Sign-in failed with `auth/configuration-not-found`
-- Cause: Firebase Authentication is not fully enabled/configured for the same project as your Web config.
-- Fix:
-  1. In Firebase Console, enable **Authentication** for the project.
-  2. Under **Authentication → Sign-in method**, enable **Google** provider.
-  3. Under **Authentication → Settings → Authorized domains**, add your hosting domain.
-  4. Re-check `apiKey`, `authDomain`, `projectId`, and `appId` in Configure Auth.
-
 ---
 
 ## 5) Operational best practices

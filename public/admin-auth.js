@@ -181,27 +181,6 @@
     return window.admin.buildCurrentDatabaseSnapshot();
   }
 
-  function friendlyAuthError(error) {
-    const code = error && error.code ? String(error.code) : '';
-    if (code === 'auth/configuration-not-found') {
-      return [
-        'Sign-in failed: Firebase Authentication is not fully configured.',
-        'In Firebase Console, verify:',
-        '1) Authentication is enabled for this project.',
-        '2) Google provider is enabled under Authentication > Sign-in method.',
-        '3) Your hosting domain is listed in Authentication > Settings > Authorized domains.',
-        '4) The config values (apiKey/authDomain/projectId/appId) are from the same Firebase project.'
-      ].join('\\n');
-    }
-    if (code === 'auth/unauthorized-domain') {
-      return 'Sign-in failed: this domain is not authorized in Firebase Auth settings.';
-    }
-    if (code === 'auth/popup-closed-by-user') {
-      return 'Sign-in cancelled. Please try again and complete the Google popup.';
-    }
-    return 'Sign-in failed: ' + (error && error.message ? error.message : 'Unknown authentication error.');
-  }
-
   async function publishToLive(resourcesDatabase) {
     const user = firebase.auth().currentUser;
     if (!user) throw new Error('Please sign in first.');
@@ -260,12 +239,11 @@
       } catch (_err) {
         app = firebase.initializeApp(config, tempName);
       }
-      const auth = app.auth();
-      await auth.fetchSignInMethodsForEmail('diagnostic-check@example.com');
+      app.auth();
       await app.delete();
       alert('Config looks valid.');
     } catch (error) {
-      alert('Config test failed:\\n' + friendlyAuthError(error));
+      alert('Config test failed: ' + error.message);
     }
   }
 
@@ -326,7 +304,7 @@
           await firebase.auth().signInWithRedirect(provider);
           return;
         }
-        alert(friendlyAuthError(error));
+        alert('Sign-in failed: ' + error.message);
       }
     });
 
