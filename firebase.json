@@ -1,6 +1,9 @@
 {
   "hosting": {
     "public": "public",
+    "predeploy": [
+      "node scripts/validate-resources.mjs"
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
