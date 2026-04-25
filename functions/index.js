@@ -7,7 +7,8 @@ const taxonomyApi = require('./taxonomy.js');
 admin.initializeApp();
 
 const taxonomyEnums = taxonomyApi.enumFields();
-const HTTP_OPTIONS = { invoker: 'public' };
+const HTTP_OPTIONS = { invoker: 'public', cors: true };
+const OPENAI_REQUEST_TIMEOUT_MS = 105000;
 
 function sendJson(res, status, payload) {
   res.status(status).set('Content-Type', 'application/json').send(JSON.stringify(payload));
@@ -55,7 +56,7 @@ function taxonomySchema() {
       formatDetails: { type: 'string' },
       keyFeatures: { type: 'array', items: { type: 'string' }, maxItems: 5 },
       practicalUse: { type: 'string' },
-      relatedResources: { type: 'array', items: { type: 'string' } },
+      relatedResources: { type: 'array', items: { type: 'string' }, maxItems: 0 },
       warnings: { type: 'array', items: { type: 'string' } },
       sourceNotes: { type: 'array', items: { type: 'string' } },
       needsReview: { type: 'boolean' }
@@ -99,6 +100,7 @@ function buildPrompt({ url, text, existingResource }) {
   return [
     'You are cataloging public-health pathogen genomics resources for APHL-GSEI.',
     'Use only the taxonomy IDs listed below. Prefer fewer, stronger tags over broad over-tagging.',
+    'Always return relatedResources as an empty array; curators add internal related resource IDs later.',
     'If a URL cannot be inspected, rely on pasted text and mark needsReview=true.',
     'Do not invent source facts. Put uncertainty in warnings/sourceNotes.',
     '',
@@ -122,6 +124,13 @@ function parseResponseText(payload) {
   return chunks.join('');
 }
 
+function fetchWithTimeout(url, options = {}, timeoutMs = OPENAI_REQUEST_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  return fetch(url, { ...options, signal: controller.signal })
+    .finally(() => clearTimeout(timeout));
+}
+
 exports.aiHealth = onRequest({ ...HTTP_OPTIONS, timeoutSeconds: 30 }, async (req, res) => {
   if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed.' });
 
@@ -136,10 +145,10 @@ exports.aiHealth = onRequest({ ...HTTP_OPTIONS, timeoutSeconds: 30 }, async (req
       });
     }
 
-    const response = await fetch('https://api.openai.com/v1/models', {
+    const response = await fetchWithTimeout('https://api.openai.com/v1/models', {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${curatorOpenAiKey}` }
-    });
+    }, 20000);
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) {
       return sendJson(res, response.status, {
@@ -181,6 +190,7 @@ exports.categorizeResource = onRequest({ ...HTTP_OPTIONS, timeoutSeconds: 120 },
     const body = {
       model: process.env.OPENAI_MODEL || 'gpt-5',
       input: buildPrompt({ url, text, existingResource }),
+      max_output_tokens: 6000,
       text: {
         format: {
           type: 'json_schema',
@@ -195,7 +205,7 @@ exports.categorizeResource = onRequest({ ...HTTP_OPTIONS, timeoutSeconds: 120 },
       body.tools = [{ type: 'web_search' }];
     }
 
-    const response = await fetch('https://api.openai.com/v1/responses', {
+    const response = await fetchWithTimeout('https://api.openai.com/v1/responses', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${curatorOpenAiKey}`,
@@ -210,7 +220,21 @@ exports.categorizeResource = onRequest({ ...HTTP_OPTIONS, timeoutSeconds: 120 },
     }
 
     const outputText = parseResponseText(payload);
-    const resource = JSON.parse(outputText);
+    if (!outputText.trim()) {
+      const incompleteReason = payload.incomplete_details?.reason || payload.status || 'empty_output';
+      return sendJson(res, 502, {
+        error: `OpenAI returned no structured resource JSON (${incompleteReason}). Try again, or paste source text into Optional context and rerun.`
+      });
+    }
+
+    let resource;
+    try {
+      resource = JSON.parse(outputText);
+    } catch (parseError) {
+      return sendJson(res, 502, {
+        error: 'OpenAI returned malformed structured JSON. Try again, or paste source text into Optional context and rerun.'
+      });
+    }
     return sendJson(res, 200, {
       resource,
       warnings: resource.warnings || [],
@@ -218,7 +242,11 @@ exports.categorizeResource = onRequest({ ...HTTP_OPTIONS, timeoutSeconds: 120 },
       needsReview: Boolean(resource.needsReview)
     });
   } catch (error) {
-    return sendJson(res, 500, { error: error.message || 'Categorization failed.' });
+    const message = error.name === 'AbortError'
+      ? 'OpenAI URL analysis timed out. Try again, or paste source text into Optional context so GPT does not have to retrieve the page.'
+      : (error.message || 'Categorization failed.');
+    const status = /Firebase auth|Missing Firebase|Authenticated user/i.test(message) ? 401 : (error.name === 'AbortError' ? 504 : 500);
+    return sendJson(res, status, { error: message });
   }
 });
 
@@ -229,7 +257,7 @@ exports.saveResources = onRequest({ ...HTTP_OPTIONS, timeoutSeconds: 60 }, async
     // Hosting file replacement is still handled by the browser file-write flow.
     // This endpoint exists so the admin panel can fail explicitly instead of 404.
     return sendJson(res, 501, {
-      error: 'Server-side publishing is not configured. Use Save to Database to write resources-data.js, then deploy Firebase Hosting.'
+      error: 'Direct browser publishing is not configured. Use Prepare for Deploy or Save to Database to write resources-data.js locally, then deploy Firebase Hosting from the project folder.'
     });
   } catch (error) {
     return sendJson(res, 401, { error: error.message || 'Unauthorized.' });

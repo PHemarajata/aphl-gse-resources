@@ -212,36 +212,13 @@
     return window.admin.buildCurrentDatabaseSnapshot();
   }
 
-  async function publishToLive(resourcesDatabase) {
-    const user = firebase.auth().currentUser;
-    if (!user) throw new Error('Please sign in first.');
-
-    const tokenResult = await user.getIdTokenResult(true);
-    if (!isAuthorizedUser(user, tokenResult)) {
-      throw new Error('You are signed in but not authorized to publish.');
-    }
-
-    const response = await fetch('/api/saveResources', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + tokenResult.token
-      },
-      body: JSON.stringify({ resourcesDatabase })
-    });
-
-    if (!response.ok) {
-      let detail = 'Publish failed.';
-      try {
-        const payload = await response.json();
-        detail = payload.error || detail;
-      } catch (_err) {
-        // no-op
-      }
-      throw new Error(detail);
-    }
-
-    return response.json().catch(() => ({}));
+  function getSaveWorkflowMessage() {
+    return [
+      'Curators prepare validated database files; maintainers publish them to Firebase Hosting.',
+      '',
+      'Next step: save resources-data.js locally and send it to the maintainer for review/deploy.',
+      'If you are the maintainer and your browser asks for a folder, select the project public folder.'
+    ].join('\n');
   }
 
   async function bootstrapAuth() {
@@ -380,11 +357,15 @@
     publishBtn?.addEventListener('click', async () => {
       try {
         publishBtn.disabled = true;
-        const snapshot = getAdminSnapshot();
-        await publishToLive(snapshot);
-        alert('Published successfully.');
+        getAdminSnapshot();
+        if (!window.admin || typeof window.admin.saveDatabase !== 'function') {
+          throw new Error('Admin app not ready. Please wait for data to finish loading.');
+        }
+        const proceed = confirm(getSaveWorkflowMessage() + '\n\nContinue to save resources-data.js now?');
+        if (!proceed) return;
+        await window.admin.saveDatabase();
       } catch (error) {
-        alert('Publish error: ' + error.message);
+        alert('Save/publish preparation error: ' + error.message);
       } finally {
         publishBtn.disabled = false;
       }
@@ -407,6 +388,9 @@
 
       updateAuthUi(user, authorized);
       setProtectedUiEnabled(authorized);
+      if (authorized && window.admin && typeof window.admin.syncSavedByFromAuth === 'function') {
+        window.admin.syncSavedByFromAuth();
+      }
     });
   });
 })();

@@ -36,6 +36,11 @@
     optionalArrays: ['keyFeatures', 'relatedResources', 'pathogenFocus', 'language', 'legacyTags'],
     urlPattern: /^https:\/\//i
   };
+  const AI_FUNCTION_BASE = 'https://us-central1-aphlgseresources.cloudfunctions.net';
+  const AI_FUNCTIONS = {
+    aiHealth: `${AI_FUNCTION_BASE}/aiHealth`,
+    categorizeResource: `${AI_FUNCTION_BASE}/categorizeResource`
+  };
 
   function formatValidationMessage(issue){
     return `[${issue.severity.toUpperCase()}] ${issue.source} | field: ${issue.field} | expected: ${issue.expected} | actual: ${issue.actual} | fix: ${issue.hint}`;
@@ -418,6 +423,7 @@ class AdminApp {
       this.renderTaxonomyControls();
       this.bind();
       this.renderList();
+      this.renderRelatedResourcePicker();
       this.updateDashboard();
       this.renderVersionHistory();
       window.admin = this; window.Admin = this;
@@ -476,6 +482,9 @@ class AdminApp {
       this.on('#useOpenAiKeyBtn', 'click', () => this.useOpenAiKeyForSession());
       this.on('#clearOpenAiKeyBtn', 'click', () => this.clearOpenAiKey());
       this.on('#testAiSetupBtn', 'click', () => this.testAiSetup());
+      this.on('#relatedResourceSearch', 'input', () => this.renderRelatedResourcePicker());
+      this.on('#relatedResourceSelect', 'change', () => this.renderRelatedResourcePicker());
+      this.on('#addRelatedResourceBtn', 'click', () => this.addSelectedRelatedResource());
 
       this.on('#clearForm','click', ()=> this.clearForm());
       this.on('#resourceForm','submit', (e)=>{ e.preventDefault(); this.saveFromForm(); });
@@ -500,6 +509,7 @@ class AdminApp {
           // Try to maintain cursor position
           input.setSelectionRange(cursorPos, cursorPos);
         }
+        this.renderRelatedResourcePicker();
       });
 
       window.addEventListener('beforeunload', (e)=> { 
@@ -513,12 +523,11 @@ class AdminApp {
 
       const savedByInput = this.q('#savedByInput');
       if (savedByInput) {
-        const remembered = localStorage.getItem('aphlAdminSavedBy');
-        if (remembered) savedByInput.value = remembered;
         savedByInput.addEventListener('change', () => {
           const normalized = String(savedByInput.value || '').trim();
           if (normalized) localStorage.setItem('aphlAdminSavedBy', normalized);
         });
+        this.syncSavedByFromAuth();
       }
     }
 
@@ -614,6 +623,9 @@ class AdminApp {
       if (response.status === 400) {
         return 'Request was rejected before reaching OpenAI. Check that your session OpenAI key is active.';
       }
+      if (response.status === 502 || response.status === 504) {
+        return 'AI URL analysis timed out before the page could be categorized. Try again, or paste the page summary/abstract into Optional context and rerun.';
+      }
       return `Request failed with status ${response.status}`;
     }
 
@@ -624,7 +636,7 @@ class AdminApp {
           status.textContent = 'Testing Firebase endpoint and OpenAI key...';
           status.className = 'text-xs text-blue-900 mt-2';
         }
-        const response = await fetch('/api/ai-health', {
+        const response = await fetch(AI_FUNCTIONS.aiHealth, {
           method: 'POST',
           headers: await this.buildAiHeaders(),
           body: JSON.stringify({})
@@ -673,6 +685,82 @@ class AdminApp {
       };
 
       ['audiences','stages','types','geography','topics','pathogenFocus','language'].forEach(renderField);
+    }
+
+    getRelatedResourceIds(){
+      return String(this.q('#relatedResources')?.value || '')
+        .split(/[;,]/)
+        .map((value) => value.trim())
+        .filter(Boolean);
+    }
+
+    setRelatedResourceIds(ids){
+      const knownIds = new Set(this.data.map((resource) => resource.id).filter(Boolean));
+      const currentId = String(this.q('#resourceId')?.value || '').trim();
+      const cleaned = Array.from(new Set((ids || [])
+        .map((id) => String(id || '').trim())
+        .filter((id) => id && id !== currentId && knownIds.has(id))));
+      const input = this.q('#relatedResources');
+      if (input) input.value = cleaned.join(';');
+      this.renderRelatedResourcePicker();
+    }
+
+    renderRelatedResourcePicker(){
+      const select = this.q('#relatedResourceSelect');
+      const selectedEl = this.q('#relatedResourceSelected');
+      const addBtn = this.q('#addRelatedResourceBtn');
+      if (!select || !selectedEl) return;
+
+      const currentId = String(this.q('#resourceId')?.value || '').trim();
+      const selectedIds = this.getRelatedResourceIds();
+      const selectedSet = new Set(selectedIds);
+      const query = String(this.q('#relatedResourceSearch')?.value || '').toLowerCase().trim();
+      const labelFor = (id) => {
+        const resource = this.data.find((item) => item.id === id);
+        return resource ? `${resource.title || resource.id} (${resource.id})` : id;
+      };
+
+      const candidates = this.data
+        .filter((resource) => resource.id && resource.id !== currentId && !selectedSet.has(resource.id))
+        .filter((resource) => {
+          if (!query) return true;
+          return [resource.id, resource.title, resource.organization]
+            .join(' ')
+            .toLowerCase()
+            .includes(query);
+        })
+        .sort((a, b) => String(a.title || a.id).localeCompare(String(b.title || b.id)))
+        .slice(0, 75);
+
+      select.innerHTML = candidates.length
+        ? candidates.map((resource) => `<option value="${escapeHtml(resource.id)}">${escapeHtml(resource.title || resource.id)} (${escapeHtml(resource.id)})</option>`).join('')
+        : '<option value="">No matching resources</option>';
+      if (addBtn) addBtn.disabled = candidates.length === 0;
+
+      selectedEl.innerHTML = selectedIds.length
+        ? selectedIds.map((id) => `
+          <span class="inline-flex items-center gap-2 px-2 py-1 rounded bg-blue-50 border border-blue-200 text-blue-900">
+            <span>${escapeHtml(labelFor(id))}</span>
+            <button type="button" class="text-blue-700 hover:text-blue-950 font-bold" data-remove-related="${escapeHtml(id)}" aria-label="Remove related resource ${escapeHtml(id)}">&times;</button>
+          </span>
+        `).join('')
+        : '<span class="text-xs text-gray-500">No related resources selected.</span>';
+
+      selectedEl.querySelectorAll('[data-remove-related]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const id = button.getAttribute('data-remove-related');
+          this.setRelatedResourceIds(this.getRelatedResourceIds().filter((value) => value !== id));
+        });
+      });
+    }
+
+    addSelectedRelatedResource(){
+      const id = String(this.q('#relatedResourceSelect')?.value || '').trim();
+      if (!id) return;
+      this.setRelatedResourceIds(this.getRelatedResourceIds().concat(id));
+      const search = this.q('#relatedResourceSearch');
+      if (search) search.value = '';
+      this.renderRelatedResourcePicker();
     }
 
     showToast(message, tone = 'info') {
@@ -814,7 +902,15 @@ class AdminApp {
 
     getSavedBy(){
       const fromInput = String(this.q('#savedByInput')?.value || '').trim();
-      return fromInput || localStorage.getItem('aphlAdminSavedBy') || 'unknown-admin';
+      const signedInEmail = String(window.firebase?.auth?.().currentUser?.email || '').trim();
+      return fromInput || signedInEmail || localStorage.getItem('aphlAdminSavedBy') || 'unknown-admin';
+    }
+
+    syncSavedByFromAuth(){
+      const savedByInput = this.q('#savedByInput');
+      if (!savedByInput || String(savedByInput.value || '').trim()) return;
+      const signedInEmail = String(window.firebase?.auth?.().currentUser?.email || '').trim();
+      if (signedInEmail) savedByInput.value = signedInEmail;
     }
 
     renderVersionHistory(){
@@ -1038,6 +1134,7 @@ class AdminApp {
         this.dirty = true;
         this.renderList();
         this.updateDashboard();
+        this.renderRelatedResourcePicker();
         this.enableValidationIfAny();
 
         const duplicateTone = skippedDuplicateCount > 0 ? 'warning' : 'success';
@@ -1074,7 +1171,7 @@ class AdminApp {
         formatDetails: document.getElementById('formatDetails')?.value.trim() || '',
         keyFeatures: (document.getElementById('keyFeatures')?.value||'').split('\n').map(s=>s.trim()).filter(Boolean),
         practicalUse: document.getElementById('practicalUse')?.value.trim(),
-        relatedResources: (document.getElementById('relatedResources')?.value||'').split(/[;,]/).map(s=>s.trim()).filter(Boolean),
+        relatedResources: this.getRelatedResourceIds(),
         legacyTags: (document.getElementById('legacyTags')?.value||'').split(/[;\n]/).map(s=>s.trim()).filter(Boolean)
       };
     }
@@ -1112,13 +1209,16 @@ class AdminApp {
         this.newOrModifiedIds.add(d.id); // Track as new
       }
       this.dirty = true; this.editing=false;
-      this.renderList(); this.clearForm(); this.updateDashboard(); this.enableValidationIfAny(); 
+      this.renderList(); this.clearForm(); this.updateDashboard(); this.renderRelatedResourcePicker(); this.enableValidationIfAny(); 
       // Validate only the resource that was just saved
       this.validateNewResources();
     }
     clearForm(){
       document.getElementById('resourceForm')?.reset();
       document.querySelectorAll('#resourceForm input[type="checkbox"]').forEach(cb => cb.checked = false);
+      const relatedSearch = this.q('#relatedResourceSearch');
+      if (relatedSearch) relatedSearch.value = '';
+      this.setRelatedResourceIds([]);
       this.editing=false;
     }
     edit(id){
@@ -1135,7 +1235,7 @@ class AdminApp {
       document.getElementById('formatDetails').value=r.formatDetails||'';
       document.getElementById('keyFeatures').value=(r.keyFeatures||[]).join('\n');
       document.getElementById('practicalUse').value=r.practicalUse||'';
-      document.getElementById('relatedResources').value=(r.relatedResources||[]).join(', ');
+      this.setRelatedResourceIds(r.relatedResources || []);
       document.getElementById('legacyTags').value=(r.legacyTags||[]).join('\n');
       window.scrollTo({top:0,behavior:'smooth'});
     }
@@ -1144,7 +1244,7 @@ class AdminApp {
       this.data = this.data.filter(r=>r.id!==id);
       this.newOrModifiedIds.delete(id); // Remove from tracking
       this.validatedIds.delete(id); // Remove from validation tracking
-      this.dirty = true; this.renderList(); this.updateDashboard(); this.enableValidationIfAny(); 
+      this.dirty = true; this.renderList(); this.updateDashboard(); this.renderRelatedResourcePicker(); this.enableValidationIfAny(); 
       // No need to validate after deletion
     }
 
@@ -1180,7 +1280,7 @@ class AdminApp {
     }
 
     async requestGptCategorization(payload) {
-      const response = await fetch('/api/categorize-resource', {
+      const response = await fetch(AI_FUNCTIONS.categorizeResource, {
         method: 'POST',
         headers: await this.buildAiHeaders(),
         body: JSON.stringify(payload)
@@ -1289,7 +1389,7 @@ class AdminApp {
       setValue('formatDetails', r.formatDetails);
       setValue('keyFeatures', r.keyFeatures);
       setValue('practicalUse', r.practicalUse);
-      setValue('relatedResources', Array.isArray(r.relatedResources) ? r.relatedResources.join(', ') : r.relatedResources);
+      this.setRelatedResourceIds(r.relatedResources || []);
       setValue('legacyTags', r.sourceNotes ? ['AI source notes:', r.sourceNotes].flat().join('\n') : undefined);
     }
 
@@ -1474,6 +1574,24 @@ if (typeof window !== 'undefined') {
       
       if ('showDirectoryPicker' in window){
         const dir = await window.showDirectoryPicker({id:'site-root', mode:'readwrite'});
+        let looksLikePublicFolder = false;
+        try {
+          await dir.getFileHandle('admin.html');
+          looksLikePublicFolder = true;
+        } catch (_error) {
+          looksLikePublicFolder = false;
+        }
+        if (!looksLikePublicFolder) {
+          const proceed = confirm([
+            'This folder does not look like the project public folder because admin.html was not found.',
+            '',
+            'To update the live database, select:',
+            'the public folder inside your local project checkout',
+            '',
+            'Write resources-data.js here anyway?'
+          ].join('\n'));
+          if (!proceed) return;
+        }
         const write = async (name,content)=>{ const h=await dir.getFileHandle(name,{create:true}); const w=await h.createWritable(); await w.write(content); await w.close(); };
         await write(backupName, backupText);
         await write('resources-data.js', newText);

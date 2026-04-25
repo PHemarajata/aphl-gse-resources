@@ -1,0 +1,82 @@
+You are helping curate a resource for the APHL Global Health Genomic Epidemiology Resource Library.
+
+Use the reference URL and any additional notes below to produce import-ready JSON for the admin tool.
+
+Reference URL:
+[PASTE URL HERE]
+
+Additional curator notes:
+[PASTE ANY ABSTRACT, DESCRIPTION, TARGET AUDIENCE, OR CONTEXT HERE]
+
+Instructions:
+Create a downloadable file named aphl-gsei-resource-import.json containing ONLY valid JSON.
+
+If your chat interface cannot create downloadable files, return ONLY the raw valid JSON in the message. Do not include markdown, commentary, or code fences.
+
+Return a JSON array with exactly one resource object.
+
+Use this exact object shape:
+[
+  {
+    "id": "",
+    "title": "",
+    "organization": "",
+    "description": "",
+    "url": "",
+    "audiences": [],
+    "stages": [],
+    "types": [],
+    "geography": [],
+    "topics": [],
+    "pathogenFocus": [],
+    "language": ["en"],
+    "lastUpdated": "",
+    "formatDetails": "",
+    "keyFeatures": [],
+    "practicalUse": "",
+    "relatedResources": [],
+    "legacyTags": []
+  }
+]
+
+Rules:
+- Use only the controlled taxonomy IDs listed below.
+- Do not invent facts. If unsure, use conservative tags and add uncertainty notes to legacyTags.
+- Prefer fewer, stronger tags over broad over-tagging.
+- relatedResources must always be an empty array. Curators add internal related resources later.
+- id must be kebab-case lowercase, using only letters, numbers, and hyphens.
+- description should be 1-2 concise sentences.
+- keyFeatures should contain 3-5 short strings.
+- practicalUse should explain how a public health genomics user would use the resource.
+- formatDetails should describe the format, such as website, PDF, dashboard, spreadsheet, online tool, training module, GitHub repository, report, or guidance document.
+- lastUpdated should be YYYY-MM-DD if clearly available; otherwise use an empty string.
+- language should use IDs from the language taxonomy below.
+
+Controlled taxonomy IDs:
+
+audiences:
+laboratorians, lab-leadership, bioinformaticians, epidemiologists, public-health-officials, policymakers, health-ministry-officials, donors-funders, trainers-educators, one-health-partners, environmental-health-teams, regional-international-orgs
+
+stages:
+readiness-assessment, planning-strategy, implementation, operations-scaleup, optimization-sustainability, evaluation-learning
+
+types:
+framework-strategy, guide-manual, interactive-tool, spreadsheet-tool, training-material, policy-document, research-evidence, case-study, template-checklist, data-dashboard
+
+geography:
+global, lmic, high-income, africa, east-africa, west-africa, southern-africa, north-africa, asia, southeast-asia, south-asia, east-asia, central-asia, americas, north-america, latin-america-caribbean, europe, mena, oceania-pacific
+
+topics:
+genomic-surveillance, amr-surveillance, environmental-surveillance, one-health, outbreak-detection, variant-monitoring, lab-networking, quality-management, accreditation, biosafety, diagnostics-integration, pipelines-workflows, data-sharing-interoperability, phylogenetics, visualization, sequencing-platforms, data-governance, ethics-legal, privacy-benefit-sharing, investment-cases, regulatory-frameworks, costing-financing, sustainability, monitoring-evaluation, stakeholder-engagement, resource-mobilization, workforce-training, technology-transfer, regional-networks, curriculum-development
+
+pathogenFocus:
+respiratory-pathogens, amr-bacteria, arboviruses-vectorborne, enteric-pathogens, emerging-pathogens, viral-genomics, bacterial-genomics
+
+language:
+en, fr, es, pt, th, vi, id, bn, other
+
+Batch use:
+To process multiple URLs, replace "Return a JSON array with exactly one resource object" with:
+"Return a JSON array with one resource object per URL, in the same order as the URLs."
+
+Then paste multiple URLs under "Reference URLs" and create a downloadable file named aphl-gsei-batch-resource-import.json.

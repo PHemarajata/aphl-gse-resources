@@ -71,3 +71,6 @@ node_modules/
 # Generated validation outputs
 validation-reports/*.json
 validation-reports/*.md
+
+# Admin-generated local resource backups
+public/resources-data-backup-*.js
