@@ -590,14 +590,16 @@ class AdminApp {
       if (!this.activateOpenAiKeyFromInput()) {
         throw new Error('Enter an OpenAI API key for this session before running AI intake.');
       }
-      let token = '';
-      if (window.firebase?.auth?.().currentUser) {
-        token = await window.firebase.auth().currentUser.getIdToken();
+      const user = window.firebase?.auth?.().currentUser;
+      if (!user) {
+        throw new Error('Firebase user is not available in the browser. Sign out, sign in again, then retry.');
       }
+      const token = await user.getIdToken(true);
       return {
         'Content-Type': 'application/json',
         'X-OpenAI-API-Key': this.openAiApiKey,
-        ...(token ? { 'X-Firebase-Auth': token } : {})
+        'X-Firebase-Auth': token,
+        ...(user.email ? { 'X-Firebase-User': user.email } : {})
       };
     }
 

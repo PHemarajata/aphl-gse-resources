@@ -13,6 +13,16 @@ function sendJson(res, status, payload) {
   res.status(status).set('Content-Type', 'application/json').send(JSON.stringify(payload));
 }
 
+function decodeJwtPayloadUnsafe(token) {
+  try {
+    const payload = String(token || '').split('.')[1];
+    if (!payload) return null;
+    return JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
+  } catch (_error) {
+    return null;
+  }
+}
+
 function taxonomySchema() {
   const arrayOf = (values) => ({
     type: 'array',
@@ -59,7 +69,15 @@ async function requireAdmin(req) {
   const firebaseToken = firebaseHeader.trim() || (authorizationHeader.match(/^Bearer\s+(.+)$/i) || [])[1] || '';
   if (!firebaseToken) throw new Error('Missing Firebase auth token.');
 
-  const decoded = await admin.auth().verifyIdToken(firebaseToken);
+  let decoded;
+  try {
+    decoded = await admin.auth().verifyIdToken(firebaseToken);
+  } catch (error) {
+    const payload = decodeJwtPayloadUnsafe(firebaseToken) || {};
+    const tokenProject = payload.aud || 'unknown';
+    const functionProject = process.env.GCLOUD_PROJECT || process.env.GCP_PROJECT || process.env.PROJECT_ID || 'unknown';
+    throw new Error(`Firebase auth token could not be verified. Token project: ${tokenProject}; function project: ${functionProject}. Sign out, use Configure Auth to ensure the project is aphlgseresources, then sign in again. Details: ${error.message}`);
+  }
   if (decoded.admin === true) return decoded;
 
   const email = String(decoded.email || '').toLowerCase();
