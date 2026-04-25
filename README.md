@@ -9,6 +9,16 @@
   <img src="https://img.shields.io/badge/Curator_Access-Google_Sign--in-EBAB21?style=flat-square&labelColor=404040" alt="Curator Access: Google Sign-in" />
 </p>
 
+<p align="center">
+  <a href="https://aphlgseresources.web.app/">
+    <img src="https://img.shields.io/badge/%E2%86%92%20Visit%20the%20Resource-aphlgseresources.web.app-00A0AF?style=for-the-badge&labelColor=006E79" alt="Visit the Resource at aphlgseresources.web.app" height="42" />
+  </a>
+</p>
+
+<p align="center">
+  <sub>Live site: <a href="https://aphlgseresources.web.app/"><b>https://aphlgseresources.web.app/</b></a></sub>
+</p>
+
 ---
 
 ## Overview
@@ -22,6 +32,8 @@ The site is hosted on Firebase Hosting. Resource data currently lives in `public
 ---
 
 ## Public Site
+
+**🔗 Live at [aphlgseresources.web.app](https://aphlgseresources.web.app/)**
 
 - Browse and search genomic epidemiology resources.
 - Filter by audience, stage, resource type, geography, topics and pathogen focus.
