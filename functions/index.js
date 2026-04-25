@@ -2,12 +2,10 @@
 
 const admin = require('firebase-admin');
 const { onRequest } = require('firebase-functions/v2/https');
-const { defineSecret } = require('firebase-functions/params');
 const taxonomyApi = require('../public/taxonomy.js');
 
 admin.initializeApp();
 
-const openAiApiKey = defineSecret('OPENAI_API_KEY');
 const taxonomyEnums = taxonomyApi.enumFields();
 
 function sendJson(res, status, payload) {
@@ -101,11 +99,15 @@ function parseResponseText(payload) {
   return chunks.join('');
 }
 
-exports.categorizeResource = onRequest({ secrets: [openAiApiKey], timeoutSeconds: 120 }, async (req, res) => {
+exports.categorizeResource = onRequest({ timeoutSeconds: 120 }, async (req, res) => {
   if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed.' });
 
   try {
     await requireAdmin(req);
+    const curatorOpenAiKey = String(req.get('X-OpenAI-API-Key') || '').trim();
+    if (!curatorOpenAiKey) {
+      return sendJson(res, 400, { error: 'OpenAI API key required for this session.' });
+    }
     const { url = '', text = '', existingResource = null } = req.body || {};
     if (!String(url).trim() && !String(text).trim()) {
       return sendJson(res, 400, { error: 'Provide a URL or pasted text.' });
@@ -125,13 +127,13 @@ exports.categorizeResource = onRequest({ secrets: [openAiApiKey], timeoutSeconds
     };
 
     if (String(url).trim()) {
-      body.tools = [{ type: 'web_search_preview' }];
+      body.tools = [{ type: 'web_search' }];
     }
 
     const response = await fetch('https://api.openai.com/v1/responses', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${openAiApiKey.value()}`,
+        'Authorization': `Bearer ${curatorOpenAiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)

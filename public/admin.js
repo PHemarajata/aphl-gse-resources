@@ -380,6 +380,7 @@ class AdminApp {
     this.newOrModifiedIds = new Set(); // Track IDs of new or modified resources
     this.validatedIds = new Set(); // Track IDs of validated resources
     this.lastValidationTime = null;
+    this.openAiApiKey = '';
 
     const start = (dbData) => {
       if (dbData && dbData.resources) {
@@ -471,11 +472,15 @@ class AdminApp {
       this.on('#compareVersionsBtn', 'click', () => this.compareVersions());
       this.on('#aiAnalyzeBtn', 'click', () => this.analyzeWithGpt());
       this.on('#applyAiSuggestionBtn', 'click', () => this.applyAiSuggestion());
+      this.on('#batchAnalyzeBtn', 'click', () => this.analyzeUrlBatch());
+      this.on('#useOpenAiKeyBtn', 'click', () => this.useOpenAiKeyForSession());
+      this.on('#clearOpenAiKeyBtn', 'click', () => this.clearOpenAiKey());
 
       this.on('#clearForm','click', ()=> this.clearForm());
       this.on('#resourceForm','submit', (e)=>{ e.preventDefault(); this.saveFromForm(); });
 
       this.on('#searchResources','input', (e)=> this.filterList(e.target.value));
+      this.updateOpenAiKeyStatus();
 
       // Add real-time ID formatting
       this.on('#resourceId','input', (e)=> {
@@ -516,6 +521,43 @@ class AdminApp {
 
     q(sel){ return document.querySelector(sel); }
     on(sel, ev, fn){ const el=this.q(sel); if(el) el.addEventListener(ev, fn); }
+
+    useOpenAiKeyForSession(){
+      const input = this.q('#openAiApiKeyInput');
+      const key = String(input?.value || '').trim();
+      if (!key) {
+        this.openAiApiKey = '';
+        this.updateOpenAiKeyStatus('Paste an OpenAI API key before enabling AI intake.');
+        return;
+      }
+      this.openAiApiKey = key;
+      if (input) input.value = '';
+      this.updateOpenAiKeyStatus();
+    }
+
+    clearOpenAiKey(){
+      this.openAiApiKey = '';
+      const input = this.q('#openAiApiKeyInput');
+      if (input) input.value = '';
+      this.updateOpenAiKeyStatus();
+    }
+
+    updateOpenAiKeyStatus(message){
+      const status = this.q('#openAiKeyStatus');
+      if (!status) return;
+      if (message) {
+        status.textContent = message;
+        status.className = 'text-xs text-red-700 mt-2';
+        return;
+      }
+      if (this.openAiApiKey) {
+        status.textContent = 'OpenAI key active for this session. It will clear on page refresh or logout.';
+        status.className = 'text-xs text-green-700 mt-2';
+      } else {
+        status.textContent = 'No OpenAI key active for this session.';
+        status.className = 'text-xs text-blue-900 mt-2';
+      }
+    }
 
     renderTaxonomyControls(){
       const renderOptions = (container, name, options, grid = false) => {
@@ -1035,32 +1077,21 @@ class AdminApp {
       const panel = this.q('#aiReviewPanel');
       const preview = this.q('#aiSuggestionPreview');
       if (!url && !context) return alert('Provide a URL or pasted context before running AI intake.');
+      if (!this.openAiApiKey) {
+        if (status) status.textContent = 'Enter an OpenAI API key for this session before running AI intake.';
+        this.updateOpenAiKeyStatus('Enter an OpenAI API key for this session before running AI intake.');
+        return;
+      }
 
       if (status) status.textContent = 'Analyzing with GPT...';
       if (panel) panel.classList.add('hidden');
 
       try {
-        let token = '';
-        if (window.firebase?.auth?.().currentUser) {
-          token = await window.firebase.auth().currentUser.getIdToken();
-        }
-
-        const response = await fetch('/api/categorize-resource', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(token ? { Authorization: `Bearer ${token}` } : {})
-          },
-          body: JSON.stringify({
-            url,
-            text: context,
-            existingResource: this.readForm()
-          })
+        const result = await this.requestGptCategorization({
+          url,
+          text: context,
+          existingResource: this.readForm()
         });
-
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(result.error || `Request failed with status ${response.status}`);
-
         this.aiSuggestion = result.resource || result;
         if (preview) preview.textContent = JSON.stringify(this.aiSuggestion, null, 2);
         if (panel) panel.classList.remove('hidden');
@@ -1068,6 +1099,100 @@ class AdminApp {
       } catch (error) {
         if (status) status.textContent = `AI intake unavailable: ${error.message}`;
       }
+    }
+
+    async requestGptCategorization(payload) {
+      if (!this.openAiApiKey) {
+        throw new Error('Enter an OpenAI API key for this session before running AI intake.');
+      }
+      let token = '';
+      if (window.firebase?.auth?.().currentUser) {
+        token = await window.firebase.auth().currentUser.getIdToken();
+      }
+
+      const response = await fetch('/api/categorize-resource', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-OpenAI-API-Key': this.openAiApiKey,
+          ...(token ? { Authorization: `Bearer ${token}` } : {})
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || `Request failed with status ${response.status}`);
+      return result;
+    }
+
+    async analyzeUrlBatch(){
+      const raw = String(this.q('#batchUrls')?.value || '');
+      const urls = [...new Set(raw.split(/\r?\n/).map((line) => line.trim()).filter(Boolean))];
+      const btn = this.q('#batchAnalyzeBtn');
+      const bar = this.q('#batchProgressBar');
+      const text = this.q('#batchProgressText');
+      const resultsEl = this.q('#batchResults');
+
+      if (urls.length === 0) return alert('Paste at least one URL, one per line.');
+      if (!this.openAiApiKey) {
+        this.updateOpenAiKeyStatus('Enter an OpenAI API key for this session before running batch intake.');
+        if (text) text.textContent = 'OpenAI key required before batch intake can start.';
+        return;
+      }
+      if (btn) btn.disabled = true;
+      if (resultsEl) resultsEl.innerHTML = '';
+      this.batchSuggestions = [];
+
+      const renderProgress = (done, total, label) => {
+        const pct = total ? Math.round((done / total) * 100) : 0;
+        if (bar) bar.style.width = `${pct}%`;
+        if (text) text.textContent = `${done}/${total} complete (${pct}%)${label ? ' - ' + label : ''}`;
+      };
+
+      renderProgress(0, urls.length, 'Starting');
+
+      for (let i = 0; i < urls.length; i++) {
+        const url = urls[i];
+        renderProgress(i, urls.length, `Analyzing ${url}`);
+        const row = document.createElement('div');
+        row.className = 'border rounded bg-white p-3 text-sm';
+        row.innerHTML = `<div class="font-medium text-gray-800 break-all">${escapeHtml(url)}</div><div class="text-xs text-gray-500 mt-1">Analyzing...</div>`;
+        if (resultsEl) resultsEl.appendChild(row);
+
+        try {
+          const result = await this.requestGptCategorization({ url, text: '', existingResource: null });
+          const resource = result.resource || result;
+          this.batchSuggestions.push(resource);
+          const idx = this.batchSuggestions.length - 1;
+          row.innerHTML = `
+            <div class="flex justify-between items-start gap-3">
+              <div class="min-w-0">
+                <div class="font-medium text-gray-800">${escapeHtml(resource.title || url)}</div>
+                <div class="text-xs text-gray-500 break-all">${escapeHtml(resource.organization || '')}</div>
+                <div class="text-xs ${result.needsReview ? 'text-yellow-700' : 'text-green-700'} mt-1">${result.needsReview ? 'Needs review' : 'Ready for curator review'}</div>
+              </div>
+              <button type="button" class="px-3 py-1 rounded bg-green-600 text-white hover:bg-green-700 text-xs" data-apply-batch="${idx}">Apply</button>
+            </div>
+          `;
+          row.querySelector('[data-apply-batch]')?.addEventListener('click', () => {
+            this.aiSuggestion = this.batchSuggestions[idx];
+            const preview = this.q('#aiSuggestionPreview');
+            const panel = this.q('#aiReviewPanel');
+            if (preview) preview.textContent = JSON.stringify(this.aiSuggestion, null, 2);
+            if (panel) panel.classList.remove('hidden');
+            this.applyAiSuggestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        } catch (error) {
+          row.innerHTML = `
+            <div class="font-medium text-gray-800 break-all">${escapeHtml(url)}</div>
+            <div class="text-xs text-red-700 mt-1">Failed: ${escapeHtml(error.message)}</div>
+          `;
+        }
+        renderProgress(i + 1, urls.length, i + 1 === urls.length ? 'Done' : 'Continuing');
+      }
+
+      if (btn) btn.disabled = false;
     }
 
     applyAiSuggestion(){

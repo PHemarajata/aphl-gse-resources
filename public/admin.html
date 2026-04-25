@@ -101,11 +101,23 @@
             <div class="flex items-center justify-between gap-3 flex-wrap">
               <div>
                 <h3 class="font-semibold text-blue-900">AI Intake</h3>
-                <p class="text-xs text-blue-800">Uses the authenticated GPT categorization endpoint when configured.</p>
+                <p class="text-xs text-blue-800">Uses your OpenAI API key for this browser session only.</p>
               </div>
               <button id="aiAnalyzeBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
                 <i class="fas fa-wand-magic-sparkles mr-1"></i>Analyze with GPT
               </button>
+            </div>
+            <div class="mt-3 bg-white border border-blue-100 rounded p-3">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
+                <label class="text-sm md:col-span-2">OpenAI API Key
+                  <input id="openAiApiKeyInput" type="password" autocomplete="off" class="mt-1 w-full border rounded px-3 py-2" placeholder="sk-...">
+                </label>
+                <div class="flex gap-2">
+                  <button id="useOpenAiKeyBtn" type="button" class="px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm flex-1">Use for Session</button>
+                  <button id="clearOpenAiKeyBtn" type="button" class="px-3 py-2 rounded bg-gray-200 text-gray-900 hover:bg-gray-300 text-sm">Clear</button>
+                </div>
+              </div>
+              <div id="openAiKeyStatus" class="text-xs text-blue-900 mt-2">No OpenAI key active for this session.</div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
               <label class="text-sm">Resource URL
@@ -124,6 +136,25 @@
                 </button>
               </div>
               <pre id="aiSuggestionPreview" class="mt-2 text-xs bg-gray-50 border rounded p-3 overflow-auto max-h-72 whitespace-pre-wrap"></pre>
+            </div>
+            <div class="mt-4 border-t border-blue-100 pt-4">
+              <div class="flex items-center justify-between gap-3 flex-wrap">
+                <div>
+                  <h4 class="font-semibold text-sm text-blue-900">Batch URL Intake</h4>
+                  <p class="text-xs text-blue-800">Paste one URL per line. Results are processed one at a time for easier review.</p>
+                </div>
+                <button id="batchAnalyzeBtn" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 text-sm">
+                  <i class="fas fa-list-check mr-1"></i>Analyze URL List
+                </button>
+              </div>
+              <textarea id="batchUrls" rows="4" class="mt-2 w-full border rounded px-3 py-2 text-sm" placeholder="https://example.org/resource-1&#10;https://example.org/resource-2"></textarea>
+              <div class="mt-3">
+                <div class="h-3 bg-blue-100 rounded-full overflow-hidden">
+                  <div id="batchProgressBar" class="h-full bg-indigo-600 transition-all" style="width:0%"></div>
+                </div>
+                <div id="batchProgressText" class="text-xs text-blue-900 mt-1">No batch running.</div>
+              </div>
+              <div id="batchResults" class="mt-3 space-y-2"></div>
             </div>
           </div>
 
