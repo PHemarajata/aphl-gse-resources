@@ -578,7 +578,7 @@ class AdminApp {
       return {
         'Content-Type': 'application/json',
         'X-OpenAI-API-Key': this.openAiApiKey,
-        ...(token ? { Authorization: `Bearer ${token}` } : {})
+        ...(token ? { 'X-Firebase-Auth': token } : {})
       };
     }
 

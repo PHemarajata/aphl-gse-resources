@@ -7,6 +7,7 @@ const taxonomyApi = require('./taxonomy.js');
 admin.initializeApp();
 
 const taxonomyEnums = taxonomyApi.enumFields();
+const HTTP_OPTIONS = { invoker: 'public' };
 
 function sendJson(res, status, payload) {
   res.status(status).set('Content-Type', 'application/json').send(JSON.stringify(payload));
@@ -53,11 +54,12 @@ function taxonomySchema() {
 }
 
 async function requireAdmin(req) {
-  const header = req.get('Authorization') || '';
-  const match = header.match(/^Bearer\s+(.+)$/i);
-  if (!match) throw new Error('Missing Firebase auth token.');
+  const firebaseHeader = req.get('X-Firebase-Auth') || '';
+  const authorizationHeader = req.get('Authorization') || '';
+  const firebaseToken = firebaseHeader.trim() || (authorizationHeader.match(/^Bearer\s+(.+)$/i) || [])[1] || '';
+  if (!firebaseToken) throw new Error('Missing Firebase auth token.');
 
-  const decoded = await admin.auth().verifyIdToken(match[1]);
+  const decoded = await admin.auth().verifyIdToken(firebaseToken);
   if (decoded.admin === true) return decoded;
 
   const email = String(decoded.email || '').toLowerCase();
@@ -102,7 +104,7 @@ function parseResponseText(payload) {
   return chunks.join('');
 }
 
-exports.aiHealth = onRequest({ timeoutSeconds: 30 }, async (req, res) => {
+exports.aiHealth = onRequest({ ...HTTP_OPTIONS, timeoutSeconds: 30 }, async (req, res) => {
   if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed.' });
 
   try {
@@ -144,7 +146,7 @@ exports.aiHealth = onRequest({ timeoutSeconds: 30 }, async (req, res) => {
   }
 });
 
-exports.categorizeResource = onRequest({ timeoutSeconds: 120 }, async (req, res) => {
+exports.categorizeResource = onRequest({ ...HTTP_OPTIONS, timeoutSeconds: 120 }, async (req, res) => {
   if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed.' });
 
   try {
@@ -202,7 +204,7 @@ exports.categorizeResource = onRequest({ timeoutSeconds: 120 }, async (req, res)
   }
 });
 
-exports.saveResources = onRequest({ timeoutSeconds: 60 }, async (req, res) => {
+exports.saveResources = onRequest({ ...HTTP_OPTIONS, timeoutSeconds: 60 }, async (req, res) => {
   if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed.' });
   try {
     await requireAdmin(req);
