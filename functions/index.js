@@ -63,8 +63,11 @@ async function requireAdmin(req) {
   const email = String(decoded.email || '').toLowerCase();
   const allowedEmails = String(process.env.ADMIN_ALLOWED_EMAILS || '').toLowerCase().split(',').map((value) => value.trim()).filter(Boolean);
   const allowedDomains = String(process.env.ADMIN_ALLOWED_DOMAINS || '').toLowerCase().split(',').map((value) => value.trim()).filter(Boolean);
+  const requireAdminClaim = String(process.env.ADMIN_REQUIRE_CLAIM || '').toLowerCase() === 'true';
+  if (requireAdminClaim) throw new Error('Authenticated user is missing the admin claim.');
   if (email && allowedEmails.includes(email)) return decoded;
   if (email && allowedDomains.some((domain) => email.endsWith(`@${domain}`))) return decoded;
+  if (email && allowedEmails.length === 0 && allowedDomains.length === 0) return decoded;
   throw new Error('Authenticated user is not authorized.');
 }
 
