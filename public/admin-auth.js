@@ -134,13 +134,20 @@
 
   function isAuthorizedUser(user, tokenResult) {
     if (!user || !user.email) return false;
+
     const email = user.email.toLowerCase();
     const hasAdminClaim = Boolean(tokenResult && tokenResult.claims && tokenResult.claims.admin === true);
-
-    // Hardened default: admin claim required unless policy explicitly allows domain/email fallback.
-    const allowFallback = POLICY.allowDomainOrEmailFallback === true;
     if (hasAdminClaim) return true;
-    if (!allowFallback) return false;
+
+    const hasAllowList = ALLOWED_DOMAINS.length > 0 || ALLOWED_EMAILS.length > 0;
+    const requireAdminClaim = POLICY.requireAdminClaim === true;
+    if (requireAdminClaim) return false;
+
+    const allowFallback = POLICY.allowDomainOrEmailFallback === true || hasAllowList;
+    if (!allowFallback) {
+      // Backward-compatible default for environments that only need signed-in gating.
+      return true;
+    }
 
     const domainMatch = ALLOWED_DOMAINS.some((domain) => email.endsWith('@' + domain));
     const emailMatch = ALLOWED_EMAILS.includes(email);
@@ -176,7 +183,8 @@
       return;
     }
 
-    status.textContent = `Authorized: ${user.email}`;
+    const hasPolicy = POLICY.requireAdminClaim === true || POLICY.allowDomainOrEmailFallback === true || ALLOWED_DOMAINS.length > 0 || ALLOWED_EMAILS.length > 0;
+    status.textContent = hasPolicy ? `Authorized: ${user.email}` : `Authorized: ${user.email} (signed-in mode)`;
     status.className = 'ml-1 text-green-700';
     signInBtn.classList.add('hidden');
     signOutBtn.classList.remove('hidden');

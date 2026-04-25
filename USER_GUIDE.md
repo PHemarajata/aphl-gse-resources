@@ -181,7 +181,9 @@ Do not rely on client-side allowlists alone for security.
 4. Configure `window.__ADMIN_AUTH_POLICY__` in deployment config:
    - `allowedDomains: []`
    - `allowedEmails: []`
-   - `allowDomainOrEmailFallback: false` (recommended default).
+   - `allowDomainOrEmailFallback: true` to enforce domain/email allowlists when present.
+   - `requireAdminClaim: true` for strict custom-claim-only access.
+   - If no policy values are set, Admin runs in **signed-in mode** (any authenticated Google user is authorized).
 5. Enforce server-side token verification for `/api/saveResources`.
 6. Prefer custom claims (e.g., `admin: true`) for long-term authorization control.
 
