@@ -11,6 +11,10 @@
         "function": "categorizeResource"
       },
       {
+        "source": "/api/ai-health",
+        "function": "aiHealth"
+      },
+      {
         "source": "/api/saveResources",
         "function": "saveResources"
       }

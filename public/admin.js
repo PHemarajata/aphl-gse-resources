@@ -475,6 +475,7 @@ class AdminApp {
       this.on('#batchAnalyzeBtn', 'click', () => this.analyzeUrlBatch());
       this.on('#useOpenAiKeyBtn', 'click', () => this.useOpenAiKeyForSession());
       this.on('#clearOpenAiKeyBtn', 'click', () => this.clearOpenAiKey());
+      this.on('#testAiSetupBtn', 'click', () => this.testAiSetup());
 
       this.on('#clearForm','click', ()=> this.clearForm());
       this.on('#resourceForm','submit', (e)=>{ e.preventDefault(); this.saveFromForm(); });
@@ -556,6 +557,55 @@ class AdminApp {
       } else {
         status.textContent = 'No OpenAI key active for this session.';
         status.className = 'text-xs text-blue-900 mt-2';
+      }
+    }
+
+    async buildAiHeaders(){
+      if (!this.openAiApiKey) {
+        throw new Error('Enter an OpenAI API key for this session before running AI intake.');
+      }
+      let token = '';
+      if (window.firebase?.auth?.().currentUser) {
+        token = await window.firebase.auth().currentUser.getIdToken();
+      }
+      return {
+        'Content-Type': 'application/json',
+        'X-OpenAI-API-Key': this.openAiApiKey,
+        ...(token ? { Authorization: `Bearer ${token}` } : {})
+      };
+    }
+
+    describeAiRequestFailure(response, result) {
+      if (result && result.error) return result.error;
+      if (response.status === 404) {
+        return 'AI endpoint not found (404). Deploy Firebase Functions and Hosting rewrites, then reload the admin page.';
+      }
+      if (response.status === 401 || response.status === 403) {
+        return 'Firebase authorization failed. Sign in with an authorized admin account.';
+      }
+      if (response.status === 400) {
+        return 'Request was rejected before reaching OpenAI. Check that your session OpenAI key is active.';
+      }
+      return `Request failed with status ${response.status}`;
+    }
+
+    async testAiSetup(){
+      const status = this.q('#openAiKeyStatus');
+      try {
+        if (status) {
+          status.textContent = 'Testing Firebase endpoint and OpenAI key...';
+          status.className = 'text-xs text-blue-900 mt-2';
+        }
+        const response = await fetch('/api/ai-health', {
+          method: 'POST',
+          headers: await this.buildAiHeaders(),
+          body: JSON.stringify({})
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(this.describeAiRequestFailure(response, result));
+        this.updateOpenAiKeyStatus(`AI setup ready. Endpoint, Firebase auth, and OpenAI key check passed. Model: ${result.model || 'default'}.`);
+      } catch (error) {
+        this.updateOpenAiKeyStatus(`AI setup check failed: ${error.message}`);
       }
     }
 
@@ -1102,26 +1152,14 @@ class AdminApp {
     }
 
     async requestGptCategorization(payload) {
-      if (!this.openAiApiKey) {
-        throw new Error('Enter an OpenAI API key for this session before running AI intake.');
-      }
-      let token = '';
-      if (window.firebase?.auth?.().currentUser) {
-        token = await window.firebase.auth().currentUser.getIdToken();
-      }
-
       const response = await fetch('/api/categorize-resource', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-OpenAI-API-Key': this.openAiApiKey,
-          ...(token ? { Authorization: `Bearer ${token}` } : {})
-        },
+        headers: await this.buildAiHeaders(),
         body: JSON.stringify(payload)
       });
 
       const result = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(result.error || `Request failed with status ${response.status}`);
+      if (!response.ok) throw new Error(this.describeAiRequestFailure(response, result));
       return result;
     }
 

@@ -99,6 +99,48 @@ function parseResponseText(payload) {
   return chunks.join('');
 }
 
+exports.aiHealth = onRequest({ timeoutSeconds: 30 }, async (req, res) => {
+  if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed.' });
+
+  try {
+    const user = await requireAdmin(req);
+    const curatorOpenAiKey = String(req.get('X-OpenAI-API-Key') || '').trim();
+    if (!curatorOpenAiKey) {
+      return sendJson(res, 400, {
+        ok: false,
+        stage: 'openai-key',
+        error: 'OpenAI API key required for this session.'
+      });
+    }
+
+    const response = await fetch('https://api.openai.com/v1/models', {
+      method: 'GET',
+      headers: { 'Authorization': `Bearer ${curatorOpenAiKey}` }
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      return sendJson(res, response.status, {
+        ok: false,
+        stage: 'openai-auth',
+        error: payload.error?.message || 'OpenAI key check failed.'
+      });
+    }
+
+    return sendJson(res, 200, {
+      ok: true,
+      stage: 'ready',
+      user: user.email || user.uid,
+      model: process.env.OPENAI_MODEL || 'gpt-5'
+    });
+  } catch (error) {
+    return sendJson(res, 401, {
+      ok: false,
+      stage: 'firebase-auth',
+      error: error.message || 'Firebase authorization failed.'
+    });
+  }
+});
+
 exports.categorizeResource = onRequest({ timeoutSeconds: 120 }, async (req, res) => {
   if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed.' });
 

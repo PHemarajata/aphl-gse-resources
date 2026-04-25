@@ -16,7 +16,7 @@
   const protectedSelectors = [
     '#resourceForm input', '#resourceForm textarea', '#resourceForm button',
     '#aiUrl', '#aiContext', '#aiAnalyzeBtn', '#applyAiSuggestionBtn',
-    '#openAiApiKeyInput', '#useOpenAiKeyBtn', '#clearOpenAiKeyBtn',
+    '#openAiApiKeyInput', '#useOpenAiKeyBtn', '#testAiSetupBtn', '#clearOpenAiKeyBtn',
     '#batchUrls', '#batchAnalyzeBtn',
     '#importTsvBtn', '#importJsBtn', '#importJsonBtn', '#exportTsvBtn', '#exportJsonBtn',
     '#validateBtn', '#validateAllBtn', '#saveDatabaseBtn', '#publishBtn',
