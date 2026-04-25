@@ -8,19 +8,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, '..');
 const dataFilePath = path.join(repoRoot, 'public', 'resources-data.js');
+const taxonomyFilePath = path.join(repoRoot, 'public', 'taxonomy.js');
 const reportDir = path.join(repoRoot, 'validation-reports');
 const machineReportPath = path.join(reportDir, 'resource-validation-report.json');
 const humanReportPath = path.join(reportDir, 'resource-validation-summary.md');
 
-const enumRules = {
-  audiences: ['laboratorians', 'epidemiologists', 'bioinformaticians', 'policymakers'],
-  stages: ['planning', 'implementation', 'optimization'],
-  types: ['guide', 'tool', 'training', 'policy'],
-  geography: ['global', 'africa', 'asia', 'lmic'],
-  topics: ['surveillance', 'implementation', 'policy', 'qms', 'bioinformatics', 'training', 'costing', 'prioritization']
-};
+function loadTaxonomyApi() {
+  const source = fs.readFileSync(taxonomyFilePath, 'utf8');
+  const context = { module: { exports: {} }, exports: {}, globalThis: {} };
+  vm.createContext(context);
+  vm.runInContext(source, context, { filename: taxonomyFilePath });
+  return context.module.exports;
+}
 
-const requiredArrayFields = Object.keys(enumRules);
+const taxonomyApi = loadTaxonomyApi();
+const enumRules = taxonomyApi.enumFields();
+
+const requiredArrayFields = ['audiences', 'stages', 'types', 'geography', 'topics'];
 const requiredScalarFields = ['id', 'title', 'description', 'organization', 'url'];
 
 function createIssue({
@@ -151,7 +155,7 @@ function validate(resourcesDatabase) {
       const invalidValues = value.filter((entry) => !validValues.includes(entry));
       if (invalidValues.length > 0) {
         issues.push(createIssue({
-          severity: 'warning',
+          severity: 'error',
           check: 'broken-enum',
           resourceId,
           field,
@@ -171,6 +175,51 @@ function validate(resourcesDatabase) {
         resourceId,
         field: 'url',
         message: `URL is not a valid http(s) URL: "${resource.url}".`
+      }));
+    }
+
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(resource.id || '')) {
+      issues.push(createIssue({
+        severity: 'error',
+        check: 'invalid-id-format',
+        resourceId,
+        field: 'id',
+        message: `Resource ID must be lowercase kebab-case: "${resource.id}".`
+      }));
+    }
+
+    for (const field of ['pathogenFocus', 'language']) {
+      if (resource[field] === undefined) continue;
+      if (!Array.isArray(resource[field])) {
+        issues.push(createIssue({
+          severity: 'error',
+          check: 'invalid-internal-structure',
+          resourceId,
+          field,
+          message: `Field "${field}" must be an array when provided.`
+        }));
+        continue;
+      }
+      const invalidValues = resource[field].filter((entry) => !enumRules[field].includes(entry));
+      if (invalidValues.length > 0) {
+        issues.push(createIssue({
+          severity: 'error',
+          check: 'broken-enum',
+          resourceId,
+          field,
+          message: `Field "${field}" has unsupported value(s): ${invalidValues.join(', ')}.`,
+          details: { invalidValues, allowedValues: enumRules[field] }
+        }));
+      }
+    }
+
+    if (resource.lastUpdated && Number.isNaN(Date.parse(resource.lastUpdated))) {
+      issues.push(createIssue({
+        severity: 'error',
+        check: 'invalid-date',
+        resourceId,
+        field: 'lastUpdated',
+        message: `lastUpdated is not a valid date: "${resource.lastUpdated}".`
       }));
     }
 

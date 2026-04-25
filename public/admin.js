@@ -17,18 +17,23 @@
   }
 
 
+  const TAXONOMY_API = window.APHL_TAXONOMY || {};
+  const TAXONOMY = TAXONOMY_API.TAXONOMY || {};
+  const TAXONOMY_ENUMS = TAXONOMY_API.enumFields ? TAXONOMY_API.enumFields() : {
+    audiences: ['laboratorians', 'epidemiologists', 'bioinformaticians', 'policymakers'],
+    stages: ['planning', 'implementation', 'optimization'],
+    types: ['guide', 'tool', 'training', 'policy'],
+    geography: ['global', 'africa', 'asia', 'lmic'],
+    topics: ['surveillance', 'implementation', 'policy', 'qms', 'bioinformatics', 'training', 'costing', 'prioritization'],
+    pathogenFocus: [],
+    language: ['en']
+  };
   const RESOURCE_SCHEMA = {
     idPattern: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
     requiredFields: ['id', 'title', 'organization', 'description', 'url'],
-    enumFields: {
-      audiences: ['laboratorians', 'epidemiologists', 'bioinformaticians', 'policymakers'],
-      stages: ['planning', 'implementation', 'optimization'],
-      types: ['guide', 'tool', 'training', 'policy'],
-      geography: ['global', 'africa', 'asia', 'lmic'],
-      topics: ['surveillance', 'implementation', 'policy', 'qms', 'bioinformatics', 'training', 'costing', 'prioritization']
-    },
+    enumFields: TAXONOMY_ENUMS,
     requiredArrays: ['audiences', 'stages', 'types', 'geography', 'topics'],
-    optionalArrays: ['keyFeatures', 'relatedResources'],
+    optionalArrays: ['keyFeatures', 'relatedResources', 'pathogenFocus', 'language', 'legacyTags'],
     urlPattern: /^https:\/\//i
   };
 
@@ -85,6 +90,28 @@
       }
     });
 
+    ['pathogenFocus', 'language'].forEach((field) => {
+      const value = record[field];
+      if (value === undefined) return;
+      const allowed = RESOURCE_SCHEMA.enumFields[field] || [];
+      const invalid = Array.isArray(value) ? value.filter((entry) => !allowed.includes(entry)) : [];
+      if (invalid.length > 0) {
+        pushIssue('critical', field, `only allowed values: ${allowed.join(', ')}`, JSON.stringify(invalid), `Replace invalid values in ${field} with allowed enum values.`);
+      }
+    });
+
+    RESOURCE_SCHEMA.requiredArrays.concat(['pathogenFocus']).forEach((field) => {
+      const value = record[field];
+      const max = TAXONOMY[field]?.maxRecommended;
+      if (Array.isArray(value) && max && value.length > max) {
+        pushIssue('warning', field, `no more than ${max} tags recommended`, JSON.stringify(value), `Remove low-value tags from ${field} to keep filtering precise.`);
+      }
+    });
+
+    if (record.lastUpdated && Number.isNaN(Date.parse(record.lastUpdated))) {
+      pushIssue('critical', 'lastUpdated', 'valid ISO date or YYYY-MM-DD', JSON.stringify(record.lastUpdated), 'Use a valid date for lastUpdated.');
+    }
+
     if (Array.isArray(record.keyFeatures) && record.keyFeatures.length === 0) {
       pushIssue('warning', 'keyFeatures', 'at least one key feature recommended', JSON.stringify(record.keyFeatures), 'Add one or more key features to improve discoverability.');
     }
@@ -104,6 +131,7 @@
   function validateResourceSet(records, sourceLabel = 'dataset') {
     const issues = [];
     const seenIds = new Map();
+    const knownIds = new Set(records.map((record) => record && record.id).filter(Boolean));
 
     records.forEach((record, idx) => {
       const source = `${sourceLabel} row/index ${idx + 1}`;
@@ -125,6 +153,20 @@
           seenIds.set(record.id, idx);
         }
       }
+
+      if (Array.isArray(record.relatedResources)) {
+        const missing = record.relatedResources.filter((id) => !knownIds.has(id));
+        if (missing.length > 0) {
+          issues.push({
+            severity: 'warning',
+            source,
+            field: 'relatedResources',
+            expected: 'IDs that exist in the current dataset',
+            actual: JSON.stringify(missing),
+            hint: 'Remove stale relatedResources IDs or add the missing referenced records.'
+          });
+        }
+      }
     });
 
     return {
@@ -136,7 +178,7 @@
 
   // Converters
   function toTSV(resources){
-    const headers = ['id','title','organization','description','url','audiences','stages','types','geography','topics','keyFeatures','practicalUse','relatedResources'];
+    const headers = ['id','title','organization','description','url','audiences','stages','types','geography','topics','pathogenFocus','language','lastUpdated','formatDetails','keyFeatures','practicalUse','relatedResources','legacyTags'];
     const head = headers.join('\t');
     const lines = resources.map(r => [
       r.id||'',
@@ -149,14 +191,36 @@
       (r.types||[]).join(';'),
       (r.geography||[]).join(';'),
       (r.topics||[]).join(';'),
+      (r.pathogenFocus||[]).join(';'),
+      (r.language||[]).join(';'),
+      r.lastUpdated||'',
+      r.formatDetails||'',
       (r.keyFeatures||[]).join('\\n'),
       r.practicalUse||'',
-      (r.relatedResources||[]).join(';')
+      (r.relatedResources||[]).join(';'),
+      (r.legacyTags||[]).join('\\n')
     ].map(x => String(x)).join('\t'));
     return [head].concat(lines).join('\n');
   }
   function toJS(resources){
-    return `// Auto-generated\nconst resourcesData = ${JSON.stringify(resources, null, 2)};`;
+    const database = {
+      metadata: {
+        version: '2.0.0',
+        lastUpdated: new Date().toISOString(),
+        totalResources: resources.length,
+        generatedBy: 'APHL Admin Panel v2.0'
+      },
+      resources
+    };
+    return `// Auto-generated resources database with metadata
+const resourcesDatabase = ${JSON.stringify(database, null, 2)};
+
+const resourcesData = resourcesDatabase.resources;
+
+if (typeof window !== 'undefined') {
+  window.resourcesDatabase = resourcesDatabase;
+  window.resourcesData = resourcesData;
+}`;
   }
 
   function deepClone(obj){
@@ -203,9 +267,14 @@
         types: splitList(get('types')),
         geography: splitList(get('geography')),
         topics: splitList(get('topics')),
+        pathogenFocus: splitList(get('pathogenFocus')),
+        language: splitList(get('language')),
+        lastUpdated: get('lastUpdated').trim(),
+        formatDetails: get('formatDetails').trim(),
         keyFeatures: String(get('keyFeatures')||'').replace(/\\r/g,'').split('\\n').filter(Boolean),
         practicalUse: get('practicalUse').trim(),
-        relatedResources: splitList(get('relatedResources'))
+        relatedResources: splitList(get('relatedResources')),
+        legacyTags: String(get('legacyTags')||'').replace(/\\r/g,'').split('\\n').filter(Boolean)
       };
     });
   }
@@ -290,6 +359,11 @@ function parseJS(text) {
       types: list(o.types),
       geography: list(o.geography),
       topics: list(o.topics),
+      pathogenFocus: list(o.pathogenFocus),
+      language: list(o.language).length ? list(o.language) : ['en'],
+      lastUpdated: String(o.lastUpdated||'').trim(),
+      formatDetails: String(o.formatDetails||'').trim(),
+      legacyTags: list(o.legacyTags),
       keyFeatures: Array.isArray(o.keyFeatures) ? o.keyFeatures : String(o.keyFeatures||'').split('\\n').filter(Boolean),
       practicalUse: String(o.practicalUse||'').trim(),
       relatedResources: list(o.relatedResources)
@@ -340,6 +414,7 @@ class AdminApp {
         this.original = JSON.parse(JSON.stringify(arr));
         this.data = JSON.parse(JSON.stringify(arr));
       }
+      this.renderTaxonomyControls();
       this.bind();
       this.renderList();
       this.updateDashboard();
@@ -394,6 +469,8 @@ class AdminApp {
       this.on('#validateAllBtn','click', ()=> this.validateAll());
       this.on('#saveDatabaseBtn','click', ()=> this.saveDatabase());
       this.on('#compareVersionsBtn', 'click', () => this.compareVersions());
+      this.on('#aiAnalyzeBtn', 'click', () => this.analyzeWithGpt());
+      this.on('#applyAiSuggestionBtn', 'click', () => this.applyAiSuggestion());
 
       this.on('#clearForm','click', ()=> this.clearForm());
       this.on('#resourceForm','submit', (e)=>{ e.preventDefault(); this.saveFromForm(); });
@@ -440,6 +517,44 @@ class AdminApp {
     q(sel){ return document.querySelector(sel); }
     on(sel, ev, fn){ const el=this.q(sel); if(el) el.addEventListener(ev, fn); }
 
+    renderTaxonomyControls(){
+      const renderOptions = (container, name, options, grid = false) => {
+        if (!container) return;
+        container.className = grid ? 'grid grid-cols-1 md:grid-cols-3 gap-1 text-sm' : container.className;
+        container.innerHTML = (options || []).map((opt) => `
+          <label class="block leading-snug">
+            <input type="checkbox" name="${escapeHtml(name)}" value="${escapeHtml(opt.id)}" class="mr-1">
+            ${escapeHtml(opt.label)}
+          </label>
+        `).join('');
+      };
+
+      const renderField = (field) => {
+        const container = this.q(`#taxonomy-${field}`);
+        const def = TAXONOMY[field];
+        if (!container || !def) return;
+        if (Array.isArray(def.options)) {
+          renderOptions(container, field, def.options, ['pathogenFocus', 'language'].includes(field));
+          return;
+        }
+        container.innerHTML = (def.groups || []).map((group) => `
+          <div>
+            <div class="text-xs font-semibold text-gray-600 mb-1">${escapeHtml(group.label)}</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
+              ${(group.options || []).map((opt) => `
+                <label class="block leading-snug">
+                  <input type="checkbox" name="${escapeHtml(field)}" value="${escapeHtml(opt.id)}" class="mr-1">
+                  ${escapeHtml(opt.label)}
+                </label>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      };
+
+      ['audiences','stages','types','geography','topics','pathogenFocus','language'].forEach(renderField);
+    }
+
     showToast(message, tone = 'info') {
       const existing = document.getElementById('adminImportToast');
       if (existing) existing.remove();
@@ -480,8 +595,8 @@ class AdminApp {
       });
     }
     tsvFallback(){ return [
-      'id\ttitle\torganization\tdescription\turl\taudiences\tstages\ttypes\tgeography\ttopics\tkeyFeatures\tpracticalUse\trelatedResources',
-      'example-resource-id\tExample Genomic Surveillance Guide\tExample Health Organization\tA comprehensive guide for implementing genomic surveillance systems in public health laboratories with step-by-step protocols and best practices.\thttps://example.org/guide\tlaboratorians;epidemiologists\tplanning;implementation\tguide;training\tglobal;lmic\tsurveillance;implementation;qms\tLaboratory setup protocols\\nQuality management systems\\nWorkflow optimization\\nStaff training materials\tUse this guide to establish genomic surveillance capabilities in your laboratory, train staff, and ensure quality standards\trelated-resource-1;related-resource-2'
+      'id\ttitle\torganization\tdescription\turl\taudiences\tstages\ttypes\tgeography\ttopics\tpathogenFocus\tlanguage\tlastUpdated\tformatDetails\tkeyFeatures\tpracticalUse\trelatedResources\tlegacyTags',
+      'example-resource-id\tExample Genomic Surveillance Guide\tExample Health Organization\tA comprehensive guide for implementing genomic surveillance systems in public health laboratories with step-by-step protocols and best practices.\thttps://example.org/guide\tlaboratorians;epidemiologists\tplanning-strategy;implementation\tguide-manual;training-material\tglobal;lmic\tgenomic-surveillance;quality-management\trespiratory-pathogens\ten\t2026-04-25\tPDF guide\tLaboratory setup protocols\\nQuality management systems\\nWorkflow optimization\\nStaff training materials\tUse this guide to establish genomic surveillance capabilities in your laboratory, train staff, and ensure quality standards\trelated-resource-1;related-resource-2\t'
     ].join('\n'); }
 
     renderList(){
@@ -833,9 +948,14 @@ class AdminApp {
         types: list('types'),
         geography: list('geography'),
         topics: list('topics'),
+        pathogenFocus: list('pathogenFocus'),
+        language: list('language').length ? list('language') : ['en'],
+        lastUpdated: document.getElementById('resourceLastUpdated')?.value || '',
+        formatDetails: document.getElementById('formatDetails')?.value.trim() || '',
         keyFeatures: (document.getElementById('keyFeatures')?.value||'').split('\n').map(s=>s.trim()).filter(Boolean),
         practicalUse: document.getElementById('practicalUse')?.value.trim(),
-        relatedResources: (document.getElementById('relatedResources')?.value||'').split(/[;,]/).map(s=>s.trim()).filter(Boolean)
+        relatedResources: (document.getElementById('relatedResources')?.value||'').split(/[;,]/).map(s=>s.trim()).filter(Boolean),
+        legacyTags: (document.getElementById('legacyTags')?.value||'').split(/[;\n]/).map(s=>s.trim()).filter(Boolean)
       };
     }
     validateForm(d){
@@ -876,7 +996,11 @@ class AdminApp {
       // Validate only the resource that was just saved
       this.validateNewResources();
     }
-    clearForm(){ document.getElementById('resourceForm')?.reset(); this.editing=false; }
+    clearForm(){
+      document.getElementById('resourceForm')?.reset();
+      document.querySelectorAll('#resourceForm input[type="checkbox"]').forEach(cb => cb.checked = false);
+      this.editing=false;
+    }
     edit(id){
       const r=this.data.find(x=>x.id===id); if(!r) return;
       this.editing=true;
@@ -886,10 +1010,13 @@ class AdminApp {
       document.getElementById('description').value=r.description;
       document.getElementById('url').value=(r.url==='#'?'':r.url);
       const set=(name,arr)=> document.querySelectorAll(`input[name="${name}"]`).forEach(cb=> cb.checked = (arr||[]).includes(cb.value));
-      set('audiences',r.audiences); set('stages',r.stages); set('types',r.types); set('geography',r.geography); set('topics',r.topics);
+      set('audiences',r.audiences); set('stages',r.stages); set('types',r.types); set('geography',r.geography); set('topics',r.topics); set('pathogenFocus',r.pathogenFocus); set('language',r.language || ['en']);
+      document.getElementById('resourceLastUpdated').value=(r.lastUpdated||'').slice(0,10);
+      document.getElementById('formatDetails').value=r.formatDetails||'';
       document.getElementById('keyFeatures').value=(r.keyFeatures||[]).join('\n');
       document.getElementById('practicalUse').value=r.practicalUse||'';
       document.getElementById('relatedResources').value=(r.relatedResources||[]).join(', ');
+      document.getElementById('legacyTags').value=(r.legacyTags||[]).join('\n');
       window.scrollTo({top:0,behavior:'smooth'});
     }
     remove(id){
@@ -899,6 +1026,80 @@ class AdminApp {
       this.validatedIds.delete(id); // Remove from validation tracking
       this.dirty = true; this.renderList(); this.updateDashboard(); this.enableValidationIfAny(); 
       // No need to validate after deletion
+    }
+
+    async analyzeWithGpt(){
+      const url = String(this.q('#aiUrl')?.value || this.q('#url')?.value || '').trim();
+      const context = String(this.q('#aiContext')?.value || this.q('#description')?.value || '').trim();
+      const status = this.q('#aiStatus');
+      const panel = this.q('#aiReviewPanel');
+      const preview = this.q('#aiSuggestionPreview');
+      if (!url && !context) return alert('Provide a URL or pasted context before running AI intake.');
+
+      if (status) status.textContent = 'Analyzing with GPT...';
+      if (panel) panel.classList.add('hidden');
+
+      try {
+        let token = '';
+        if (window.firebase?.auth?.().currentUser) {
+          token = await window.firebase.auth().currentUser.getIdToken();
+        }
+
+        const response = await fetch('/api/categorize-resource', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {})
+          },
+          body: JSON.stringify({
+            url,
+            text: context,
+            existingResource: this.readForm()
+          })
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.error || `Request failed with status ${response.status}`);
+
+        this.aiSuggestion = result.resource || result;
+        if (preview) preview.textContent = JSON.stringify(this.aiSuggestion, null, 2);
+        if (panel) panel.classList.remove('hidden');
+        if (status) status.textContent = result.needsReview ? 'Suggestion returned; manual review recommended.' : 'Suggestion returned.';
+      } catch (error) {
+        if (status) status.textContent = `AI intake unavailable: ${error.message}`;
+      }
+    }
+
+    applyAiSuggestion(){
+      const r = this.aiSuggestion;
+      if (!r) return;
+      const setValue = (id, value) => {
+        const el = document.getElementById(id);
+        if (el && value !== undefined && value !== null) el.value = Array.isArray(value) ? value.join('\n') : value;
+      };
+      const setChecks = (name, arr) => {
+        const values = new Set(Array.isArray(arr) ? arr : []);
+        document.querySelectorAll(`input[name="${name}"]`).forEach(cb => { cb.checked = values.has(cb.value); });
+      };
+
+      setValue('resourceId', r.id || r.suggestedId);
+      setValue('title', r.title);
+      setValue('organization', r.organization);
+      setValue('url', r.url);
+      setValue('description', r.description);
+      setChecks('audiences', r.audiences);
+      setChecks('stages', r.stages);
+      setChecks('types', r.types);
+      setChecks('geography', r.geography);
+      setChecks('topics', r.topics);
+      setChecks('pathogenFocus', r.pathogenFocus);
+      setChecks('language', r.language || ['en']);
+      setValue('resourceLastUpdated', (r.lastUpdated || '').slice(0, 10));
+      setValue('formatDetails', r.formatDetails);
+      setValue('keyFeatures', r.keyFeatures);
+      setValue('practicalUse', r.practicalUse);
+      setValue('relatedResources', Array.isArray(r.relatedResources) ? r.relatedResources.join(', ') : r.relatedResources);
+      setValue('legacyTags', r.sourceNotes ? ['AI source notes:', r.sourceNotes].flat().join('\n') : undefined);
     }
 
     async validateNewResources(){

@@ -1,6 +1,20 @@
 {
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs20"
+  },
   "hosting": {
     "public": "public",
+    "rewrites": [
+      {
+        "source": "/api/categorize-resource",
+        "function": "categorizeResource"
+      },
+      {
+        "source": "/api/saveResources",
+        "function": "saveResources"
+      }
+    ],
     "predeploy": [
       "node scripts/validate-resources.mjs"
     ],

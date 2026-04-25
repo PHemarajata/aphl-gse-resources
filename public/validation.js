@@ -93,6 +93,29 @@ class ResourceValidator {
             if (!resource[field] || !Array.isArray(resource[field]) || resource[field].length === 0) {
                 result.issues.push(`Missing or empty array field: ${field}`);
                 result.score -= 15;
+                return;
+            }
+
+            const allowed = window.APHL_TAXONOMY?.enumFields?.()[field] || [];
+            const invalid = resource[field].filter(value => !allowed.includes(value));
+            if (invalid.length > 0) {
+                result.issues.push(`Unsupported ${field} value(s): ${invalid.join(', ')}`);
+                result.score -= 15;
+            }
+        });
+
+        ['pathogenFocus', 'language'].forEach(field => {
+            if (!resource[field]) return;
+            if (!Array.isArray(resource[field])) {
+                result.issues.push(`${field} must be an array`);
+                result.score -= 10;
+                return;
+            }
+            const allowed = window.APHL_TAXONOMY?.enumFields?.()[field] || [];
+            const invalid = resource[field].filter(value => !allowed.includes(value));
+            if (invalid.length > 0) {
+                result.issues.push(`Unsupported ${field} value(s): ${invalid.join(', ')}`);
+                result.score -= 10;
             }
         });
 

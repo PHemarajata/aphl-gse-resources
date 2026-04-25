@@ -15,6 +15,7 @@
 
   const protectedSelectors = [
     '#resourceForm input', '#resourceForm textarea', '#resourceForm button',
+    '#aiUrl', '#aiContext', '#aiAnalyzeBtn', '#applyAiSuggestionBtn',
     '#importTsvBtn', '#importJsBtn', '#importJsonBtn', '#exportTsvBtn', '#exportJsonBtn',
     '#validateBtn', '#validateAllBtn', '#saveDatabaseBtn', '#publishBtn',
     '#searchResources', '#clearForm', '#compareVersionsBtn', '#compareVersionA', '#compareVersionB'

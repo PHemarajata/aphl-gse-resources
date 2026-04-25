@@ -1,44 +1,45 @@
 // Auto-generated resources database with metadata
 const resourcesDatabase = {
   "metadata": {
-    "version": "1.8.1",
-    "lastUpdated": "2025-09-26T12:15:34.639Z",
+    "version": "2.0.0",
+    "lastUpdated": "2026-04-25T06:46:29.653Z",
     "totalResources": 76,
     "lastValidated": "2025-09-26T11:41:55.621Z",
     "validatedResources": [
-      "Thailand_MDRTB_WGS",
-      "SEA_NGS_Assessment",
-      "Bangkok_Wastewater_Surv",
-      "SEA_EID_Capabilities",
-      "Indonesia_VariantCollab",
-      "Vietnam_SARS2_GenVars",
-      "Mpox_Training_SEA_2025",
-      "AfricaPGI_CaseStudy",
-      "AfricaPGI_CapacityBuilding_BeyondCovid",
-      "AfricaPolicy_Framework",
-      "Africa_GenomicData_SharingPlatform",
-      "Malawi_GenSurv_Strategy_MoH",
-      "GenSurv_SurveillanceGaps_WNV",
-      "AfricaPGI_DETECT",
-      "Bangladesh_StrategicFramework_Bangla",
-      "WHO_Considerations_NationalGSStrategy",
-      "GlobalGenomicSurvStrategy_2022",
-      "PAHO_CSP30R9_RegionalGSStrategy_PAHA",
-      "AfricaDataBarriers_CellReview",
-      "ClinicalMicrobio_LabGap_Africa",
-      "WorldBank_LandscapeAnalysis_Africa",
-      "Africa_PGI_PolicyFramework",
-      "WHO_GlobalStrategy2022",
-      "Malawi_GenSurv_IP2",
-      "Nigeria_NGSS_Strategy",
-      "Africa_DataSharing_Principles",
+      "thailand-mdrtb-wgs",
+      "sea-ngs-assessment",
+      "bangkok-wastewater-surv",
+      "sea-eid-capabilities",
+      "indonesia-variantcollab",
+      "vietnam-sars2-genvars",
+      "mpox-training-sea-2025",
+      "africapgi-casestudy",
+      "africapgi-capacitybuilding-beyondcovid",
+      "africapolicy-framework",
+      "africa-genomicdata-sharingplatform",
+      "malawi-gensurv-strategy-moh",
+      "gensurv-surveillancegaps-wnv",
+      "africapgi-detect",
+      "bangladesh-strategicframework-bangla",
+      "who-considerations-nationalgsstrategy",
+      "globalgenomicsurvstrategy-2022",
+      "paho-csp30r9-regionalgsstrategy-paha",
+      "africadatabarriers-cellreview",
+      "clinicalmicrobio-labgap-africa",
+      "worldbank-landscapeanalysis-africa",
+      "africa-pgi-policyframework",
+      "who-globalstrategy2022",
+      "malawi-gensurv-ip2",
+      "nigeria-ngss-strategy",
+      "africa-datasharing-principles",
       "strobe-metagenomics",
       "mixs-minimum-info",
       "minseqe-minimum-info",
       "misag-minimum-info",
       "mimag-minimum-info"
     ],
-    "generatedBy": "APHL Admin Panel v1.8"
+    "generatedBy": "APHL taxonomy migration script",
+    "taxonomyVersion": "2026-04-expanded"
   },
   "resources": [
     {
@@ -53,20 +54,20 @@ const resourcesDatabase = {
         "laboratorians"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "guide",
-        "policy"
+        "guide-manual",
+        "policy-document"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "surveillance",
-        "policy",
-        "implementation"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "10-year strategic framework",
@@ -81,7 +82,14 @@ const resourcesDatabase = {
         "asia-pgi-roadmap",
         "africa-pgi-framework",
         "tom-implementation"
-      ]
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
       "id": "who-costing-tool",
@@ -94,19 +102,19 @@ const resourcesDatabase = {
         "laboratorians"
       ],
       "stages": [
-        "planning"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "tool"
+        "spreadsheet-tool"
       ],
       "geography": [
         "global",
         "lmic"
       ],
       "topics": [
-        "costing",
-        "implementation",
-        "planning"
+        "stakeholder-engagement",
+        "costing-financing"
       ],
       "keyFeatures": [
         "Infrastructure cost calculation",
@@ -120,6 +128,16 @@ const resourcesDatabase = {
         "who-global-strategy",
         "investment-case-guide",
         "tom-implementation"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "types: inferred from title/description"
       ]
     },
     {
@@ -134,20 +152,20 @@ const resourcesDatabase = {
         "epidemiologists"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "asia",
         "lmic"
       ],
       "topics": [
-        "implementation",
-        "surveillance",
-        "prioritization"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "outbreak-detection"
       ],
       "keyFeatures": [
         "Country-specific profiles",
@@ -161,7 +179,14 @@ const resourcesDatabase = {
         "africa-pgi-framework",
         "who-global-strategy",
         "pathogen-prioritization"
-      ]
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
       "id": "africa-pgi-framework",
@@ -175,21 +200,22 @@ const resourcesDatabase = {
         "epidemiologists"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "guide",
-        "policy"
+        "guide-manual",
+        "policy-document",
+        "training-material"
       ],
       "geography": [
         "africa",
         "lmic"
       ],
       "topics": [
-        "implementation",
-        "training",
-        "policy"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "workforce-training"
       ],
       "keyFeatures": [
         "Hub network coordination model",
@@ -201,8 +227,16 @@ const resourcesDatabase = {
       "practicalUse": "Continental coordination, hub participation, policy development, training access",
       "relatedResources": [
         "asia-pgi-roadmap",
-        "who-global-strategy",
-        "ngs-training-programs"
+        "who-global-strategy"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "relatedResources removed: ngs-training-programs"
       ]
     },
     {
@@ -217,19 +251,19 @@ const resourcesDatabase = {
         "epidemiologists"
       ],
       "stages": [
-        "planning",
-        "implementation"
+        "planning-strategy",
+        "implementation",
+        "optimization-sustainability"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "global",
         "lmic"
       ],
       "topics": [
-        "implementation",
-        "planning",
+        "stakeholder-engagement",
         "sustainability"
       ],
       "keyFeatures": [
@@ -244,7 +278,14 @@ const resourcesDatabase = {
         "who-global-strategy",
         "implementation-checklists",
         "capacity-assessment"
-      ]
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
       "id": "cdc-qms-guidance",
@@ -259,14 +300,14 @@ const resourcesDatabase = {
         "implementation"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "qms",
-        "implementation"
+        "stakeholder-engagement",
+        "quality-management"
       ],
       "keyFeatures": [
         "Personnel competency frameworks",
@@ -277,9 +318,17 @@ const resourcesDatabase = {
       ],
       "practicalUse": "QMS setup, accreditation preparation, quality protocol development",
       "relatedResources": [
-        "iso-15189-guidance",
-        "lab-accreditation",
-        "quality-standards"
+        "iso-15189-guidance"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "relatedResources removed: lab-accreditation",
+        "relatedResources removed: quality-standards"
       ]
     },
     {
@@ -293,16 +342,17 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "qms",
+        "stakeholder-engagement",
+        "quality-management",
         "accreditation"
       ],
       "keyFeatures": [
@@ -314,9 +364,17 @@ const resourcesDatabase = {
       ],
       "practicalUse": "Accreditation planning, quality standards implementation, compliance preparation",
       "relatedResources": [
-        "cdc-qms-guidance",
-        "quality-standards",
-        "lab-accreditation"
+        "cdc-qms-guidance"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "relatedResources removed: quality-standards",
+        "relatedResources removed: lab-accreditation"
       ]
     },
     {
@@ -333,15 +391,15 @@ const resourcesDatabase = {
         "implementation"
       ],
       "types": [
-        "tool",
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "surveillance"
+        "stakeholder-engagement",
+        "pipelines-workflows",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Illumina MiSeq protocols",
@@ -352,9 +410,18 @@ const resourcesDatabase = {
       ],
       "practicalUse": "Pathogen detection, metagenomics analysis, clinical surveillance, environmental monitoring",
       "relatedResources": [
-        "cz-id-platform",
-        "illumina-protocols",
-        "ngs-workflows"
+        "cz-id-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "relatedResources removed: illumina-protocols",
+        "relatedResources removed: ngs-workflows"
       ]
     },
     {
@@ -370,17 +437,18 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "tool"
+        "interactive-tool"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "surveillance"
+        "stakeholder-engagement",
+        "pipelines-workflows",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Cloud-based analysis platform",
@@ -394,6 +462,16 @@ const resourcesDatabase = {
         "pangia-workflow",
         "card-database",
         "galaxy-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "types: inferred from title/description"
       ]
     },
     {
@@ -407,20 +485,20 @@ const resourcesDatabase = {
         "epidemiologists"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "tool",
-        "training"
+        "training-material"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "training"
+        "stakeholder-engagement",
+        "workforce-training",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "Web-based analysis platform",
@@ -434,6 +512,15 @@ const resourcesDatabase = {
         "galaxy-training",
         "nextstrain-platform",
         "irida-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool"
       ]
     },
     {
@@ -448,17 +535,18 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "tool"
+        "interactive-tool"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "surveillance",
-        "bioinformatics"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "Real-time phylogenetic analysis",
@@ -469,9 +557,19 @@ const resourcesDatabase = {
       ],
       "practicalUse": "Outbreak tracking, phylogenetic analysis, real-time surveillance, data visualization",
       "relatedResources": [
-        "microreact-platform",
-        "phylogenetic-tools",
-        "outbreak-analysis"
+        "microreact-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "types: inferred from title/description",
+        "relatedResources removed: phylogenetic-tools",
+        "relatedResources removed: outbreak-analysis"
       ]
     },
     {
@@ -486,16 +584,17 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "tool"
+        "interactive-tool"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "surveillance",
+        "stakeholder-engagement",
+        "genomic-surveillance",
         "visualization"
       ],
       "keyFeatures": [
@@ -508,8 +607,18 @@ const resourcesDatabase = {
       "practicalUse": "Outbreak investigation, geographic analysis, data presentation, collaborative research",
       "relatedResources": [
         "nextstrain-platform",
-        "gisaid-platform",
-        "outbreak-analysis"
+        "gisaid-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "types: inferred from title/description",
+        "relatedResources removed: outbreak-analysis"
       ]
     },
     {
@@ -524,18 +633,19 @@ const resourcesDatabase = {
         "epidemiologists"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "training"
+        "training-material"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "training",
-        "bioinformatics"
+        "stakeholder-engagement",
+        "workforce-training",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "Self-paced learning modules",
@@ -547,8 +657,16 @@ const resourcesDatabase = {
       "practicalUse": "Skill development, workflow learning, capacity building, training programs",
       "relatedResources": [
         "galaxy-platform",
-        "gisaid-training",
-        "ngs-training-programs"
+        "gisaid-training"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "relatedResources removed: ngs-training-programs"
       ]
     },
     {
@@ -565,15 +683,16 @@ const resourcesDatabase = {
         "implementation"
       ],
       "types": [
-        "training"
+        "training-material"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "training",
-        "bioinformatics",
-        "surveillance"
+        "stakeholder-engagement",
+        "workforce-training",
+        "pipelines-workflows",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Phylogenetic analysis training",
@@ -585,8 +704,16 @@ const resourcesDatabase = {
       "practicalUse": "Phylogenetic skills, data sharing, surveillance training, capacity building",
       "relatedResources": [
         "gisaid-platform",
-        "phylogenetic-tools",
         "galaxy-training"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "relatedResources removed: phylogenetic-tools"
       ]
     },
     {
@@ -601,18 +728,18 @@ const resourcesDatabase = {
         "policymakers"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "training"
+        "training-material"
       ],
       "geography": [
         "lmic"
       ],
       "topics": [
-        "training",
-        "capacity-building"
+        "stakeholder-engagement",
+        "workforce-training"
       ],
       "keyFeatures": [
         "LMIC-focused programs",
@@ -623,9 +750,17 @@ const resourcesDatabase = {
       ],
       "practicalUse": "Institutional development, research partnerships, capacity building, training programs",
       "relatedResources": [
-        "ngs-training-programs",
-        "capacity-building",
         "africa-pgi-framework"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "relatedResources removed: ngs-training-programs",
+        "relatedResources removed: capacity-building"
       ]
     },
     {
@@ -641,17 +776,18 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "tool"
+        "interactive-tool"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "surveillance",
-        "data-sharing"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "data-sharing-interoperability"
       ],
       "keyFeatures": [
         "Global genomic database",
@@ -663,8 +799,18 @@ const resourcesDatabase = {
       "practicalUse": "Data sharing, global surveillance, phylogenetic analysis, collaborative research",
       "relatedResources": [
         "nextstrain-platform",
-        "microreact-platform",
-        "data-sharing-protocols"
+        "microreact-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "types: inferred from title/description",
+        "relatedResources removed: data-sharing-protocols"
       ]
     },
     {
@@ -680,17 +826,18 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "tool"
+        "interactive-tool"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "surveillance"
+        "stakeholder-engagement",
+        "pipelines-workflows",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Comprehensive resistance gene database",
@@ -701,9 +848,19 @@ const resourcesDatabase = {
       ],
       "practicalUse": "AMR surveillance, resistance gene identification, genotype-phenotype correlation",
       "relatedResources": [
-        "cz-id-platform",
-        "amr-surveillance",
-        "resistance-analysis"
+        "cz-id-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "types: inferred from title/description",
+        "relatedResources removed: amr-surveillance",
+        "relatedResources removed: resistance-analysis"
       ]
     },
     {
@@ -718,18 +875,17 @@ const resourcesDatabase = {
         "epidemiologists"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "lmic"
       ],
       "topics": [
-        "implementation",
-        "planning"
+        "stakeholder-engagement"
       ],
       "keyFeatures": [
         "Stage-specific checklists",
@@ -743,7 +899,14 @@ const resourcesDatabase = {
         "tom-implementation",
         "capacity-assessment",
         "who-global-strategy"
-      ]
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
       "id": "pathogen-prioritization",
@@ -756,17 +919,18 @@ const resourcesDatabase = {
         "policymakers"
       ],
       "stages": [
-        "planning"
+        "planning-strategy"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "lmic"
       ],
       "topics": [
-        "prioritization",
-        "surveillance"
+        "stakeholder-engagement",
+        "outbreak-detection",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Multi-criteria decision matrices",
@@ -778,8 +942,16 @@ const resourcesDatabase = {
       "practicalUse": "Priority setting, resource allocation, strategic planning, expert panel setup",
       "relatedResources": [
         "asia-pgi-roadmap",
-        "surveillance-design",
         "who-global-strategy"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "relatedResources removed: surveillance-design"
       ]
     },
     {
@@ -793,19 +965,20 @@ const resourcesDatabase = {
         "epidemiologists"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "training"
+        "training-material"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "training",
-        "networking"
+        "stakeholder-engagement",
+        "workforce-training",
+        "regional-networks"
       ],
       "keyFeatures": [
         "Professional networking",
@@ -815,10 +988,17 @@ const resourcesDatabase = {
         "Best practice sharing"
       ],
       "practicalUse": "Professional development, networking, training access, best practice sharing",
-      "relatedResources": [
-        "professional-networks",
-        "training-programs",
-        "implementation-support"
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "relatedResources removed: professional-networks",
+        "relatedResources removed: training-programs",
+        "relatedResources removed: implementation-support"
       ]
     },
     {
@@ -831,17 +1011,19 @@ const resourcesDatabase = {
         "policymakers"
       ],
       "stages": [
-        "planning"
+        "planning-strategy"
       ],
       "types": [
-        "guide"
+        "guide-manual",
+        "policy-document"
       ],
       "geography": [
         "lmic"
       ],
       "topics": [
-        "costing",
-        "policy"
+        "stakeholder-engagement",
+        "costing-financing",
+        "regulatory-frameworks"
       ],
       "keyFeatures": [
         "Investment case templates",
@@ -853,8 +1035,16 @@ const resourcesDatabase = {
       "practicalUse": "Funding advocacy, economic analysis, policy development, stakeholder engagement",
       "relatedResources": [
         "who-costing-tool",
-        "sustainability-planning",
-        "policy-advocacy"
+        "sustainability-planning"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "relatedResources removed: policy-advocacy"
       ]
     },
     {
@@ -869,17 +1059,18 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability",
+        "planning-strategy"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "lmic"
       ],
       "topics": [
-        "sustainability",
-        "planning"
+        "stakeholder-engagement",
+        "sustainability"
       ],
       "keyFeatures": [
         "Sustainability assessment tools",
@@ -890,9 +1081,17 @@ const resourcesDatabase = {
       ],
       "practicalUse": "Long-term planning, funding sustainability, capacity retention, system integration",
       "relatedResources": [
-        "investment-case-guide",
-        "capacity-building",
-        "policy-development"
+        "investment-case-guide"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "relatedResources removed: capacity-building",
+        "relatedResources removed: policy-development"
       ]
     },
     {
@@ -908,18 +1107,19 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "tool"
+        "guide-manual"
       ],
       "geography": [
         "global"
       ],
       "topics": [
+        "stakeholder-engagement",
         "visualization",
         "phylogenetics",
-        "surveillance"
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Browser-based tree visualization;Rich annotation datasets and styles;High-resolution exports;Project management and sharing"
@@ -928,6 +1128,16 @@ const resourcesDatabase = {
       "relatedResources": [
         "nextstrain-platform",
         "microreact-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "types: inferred from title/description"
       ]
     },
     {
@@ -943,18 +1153,18 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "tool"
+        "interactive-tool"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "surveillance",
-        "workflows"
+        "stakeholder-engagement",
+        "pipelines-workflows",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Project and sample management;In-browser QC and visualization;Workflow execution;REST API and integrations"
@@ -964,6 +1174,16 @@ const resourcesDatabase = {
         "galaxy-platform",
         "nextstrain-platform",
         "microreact-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "types: inferred from title/description"
       ]
     },
     {
@@ -979,18 +1199,19 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "tool"
+        "interactive-tool"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "surveillance",
-        "qc"
+        "stakeholder-engagement",
+        "pipelines-workflows",
+        "genomic-surveillance",
+        "quality-management"
       ],
       "keyFeatures": [
         "Sequence QC with actionable flags;Clade assignment and mutation calling;Phylogenetic placement;Exports for downstream tools"
@@ -1000,6 +1221,16 @@ const resourcesDatabase = {
         "nextstrain-platform",
         "microreact-platform",
         "itol-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "types: inferred from title/description"
       ]
     },
     {
@@ -1014,17 +1245,18 @@ const resourcesDatabase = {
       ],
       "stages": [
         "implementation",
-        "optimization"
+        "optimization-sustainability"
       ],
       "types": [
-        "tool"
+        "guide-manual"
       ],
       "geography": [
         "global"
       ],
       "topics": [
+        "stakeholder-engagement",
         "phylogenetics",
-        "surveillance"
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Maximum parsimony placement;Handles very large trees;Fast turnaround;Web and command-line interfaces"
@@ -1034,6 +1266,16 @@ const resourcesDatabase = {
         "nextstrain-platform",
         "nextclade-tool",
         "itol-platform"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool",
+        "types: inferred from title/description"
       ]
     },
     {
@@ -1047,20 +1289,19 @@ const resourcesDatabase = {
         "laboratorians"
       ],
       "stages": [
-        "planning"
+        "planning-strategy"
       ],
       "types": [
-        "guide",
-        "tool"
+        "guide-manual"
       ],
       "geography": [
         "global",
         "lmic"
       ],
       "topics": [
-        "capacity",
-        "planning",
-        "qms"
+        "stakeholder-engagement",
+        "workforce-training",
+        "quality-management"
       ],
       "keyFeatures": [
         "System and facility questionnaires;Customizable assessment modules;Gap analysis and action planning"
@@ -1069,6 +1310,15 @@ const resourcesDatabase = {
       "relatedResources": [
         "tom-implementation",
         "who-global-strategy"
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: tool"
       ]
     },
     {
@@ -1083,19 +1333,20 @@ const resourcesDatabase = {
         "laboratorians"
       ],
       "stages": [
-        "planning"
+        "planning-strategy"
       ],
       "types": [
-        "guide",
-        "policy"
+        "guide-manual",
+        "policy-document"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "prioritization",
-        "surveillance",
-        "policy"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "outbreak-detection",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Evidence-based prioritization;Global expert consensus process;Inputs for national lists"
@@ -1105,1499 +1356,1885 @@ const resourcesDatabase = {
         "asia-pgi-roadmap",
         "africa-pgi-framework",
         "who-global-strategy"
-      ]
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "AsiaPGI-SurveyFramework",
+      "id": "asiapgi-surveyframework",
       "title": "Getchell et al.",
       "description": "\"Assessment framework & survey describing status of pathogen genomics (capacity, quality, data sharing, etc.) among 42 institutions in 13 countries; identifies gaps, priorities & enabling factors\"",
       "url": "https://www.nature.com/articles/s41564-024-01809-4",
       "organization": "Pathogen Genomic Surveillance Status Among Lower-Resource Settings in South & Southeast Asia",
       "audiences": [
-        "South & Southeast Asia"
+        "epidemiologists",
+        "bioinformaticians",
+        "lab-leadership"
       ],
       "stages": [
-        "Read more / survey report"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Epidemiologists",
-        "Bioinformaticians",
-        "Lab leadership"
+        "guide-manual"
       ],
       "geography": [
-        "Planning",
-        "Implementation"
+        "southeast-asia"
       ],
       "topics": [
-        "Guide"
+        "stakeholder-engagement"
       ],
       "keyFeatures": [
         "Global; Asia; LMICs"
       ],
       "practicalUse": "Surveillance; Capacity Assessment; Bioinformatics",
-      "relatedResources": [
-        "\"Survey tool",
-        "standardized indicators",
-        "analysis of enabling environment, quality assurance, data sharing issues\""
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "stages: Read more / survey report",
+        "relatedResources removed: survey-tool",
+        "relatedResources removed: standardized-indicators",
+        "relatedResources removed: analysis-of-enabling-environment-quality-assurance-data-sharing-issues"
       ]
     },
     {
-      "id": "WHO-SEA-Roadmap",
+      "id": "who-sea-roadmap",
       "title": "WHO South-East Asia Region",
       "description": "Roadmap document for SE Asia on integrating genomic surveillance with diagnostic preparedness and lab networks; policy & technical considerations",
       "url": "https://iris.who.int/bitstream/handle/10665/363333/9789290209942-eng.pdf?sequence=1",
       "organization": "\"South-East Asia Regional Roadmap for Diagnostic Preparedness, Integrated Laboratory Networking & Genomic Surveillance\"",
       "audiences": [
-        "Laboratory leadership",
-        "Policymakers",
-        "Epidemiologists"
+        "lab-leadership",
+        "policymakers",
+        "epidemiologists"
       ],
       "stages": [
-        "Planning",
-        "Policy"
+        "planning-strategy"
       ],
       "types": [
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Asia",
-        "LMICs"
+        "asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Policy",
-        "Laboratory networking"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "lab-networking"
       ],
       "keyFeatures": [
         "Guidance on network building; diagnostic & genomic integration; sample referral; workforce; regulatory & financing issues"
       ],
       "practicalUse": "Roadmap for SE Asian countries to align strategy; for ministries & regional bodies; supports planning & partnerships",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "AusPathoGen-EvalProtocol",
+      "id": "auspathogen-evalprotocol",
       "title": "Ferdinand et al.",
       "description": "\"Evaluation protocol for “AusPathoGen” program: assessing utility, costs, practices, decision-making around WGS in public health labs; includes case study, stakeholder input etc.\"",
       "url": "https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2025.1587112/full",
       "organization": "Enhancing Public Health Infectious Disease Response: Evaluation Protocol for the Australian Pathogen Genomics Program",
       "audiences": [
-        "Epidemiologists",
-        "Lab leadership",
-        "Bioinformaticians"
+        "epidemiologists",
+        "lab-leadership",
+        "bioinformaticians"
       ],
       "stages": [
-        "Implementation",
-        "Optimization"
+        "implementation",
+        "optimization-sustainability"
       ],
       "types": [
-        "Training",
-        "Guide"
+        "training-material",
+        "guide-manual"
       ],
       "geography": [
-        "Global",
-        "High-income",
-        "Australia"
+        "global",
+        "high-income",
+        "oceania-pacific"
       ],
       "topics": [
-        "Surveillance",
-        "Implementation",
-        "Bioinformatics"
+        "stakeholder-engagement",
+        "workforce-training",
+        "genomic-surveillance",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "Includes mixed-methods approach; cost & impact evaluation; situation assessment; case studies; expert elicitation"
       ],
       "practicalUse": "Useful for labs / funders looking to justify investment; learning evaluation approaches; refining surveillance systems",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "Optimizing-Variant-HubStrategy",
+      "id": "optimizing-variant-hubstrategy",
       "title": "Gu et al.",
       "description": "Model-based study showing that focusing genomic surveillance resources on international travelers in key travel hubs reduces detection delays for new variants; includes cost & resource allocation modeling",
       "url": "https://arxiv.org/abs/2502.00934",
       "organization": "Optimizing Global Genomic Surveillance for Early Detection of Emerging SARS-CoV-2 Variants",
       "audiences": [
-        "Epidemiologists",
-        "Policymakers",
-        "Bioinformaticians"
+        "epidemiologists",
+        "policymakers",
+        "bioinformaticians"
       ],
       "stages": [
-        "Planning",
-        "Policy"
+        "planning-strategy"
       ],
       "types": [
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Global"
+        "global"
       ],
       "topics": [
-        "Surveillance",
-        "Prioritization",
-        "Bioinformatics"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "outbreak-detection",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "Quantitative modeling; cost-effectiveness; resource reallocation; early‐detection metrics; travel data integration"
       ],
       "practicalUse": "Helps public health planners decide where to allocate sequencing capacity & how to design sampling strategies for early warning",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "GenSurv-Frameworks-Toolkit",
+      "id": "gensurv-frameworks-toolkit",
       "title": "Public Health / Illumina (Marketplace)",
       "description": "\"Resource page / toolkit presenting NGS methods for pathogen surveillance: early detection, outbreak response, AMR detection, environmental surveillance etc.\"",
       "url": "https://sapac.illumina.com/areas-of-interest/microbiology/public-health-surveillance.html",
       "organization": "Genomic-based Public Health Surveillance Approaches and Methods (Illumina)",
       "audiences": [
-        "Laboratorians",
-        "Bioinformaticians",
-        "Lab leadership"
+        "laboratorians",
+        "bioinformaticians",
+        "lab-leadership"
       ],
       "stages": [
-        "Implementation",
-        "Optimization"
+        "implementation",
+        "optimization-sustainability"
       ],
       "types": [
-        "Tool",
-        "Guide"
+        "guide-manual"
       ],
       "geography": [
-        "Global",
-        "LMICs"
+        "global",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Implementation",
-        "AMR",
-        "Bioinformatics"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "amr-surveillance",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "Descriptions of workflows; sample types; environmental / zoonotic reservoir surveillance; combining outbreak & clinical surveillance; visualization / analytic examples"
       ],
       "practicalUse": "Useful for labs choosing methods; informing procurement; building capacity in surveillance & outbreak responses",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [
+        "amr-bacteria"
+      ],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: Tool"
+      ]
     },
     {
-      "id": "GenSurv-Toolkit-AFI Kazaian et al.",
+      "id": "gensurv-toolkit-afi-kazaian-et-al",
       "title": "Toolkit for Planning & Implementing Acute Febrile Illness Surveillance",
-      "description": "https://www.ncbi.nlm.nih.gov/articles/PMC11025857/",
-      "url": "Laboratorians; Epidemiologists; Lab leadership",
-      "organization": "Toolkit & framework for acute febrile illness (AFI) surveillance that includes planning / lab / data / integration; flexibility for multiple settings",
+      "description": "Toolkit and framework for acute febrile illness surveillance that includes planning, laboratory, data, and integration modules with flexibility for multiple settings.",
+      "url": "https://www.ncbi.nlm.nih.gov/articles/PMC11025857/",
+      "organization": "Kazaian et al.",
       "audiences": [
-        "Planning",
-        "Implementation"
+        "laboratorians"
       ],
       "stages": [
-        "Tool"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Global",
-        "LMICs"
+        "guide-manual"
       ],
       "geography": [
-        "Surveillance",
-        "Implementation",
-        "Data Integration"
+        "global",
+        "lmic"
       ],
       "topics": [
-        "Key modules",
-        "sample design",
-        "workflows",
-        "data flows",
-        "integration with diagnostics & laboratory capacity"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "pipelines-workflows",
+        "data-sharing-interoperability",
+        "diagnostics-integration"
       ],
       "keyFeatures": [
         "Useful for planning AFI surveillance; integrating labs with epidemiology; adapting to low-resource settings"
       ],
       "practicalUse": "",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "source column repair: URL/audience/organization fields were shifted in source data",
+        "audiences from shifted URL field: Laboratorians; Epidemiologists; Lab leadership",
+        "stages: Tool",
+        "geography: Data Integration",
+        "topics: Key modules",
+        "topics: sample design",
+        "topics: integration with diagnostics & laboratory capacity",
+        "types: inferred from title/description"
+      ]
     },
     {
-      "id": "GenSurv-GenVirusesFramework",
+      "id": "gensurv-genvirusesframework",
       "title": "Genomic Surveillance for Viruses of Public Health Importance",
-      "description": "https://www.tandfonline.com/doi/full/10.1080/14737159.2025.2543750",
-      "url": "\"SARS viruses etc., Epidemiologists; Policymakers; Bioinformaticians\"",
-      "organization": "\"Suggested frameworks for applying genomic surveillance for viruses of public health importance, especially national-level plans; technical & policy guidance\"",
+      "description": "Suggested frameworks for applying genomic surveillance to viruses of public health importance, especially national-level plans and technical-policy guidance.",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/14737159.2025.2543750",
+      "organization": "Expert Review of Anti-infective Therapy",
       "audiences": [
-        "Planning",
-        "Policy"
+        "policymakers"
       ],
       "stages": [
-        "Guide"
+        "planning-strategy"
       ],
       "types": [
-        "Global",
-        "LMICs"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Surveillance",
-        "Policy",
-        "Virus Genomics"
+        "global",
+        "lmic"
       ],
       "topics": [
-        "Suggested national-level plan structure",
-        "risk prioritization",
-        "sample & data workflows",
-        "case studies & best practices"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "outbreak-detection",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "\"Guides for ministries / agencies to draft viral genomic surveillance programs; aligning policy, workflows & sampling\""
       ],
       "practicalUse": "",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [
+        "viral-genomics"
+      ],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "source column repair: URL/audience/organization fields were shifted in source data",
+        "pathogen/audience text from shifted URL field: SARS viruses etc., Epidemiologists; Policymakers; Bioinformaticians",
+        "topics: Suggested national-level plan structure",
+        "topics: case studies & best practices"
+      ]
     },
     {
-      "id": "AsiaPGI_Surveystatus",
+      "id": "asiapgi-surveystatus",
       "title": "Pathogen Genomic Surveillance Status among Lower-Resource Settings in South & Southeast Asia",
       "organization": "Asia Pathogen Genomics Initiative / Getchell et al.",
       "description": "Survey & framework across 42 institutions in 13 S/SE Asian countries (mid-2022 to early-2023) to assess pathogen genomics capacity, QA, data sharing, gaps & priorities.",
       "url": "https://www.nature.com/articles/s41564-024-01809-4",
       "audiences": [
-        "Laboratorians",
-        "Bioinformaticians",
-        "Lab leadership"
+        "laboratorians",
+        "bioinformaticians",
+        "lab-leadership"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Guide"
+        "guide-manual"
       ],
       "geography": [
-        "Asia",
-        "LMICs"
+        "asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Capacity Assessment",
-        "Bioinformatics"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "workforce-training",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "Standardized indicators; highlights of under-resourced areas (environmental & One Health surveillance; supply chain; personnel & QA gaps)"
       ],
       "practicalUse": "Informs national & regional planning; helps identify where investment needed; supports grant proposals; benchmarking capabilities",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "SEA_Diagnostic_Lab_Roadmap",
+      "id": "sea-diagnostic-lab-roadmap",
       "title": "South-East Asia Regional Roadmap for Diagnostic Preparedness, Integrated Laboratory Networking & Genomic Surveillance",
       "organization": "WHO South-East Asia Region",
       "description": "Roadmap for SE Asia member states for strengthening diagnostic lab networks & integrating genomic surveillance & diagnostics; includes policy, workforce, sample referral & financing guidance.",
       "url": "https://iris.who.int/bitstream/handle/10665/363333/9789290209942-eng.pdf?sequence=1",
       "audiences": [
-        "Laboratory leadership",
-        "Policymakers",
-        "Epidemiologists"
+        "lab-leadership",
+        "policymakers",
+        "epidemiologists"
       ],
       "stages": [
-        "Planning",
-        "Policy"
+        "planning-strategy"
       ],
       "types": [
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Asia",
-        "LMICs"
+        "asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Policy",
-        "Laboratory Networking"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "lab-networking"
       ],
       "keyFeatures": [
         "Guidance on long-term sustainability; diagnostic/genomic integration; regulatory & financing issues; workforce building"
       ],
       "practicalUse": "Roadmap for ministries of health & regional bodies to plan or revise lab & genomic surveillance strategies; helps align diagnostics & genomics; support resource allocation",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "Khoo_InvestmentCase_Framework",
+      "id": "khoo-investmentcase-framework",
       "title": "National Investment Case Framework for Pathogen Genomic Surveillance Framework",
       "organization": "Khoo et al. / Duke-NUS et al.",
       "description": "A framework for evaluating cost & benefits of a multi-pathogen genomic surveillance system, including pathogen prioritization, actionability, infrastructure, and cost modelling.",
       "url": "https://www.sciencedirect.com/science/article/pii/S2666979X25000370",
       "audiences": [
-        "Public health planners",
-        "Policymakers",
-        "Laboratory leadership",
-        "Funders"
+        "public-health-officials",
+        "policymakers",
+        "lab-leadership",
+        "donors-funders"
       ],
       "stages": [
-        "Planning",
-        "Policy"
+        "planning-strategy",
+        "optimization-sustainability"
       ],
       "types": [
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Asia",
-        "LMICs"
+        "asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Policy",
-        "Sustainability"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "sustainability"
       ],
       "keyFeatures": [
         "Cost-benefit model; stepwise investment case; alignment with health systems & priorities"
       ],
       "practicalUse": "Helps in developing proposals & budgets; prioritizing which pathogens & capacities to invest in; advocating for sustained financing",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "WastewaterEarlyDetection_Asia",
+      "id": "wastewaterearlydetection-asia",
       "title": "Wastewater Surveillance for Early Pathogen Detection in Asia",
       "organization": "Duke-NUS et al. / Pang et al.",
       "description": "Assessment of wastewater surveillance projects in 19 Asian countries: what’s working, what types of pathogens, funding, gaps & how integrated into public health.",
       "url": "https://pubmed.ncbi.nlm.nih.gov/40828164/",
       "audiences": [
-        "Public Health Labs",
-        "Environmental surveillance",
-        "Bioinformaticians",
-        "Epidemiologists"
+        "laboratorians",
+        "environmental-health-teams",
+        "bioinformaticians",
+        "epidemiologists"
       ],
       "stages": [
-        "Implementation",
-        "Optimization"
+        "implementation",
+        "optimization-sustainability"
       ],
       "types": [
-        "Guide"
+        "guide-manual"
       ],
       "geography": [
-        "Global",
-        "Asia",
-        "LMICs"
+        "global",
+        "asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Wastewater",
-        "Viral & Bacterial Pathogens"
+        "environmental-surveillance",
+        "stakeholder-engagement",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Method comparisons; frequency & source of sampling; embedding into surveillance; funding sources; pathogen focus (SARS-CoV-2, AMR, Enterovirus etc.)"
       ],
       "practicalUse": "Useful for labs of public health to design or scale wastewater surveillance; supports early detection systems; case for integrating into national surveillance systems",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [
+        "viral-genomics",
+        "bacterial-genomics"
+      ],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "Khoo_2025_PathogenGenomicsInvestmentCase",
+      "id": "khoo-2025-pathogengenomicsinvestmentcase",
       "title": "National Investment Case Framework for Pathogen Genomic Surveillance Framework",
       "organization": "Khoo et al. / Duke-NUS & Asia PGI",
       "description": "A proposed framework for evaluating cost & benefits of a multi-pathogen genomic surveillance system. Includes public health & systems considerations, pathogen prioritization, utility, infrastructure and cost modeling.",
       "url": "https://www.sciencedirect.com/science/article/pii/S2666979X25000370",
       "audiences": [
-        "Public health planners",
-        "Policymakers",
-        "Laboratory leadership",
-        "Funders"
+        "public-health-officials",
+        "policymakers",
+        "lab-leadership",
+        "donors-funders"
       ],
       "stages": [
-        "Planning",
-        "Policy"
+        "planning-strategy",
+        "optimization-sustainability"
       ],
       "types": [
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Asia",
-        "LMICs"
+        "asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Policy",
-        "Sustainability"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "sustainability"
       ],
       "keyFeatures": [
         "Cost-benefit framework; stepwise investment case development; pathogen prioritization; integration with existing systems"
       ],
       "practicalUse": "Helps ministries / labs build investment proposals; decide on infrastructure & prioritization; align funding sources; justify budgets",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "Getchell_2024_SurveillanceStatus",
+      "id": "getchell-2024-surveillancestatus",
       "title": "Asia Pathogen Genomics Initiative: Pathogen Genomic Surveillance Status among Lower-Resource Settings in S/SE Asia",
       "organization": "Getchell et al. / Asia PGI",
       "description": "Survey across 42 institutions in 13 South & Southeast Asian countries between mid-2022 to early-2023 to assess NGS capacity, gaps (QA, workforce, supply chains), enabling environment, policy integration, data sharing etc.",
       "url": "https://www.nature.com/articles/s41564-024-01809-4",
       "audiences": [
-        "Laboratorians",
-        "Bioinformaticians",
-        "Lab leadership"
+        "laboratorians",
+        "bioinformaticians",
+        "lab-leadership"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Guide"
+        "guide-manual"
       ],
       "geography": [
-        "Asia",
-        "LMICs"
+        "asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Capacity Assessment",
-        "Bioinformatics"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "workforce-training",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "System-wide assessment framework; detailed indicators; identification of priority gaps (environmental surveillance; One Health; supply chain; internal funding)"
       ],
       "practicalUse": "Useful for benchmarking capacity; guiding strategic planning; identifying where to direct technical & financial support",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "PathogenGenomics_Advancing_Asia",
+      "id": "pathogengenomics-advancing-asia",
       "title": "Advancing pathogen genomics in resource-limited settings Framework for prioritizing pathogens & implementing surveillance in Asia",
       "organization": "Pronyk et al. / Asia PGI & partners",
       "description": "A framework to help countries prioritize which pathogens to include in genomic surveillance, considering burden, actionability, capacity; includes stakeholder input & regional examples.",
       "url": "https://www.cell.com/cell-genomics/fulltext/S2666-979X(23)00278-1",
       "audiences": [
-        "Policymakers",
-        "Lab leadership",
-        "Bioinformaticians",
-        "Epidemiologists"
+        "policymakers",
+        "lab-leadership",
+        "bioinformaticians",
+        "epidemiologists"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Guide"
+        "guide-manual",
+        "policy-document"
       ],
       "geography": [
-        "Asia",
-        "LMICs"
+        "asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Pathogen Prioritization",
-        "Policy"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "outbreak-detection",
+        "regulatory-frameworks"
       ],
       "keyFeatures": [
         "Criteria for prioritization; burden vs feasibility; alignment with national health priorities; capacity matching"
       ],
       "practicalUse": "Useful for decision making in choosing which pathogens to invest in; aligning surveillance expansions with capacity; justifying resource use",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "NLIC_CaseFramework",
+      "id": "nlic-caseframework",
       "title": "Infectious Disease Detection Capabilities of Southeast-Asian Countries: Gaps & Enablers",
       "organization": "Vital Strategies (report)",
       "description": "Analysis of detection capabilities (lab + surveillance systems) across SE Asia countries with respect to emerging infectious diseases & pathogens; identifies gaps, infrastructure, early warning capacity.",
       "url": "https://www.vitalstrategies.org/wp-content/uploads/Infectious-Disease-Detection-Capabilities-of-Southeast-Asian-Countries.pdf",
       "audiences": [
-        "Public health authorities",
-        "Epidemiologists",
-        "Lab leadership"
+        "public-health-officials",
+        "epidemiologists",
+        "lab-leadership"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Guide"
+        "guide-manual"
       ],
       "geography": [
-        "Asia",
-        "LMICs"
+        "asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Diagnostics",
-        "Genomic Surveillance"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "diagnostics-integration"
       ],
       "keyFeatures": [
         "Infrastructure & lab network assessments; early warning; detection capacity; system readiness metrics"
       ],
       "practicalUse": "Useful for governments to prioritize capacity building; mapping infrastructure; planning diagnostic & sequencing expansion",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "PathogenGenomics_InvestmentCase_Framework",
+      "id": "pathogengenomics-investmentcase-framework",
       "title": "National Investment Case Development for Pathogen Genomic Surveillance Framework",
       "organization": "Khoo et al. / regional collaborators",
       "description": "Proposes a framework linking public health & health system factors with genomics surveillance; provides stepwise approach for national investment cases (costing, priorities, sustainability) tailored to countries including those in SE Asia.",
       "url": "https://www.sciencedirect.com/science/article/pii/S2666979X25000370",
       "audiences": [
-        "Public health planners",
-        "Policymakers",
-        "Lab leadership",
-        "Funders"
+        "public-health-officials",
+        "policymakers",
+        "lab-leadership",
+        "donors-funders"
       ],
       "stages": [
-        "Planning",
-        "Policy"
+        "planning-strategy",
+        "optimization-sustainability"
       ],
       "types": [
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Asia",
-        "LMICs"
+        "asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Policy",
-        "Sustainability"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "sustainability"
       ],
       "keyFeatures": [
         "Costing framework; priority setting; sustainability & funding models; alignment with health systems"
       ],
       "practicalUse": "Helps countries build investment proposals; prioritize tools & infrastructure; advocate for domestic funding",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "PrecisionBio_AsiaGaps",
+      "id": "precisionbio-asiagaps",
       "title": "Precision Medicine Gaps & Bioinformatics Capacity in Asia",
       "organization": "Phanthunane et al.",
       "description": "Study identifying gaps in precision medicine / genomics & bioinformatic capacity in Asia; challenges in data integration, regulation, equity, ethics.",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11197108/",
       "audiences": [
-        "Laboratorians",
-        "Bioinformaticians",
-        "Policymakers"
+        "laboratorians",
+        "bioinformaticians",
+        "policymakers"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Review"
+        "research-evidence"
       ],
       "geography": [
-        "Global",
-        "Asia"
+        "global",
+        "asia"
       ],
       "topics": [
-        "Bioinformatics",
-        "Genomic Surveillance",
-        "Ethical & Legal Issues"
+        "stakeholder-engagement",
+        "pipelines-workflows",
+        "genomic-surveillance",
+        "ethics-legal"
       ],
       "keyFeatures": [
         "Mapping of gap areas; case studies of countries; recommendations for capacity strengthening; data regulation challenges"
       ],
       "practicalUse": "Useful for setting policy & training agendas; identifying priority regulatory / data sharing reforms; planning bioinformatics infrastructure",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "Thailand_MDRTB_WGS",
+      "id": "thailand-mdrtb-wgs",
       "title": "Genomic decoding of drug-resistant tuberculosis in Thailand",
       "organization": "N Thawong et al. / Thailand TB Programs & Research Institutions",
       "description": "A large-sample (2005 isolates, including 1,189 newly sequenced) WGS study of drug-resistant Mycobacterium tuberculosis in Thailand (1994-2020); looks at strain lineage, resistance mutations, and using WGS for surveillance and outbreak detection.",
       "url": "https://www.nature.com/articles/s41598-025-15093-7",
       "audiences": [
-        "Laboratorians",
-        "Epidemiologists",
-        "Bioinformaticians"
+        "laboratorians",
+        "epidemiologists",
+        "bioinformaticians"
       ],
       "stages": [
-        "Implementation",
-        "Optimization"
+        "implementation",
+        "optimization-sustainability"
       ],
       "types": [
-        "Guide",
-        "Research"
+        "guide-manual",
+        "research-evidence"
       ],
       "geography": [
-        "Asia",
-        "LMICs",
-        "Thailand"
+        "asia",
+        "lmic",
+        "southeast-asia"
       ],
       "topics": [
-        "Surveillance",
-        "AMR",
-        "Pathogen Genomics"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "amr-surveillance"
       ],
       "keyFeatures": [
         "High sample size over long timeframe; linkage of phenotypic drug resistance with genomic data; establishes baseline of circulating lineages in Thailand"
       ],
       "practicalUse": "Helps Thai NTP (National TB Program) plan integrating WGS for routine resistance surveillance; training needs/capacity building; baseline mutation / lineage mapping",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [
+        "amr-bacteria"
+      ],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "SEA_NGS_Assessment",
+      "id": "sea-ngs-assessment",
       "title": "Pathogen Genomic Surveillance Status among Lower-Resource Settings in South & Southeast Asia",
       "organization": "Getchell et al. / Asia PGI",
       "description": "Survey & framework assessing NGS pathogen genomic surveillance capacity (42 institutions across 13 Asian countries, many in SEA) — identifies gaps, enabling environment, QA, data sharing etc.",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11445059/",
       "audiences": [
-        "Laboratorians",
-        "Policymakers",
-        "Lab leadership",
-        "Bioinformaticians"
+        "laboratorians",
+        "policymakers",
+        "lab-leadership",
+        "bioinformaticians"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Guide"
+        "guide-manual",
+        "policy-document"
       ],
       "geography": [
-        "Global",
-        "Asia",
-        "LMICs",
-        "SE Asia"
+        "global",
+        "asia",
+        "lmic",
+        "southeast-asia"
       ],
       "topics": [
-        "Surveillance",
-        "Bioinformatics",
-        "Policy"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "pipelines-workflows",
+        "regulatory-frameworks"
       ],
       "keyFeatures": [
         "Includes indicators on enabling environment, capacity, QA, strategic plan existence; shows variation between countries; identified priority pathogen types & low use of environmental or animal-human interface surveillance"
       ],
       "practicalUse": "Useful for benchmarking public health labs in SEA; informs national plan & donor prioritisation",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "Bangkok_Wastewater_Surv",
+      "id": "bangkok-wastewater-surv",
       "title": "Multi-scale wastewater surveillance at a Bangkok tertiary hospital",
       "organization": "Q Hayre et al. / Bangkok hospital & collaborators",
       "description": "A hospital-based wastewater genomics surveillance study, tracking SARS-CoV-2 over time with sequencing; shows variation, detection dynamics in low vs high patient counts.",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11978038/",
       "audiences": [
-        "Laboratorians",
-        "Environmental surveillance teams",
-        "Epidemiologists",
-        "Lab leadership"
+        "laboratorians",
+        "environmental-health-teams",
+        "epidemiologists",
+        "lab-leadership"
       ],
       "stages": [
-        "Implementation",
-        "Optimization"
+        "implementation",
+        "optimization-sustainability"
       ],
       "types": [
-        "Research",
-        "Tool"
+        "research-evidence"
       ],
       "geography": [
-        "Asia",
-        "Thailand",
-        "Urban settings"
+        "asia",
+        "southeast-asia",
+        "global"
       ],
       "topics": [
-        "Surveillance",
-        "Wastewater",
-        "Viral Genomics"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "environmental-surveillance"
       ],
       "keyFeatures": [
         "Time series data; compares hospital vs community wastewater; shows detection during low prevalence; method for continuous monitoring"
       ],
       "practicalUse": "Useful for hospital public health units & city health authorities to set wastewater surveillance protocols; early warning systems; resource allocation for environmental sampling",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [
+        "viral-genomics"
+      ],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: Tool"
+      ]
     },
     {
-      "id": "SEA_EID_Capabilities",
+      "id": "sea-eid-capabilities",
       "title": "Infectious Disease Detection Capabilities of Southeast Asian Countries: Gaps & Enablers",
       "organization": "Vital Strategies",
       "description": "Report comparing detection / surveillance / genomic surveillance capability in six Southeast Asian countries (Brunei, Indonesia, Malaysia, Philippines, Thailand, Vietnam) — covers lab systems, supply chains, data sharing, workforce etc.",
       "url": "https://www.vitalstrategies.org/wp-content/uploads/Infectious-Disease-Detection-Capabilities-of-Southeast-Asian-Countries.pdf",
       "audiences": [
-        "Public health authorities",
-        "Epidemiologists",
-        "Lab leadership",
-        "Policymakers"
+        "public-health-officials",
+        "epidemiologists",
+        "lab-leadership",
+        "policymakers"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Guide"
+        "guide-manual",
+        "policy-document"
       ],
       "geography": [
-        "Global",
-        "SE Asia",
-        "LMICs"
+        "global",
+        "southeast-asia",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Genomic Surveillance",
-        "Policy"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "regulatory-frameworks"
       ],
       "keyFeatures": [
         "Comparative data across countries; identifies supply chain / regulatory / interoperable data gaps; stakeholder mapping etc."
       ],
       "practicalUse": "Aids ministries to identify priorities; helps with advocacy & funding proposals; cross-country learning",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "Indonesia_VariantCollab",
+      "id": "indonesia-variantcollab",
       "title": "Indonesia SARS-CoV-2 Variant Surveillance Collaboration",
       "organization": "M Chambers et al. / Indonesia MOH & partners",
       "description": "A collaboration to assist Indonesia’s MOH and local health offices in laboratory diagnosis, genomic surveillance of SARS-CoV-2, and variant monitoring; includes guidance and capacity building.",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11252647/",
       "audiences": [
-        "Laboratorians",
-        "Epidemiologists",
-        "Lab leadership"
+        "laboratorians",
+        "epidemiologists",
+        "lab-leadership"
       ],
       "stages": [
-        "Implementation"
+        "implementation"
       ],
       "types": [
-        "Tool",
-        "Guide"
+        "guide-manual"
       ],
       "geography": [
-        "Asia",
-        "Indonesia",
-        "SE Asia"
+        "asia",
+        "southeast-asia"
       ],
       "topics": [
-        "Surveillance",
-        "Variant Detection",
-        "Diagnostics"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "variant-monitoring",
+        "diagnostics-integration"
       ],
       "keyFeatures": [
         "Country-level case of surveillance scaling; includes data flow, sample transport & lab network issues; emphasizes diagnostics + genomic sequencing integration"
       ],
       "practicalUse": "Useful for other SE Asian countries scaling variant surveillance; offers lessons in logistics, capacity, variation detection",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: Tool"
+      ]
     },
     {
-      "id": "Vietnam_SARS2_GenVars",
+      "id": "vietnam-sars2-genvars",
       "title": "SARS-CoV-2 genomic surveillance in southern Vietnam (2020-2021): Tracking variant evolution and public health impact in a limited-resource setting",
       "organization": "Gladkikh et al. / Vietnam MoH / Pasteur Institute etc.",
       "description": "A WGS surveillance study of 126 SARS-CoV-2 genomes from southern Vietnam (2020-21), identifying local variant dynamics, distribution of variants, and impact of control measures.",
       "url": "https://bmcinfectdis.biomedcentral.com/articles/10.1186/s12879-023-08814-8",
       "audiences": [
-        "Laboratorians",
-        "Epidemiologists",
-        "Bioinformaticians"
+        "laboratorians",
+        "epidemiologists",
+        "bioinformaticians"
       ],
       "stages": [
-        "Implementation"
+        "implementation"
       ],
       "types": [
-        "Research"
+        "research-evidence"
       ],
       "geography": [
-        "Asia",
-        "Vietnam",
-        "SE Asia"
+        "asia",
+        "southeast-asia"
       ],
       "topics": [
-        "Surveillance",
-        "Viral Genomics"
+        "stakeholder-engagement",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Relatively complete genomes; good metadata for location/time; shows how variants move and establish; reflecting public health interventions effect"
       ],
       "practicalUse": "Useful for Vietnam & similar settings to learn about variant emergence, timing; informs local response & planning",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [
+        "viral-genomics"
+      ],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "Mpox_Training_SEA_2025",
+      "id": "mpox-training-sea-2025",
       "title": "Strengthening Mpox genomic surveillance: Regional training workshop concludes in Thailand",
       "organization": "WHO SE Asia / Thailand Ministry of Public Health / Asia PGI / ARTIC Network / others",
       "description": "A regional hands-on training workshop in Nonthaburi (Thailand) for participants from across WHO SE Asia; sequencing, bioinformatics, data sharing, outbreak preparedness for Mpox.",
       "url": "https://www.who.int/southeastasia/news/detail/14-03-2025-strengng-mpox-genomic-survnws-th",
       "audiences": [
-        "Laboratorians",
-        "Bioinformaticians",
-        "Epidemiologists",
-        "Lab leadership"
+        "laboratorians",
+        "bioinformaticians",
+        "epidemiologists",
+        "lab-leadership"
       ],
       "stages": [
-        "Implementation",
-        "Training"
+        "implementation"
       ],
       "types": [
-        "Training",
-        "Tool"
+        "training-material"
       ],
       "geography": [
-        "Asia",
-        "SE Asia",
-        "Thailand"
+        "asia",
+        "southeast-asia"
       ],
       "topics": [
-        "Surveillance",
-        "Emerging Pathogens",
-        "Viral Genomics"
+        "stakeholder-engagement",
+        "workforce-training",
+        "genomic-surveillance",
+        "outbreak-detection"
       ],
       "keyFeatures": [
         "Practical workshop; hands-on with sequencing technologies (Illumina, Nanopore), pipelines; data sharing discussions; networking across countries"
       ],
       "practicalUse": "Useful for labs in SE Asia to build capacity for emerging pathogens; useful model for recurring training; can seed networks",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [
+        "emerging-pathogens",
+        "viral-genomics"
+      ],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: Tool"
+      ]
     },
     {
-      "id": "AfricaPGI_CaseStudy",
+      "id": "africapgi-casestudy",
       "title": "African Pathogen Genomics Initiative Case Study",
       "organization": "Africa CDC & Grand Challenges",
       "description": "A case study of the African Pathogen Genomics Initiative: how sequencing capacity was scaled continent-wide; detailing how many countries gained local sequencing, infrastructure, software, and the impact on outbreak detection.",
       "url": "https://gcgh.grandchallenges.org/case-study/african-pathogen-genomics-initiative",
       "audiences": [
-        "Laboratorians",
-        "Bioinformaticians",
-        "Lab leadership",
-        "Epidemiologists"
+        "laboratorians",
+        "bioinformaticians",
+        "lab-leadership",
+        "epidemiologists"
       ],
       "stages": [
-        "Implementation",
-        "Optimization"
+        "implementation",
+        "optimization-sustainability"
       ],
       "types": [
-        "Guide",
-        "Tool"
+        "guide-manual"
       ],
       "geography": [
-        "Africa",
-        "LMICs"
+        "africa",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Pathogen Genomics",
-        "Capacity Building"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "workforce-training"
       ],
       "keyFeatures": [
         "Shows scale-up of lab + bioinformatics; timelines; partnerships; supply chain & reagent issues addressed"
       ],
       "practicalUse": "Informs other countries how to plan & scale genomics; helps with proposal writing; gives models of capacity building steps",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: Tool"
+      ]
     },
     {
-      "id": "AfricaPGI_CapacityBuilding_BeyondCovid",
+      "id": "africapgi-capacitybuilding-beyondcovid",
       "title": "Building Pathogen Genomic Sequencing Capacity in Africa (CERI/ KRISP fellowship)",
       "organization": "Agboli et al. / Africa PGI / University of KwaZulu-Natal etc.",
       "description": "Fellowship & training programme describing how Africa is supporting ongoing sequencing even as COVID-19 fades; focuses on skills transfer, sustainable funding, and keeping up with emerging pathogens.",
       "url": "https://doi.org/10.3390/tropicalmed10040090",
       "audiences": [
-        "Laboratorians",
-        "Bioinformaticians",
-        "Lab leadership",
-        "Trainers"
+        "laboratorians",
+        "bioinformaticians",
+        "lab-leadership",
+        "trainers-educators"
       ],
       "stages": [
-        "Implementation",
-        "Optimization"
+        "implementation",
+        "optimization-sustainability"
       ],
       "types": [
-        "Training",
-        "Guide"
+        "training-material",
+        "guide-manual"
       ],
       "geography": [
-        "Africa",
-        "LMICs"
+        "africa",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Emerging Pathogens",
-        "Bioinformatics"
+        "stakeholder-engagement",
+        "workforce-training",
+        "genomic-surveillance",
+        "outbreak-detection",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "Hands-on training; fellowships; mentoring; infrastructure support; continuous monitoring of sequence evolution"
       ],
       "practicalUse": "Useful for PHLs (public health labs) wanting to retain capacity; helps plan training curricula; informs funders of long-term investment needs",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [
+        "emerging-pathogens"
+      ],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "AfricaPolicy_Framework",
+      "id": "africapolicy-framework",
       "title": "African Pathogen Genomic Surveillance Policy Framework",
       "organization": "Africa CDC / AU Member States",
       "description": "A policy framework intended to guide AU Member States in developing national pathogen genomic surveillance strategies: vision & guiding principles; priority areas; roadmap for implementation over ~5 years.",
       "url": "https://africacdc.org/download/pathogen-genomic-surveillance-policy-framework/",
       "audiences": [
-        "Laboratorians",
-        "Policymakers",
-        "Epidemiologists",
-        "Lab leadership"
+        "laboratorians",
+        "policymakers",
+        "epidemiologists",
+        "lab-leadership"
       ],
       "stages": [
-        "Planning",
-        "Policy"
+        "planning-strategy",
+        "optimization-sustainability"
       ],
       "types": [
-        "Policy",
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Africa",
-        "LMICs"
+        "africa",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Policy",
-        "Sustainability"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "sustainability"
       ],
       "keyFeatures": [
         "Priority pathogens; cooperation among states; integration into public health systems; sustainable financing; context-tailored action items"
       ],
       "practicalUse": "Aids countries in drafting or refining their national policies/strategies; helps set roadmaps; useful for advocacy & budgeting",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "Africa_GenomicData_SharingPlatform",
+      "id": "africa-genomicdata-sharingplatform",
       "title": "A pan-African pathogen genomics data sharing platform (trusted archive)",
       "organization": "Christoffels et al.",
       "description": "A proposed / conceptual platform for data management and sharing of pathogen genomic data in Africa: aims for trusted local repositories, governance, stakeholder workshop outcomes, linking with global databases.",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12181013/",
       "audiences": [
-        "Laboratorians",
-        "Bioinformaticians",
-        "Epidemiologists",
-        "Policymakers"
+        "laboratorians",
+        "bioinformaticians",
+        "epidemiologists",
+        "policymakers"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Tool",
-        "Guide"
+        "guide-manual"
       ],
       "geography": [
-        "Africa"
+        "africa"
       ],
       "topics": [
-        "Surveillance",
-        "Data Sharing",
-        "Genomic Infrastructure"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "data-sharing-interoperability"
       ],
       "keyFeatures": [
         "Designed with stakeholder input; governance focus; digital infrastructure & interoperability; data security and locality concerns addressed"
       ],
       "practicalUse": "Useful for countries building data platforms; supports local data sovereignty; helps PHLs plan infrastructure for storage / retrieval / sharing of genomic datasets",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: Tool"
+      ]
     },
     {
-      "id": "Malawi_GenSurv_Strategy_MoH",
+      "id": "malawi-gensurv-strategy-moh",
       "title": "Malawi’s 2nd Edition Pathogen Genomic Surveillance Strategy & Implementation Plan",
       "organization": "Malawi Ministry of Health + Africa CDC / Africa PGI",
       "description": "Malawi updated its national strategy to integrate multi-pathogen genomic surveillance into existing public health systems; includes a steering committee, advisory group, lab networks, priority pathogens, use cases, monitoring & evaluation.",
       "url": "https://africacdc.org/news-item/malawi-launches-second-edition-of-pathogen-genomic-surveillance-strategy-and-implementation-plan/",
       "audiences": [
-        "Public health authorities",
-        "Lab leadership",
-        "Epidemiologists"
+        "public-health-officials",
+        "lab-leadership",
+        "epidemiologists",
+        "policymakers"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Policy",
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Africa",
-        "LMICs",
-        "Malawi"
+        "africa",
+        "lmic",
+        "southern-africa"
       ],
       "topics": [
-        "Surveillance",
-        "Implementation",
-        "Policy"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Updated strategy with stakeholder structure; commitment to One Health & AMR; clear M&E mechanisms; harmonization with Africa CDC framework"
       ],
       "practicalUse": "Helps Malawi and similar countries see a model for revising surveillance strategy; useful template; supports coordination of labs, govt, funders",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "GenSurv_SurveillanceGaps_WNV",
+      "id": "gensurv-surveillancegaps-wnv",
       "title": "Identifying genomic surveillance gaps in Africa for West Nile Virus (WNV)",
       "organization": "Moir et al. / Africa labs network",
       "description": "A review of the status of molecular testing and sequencing of WNV in African countries; mapping which countries test/sequence, where gaps are, challenges (logistics, reagents, labs), and what needed to improve.",
       "url": "https://www.sciencedirect.com/science/article/pii/S2666524725001041",
       "audiences": [
-        "Laboratorians",
-        "Epidemiologists",
-        "Bioinformaticians"
+        "laboratorians",
+        "epidemiologists",
+        "bioinformaticians"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Review"
+        "research-evidence"
       ],
       "geography": [
-        "Global",
-        "Africa"
+        "global",
+        "africa"
       ],
       "topics": [
-        "Surveillance",
-        "Arboviruses",
-        "Viral Genomics"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "outbreak-detection"
       ],
       "keyFeatures": [
         "Mapping surveillance coverage; identifying countries with minimal or no sequencing; highlighting supply chain, funding, technical training gaps; geographic & temporal gaps"
       ],
       "practicalUse": "Informs planning of coverage expansion; helps allocate funding; useful for arbovirus surveillance planning",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [
+        "arboviruses-vectorborne",
+        "viral-genomics"
+      ],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "AfricaPGI_DETECT",
+      "id": "africapgi-detect",
       "title": "Africa PGI Integrated Genomic Surveillance for Outbreak Detection (DETECT)",
       "organization": "Africa CDC / APHF",
       "description": "Continental initiative to strengthen molecular diagnostic and genomic sequencing for outbreak detection, characterization, and response across Africa; includes guidance, diagnostic algorithms, training & capacity building.",
       "url": "https://africacdc.org/download/the-africa-pathogen-genomics-initative-africa-pgi-integrated-genomic-surveillance-for-outbreak-detection-detect/",
       "audiences": [
-        "Laboratorians",
-        "Public health authorities",
-        "Policymakers",
-        "Lab leadership"
+        "laboratorians",
+        "public-health-officials",
+        "policymakers",
+        "lab-leadership"
       ],
       "stages": [
-        "Implementation",
-        "Optimization"
+        "implementation",
+        "optimization-sustainability"
       ],
       "types": [
-        "Tool",
-        "Guide"
+        "guide-manual"
       ],
       "geography": [
-        "Africa",
-        "LMICs"
+        "africa",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Outbreak Detection",
-        "Pathogen Genomics"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "outbreak-detection"
       ],
       "keyFeatures": [
         "Focuses on outbreak detection & response; scalable diagnostic/genomic sequencing integration; strengthening lab networks & training; includes guidance docs & protocols"
       ],
       "practicalUse": "Useful for ministries / health agencies building or scaling outbreak-genomic surveillance systems; support for diagnostics + sequencing planning; capacity building",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "types: Tool"
+      ]
     },
     {
-      "id": "Bangladesh_StrategicFramework_Bangla",
+      "id": "bangladesh-strategicframework-bangla",
       "title": "A Strategic Framework of SARS-CoV-2 Genomic Surveillance in Bangladesh",
       "organization": "Bangladesh MoH + collaborators (Institutes/Hospitals)",
       "description": "Document describing framework developed between mid-2021 and end-2022 for SARS-CoV-2 variant surveillance across 13 hospitals and institutes; sets priorities, QC, data pipelines.",
       "url": "https://pubmed.ncbi.nlm.nih.gov/39440811/",
       "audiences": [
-        "Laboratorians",
-        "Epidemiologists",
-        "Policymakers",
-        "Lab leadership"
+        "laboratorians",
+        "epidemiologists",
+        "policymakers",
+        "lab-leadership"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Guide"
+        "guide-manual"
       ],
       "geography": [
-        "Global",
-        "LMICs",
-        "Asia"
+        "global",
+        "lmic",
+        "asia"
       ],
       "topics": [
-        "Surveillance",
-        "Variant Monitoring",
-        "Quality Assurance"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "variant-monitoring",
+        "quality-management"
       ],
       "keyFeatures": [
         "Includes sample selection; QC; workflows; turn-around times; coordination among hospitals and public health labs; variant tracking pipelines"
       ],
       "practicalUse": "Useful for countries designing national scale variant surveillance; illustrating hospital ↔ public health Lab coordination; designing QC & variant tracking systems",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "WHO_Considerations_NationalGSStrategy",
+      "id": "who-considerations-nationalgsstrategy",
       "title": "Considerations for developing a national genomic surveillance strategy or action plan for pathogens with pandemic and epidemic potential",
       "organization": "WHO",
       "description": "Global technical document guiding national and subnational stakeholders through steps/considerations for creating their own genomic surveillance strategy / action plan.",
       "url": "https://www.who.int/publications/i/item/9789240076563",
       "audiences": [
-        "Laboratorians",
-        "Lab leadership",
-        "Policymakers",
-        "Health ministries",
-        "One Health partners"
+        "laboratorians",
+        "lab-leadership",
+        "policymakers",
+        "health-ministry-officials",
+        "one-health-partners"
       ],
       "stages": [
-        "Planning",
-        "Policy"
+        "planning-strategy",
+        "readiness-assessment"
       ],
       "types": [
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Global",
-        "LMICs"
+        "global",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Strategy",
-        "Policy",
-        "Readiness"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance"
       ],
       "keyFeatures": [
         "Covers stakeholder engagement; capacity assessment; financing & sustainability; sample & data flows; regulatory / ethical issues"
       ],
       "practicalUse": "Useful for policy makers drafting national genomic surveillance strategy; gives structured checklist / roadmap; helps ensure strategy is comprehensive and actionable",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "GlobalGenomicSurvStrategy_2022",
+      "id": "globalgenomicsurvstrategy-2022",
       "title": "WHO Global Genomic Surveillance Strategy for Pathogens with Pandemic & Epidemic Potential, 2022-2032",
       "organization": "WHO",
       "description": "High-level strategy document with objectives, strategic actions, monitoring, enabling environment, workforce, data sharing etc, to guide countries and partners globally.",
       "url": "https://iris.who.int/bitstream/handle/10665/374757/9789240084773-eng.pdf?sequence=1",
       "audiences": [
-        "Laboratorians",
-        "Policymakers",
-        "Donors",
-        "Health ministries"
+        "laboratorians",
+        "policymakers",
+        "donors-funders",
+        "health-ministry-officials"
       ],
       "stages": [
-        "Planning",
-        "Policy"
+        "planning-strategy",
+        "optimization-sustainability"
       ],
       "types": [
-        "Policy",
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Global",
-        "LMICs"
+        "global",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Policy",
-        "Sustainability",
-        "Data Sharing"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "sustainability",
+        "data-sharing-interoperability"
       ],
       "keyFeatures": [
         "Objectives over 10 years; strategic actions; alignment with pandemic & epidemic priorities; normative guidance & indicators"
       ],
       "practicalUse": "Useful for aligning national strategies with global norms; for advocacy; donor alignment; policy drafting",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "PAHO_CSP30R9_RegionalGSStrategy_PAHA",
+      "id": "paho-csp30r9-regionalgsstrategy-paha",
       "title": "Resolution CSP30.R9 Strategy on Regional Genomic Surveillance for Epidemic and Pandemic Preparedness and Response",
       "organization": "Pan American Health Organization (PAHO)",
       "description": "Regional strategy adopted December 2024 for enhancing genomic surveillance capabilities across Americas; mandates regional networks, capacity building, lab strengthening, data sharing, preparedness & response.",
       "url": "https://www.paho.org/en/documents/resolution-csp30r9-strategy-regional-genomic-surveillance-epidemic-and-pandemic",
       "audiences": [
-        "Laboratorians",
-        "Public health authorities",
-        "Policymakers",
-        "Regional health organizations"
+        "laboratorians",
+        "public-health-officials",
+        "policymakers",
+        "regional-international-orgs"
       ],
       "stages": [
-        "Planning",
-        "Policy"
+        "planning-strategy"
       ],
       "types": [
-        "Policy",
-        "Guide"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Americas",
-        "Global relevance"
+        "americas",
+        "global"
       ],
       "topics": [
-        "Surveillance",
-        "Regional Network",
-        "Policy"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "regional-networks"
       ],
       "keyFeatures": [
         "The-res but focused on genomic surveillance; regional integration; mandates for networks & data sharing; resource mobilization"
       ],
       "practicalUse": "Aids countries in Americas & elsewhere to see what regional strategy & mandates look like; can provide model for regional pact / policy; helps stakeholders push for regional networks",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "AfricaDataBarriers_CellReview",
+      "id": "africadatabarriers-cellreview",
       "title": "Africa in the era of pathogen genomics: Unlocking data barriers",
       "organization": "Cell (review article)",
       "description": "Review of expansion of pathogen sequencing in Africa; focuses on local generation of genomic data, data governance, infrastructure barriers, equity; what’s needed to embed genomic surveillance into health systems.",
       "url": "https://www.cell.com/cell/fulltext/S0092-8674(24)00960-7",
       "audiences": [
-        "Laboratorians",
-        "Policymakers",
-        "Bioinformaticians",
-        "Health ministries"
+        "laboratorians",
+        "policymakers",
+        "bioinformaticians",
+        "health-ministry-officials"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Review"
+        "research-evidence",
+        "policy-document"
       ],
       "geography": [
-        "Global",
-        "Africa"
+        "global",
+        "africa"
       ],
       "topics": [
-        "Surveillance",
-        "Data Sharing",
-        "Policy"
+        "stakeholder-engagement",
+        "genomic-surveillance",
+        "data-sharing-interoperability",
+        "regulatory-frameworks"
       ],
       "keyFeatures": [
         "Governance; data ownership; interoperability; equitable access; infrastructure; policy / normative gaps"
       ],
       "practicalUse": "Useful for stakeholders / policy makers to understand current gaps in data sharing & governance; to inform regulation & policy; for donor / funder advocacy",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "ClinicalMicrobio_LabGap_Africa",
+      "id": "clinicalmicrobio-labgap-africa",
       "title": "Enhancing Clinical Microbiology for Genomic AMR Surveillance in Africa",
       "organization": "Various African labs & collaborators (see article)",
       "description": "Review of clinical microbiology lab gaps in Africa that limit AMR / genomic surveillance: low isolate recovery, access inequity, lack of representativeness, QC etc.",
       "url": "https://aricjournal.biomedcentral.com/articles/10.1186/s13756-024-01472-8",
       "audiences": [
-        "Laboratorians",
-        "Policymakers",
-        "Public health authorities"
+        "laboratorians",
+        "policymakers",
+        "public-health-officials"
       ],
       "stages": [
-        "Planning",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Review"
+        "research-evidence"
       ],
       "geography": [
-        "Global",
-        "Africa",
-        "LMICs"
+        "global",
+        "africa",
+        "lmic"
       ],
       "topics": [
-        "Bacterial AMR",
-        "Surveillance",
-        "Laboratory Systems"
+        "stakeholder-engagement",
+        "amr-surveillance",
+        "genomic-surveillance",
+        "lab-networking"
       ],
       "keyFeatures": [
         "Emphasis on clinical microbiology lab infrastructure; recommendations for more equitable access; representation; QC/standards; funding & staffing"
       ],
       "practicalUse": "Useful to inform policy on lab services funding; to integrate AMR & genomics in national surveillance; for reforms in microbiology lab networks & investment priorities",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [
+        "amr-bacteria"
+      ],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "WorldBank_LandscapeAnalysis_Africa",
+      "id": "worldbank-landscapeanalysis-africa",
       "title": "Landscape analysis of networks supporting genomic surveillance (Africa)",
       "organization": "World Bank / African partners",
       "description": "PDF analysis of the landscape of networks, laboratories, workforce, capabilities, and gaps in genomic surveillance across African region; looks also at policy, funding & regional linkages.",
       "url": "https://documents1.worldbank.org/curated/en/099716212222240993/pdf/P17618002a6bfd00c09e39087a18be85684.pdf",
       "audiences": [
-        "Laboratorians",
-        "Public health authorities",
-        "Policymakers",
-        "Donors"
+        "laboratorians",
+        "public-health-officials",
+        "policymakers",
+        "donors-funders"
       ],
       "stages": [
-        "Planning",
-        "Policy",
-        "Implementation"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Guide",
-        "Review"
+        "policy-document",
+        "guide-manual",
+        "research-evidence"
       ],
       "geography": [
-        "Africa",
-        "LMICs"
+        "africa",
+        "lmic"
       ],
       "topics": [
-        "Surveillance",
-        "Laboratory Systems",
-        "Capacity Building"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "lab-networking",
+        "workforce-training"
       ],
       "keyFeatures": [
         "Key network mapping; device / lab numbers; workforce gaps; regional disparities; recommendations for sustaining infrastructure"
       ],
       "practicalUse": "Useful for government & donors to see a regional baseline; guide investment; set priorities for capacity expansion & network strengthening; can feed into strategy documents",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
-      "id": "Africa_PGI_PolicyFramework",
+      "id": "africa-pgi-policyframework",
       "title": "African Pathogen Genomic Surveillance Policy Framework",
       "organization": "Africa CDC / AU Member States",
       "description": "Framework to guide AU member states in developing national pathogen genomic surveillance policies: vision, guiding principles, priority actions & roadmap over five years.",
       "url": "https://africacdc.org/download/pathogen-genomic-surveillance-policy-framework/ Policymakers; Lab leadership; Epidemiologists; Donors",
       "audiences": [
-        "Planning",
-        "Policy"
+        "policymakers"
       ],
       "stages": [
-        "Policy",
-        "Guide"
+        "planning-strategy",
+        "optimization-sustainability"
       ],
       "types": [
-        "Africa",
-        "LMICs"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Surveillance",
-        "Policy",
-        "Sustainability"
+        "africa",
+        "lmic"
       ],
       "topics": [
-        "Includes priority actions",
-        "public health & clinical integration",
-        "sustainability considerations",
-        "multi-country context",
-        "contextualization for different capacity levels"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "sustainability"
       ],
       "keyFeatures": [
         "Helps governments draft national/genomic surveillance strategies; align funding; coordinate regional cooperation; justify investment in genomics"
       ],
       "practicalUse": "",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "topics: Includes priority actions",
+        "topics: public health & clinical integration",
+        "topics: multi-country context",
+        "topics: contextualization for different capacity levels"
+      ]
     },
     {
-      "id": "WHO_GlobalStrategy2022",
+      "id": "who-globalstrategy2022",
       "title": "WHO Global Genomic Surveillance Strategy for Pathogens with Pandemic & Epidemic Potential, 2022-2032",
       "organization": "WHO",
       "description": "Global strategy & step-by-step guide for national genomic surveillance strategy/action plan development; strategy objectives, strategic actions, stakeholder roles.",
       "url": "https://www.who.int/initiatives/genomic-surveillance-strategy WHO; Policymakers; Health ministries; Donors; One Health partners",
       "audiences": [
-        "Planning",
-        "Policy"
+        "policymakers"
       ],
       "stages": [
-        "Guide"
+        "planning-strategy",
+        "readiness-assessment"
       ],
       "types": [
-        "Global",
-        "LMICs"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Surveillance",
-        "Policy",
-        "Readiness",
-        "Strategy"
+        "global",
+        "lmic"
       ],
       "topics": [
-        "Outlines objectives, steps for strategy development",
-        "monitoring & evaluation",
-        "investment cases",
-        "normative guidance for standards & data sharing"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "monitoring-evaluation",
+        "investment-cases"
       ],
       "keyFeatures": [
         "Useful to align national plans with global norms; can serve as model framework; useful for donor proposals and national policy drafting"
       ],
       "practicalUse": "",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "topics: Outlines objectives, steps for strategy development",
+        "topics: normative guidance for standards & data sharing"
+      ]
     },
     {
-      "id": "Malawi_GenSurv_IP2",
+      "id": "malawi-gensurv-ip2",
       "title": "Malawi Genomic Surveillance Implementation Plan 2.0 (2023-2030)",
       "organization": "Malawi Ministry of Health + Africa CDC / PGI",
       "description": "Costed implementation plan with seven thematic areas (e.g. surveillance & research; health system strengthening; capacity building; governance; regulation & policy; financing etc.), developed with government, partners, stakeholders.",
       "url": "https://africacdc.org/wp-content/uploads/2025/07/Malawi-Genomic-Surveillance-Implementation-Plan-FINAL-3-JULY.pdf Public health authorities; Lab leadership; Epidemiologists; Donors; Government ministries",
       "audiences": [
-        "Planning",
-        "Implementation"
+        "policymakers"
       ],
       "stages": [
-        "Policy",
-        "Guide"
+        "planning-strategy",
+        "implementation",
+        "optimization-sustainability"
       ],
       "types": [
-        "Africa",
-        "LMICs",
-        "Malawi"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Surveillance",
-        "Policy",
-        "Implementation",
-        "Sustainability"
+        "africa",
+        "lmic",
+        "southern-africa"
       ],
       "topics": [
-        "SWOT analysis",
-        "governance & policy roles",
-        "stakeholder engagement",
-        "resource mobilization",
-        "costed activities",
-        "clear M&E framework"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "sustainability",
+        "data-governance",
+        "resource-mobilization",
+        "costing-financing",
+        "monitoring-evaluation"
       ],
       "keyFeatures": [
         "Serves as a blueprint for other countries; helps stakeholders understand what’s involved in implementation; guides budgeting and policy alignment"
       ],
       "practicalUse": "",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "topics: SWOT analysis"
+      ]
     },
     {
-      "id": "Nigeria_NGSS_Strategy",
+      "id": "nigeria-ngss-strategy",
       "title": "Nigeria National Genomic Surveillance Strategy",
       "organization": "Nigeria Centre for Disease Control (NCDC) with partners",
       "description": "National strategy document including stakeholder engagement process, plan for capacity building, sequencing, data reporting, consortium formation.",
       "url": "https://ncdc.gov.ng/themes/common/docs/protocols/356_1737549534.pdf Public health authorities; Policymakers; Lab leadership; Academia; Private sector",
       "audiences": [
-        "Planning",
-        "Implementation",
-        "Policy"
+        "policymakers"
       ],
       "stages": [
-        "Policy",
-        "Guide"
+        "planning-strategy",
+        "implementation"
       ],
       "types": [
-        "Africa",
-        "LMICs",
-        "Nigeria"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Surveillance",
-        "Policy",
-        "Stakeholder Engagement",
-        "Capacity Building"
+        "africa",
+        "lmic",
+        "west-africa"
       ],
       "topics": [
-        "Conducts workshops across sectors",
-        "defines roadmap / timeline",
-        "addresses human resources, quality assurance, bioinformatics",
-        "defines consortium structure"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "genomic-surveillance",
+        "workforce-training"
       ],
       "keyFeatures": [
         "Useful for policy makers & stakeholders in Nigeria; capture lessons for other African countries; useful in planning national consortia and stakeholder roles"
       ],
       "practicalUse": "",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "topics: Conducts workshops across sectors",
+        "topics: defines roadmap / timeline",
+        "topics: addresses human resources, quality assurance, bioinformatics",
+        "topics: defines consortium structure"
+      ]
     },
     {
-      "id": "Africa_DataSharing_Principles",
+      "id": "africa-datasharing-principles",
       "title": "Attributes & Principles for Genomic Data-Sharing Platforms supporting Surveillance (WHO consultation)",
       "organization": "WHO / Genomics & Analytics Unit / Emergency Zoonotic Diseases Unit",
       "description": "Document describing the desired attributes & principles for genomic data-sharing platforms used in pathogen surveillance, to guide policy / platform developers / donors.",
       "url": "https://www.who.int/news-room/articles-detail/online-public-consultation-attributes-and-principles-for-genomic-data-sharing-platforms-supporting-surveillance-of-pathogens-with-epidemic-and-pandemic-potential Policymakers; Donors; Platform developers; Health Authorities; Bioinformaticians",
       "audiences": [
-        "Planning",
-        "Policy"
+        "policymakers"
       ],
       "stages": [
-        "Guide"
+        "planning-strategy"
       ],
       "types": [
-        "Global",
-        "Africa",
-        "LMICs"
+        "policy-document",
+        "guide-manual"
       ],
       "geography": [
-        "Data Sharing",
-        "Policy",
-        "Surveillance"
+        "global",
+        "africa",
+        "lmic"
       ],
       "topics": [
-        "Transparency",
-        "governance",
-        "interoperability",
-        "privacy",
-        "benefit sharing",
-        "ease of access",
-        "stability of platforms"
+        "stakeholder-engagement",
+        "regulatory-frameworks",
+        "data-sharing-interoperability",
+        "genomic-surveillance",
+        "data-governance",
+        "privacy-benefit-sharing"
       ],
       "keyFeatures": [
         "Helps shape policies / regulations on how data is shared; useful for drafting legal or governance frameworks; input for national strategy documents"
       ],
       "practicalUse": "",
-      "relatedResources": []
+      "relatedResources": [],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": [
+        "topics: Transparency",
+        "topics: ease of access",
+        "topics: stability of platforms"
+      ]
     },
     {
       "id": "strobe-metagenomics",
@@ -2612,19 +3249,20 @@ const resourcesDatabase = {
         "policymakers"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "guide"
+        "guide-manual",
+        "policy-document"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "implementation",
-        "policy"
+        "stakeholder-engagement",
+        "pipelines-workflows",
+        "regulatory-frameworks"
       ],
       "keyFeatures": [
         "Structured checklist for metagenomics studies; Covers specimen handling, sequencing and bioinformatics QC; Promotes transparency, reproducibility and bias reporting"
@@ -2633,7 +3271,14 @@ const resourcesDatabase = {
       "relatedResources": [
         "minseqe-minimum-info",
         "mixs-minimum-info"
-      ]
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
       "id": "mixs-minimum-info",
@@ -2647,18 +3292,18 @@ const resourcesDatabase = {
         "epidemiologists"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "implementation"
+        "stakeholder-engagement",
+        "pipelines-workflows"
       ],
       "keyFeatures": [
         "Core and extension checklists; Environmental/context packages with controlled vocabularies; Supports FAIR data, interoperability and reuse"
@@ -2667,7 +3312,14 @@ const resourcesDatabase = {
       "relatedResources": [
         "misag-minimum-info",
         "mimag-minimum-info"
-      ]
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
       "id": "minseqe-minimum-info",
@@ -2681,19 +3333,19 @@ const resourcesDatabase = {
         "epidemiologists"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "qms",
-        "implementation"
+        "stakeholder-engagement",
+        "pipelines-workflows",
+        "quality-management"
       ],
       "keyFeatures": [
         "Requires raw and processed data with provenance; Documents library prep, instruments and analysis steps; Links samples to datasets for full traceability"
@@ -2701,7 +3353,14 @@ const resourcesDatabase = {
       "practicalUse": "Include MINSEQE fields in protocols and publications to meet repository/journal expectations and support QA/QC.",
       "relatedResources": [
         "strobe-metagenomics"
-      ]
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
       "id": "misag-minimum-info",
@@ -2714,19 +3373,19 @@ const resourcesDatabase = {
         "laboratorians"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "implementation",
-        "qms"
+        "stakeholder-engagement",
+        "pipelines-workflows",
+        "quality-management"
       ],
       "keyFeatures": [
         "Quality tiers for SAGs (completeness/contamination); Required contextual metadata aligned to MIxS; Supports repository validation and comparability"
@@ -2735,7 +3394,14 @@ const resourcesDatabase = {
       "relatedResources": [
         "mixs-minimum-info",
         "mimag-minimum-info"
-      ]
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     },
     {
       "id": "mimag-minimum-info",
@@ -2748,19 +3414,19 @@ const resourcesDatabase = {
         "laboratorians"
       ],
       "stages": [
-        "planning",
+        "planning-strategy",
         "implementation"
       ],
       "types": [
-        "guide"
+        "guide-manual"
       ],
       "geography": [
         "global"
       ],
       "topics": [
-        "bioinformatics",
-        "implementation",
-        "qms"
+        "stakeholder-engagement",
+        "pipelines-workflows",
+        "quality-management"
       ],
       "keyFeatures": [
         "MAG quality metrics and tiers; Contextual metadata aligned to MIxS; Enables cross-study comparison and repository checks"
@@ -2769,7 +3435,14 @@ const resourcesDatabase = {
       "relatedResources": [
         "mixs-minimum-info",
         "misag-minimum-info"
-      ]
+      ],
+      "pathogenFocus": [],
+      "language": [
+        "en"
+      ],
+      "lastUpdated": "",
+      "formatDetails": "",
+      "legacyTags": []
     }
   ]
 };

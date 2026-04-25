@@ -97,6 +97,36 @@
             <button id="clearForm" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"><i class="fas fa-plus mr-1"></i>New</button>
           </div>
 
+          <div class="mb-6 border rounded-lg bg-blue-50 p-4">
+            <div class="flex items-center justify-between gap-3 flex-wrap">
+              <div>
+                <h3 class="font-semibold text-blue-900">AI Intake</h3>
+                <p class="text-xs text-blue-800">Uses the authenticated GPT categorization endpoint when configured.</p>
+              </div>
+              <button id="aiAnalyzeBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+                <i class="fas fa-wand-magic-sparkles mr-1"></i>Analyze with GPT
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+              <label class="text-sm">Resource URL
+                <input id="aiUrl" class="mt-1 w-full border rounded px-3 py-2" placeholder="https://...">
+              </label>
+              <label class="text-sm">Optional context
+                <textarea id="aiContext" rows="2" class="mt-1 w-full border rounded px-3 py-2" placeholder="Paste abstract, source notes, or curator context"></textarea>
+              </label>
+            </div>
+            <div id="aiStatus" class="text-xs text-blue-900 mt-2"></div>
+            <div id="aiReviewPanel" class="hidden mt-3 bg-white border rounded p-3">
+              <div class="flex items-center justify-between gap-3">
+                <h4 class="font-semibold text-sm">GPT Suggestions</h4>
+                <button id="applyAiSuggestionBtn" class="px-3 py-2 rounded bg-green-600 text-white hover:bg-green-700 text-sm">
+                  Apply to Form
+                </button>
+              </div>
+              <pre id="aiSuggestionPreview" class="mt-2 text-xs bg-gray-50 border rounded p-3 overflow-auto max-h-72 whitespace-pre-wrap"></pre>
+            </div>
+          </div>
+
           <form id="resourceForm" class="space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -113,51 +143,39 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p class="text-sm font-medium mb-1">Audiences*</p>
-                <div class="space-y-1 text-sm">
-                  <label class="block"><input type="checkbox" name="audiences" value="laboratorians"> Laboratorians</label>
-                  <label class="block"><input type="checkbox" name="audiences" value="epidemiologists"> Epidemiologists</label>
-                  <label class="block"><input type="checkbox" name="audiences" value="bioinformaticians"> Bioinformaticians</label>
-                  <label class="block"><input type="checkbox" name="audiences" value="policymakers"> Policymakers</label>
-                </div>
+                <div id="taxonomy-audiences" class="space-y-1 text-sm"></div>
               </div>
               <div>
                 <p class="text-sm font-medium mb-1">Stages*</p>
-                <div class="space-y-1 text-sm">
-                  <label class="block"><input type="checkbox" name="stages" value="planning"> Planning</label>
-                  <label class="block"><input type="checkbox" name="stages" value="implementation"> Implementation</label>
-                  <label class="block"><input type="checkbox" name="stages" value="optimization"> Optimization</label>
-                </div>
+                <div id="taxonomy-stages" class="space-y-1 text-sm"></div>
               </div>
               <div>
                 <p class="text-sm font-medium mb-1">Types*</p>
-                <div class="space-y-1 text-sm">
-                  <label class="block"><input type="checkbox" name="types" value="guide"> Guide</label>
-                  <label class="block"><input type="checkbox" name="types" value="tool"> Tool</label>
-                  <label class="block"><input type="checkbox" name="types" value="training"> Training</label>
-                  <label class="block"><input type="checkbox" name="types" value="policy"> Policy</label>
-                </div>
+                <div id="taxonomy-types" class="space-y-1 text-sm"></div>
               </div>
               <div>
                 <p class="text-sm font-medium mb-1">Geography*</p>
-                <div class="space-y-1 text-sm">
-                  <label class="block"><input type="checkbox" name="geography" value="global"> Global</label>
-                  <label class="block"><input type="checkbox" name="geography" value="africa"> Africa</label>
-                  <label class="block"><input type="checkbox" name="geography" value="asia"> Asia</label>
-                  <label class="block"><input type="checkbox" name="geography" value="lmic"> LMIC</label>
-                </div>
+                <div id="taxonomy-geography" class="space-y-2 text-sm"></div>
               </div>
               <div class="md:col-span-2">
                 <p class="text-sm font-medium mb-1">Topics*</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-1 text-sm">
-                  <label class="block"><input type="checkbox" name="topics" value="surveillance"> Surveillance</label>
-                  <label class="block"><input type="checkbox" name="topics" value="implementation"> Implementation</label>
-                  <label class="block"><input type="checkbox" name="topics" value="policy"> Policy</label>
-                  <label class="block"><input type="checkbox" name="topics" value="qms"> QMS</label>
-                  <label class="block"><input type="checkbox" name="topics" value="bioinformatics"> Bioinformatics</label>
-                  <label class="block"><input type="checkbox" name="topics" value="training"> Training</label>
-                  <label class="block"><input type="checkbox" name="topics" value="costing"> Costing</label>
-                  <label class="block"><input type="checkbox" name="topics" value="prioritization"> Prioritization</label>
-                </div>
+                <div id="taxonomy-topics" class="space-y-2 text-sm"></div>
+              </div>
+              <div class="md:col-span-2">
+                <p class="text-sm font-medium mb-1">Pathogen Focus</p>
+                <div id="taxonomy-pathogenFocus" class="grid grid-cols-1 md:grid-cols-3 gap-1 text-sm"></div>
+              </div>
+              <div>
+                <p class="text-sm font-medium mb-1">Language</p>
+                <div id="taxonomy-language" class="space-y-1 text-sm"></div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Last Updated</label>
+                <input id="resourceLastUpdated" type="date" class="w-full border rounded px-3 py-2">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Format Details</label>
+                <input id="formatDetails" class="w-full border rounded px-3 py-2" placeholder="PDF, Excel, dashboard, video...">
               </div>
               <div class="md:col-span-2">
                 <label class="block text-sm font-medium mb-1">Key Features (one per line)</label>
@@ -170,6 +188,10 @@
               <div class="md:col-span-2">
                 <label class="block text-sm font-medium mb-1">Related Resource IDs (comma or semicolon separated)</label>
                 <input id="relatedResources" class="w-full border rounded px-3 py-2" placeholder="id-1, id-2">
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-sm font-medium mb-1">Legacy Tags / Migration Notes</label>
+                <textarea id="legacyTags" rows="2" class="w-full border rounded px-3 py-2" placeholder="Preserved automatically during migration"></textarea>
               </div>
             </div>
 
@@ -305,6 +327,7 @@
     </div>
   </div>
 
+  <script src="taxonomy.js"></script>
   <script src="validation.js"></script>
   <script src="resources-data.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
