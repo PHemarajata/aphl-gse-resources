@@ -440,6 +440,31 @@ class AdminApp {
     q(sel){ return document.querySelector(sel); }
     on(sel, ev, fn){ const el=this.q(sel); if(el) el.addEventListener(ev, fn); }
 
+    showToast(message, tone = 'info') {
+      const existing = document.getElementById('adminImportToast');
+      if (existing) existing.remove();
+
+      const palette = {
+        success: 'bg-green-600',
+        warning: 'bg-yellow-600',
+        info: 'bg-gray-800'
+      };
+
+      const toast = document.createElement('div');
+      toast.id = 'adminImportToast';
+      toast.className = `${palette[tone] || palette.info} text-white text-sm px-4 py-3 rounded shadow-lg fixed bottom-4 right-4 z-50 max-w-md`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      window.setTimeout(() => {
+        toast.style.transition = 'opacity 250ms ease';
+        toast.style.opacity = '0';
+      }, 2600);
+      window.setTimeout(() => {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 2900);
+    }
+
     templateDownload(sel, filename, fallbackText){
       const el = this.q(sel); if(!el) return;
       el.addEventListener('click', async (e)=>{
@@ -743,22 +768,34 @@ class AdminApp {
           if (!proceed) return;
         }
         
-        // Track imported resources for validation
-        const importedIds = new Set(inc.map(r => r.id));
-        
         // Merge per import mode
         const mode = (document.querySelector('input[name="importMode"]:checked')?.value) || 'append';
         const overwrite = !!document.getElementById('overwriteDuplicates')?.checked;
+        let importedNewCount = 0;
+        let skippedDuplicateCount = 0;
+        let overwrittenCount = 0;
+
         if (mode==='replace'){
           this.data = inc;
           // In replace mode, all resources are considered new
           this.newOrModifiedIds = new Set(inc.map(r => r.id));
+          importedNewCount = inc.length;
         }else{
           const map = new Map(this.data.map(r=>[r.id, r]));
           inc.forEach(r => {
-            if (!map.has(r.id) || overwrite) {
+            if (!map.has(r.id)) {
               map.set(r.id, r);
+              importedNewCount += 1;
               this.newOrModifiedIds.add(r.id); // Track as new/modified
+              return;
+            }
+
+            if (overwrite) {
+              map.set(r.id, r);
+              overwrittenCount += 1;
+              this.newOrModifiedIds.add(r.id); // Track as new/modified
+            } else {
+              skippedDuplicateCount += 1;
             }
           });
           this.data = Array.from(map.values());
@@ -767,6 +804,17 @@ class AdminApp {
         this.renderList();
         this.updateDashboard();
         this.enableValidationIfAny();
+
+        const duplicateTone = skippedDuplicateCount > 0 ? 'warning' : 'success';
+        if (mode === 'replace') {
+          this.showToast(`Import complete (replace mode): ${importedNewCount} loaded.`, 'info');
+        } else {
+          this.showToast(
+            `Import complete: ${importedNewCount} new, ${skippedDuplicateCount} skipped duplicates, ${overwrittenCount} overwritten.`,
+            duplicateTone
+          );
+        }
+
         // Auto validate only newly imported resources
         this.validateNewResources();
       }).catch(err => alert('Import failed: ' + err.message));
