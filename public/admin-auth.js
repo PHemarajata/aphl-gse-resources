@@ -273,6 +273,7 @@
     const configureBtn = byId('configureAuthBtn');
     const closeConfigBtn = byId('closeAuthConfigBtn');
     const clearConfigBtn = byId('clearAuthConfigBtn');
+    const useHostingConfigBtn = byId('useHostingAuthConfigBtn');
     const testConfigBtn = byId('testAuthConfigBtn');
     const saveConfigBtn = byId('saveAuthConfigBtn');
 
@@ -291,6 +292,18 @@
       clearConfig();
       fillConfigForm({});
       alert('Stored config cleared.');
+    });
+
+    useHostingConfigBtn?.addEventListener('click', async () => {
+      const hostingConfig = await getHostingAutoConfig();
+      if (!isValidConfig(hostingConfig)) {
+        alert('Could not load Firebase Hosting config from /__/firebase/init.json. Make sure you are using the deployed Firebase Hosting URL.');
+        return;
+      }
+      fillConfigForm(hostingConfig);
+      persistConfig(hostingConfig);
+      alert('Firebase Hosting config loaded and saved. Reloading page...');
+      window.location.reload();
     });
 
     testConfigBtn?.addEventListener('click', async () => {
