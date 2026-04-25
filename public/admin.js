@@ -481,6 +481,8 @@ class AdminApp {
       this.on('#resourceForm','submit', (e)=>{ e.preventDefault(); this.saveFromForm(); });
 
       this.on('#searchResources','input', (e)=> this.filterList(e.target.value));
+      this.on('#openAiApiKeyInput','input', () => this.noteOpenAiKeyInput());
+      this.on('#openAiApiKeyInput','paste', () => window.setTimeout(() => this.noteOpenAiKeyInput(), 0));
       this.updateOpenAiKeyStatus();
 
       // Add real-time ID formatting
@@ -539,7 +541,10 @@ class AdminApp {
       const key = String(input?.value || '').trim();
       if (key) {
         this.openAiApiKey = key;
-        if (input) input.value = '';
+        if (input) {
+          input.dataset.hasSessionKey = 'true';
+          input.value = '';
+        }
         this.updateOpenAiKeyStatus();
         return true;
       }
@@ -548,6 +553,20 @@ class AdminApp {
         this.updateOpenAiKeyStatus('Paste an OpenAI API key before enabling AI intake.');
       }
       return false;
+    }
+
+    noteOpenAiKeyInput(){
+      const input = this.q('#openAiApiKeyInput');
+      const key = String(input?.value || '').trim();
+      if (!key) {
+        if (!this.openAiApiKey) this.updateOpenAiKeyStatus();
+        return;
+      }
+      const status = this.q('#openAiKeyStatus');
+      if (status) {
+        status.textContent = 'OpenAI key detected in the field. Click Test or Analyze to use it for this session.';
+        status.className = 'text-xs text-blue-900 mt-2';
+      }
     }
 
     updateOpenAiKeyStatus(message){
