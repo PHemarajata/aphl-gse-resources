@@ -2,7 +2,7 @@
 
 const admin = require('firebase-admin');
 const { onRequest } = require('firebase-functions/v2/https');
-const taxonomyApi = require('../public/taxonomy.js');
+const taxonomyApi = require('./taxonomy.js');
 
 admin.initializeApp();
 
