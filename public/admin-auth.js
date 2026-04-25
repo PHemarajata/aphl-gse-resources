@@ -40,10 +40,16 @@
     );
   }
 
+  function normalizeAuthDomain(value) {
+    const raw = String(value || '').trim();
+    if (!raw) return '';
+    return raw.replace(/^https?:\/\//i, '').replace(/\/.*$/, '');
+  }
+
   function sanitizeConfig(config) {
     return {
       apiKey: String(config.apiKey || '').trim(),
-      authDomain: String(config.authDomain || '').trim(),
+      authDomain: normalizeAuthDomain(config.authDomain),
       projectId: String(config.projectId || '').trim(),
       appId: String(config.appId || '').trim() || undefined,
       storageBucket: String(config.storageBucket || '').trim() || undefined
@@ -79,21 +85,23 @@
   }
 
   async function resolveFirebaseConfig() {
+    const hostingConfig = await getHostingAutoConfig();
+
     const candidates = [
       sanitizeConfig(window.__FIREBASE_CONFIG__ || {}),
       sanitizeConfig(window.FIREBASE_CONFIG || {}),
+      hostingConfig,
       getStoredConfig(),
       sanitizeConfig(fallbackConfig)
     ];
 
     for (const candidate of candidates) {
-      if (isValidConfig(candidate)) return candidate;
-    }
-
-    const hostingConfig = await getHostingAutoConfig();
-    if (isValidConfig(hostingConfig)) {
-      persistConfig(hostingConfig);
-      return hostingConfig;
+      if (isValidConfig(candidate)) {
+        if (hostingConfig && candidate && hostingConfig.projectId === candidate.projectId) {
+          persistConfig(candidate);
+        }
+        return candidate;
+      }
     }
 
     return null;
@@ -126,13 +134,20 @@
 
   function isAuthorizedUser(user, tokenResult) {
     if (!user || !user.email) return false;
+
     const email = user.email.toLowerCase();
     const hasAdminClaim = Boolean(tokenResult && tokenResult.claims && tokenResult.claims.admin === true);
-
-    // Hardened default: admin claim required unless policy explicitly allows domain/email fallback.
-    const allowFallback = POLICY.allowDomainOrEmailFallback === true;
     if (hasAdminClaim) return true;
-    if (!allowFallback) return false;
+
+    const hasAllowList = ALLOWED_DOMAINS.length > 0 || ALLOWED_EMAILS.length > 0;
+    const requireAdminClaim = POLICY.requireAdminClaim === true;
+    if (requireAdminClaim) return false;
+
+    const allowFallback = POLICY.allowDomainOrEmailFallback === true || hasAllowList;
+    if (!allowFallback) {
+      // Backward-compatible default for environments that only need signed-in gating.
+      return true;
+    }
 
     const domainMatch = ALLOWED_DOMAINS.some((domain) => email.endsWith('@' + domain));
     const emailMatch = ALLOWED_EMAILS.includes(email);
@@ -168,7 +183,8 @@
       return;
     }
 
-    status.textContent = `Authorized: ${user.email}`;
+    const hasPolicy = POLICY.requireAdminClaim === true || POLICY.allowDomainOrEmailFallback === true || ALLOWED_DOMAINS.length > 0 || ALLOWED_EMAILS.length > 0;
+    status.textContent = hasPolicy ? `Authorized: ${user.email}` : `Authorized: ${user.email} (signed-in mode)`;
     status.className = 'ml-1 text-green-700';
     signInBtn.classList.add('hidden');
     signOutBtn.classList.remove('hidden');
@@ -304,6 +320,20 @@
           await firebase.auth().signInWithRedirect(provider);
           return;
         }
+
+        if (error && error.code === 'auth/configuration-not-found') {
+          const origin = window.location.origin;
+          alert(
+            'Sign-in failed: Firebase Auth configuration was not found for this app.\n\n' +
+            'Checklist:\n' +
+            '1) Enable Google provider in Firebase Authentication.\n' +
+            '2) Add this domain to Authorized domains: ' + origin + '\n' +
+            '3) Ensure apiKey + authDomain + projectId come from the same Firebase web app.\n\n' +
+            'If needed, click Configure Auth, verify values, then Save & Reload.'
+          );
+          return;
+        }
+
         alert('Sign-in failed: ' + error.message);
       }
     });
