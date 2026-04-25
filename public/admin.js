@@ -524,16 +524,7 @@ class AdminApp {
     on(sel, ev, fn){ const el=this.q(sel); if(el) el.addEventListener(ev, fn); }
 
     useOpenAiKeyForSession(){
-      const input = this.q('#openAiApiKeyInput');
-      const key = String(input?.value || '').trim();
-      if (!key) {
-        this.openAiApiKey = '';
-        this.updateOpenAiKeyStatus('Paste an OpenAI API key before enabling AI intake.');
-        return;
-      }
-      this.openAiApiKey = key;
-      if (input) input.value = '';
-      this.updateOpenAiKeyStatus();
+      this.activateOpenAiKeyFromInput({ requireKey: true });
     }
 
     clearOpenAiKey(){
@@ -541,6 +532,22 @@ class AdminApp {
       const input = this.q('#openAiApiKeyInput');
       if (input) input.value = '';
       this.updateOpenAiKeyStatus();
+    }
+
+    activateOpenAiKeyFromInput({ requireKey = false } = {}){
+      const input = this.q('#openAiApiKeyInput');
+      const key = String(input?.value || '').trim();
+      if (key) {
+        this.openAiApiKey = key;
+        if (input) input.value = '';
+        this.updateOpenAiKeyStatus();
+        return true;
+      }
+      if (this.openAiApiKey) return true;
+      if (requireKey) {
+        this.updateOpenAiKeyStatus('Paste an OpenAI API key before enabling AI intake.');
+      }
+      return false;
     }
 
     updateOpenAiKeyStatus(message){
@@ -555,13 +562,13 @@ class AdminApp {
         status.textContent = 'OpenAI key active for this session. It will clear on page refresh or logout.';
         status.className = 'text-xs text-green-700 mt-2';
       } else {
-        status.textContent = 'No OpenAI key active for this session.';
+        status.textContent = 'No OpenAI key active for this session. Paste a key, then click Use for Session, Test, or Analyze.';
         status.className = 'text-xs text-blue-900 mt-2';
       }
     }
 
     async buildAiHeaders(){
-      if (!this.openAiApiKey) {
+      if (!this.activateOpenAiKeyFromInput()) {
         throw new Error('Enter an OpenAI API key for this session before running AI intake.');
       }
       let token = '';
@@ -1127,7 +1134,7 @@ class AdminApp {
       const panel = this.q('#aiReviewPanel');
       const preview = this.q('#aiSuggestionPreview');
       if (!url && !context) return alert('Provide a URL or pasted context before running AI intake.');
-      if (!this.openAiApiKey) {
+      if (!this.activateOpenAiKeyFromInput()) {
         if (status) status.textContent = 'Enter an OpenAI API key for this session before running AI intake.';
         this.updateOpenAiKeyStatus('Enter an OpenAI API key for this session before running AI intake.');
         return;
@@ -1172,7 +1179,7 @@ class AdminApp {
       const resultsEl = this.q('#batchResults');
 
       if (urls.length === 0) return alert('Paste at least one URL, one per line.');
-      if (!this.openAiApiKey) {
+      if (!this.activateOpenAiKeyFromInput()) {
         this.updateOpenAiKeyStatus('Enter an OpenAI API key for this session before running batch intake.');
         if (text) text.textContent = 'OpenAI key required before batch intake can start.';
         return;
