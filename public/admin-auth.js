@@ -135,6 +135,18 @@
     modal.classList.toggle('hidden', !show);
   }
 
+  function setConfigStatus(message, tone = 'info') {
+    const status = byId('authConfigStatus');
+    if (!status) return;
+    status.textContent = message || '';
+    const colors = {
+      info: 'mt-3 text-sm text-gray-700',
+      success: 'mt-3 text-sm text-green-700',
+      error: 'mt-3 text-sm text-red-700'
+    };
+    status.className = colors[tone] || colors.info;
+  }
+
   function isAuthorizedUser(user, tokenResult) {
     if (!user || !user.email) return false;
 
@@ -291,22 +303,29 @@
     clearConfigBtn?.addEventListener('click', () => {
       clearConfig();
       fillConfigForm({});
-      alert('Stored config cleared.');
+      setConfigStatus('Stored config cleared. Click Use Hosting Config to restore the deployed project config.', 'info');
     });
 
     useHostingConfigBtn?.addEventListener('click', async () => {
-      const hostingConfig = await getHostingAutoConfig();
-      if (!isValidConfig(hostingConfig)) {
-        alert('Could not load Firebase Hosting config from /__/firebase/init.json. Make sure you are using the deployed Firebase Hosting URL.');
-        return;
+      try {
+        useHostingConfigBtn.disabled = true;
+        setConfigStatus('Loading Firebase Hosting config from /__/firebase/init.json...', 'info');
+        const hostingConfig = await getHostingAutoConfig();
+        if (!isValidConfig(hostingConfig)) {
+          setConfigStatus('Could not load a valid Firebase Hosting config. Make sure you are on the deployed Firebase Hosting URL, then hard refresh.', 'error');
+          return;
+        }
+        fillConfigForm(hostingConfig);
+        persistConfig(hostingConfig);
+        setConfigStatus(`Loaded project ${hostingConfig.projectId}. Reloading now...`, 'success');
+        window.setTimeout(() => window.location.reload(), 500);
+      } finally {
+        useHostingConfigBtn.disabled = false;
       }
-      fillConfigForm(hostingConfig);
-      persistConfig(hostingConfig);
-      alert('Firebase Hosting config loaded and saved. Reloading page...');
-      window.location.reload();
     });
 
     testConfigBtn?.addEventListener('click', async () => {
+      setConfigStatus('Testing entered Firebase config...', 'info');
       await testConfig(readConfigForm());
     });
 
