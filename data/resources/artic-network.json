@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "artic-network",
   "title": "ARTIC network",
   "organization": "ARTIC network",

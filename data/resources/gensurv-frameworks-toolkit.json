@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "gensurv-frameworks-toolkit",
   "title": "Public Health / Illumina (Marketplace)",
   "organization": "Genomic-based Public Health Surveillance Approaches and Methods (Illumina)",

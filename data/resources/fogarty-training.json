@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "fogarty-training",
   "title": "Fogarty Genomic Surveillance Training",
   "organization": "NIH Fogarty International Center",

@@ -1,11 +1,12 @@
 {
   "name": "aphl-gse-resources",
   "private": true,
-  "description": "APHL genomic epidemiology resources — static site and curation tooling",
+  "description": "APHL genomic epidemiology resources \u2014 static site and curation tooling",
   "scripts": {
-    "build": "node scripts/build-data.mjs",
-    "check": "node scripts/build-data.mjs --check",
-    "validate": "node scripts/build-data.mjs --check && node scripts/validate-resources.mjs",
+    "build": "node scripts/build-data.mjs && node scripts/build-schema.mjs",
+    "check": "node scripts/build-data.mjs --check && node scripts/build-schema.mjs --check",
+    "validate": "npm run check && node scripts/validate-resources.mjs",
+    "new": "node scripts/new-resource.mjs",
     "test": "npm run validate"
   }
 }

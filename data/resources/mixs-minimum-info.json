@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "mixs-minimum-info",
   "title": "MIxS: Minimum Information about any (x) Sequence",
   "organization": "Genomic Standards Consortium",

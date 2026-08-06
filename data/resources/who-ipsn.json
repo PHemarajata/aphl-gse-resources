@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "who-ipsn",
   "title": "International Pathogen Surveillance Network (IPSN)",
   "organization": "World Health Organization (WHO)",

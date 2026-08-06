@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "africapgi-detect",
   "title": "Africa PGI Integrated Genomic Surveillance for Outbreak Detection (DETECT)",
   "organization": "Africa CDC / APHF",

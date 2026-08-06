@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "asiapgi-surveystatus",
   "title": "Pathogen genomic surveillance status among lower resource settings in Asia",
   "organization": "Getchell et al. / Nature Microbiology",

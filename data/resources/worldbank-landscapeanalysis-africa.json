@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "worldbank-landscapeanalysis-africa",
   "title": "Landscape analysis of networks supporting genomic surveillance (Africa)",
   "organization": "World Bank / African partners",

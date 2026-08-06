@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "africa-datasharing-principles",
   "title": "Attributes & Principles for Genomic Data-Sharing Platforms supporting Surveillance (WHO consultation)",
   "organization": "WHO / Genomics & Analytics Unit / Emergency Zoonotic Diseases Unit",

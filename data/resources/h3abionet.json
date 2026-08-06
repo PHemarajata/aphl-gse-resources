@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "h3abionet",
   "title": "H3ABioNet",
   "organization": "H3ABioNet",

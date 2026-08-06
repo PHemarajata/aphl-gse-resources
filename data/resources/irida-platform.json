@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "irida-platform",
   "title": "IRIDA: Integrated Rapid Infectious Disease Analysis",
   "organization": "IRIDA Consortium",

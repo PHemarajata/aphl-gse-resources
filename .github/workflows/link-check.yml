@@ -1,0 +1,75 @@
+name: Link check
+
+# The one maintenance burden nothing else covers. A link library decays
+# quietly: nobody notices a dead URL until someone clicks it.
+#
+# Runs weekly and on demand. Opens (or updates) a single issue listing
+# anything broken, rather than failing a build nobody is watching.
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'   # 07:00 UTC Mondays
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    name: Check every resource URL
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Fetch every URL
+        id: check
+        run: node scripts/check-links.mjs
+        continue-on-error: true
+
+      - name: Open or update the report issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            if (!fs.existsSync('link-report.md')) {
+              core.info('No report produced — nothing to do.');
+              return;
+            }
+            const body = fs.readFileSync('link-report.md', 'utf8');
+            const title = 'Link check: broken or moved resource URLs';
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'link-check'
+            });
+            const clean = body.includes('All links resolved');
+            if (clean) {
+              for (const i of existing.data) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: i.number, body: 'All links resolved on the latest run. Closing.'
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: i.number, state: 'closed'
+                });
+              }
+              core.info('All links fine.');
+              return;
+            }
+            if (existing.data.length) {
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: existing.data[0].number, body
+              });
+              core.info(`Updated issue #${existing.data[0].number}`);
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title, body, labels: ['link-check']
+              });
+              core.info('Opened a new issue.');
+            }

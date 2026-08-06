@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "usher-tool",
   "title": "UShER: Ultrafast Sample placement on Existing tRees",
   "organization": "UCSC / UShER Team",

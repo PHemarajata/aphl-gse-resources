@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "iso-15189-guidance",
   "title": "ISO 15189 for Pathogen Genomics Implementation",
   "organization": "Microbial Genomics Journal",

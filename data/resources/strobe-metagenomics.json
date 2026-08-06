@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "strobe-metagenomics",
   "title": "STROBE-metagenomics: reporting guideline for metagenomic sequencing studies",
   "organization": "The Lancet Infectious Diseases (Bharucha et al.)",

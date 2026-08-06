@@ -39,16 +39,15 @@ The admin panel is deliberately absent from the public site. A copy-then-delete
 assembly is one typo away from shipping it, so the workflow asserts afterwards
 that none of those files reached the output and fails the build if any did.
 
-## Running the admin panel
+## Curating
 
-Open `public/admin.html` from your own clone. It already writes files directly
-through the browser's directory picker (`showDirectoryPicker`), so it works
-against a working copy with no hosting and no login.
+There is no admin panel. It was retired because it wrote
+`public/resources-data.js` directly and knew nothing about `data/`, so any edit
+made through it was either rejected by CI or silently destroyed by the next
+build. See `CONTRIBUTING.md` for how curation works now.
 
-Keeping it off the public internet removes the Firebase Auth surface entirely.
-The AI intake endpoints still live on Firebase and still authenticate against
-the Firebase project — see `ADMIN-AUTH.md`, and note the environment variables
-there still need setting.
+The removals above are therefore normally no-ops, kept as a safety net in case a
+browser editor is ever reintroduced under `public/`.
 
 ## Firebase
 

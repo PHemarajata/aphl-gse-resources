@@ -1,0 +1,78 @@
+name: Draft a resource record
+
+# Successor to the Firebase categorizeResource function.
+#
+# Give it a URL; it fetches the page, drafts a record against the current
+# taxonomy, and opens a pull request. The draft becomes a reviewable artifact
+# rather than something applied invisibly in one curator's browser session.
+#
+# Nothing here writes to main. A human reviews the PR like any other.
+#
+# Requires an OPENAI_API_KEY repository secret. Without it the job stops with
+# a clear message rather than failing obscurely.
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'URL of the resource to draft'
+        required: true
+      id:
+        description: 'Record id (kebab-case). Leave blank to derive one from the title.'
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  draft:
+    name: Draft and open a pull request
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check the API key is configured
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "::error::No OPENAI_API_KEY repository secret is set."
+            echo "Add one under Settings → Secrets and variables → Actions, or draft the record by hand with: npm run new -- <id>"
+            exit 1
+          fi
+
+      - name: Draft the record
+        id: draft
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RESOURCE_URL: ${{ inputs.url }}
+          RESOURCE_ID: ${{ inputs.id }}
+        run: node scripts/draft-resource.mjs
+
+      - name: Rebuild and validate
+        run: npm run validate
+
+      - name: Open a pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NEW_ID: ${{ steps.draft.outputs.id }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          branch="ai-draft/$NEW_ID"
+          git checkout -b "$branch"
+          git add data/ public/resources-data.js
+          git commit -m "draft: $NEW_ID (machine-drafted, needs review)
+
+          Drafted from ${{ inputs.url }} by .github/workflows/ai-draft.yml.
+          Every field is a suggestion. The record is marked validated: false and
+          must be checked against the source before merging."
+          git push -u origin "$branch"
+          gh pr create \
+            --title "Draft resource: $NEW_ID" \
+            --body "$(cat pr-body.md)" \
+            --label "ai-draft"

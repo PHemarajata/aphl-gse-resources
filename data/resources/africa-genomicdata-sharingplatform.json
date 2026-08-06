@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "africa-genomicdata-sharingplatform",
   "title": "A pan-African pathogen genomics data sharing platform (trusted archive)",
   "organization": "Christoffels et al.",

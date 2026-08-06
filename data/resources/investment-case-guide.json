@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "investment-case-guide",
   "title": "National Investment Case Development",
   "organization": "Multiple Organizations",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "mpox-training-sea-2025",
   "title": "Strengthening Mpox genomic surveillance: Regional training workshop concludes in Thailand",
   "organization": "WHO SE Asia / Thailand Ministry of Public Health / Asia PGI / ARTIC Network / others",

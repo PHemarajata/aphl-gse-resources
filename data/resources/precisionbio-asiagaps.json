@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "precisionbio-asiagaps",
   "title": "Precision Medicine Gaps & Bioinformatics Capacity in Asia",
   "organization": "Phanthunane et al.",

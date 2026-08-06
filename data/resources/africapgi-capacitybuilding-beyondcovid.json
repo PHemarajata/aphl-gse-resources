@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "africapgi-capacitybuilding-beyondcovid",
   "title": "Building Pathogen Genomic Sequencing Capacity in Africa (CERI/ KRISP fellowship)",
   "organization": "Agboli et al. / Africa PGI / University of KwaZulu-Natal etc.",

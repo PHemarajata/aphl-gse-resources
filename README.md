@@ -147,8 +147,6 @@ Before committing or deploying:
 - [ ] Syntax checks pass for changed JavaScript files, for example:
 
   ```bash
-  node --check public/admin.js
-  node --check public/admin-auth.js
   node --check functions/index.js
   ```
 

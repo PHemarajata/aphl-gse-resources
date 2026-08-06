@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "cov-lineages-pangolin",
   "title": "Pangolin (Phylogenetic Assignment of Named Global Outbreak Lineages)",
   "organization": "Pango team (cov-lineages.org)",

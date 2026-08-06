@@ -4,7 +4,8 @@ name: Validate
 #
 # Two gates, both cheap:
 #   1. the committed public/resources-data.js matches what data/ produces
-#   2. every record validates against the taxonomy in public/taxonomy.js
+#   2. data/resource.schema.json matches the taxonomy it is generated from
+#   3. every record validates against the taxonomy in public/taxonomy.js
 #
 # No `npm install` step: the build and validator are deliberately
 # zero-dependency, so this runs in a few seconds.
@@ -34,6 +35,12 @@ jobs:
       # Catches both a hand-edit of the generated file and a forgotten rebuild.
       - name: Built data file is in sync with data/
         run: node scripts/build-data.mjs --check
+
+      # The record schema is generated from the taxonomy. If someone adds a
+      # vocabulary value without regenerating, curators' editors would keep
+      # flagging the new value as invalid.
+      - name: Record schema is in sync with the taxonomy
+        run: node scripts/build-schema.mjs --check
 
       - name: Resources validate against the taxonomy
         run: node scripts/validate-resources.mjs

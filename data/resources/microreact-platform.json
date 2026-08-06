@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "microreact-platform",
   "title": "Microreact Phylogeographic Visualization",
   "organization": "Centre for Genomic Pathogen Surveillance",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "gensurv-genvirusesframework",
   "title": "Genomic Surveillance for Viruses of Public Health Importance",
   "organization": "Expert Review of Anti-infective Therapy",

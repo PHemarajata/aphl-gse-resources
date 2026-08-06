@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "sea-eid-capabilities",
   "title": "Infectious Disease Detection Capabilities of Southeast Asian Countries: A Landscape Analysis of Surveillance Systems and Stakeholders",
   "organization": "Vital Strategies",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "gisaid-training",
   "title": "GISAID Training Workshops",
   "organization": "GISAID Initiative",

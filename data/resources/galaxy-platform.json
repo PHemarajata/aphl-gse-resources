@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "galaxy-platform",
   "title": "Galaxy Project Training & Workflows",
   "organization": "Galaxy Project Consortium",

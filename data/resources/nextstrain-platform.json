@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "nextstrain-platform",
   "title": "Nextstrain Real-time Phylogenetic Platform",
   "organization": "Nextstrain Team",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "minseqe-minimum-info",
   "title": "MINSEQE: Minimum Information about a High-Throughput Sequencing Experiment",
   "organization": "FGED Society / FGED Consortium",

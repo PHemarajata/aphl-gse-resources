@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "aphl-community",
   "title": "APHL Genomic Epidemiology Community",
   "organization": "Association of Public Health Laboratories",

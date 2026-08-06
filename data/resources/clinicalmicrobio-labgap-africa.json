@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "clinicalmicrobio-labgap-africa",
   "title": "Enhancing Clinical Microbiology for Genomic AMR Surveillance in Africa",
   "organization": "Antimicrobial Resistance & Infection Control / African laboratory collaborators",

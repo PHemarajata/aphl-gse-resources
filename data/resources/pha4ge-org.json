@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "pha4ge-org",
   "title": "Public Health Alliance for Genomic Epidemiology (PHA4GE) – Website",
   "organization": "Public Health Alliance for Genomic Epidemiology (PHA4GE)",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "card-database",
   "title": "CARD Antibiotic Resistance Database",
   "organization": "McMaster University",
