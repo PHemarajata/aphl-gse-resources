@@ -1,0 +1,48 @@
+{
+  "id": "pathogengenomics-investmentcase-framework",
+  "title": "National investment case development for pathogen genomics surveillance",
+  "organization": "Khoo et al. / The Lancet Microbe",
+  "description": "Framework article for developing national investment cases for pathogen genomics surveillance, linking public health priorities, system readiness, infrastructure, workforce, and cost-benefit considerations.",
+  "url": "https://www.sciencedirect.com/science/article/pii/S2666979X25000370",
+  "audiences": [
+    "public-health-officials",
+    "policymakers",
+    "lab-leadership",
+    "donors-funders"
+  ],
+  "stages": [
+    "planning-strategy",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "policy-document",
+    "guide-manual",
+    "research-evidence"
+  ],
+  "geography": [
+    "asia",
+    "lmic"
+  ],
+  "topics": [
+    "regulatory-frameworks",
+    "genomic-surveillance",
+    "sustainability",
+    "costing-financing"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Stepwise framework for national investment case development.",
+    "Connects pathogen prioritization with public health actionability and system readiness.",
+    "Highlights infrastructure, workforce, accreditation, quality assurance, and bioinformatics needs.",
+    "Supports financing discussions with governments, donors, and implementing partners."
+  ],
+  "practicalUse": "Use this framework to structure investment proposals, compare sequencing priorities, estimate resource needs, and justify sustainable financing for pathogen genomics surveillance.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Journal article / investment case framework",
+  "legacyTags": [],
+  "validated": false
+}

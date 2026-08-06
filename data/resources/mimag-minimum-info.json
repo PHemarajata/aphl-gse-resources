@@ -1,0 +1,41 @@
+{
+  "id": "mimag-minimum-info",
+  "title": "MIMAG: Minimum Information about a Metagenome-Assembled Genome",
+  "organization": "Genomic Standards Consortium",
+  "description": "Reporting guideline for metagenome-assembled genomes (MAGs), defining metadata and quality metrics including completeness, contamination and strain heterogeneity.",
+  "url": "https://gensc.org/misag-mimag/",
+  "audiences": [
+    "bioinformaticians",
+    "laboratorians"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "metadata-management",
+    "quality-management"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "MAG quality metrics and tiers; Contextual metadata aligned to MIxS; Enables cross-study comparison and repository checks"
+  ],
+  "practicalUse": "Apply MIMAG when assembling MAGs from surveillance datasets to document quality and facilitate reuse.",
+  "relatedResources": [
+    "mixs-minimum-info",
+    "misag-minimum-info"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

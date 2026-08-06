@@ -1,0 +1,50 @@
+{
+  "id": "nextstrain-platform",
+  "title": "Nextstrain Real-time Phylogenetic Platform",
+  "organization": "Nextstrain Team",
+  "description": "Interactive platform for real-time pathogen evolution tracking with maintained analyses for major pathogens and custom dataset capabilities.",
+  "url": "https://nextstrain.org",
+  "audiences": [
+    "epidemiologists",
+    "bioinformaticians"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "interactive-tool"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "pipelines-workflows",
+    "phylogenetics",
+    "visualization"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Real-time phylogenetic analysis",
+    "Interactive visualization",
+    "Maintained pathogen datasets",
+    "Custom analysis capabilities",
+    "Temporal tracking"
+  ],
+  "practicalUse": "Outbreak tracking, phylogenetic analysis, real-time surveillance, data visualization",
+  "relatedResources": [
+    "microreact-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "types: inferred from title/description",
+    "relatedResources removed: phylogenetic-tools",
+    "relatedResources removed: outbreak-analysis"
+  ],
+  "validated": false
+}

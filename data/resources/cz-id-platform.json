@@ -1,0 +1,50 @@
+{
+  "id": "cz-id-platform",
+  "title": "Chan Zuckerberg ID (CZ ID) Platform",
+  "organization": "Chan Zuckerberg Initiative",
+  "description": "Open cloud-based platform for microbial detection with integrated AMR profiling using CARD and RGI databases, free for academic and public health use.",
+  "url": "https://czid.org",
+  "audiences": [
+    "bioinformaticians",
+    "laboratorians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "interactive-tool"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "pipelines-workflows",
+    "amr-surveillance"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Cloud-based analysis platform",
+    "Automated pathogen detection",
+    "AMR profiling integration",
+    "CARD/RGI database access",
+    "Collaborative workspace"
+  ],
+  "practicalUse": "Automated analysis, AMR surveillance, cloud computing, collaborative research",
+  "relatedResources": [
+    "pangia-workflow",
+    "card-database",
+    "galaxy-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "types: inferred from title/description"
+  ],
+  "validated": false
+}

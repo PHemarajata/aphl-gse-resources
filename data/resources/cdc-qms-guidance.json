@@ -1,0 +1,44 @@
+{
+  "id": "cdc-qms-guidance",
+  "title": "CDC Practical QMS Guidance for NGS Labs",
+  "organization": "CDC / Journal of Clinical Microbiology",
+  "description": "Comprehensive Phase 1 implementation guide covering personnel management, equipment protocols, and process management for public health NGS laboratories.",
+  "url": "https://journals.asm.org/doi/10.1128/JCM.00261-19",
+  "audiences": [
+    "laboratorians"
+  ],
+  "stages": [
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "quality-management"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Personnel competency frameworks",
+    "Equipment calibration protocols",
+    "Process validation procedures",
+    "Quality control implementation",
+    "Documentation requirements"
+  ],
+  "practicalUse": "QMS setup, accreditation preparation, quality protocol development",
+  "relatedResources": [
+    "iso-15189-guidance"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "relatedResources removed: lab-accreditation",
+    "relatedResources removed: quality-standards"
+  ],
+  "validated": false
+}

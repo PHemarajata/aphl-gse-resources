@@ -1,0 +1,47 @@
+{
+  "id": "implementation-checklists",
+  "title": "Genomic Surveillance Implementation Checklists",
+  "organization": "Multiple Organizations",
+  "description": "Practical checklists and SOPs for systematic implementation of genomic surveillance systems with stage-specific guidance.",
+  "url": "#",
+  "audiences": [
+    "laboratorians",
+    "policymakers",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "lmic"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "quality-management"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Stage-specific checklists",
+    "Implementation milestones",
+    "Quality checkpoints",
+    "Resource requirements",
+    "Timeline guidance"
+  ],
+  "practicalUse": "Implementation planning, progress tracking, quality assurance, milestone management",
+  "relatedResources": [
+    "tom-implementation",
+    "capacity-assessment",
+    "who-global-strategy"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": false
+}

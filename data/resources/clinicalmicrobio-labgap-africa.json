@@ -1,0 +1,48 @@
+{
+  "id": "clinicalmicrobio-labgap-africa",
+  "title": "Enhancing Clinical Microbiology for Genomic AMR Surveillance in Africa",
+  "organization": "Antimicrobial Resistance & Infection Control / African laboratory collaborators",
+  "description": "Review of clinical microbiology lab gaps in Africa that limit AMR / genomic surveillance: low isolate recovery, access inequity, lack of representativeness, QC etc.",
+  "url": "https://aricjournal.biomedcentral.com/articles/10.1186/s13756-024-01472-8",
+  "audiences": [
+    "laboratorians",
+    "policymakers",
+    "public-health-officials"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "research-evidence"
+  ],
+  "geography": [
+    "global",
+    "africa",
+    "lmic"
+  ],
+  "topics": [
+    "amr-surveillance",
+    "genomic-surveillance",
+    "lab-networking",
+    "quality-management"
+  ],
+  "pathogenFocus": [
+    "amr-bacteria"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Reviews clinical microbiology gaps that limit AMR and genomic surveillance in Africa.",
+    "Highlights isolate recovery, representativeness, quality systems, staffing, and funding barriers.",
+    "Connects microbiology capacity with equitable genomic AMR surveillance.",
+    "Useful for planning laboratory network investments and AMR surveillance strengthening."
+  ],
+  "practicalUse": "Useful to inform policy on lab services funding; to integrate AMR & genomics in national surveillance; for reforms in microbiology lab networks & investment priorities",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Journal review article",
+  "legacyTags": [],
+  "validated": true
+}

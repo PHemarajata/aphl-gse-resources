@@ -1,0 +1,65 @@
+{
+  "id": "cov-lineages-pangolin",
+  "title": "Pangolin (Phylogenetic Assignment of Named Global Outbreak Lineages)",
+  "organization": "Pango team (cov-lineages.org)",
+  "description": "Software and web app for assigning SARS-CoV-2 genomes to Pango lineages; documentation hub with quick reference, installation, usage, output, and tutorial materials. Available as a GPLv3 command-line tool and a web application developed by the Centre for Genomic Pathogen Surveillance. ([cov-lineages.org](https://cov-lineages.org/resources/pangolin.html))",
+  "url": "https://cov-lineages.org/resources/pangolin.html",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "implementation",
+    "operations-scaleup"
+  ],
+  "types": [
+    "guide-manual",
+    "interactive-tool"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "variant-monitoring",
+    "pipelines-workflows",
+    "phylogenetics"
+  ],
+  "pathogenFocus": [
+    "respiratory-pathogens",
+    "viral-genomics"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Assigns most-likely Pango lineage to SARS-CoV-2 query sequences.",
+    "Available as command-line tool (GPL-3.0) and web application.",
+    "Pipeline supports pangoLEARN and UShER inference modes.",
+    "Uses minimap2 and gofasta for alignment; integrates scorpio checks against constellations for VOC/VOI.",
+    "Web app workflow includes visualization link-outs to Microreact."
+  ],
+  "practicalUse": "Use Pangolin to classify SARS-CoV-2 sequences by Pango lineage for genomic surveillance, variant monitoring, and reporting; deploy via CLI in pipelines or via the web app when command-line access is limited.",
+  "relatedResources": [],
+  "lastUpdated": "2026-02-19",
+  "formatDetails": "Web documentation page linking to quick reference, pipeline description, installation, updating, usage, output, and a web app tutorial; CLI licensed GPL-3.0; web app hosted separately.",
+  "sourceNotes": [
+    "Related source found during AI intake: https://pangolin.cog-uk.io",
+    "Related source found during AI intake: https://github.com/cov-lineages/pangolin",
+    "Related source found during AI intake: https://cov-lineages.org/resources/pangolin/pipeline.html",
+    "Related source found during AI intake: https://cov-lineages.org/FAQ.html",
+    "Related source found during AI intake: https://pango.network"
+  ],
+  "legacyTags": [
+    "AI source notes:",
+    "Core description, GPL license, and web app developer from the Pangolin resource page. ([cov-lineages.org](https://cov-lineages.org/resources/pangolin.html))",
+    "Docs index and page structure (installation, updating, usage, output) from the quick reference page. ([cov-lineages.org](https://cov-lineages.org/resources/pangolin/quick_reference.html))",
+    "Pipeline details (minimap2, gofasta, scorpio",
+    "pangoLEARN and UShER inference) from ‘How it works’ page. ([cov-lineages.org](https://cov-lineages.org/resources/pangolin/pipeline.html))",
+    "Web app tutorial confirms remote-server analysis and Microreact link-outs. ([cov-lineages.org](https://cov-lineages.org/resources/pangolin/tutorial.html))",
+    "Latest release date (v4.4 on 2026-02-19) used for lastUpdated from GitHub releases",
+    "may differ from website content update date. ([github.com](https://github.com/cov-lineages/pangolin))",
+    "Contributors and broader Pango context available on site ‘About/How to Cite’ pages (Virus Evolution 2021). ([cov-lineages.org](https://cov-lineages.org/index.html))"
+  ],
+  "validated": true
+}

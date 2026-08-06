@@ -1,0 +1,47 @@
+{
+  "id": "nextclade-tool",
+  "title": "Nextclade",
+  "organization": "Nextstrain",
+  "description": "In-browser and CLI tool for alignment, clade assignment, mutation calling, QC, and phylogenetic placement across multiple pathogens.",
+  "url": "https://clades.nextstrain.org/",
+  "audiences": [
+    "bioinformaticians",
+    "epidemiologists",
+    "laboratorians"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "interactive-tool"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "pipelines-workflows",
+    "quality-management",
+    "phylogenetics"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Sequence QC with actionable flags;Clade assignment and mutation calling;Phylogenetic placement;Exports for downstream tools"
+  ],
+  "practicalUse": "Rapid QC and contextualization of genomes before downstream analysis.",
+  "relatedResources": [
+    "nextstrain-platform",
+    "microreact-platform",
+    "itol-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "types: inferred from title/description"
+  ],
+  "validated": false
+}

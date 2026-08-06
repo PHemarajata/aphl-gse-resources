@@ -1,0 +1,53 @@
+{
+  "id": "africa-pgi-framework",
+  "title": "Africa PGI 2.0 Initiative & Policy Framework",
+  "organization": "Africa CDC",
+  "description": "Continental-scale pathogen genomics initiative with hub network model, NGS Academy training, and five-year policy integration roadmap.",
+  "url": "https://africacdc.org/africa-pathogen-genomics-initiative-africa-pgi/",
+  "audiences": [
+    "policymakers",
+    "laboratorians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual",
+    "policy-document",
+    "training-material"
+  ],
+  "geography": [
+    "africa",
+    "lmic"
+  ],
+  "topics": [
+    "regulatory-frameworks",
+    "workforce-training",
+    "genomic-surveillance",
+    "regional-networks"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Hub network coordination model",
+    "NGS Academy training programs",
+    "Continental data architecture",
+    "Five-year policy roadmap",
+    "Governance frameworks"
+  ],
+  "practicalUse": "Continental coordination, hub participation, policy development, training access",
+  "relatedResources": [
+    "asia-pgi-roadmap",
+    "who-global-strategy"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "relatedResources removed: ngs-training-programs"
+  ],
+  "validated": false
+}

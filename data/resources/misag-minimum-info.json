@@ -1,0 +1,41 @@
+{
+  "id": "misag-minimum-info",
+  "title": "MISAG: Minimum Information about a Single Amplified Genome",
+  "organization": "Genomic Standards Consortium",
+  "description": "Standardized metadata for single-amplified genomes (SAGs), covering assembly quality, completeness, contamination and contextual fields aligned to MIxS.",
+  "url": "https://gensc.org/misag-mimag/",
+  "audiences": [
+    "bioinformaticians",
+    "laboratorians"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "metadata-management",
+    "quality-management"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Quality tiers for SAGs (completeness/contamination); Required contextual metadata aligned to MIxS; Supports repository validation and comparability"
+  ],
+  "practicalUse": "Use MISAG fields when generating or curating SAGs from surveillance samples to ensure comparable quality metadata.",
+  "relatedResources": [
+    "mixs-minimum-info",
+    "mimag-minimum-info"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

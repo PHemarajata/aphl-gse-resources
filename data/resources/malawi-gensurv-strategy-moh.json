@@ -1,0 +1,44 @@
+{
+  "id": "malawi-gensurv-strategy-moh",
+  "title": "Malawi’s 2nd Edition Pathogen Genomic Surveillance Strategy & Implementation Plan",
+  "organization": "Malawi Ministry of Health + Africa CDC / Africa PGI",
+  "description": "Malawi updated its national strategy to integrate multi-pathogen genomic surveillance into existing public health systems; includes a steering committee, advisory group, lab networks, priority pathogens, use cases, monitoring & evaluation.",
+  "url": "https://africacdc.org/news-item/malawi-launches-second-edition-of-pathogen-genomic-surveillance-strategy-and-implementation-plan/",
+  "audiences": [
+    "public-health-officials",
+    "lab-leadership",
+    "epidemiologists",
+    "policymakers"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "policy-document",
+    "guide-manual"
+  ],
+  "geography": [
+    "africa",
+    "lmic",
+    "southern-africa"
+  ],
+  "topics": [
+    "stakeholder-engagement",
+    "regulatory-frameworks",
+    "genomic-surveillance"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Updated strategy with stakeholder structure; commitment to One Health & AMR; clear M&E mechanisms; harmonization with Africa CDC framework"
+  ],
+  "practicalUse": "Helps Malawi and similar countries see a model for revising surveillance strategy; useful template; supports coordination of labs, govt, funders",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

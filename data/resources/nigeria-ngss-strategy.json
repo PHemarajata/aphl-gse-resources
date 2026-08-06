@@ -1,0 +1,53 @@
+{
+  "id": "nigeria-ngss-strategy",
+  "title": "Nigeria National Genomic Surveillance Strategy",
+  "organization": "Nigeria Centre for Disease Control (NCDC) with partners",
+  "description": "National strategy document including stakeholder engagement process, plan for capacity building, sequencing, data reporting, consortium formation.",
+  "url": "https://ncdc.gov.ng/themes/common/docs/protocols/356_1737549534.pdf",
+  "audiences": [
+    "policymakers",
+    "public-health-officials",
+    "lab-leadership"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "policy-document",
+    "guide-manual"
+  ],
+  "geography": [
+    "africa",
+    "lmic",
+    "west-africa"
+  ],
+  "topics": [
+    "stakeholder-engagement",
+    "regulatory-frameworks",
+    "genomic-surveillance",
+    "workforce-training"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Useful for policy makers & stakeholders in Nigeria; capture lessons for other African countries; useful in planning national consortia and stakeholder roles"
+  ],
+  "practicalUse": "",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "topics: Conducts workshops across sectors",
+    "topics: defines roadmap / timeline",
+    "topics: addresses human resources, quality assurance, bioinformatics",
+    "topics: defines consortium structure",
+    "url repaired: audience list stripped from url field",
+    "audiences recovered from corrupted url: public-health-officials, policymakers, lab-leadership",
+    "audiences unmapped: Academia",
+    "audiences unmapped: Private sector"
+  ],
+  "validated": true
+}

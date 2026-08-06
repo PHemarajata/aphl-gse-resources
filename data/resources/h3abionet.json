@@ -1,0 +1,56 @@
+{
+  "id": "h3abionet",
+  "title": "H3ABioNet",
+  "organization": "H3ABioNet",
+  "description": "H3ABioNet is a Pan African bioinformatics network that supports genomics data analysis capacity across Africa. The site provides training, tools, workflows, technical guidance and data standards resources.",
+  "url": "https://h3abionet.org/",
+  "audiences": [
+    "bioinformaticians",
+    "trainers-educators",
+    "laboratorians",
+    "regional-international-orgs"
+  ],
+  "stages": [
+    "readiness-assessment",
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "training-material",
+    "guide-manual",
+    "interactive-tool"
+  ],
+  "geography": [
+    "africa",
+    "lmic"
+  ],
+  "topics": [
+    "workforce-training",
+    "curriculum-development",
+    "pipelines-workflows",
+    "regional-networks",
+    "technology-transfer"
+  ],
+  "pathogenFocus": [
+    "bacterial-genomics",
+    "viral-genomics",
+    "emerging-pathogens"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Bioinformatics training resources",
+    "Tools and workflow links",
+    "Data management and FAIR resources",
+    "Africa-focused genomics capacity building"
+  ],
+  "practicalUse": "Public health genomics programs can use this resource to identify training materials, workflows and technical guidance for building or strengthening bioinformatics capacity, especially in African settings.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Website with training resources, bioinformatics tools, workflows, technical guidelines and data standards materials.",
+  "legacyTags": [
+    "Some content is broader bioinformatics and human genomics, not exclusively pathogen genomics."
+  ],
+  "validated": true
+}

@@ -1,0 +1,49 @@
+{
+  "id": "asia-pgi-roadmap",
+  "title": "Asia PGI Roadmap for Pathogen Genomics",
+  "organization": "Asia Pathogen Genomics Initiative / Duke-NUS",
+  "description": "Multi-country assessment with landscape analysis tool, country profiles, prioritized pathogen lists, and financing recommendations for Asian countries.",
+  "url": "https://www.duke-nus.edu.sg/docs/librariesprovider24/default-document-library/roadmap_21aug2024.pdf",
+  "audiences": [
+    "policymakers",
+    "laboratorians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "asia",
+    "lmic"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "outbreak-detection",
+    "surveillance-design"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Country-specific profiles",
+    "Landscape assessment tool (Annex 2)",
+    "Pathogen prioritization matrix",
+    "Financing recommendations",
+    "Decision tree for system design"
+  ],
+  "practicalUse": "Regional planning, pathogen prioritization, capacity assessment, hub network participation",
+  "relatedResources": [
+    "africa-pgi-framework",
+    "who-global-strategy",
+    "pathogen-prioritization"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": false
+}

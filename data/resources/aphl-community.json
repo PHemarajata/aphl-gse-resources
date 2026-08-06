@@ -1,0 +1,47 @@
+{
+  "id": "aphl-community",
+  "title": "APHL Genomic Epidemiology Community",
+  "organization": "Association of Public Health Laboratories",
+  "description": "Association of Public Health Laboratories community of practice with training programs, implementation guides, and professional networking.",
+  "url": "https://www.aphl.org/",
+  "audiences": [
+    "laboratorians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "training-material"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "workforce-training",
+    "regional-networks"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Professional networking",
+    "Communities of practice",
+    "Training programs",
+    "Implementation support",
+    "Best practice sharing"
+  ],
+  "practicalUse": "Professional development, networking, training access, best practice sharing",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "relatedResources removed: professional-networks",
+    "relatedResources removed: training-programs",
+    "relatedResources removed: implementation-support"
+  ],
+  "validated": false
+}

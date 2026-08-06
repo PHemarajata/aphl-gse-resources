@@ -1,0 +1,48 @@
+{
+  "id": "sustainability-planning",
+  "title": "Sustainability Planning Frameworks",
+  "organization": "Multiple Organizations",
+  "description": "Comprehensive frameworks for ensuring long-term sustainability of genomic surveillance programs with local funding strategies.",
+  "url": "#",
+  "audiences": [
+    "policymakers",
+    "laboratorians"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability",
+    "planning-strategy"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "lmic"
+  ],
+  "topics": [
+    "sustainability",
+    "costing-financing"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Sustainability assessment tools",
+    "Local funding strategies",
+    "Capacity retention frameworks",
+    "Health system integration",
+    "Long-term planning"
+  ],
+  "practicalUse": "Long-term planning, funding sustainability, capacity retention, system integration",
+  "relatedResources": [
+    "investment-case-guide"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "relatedResources removed: capacity-building",
+    "relatedResources removed: policy-development"
+  ],
+  "validated": false
+}

@@ -1,0 +1,44 @@
+{
+  "id": "who-considerations-nationalgsstrategy",
+  "title": "Considerations for developing a national genomic surveillance strategy or action plan for pathogens with pandemic and epidemic potential",
+  "organization": "WHO",
+  "description": "Global technical document guiding national and subnational stakeholders through steps/considerations for creating their own genomic surveillance strategy / action plan.",
+  "url": "https://www.who.int/publications/i/item/9789240076563",
+  "audiences": [
+    "laboratorians",
+    "lab-leadership",
+    "policymakers",
+    "health-ministry-officials",
+    "one-health-partners"
+  ],
+  "stages": [
+    "planning-strategy",
+    "readiness-assessment"
+  ],
+  "types": [
+    "policy-document",
+    "guide-manual"
+  ],
+  "geography": [
+    "global",
+    "lmic"
+  ],
+  "topics": [
+    "stakeholder-engagement",
+    "regulatory-frameworks",
+    "genomic-surveillance"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Covers stakeholder engagement; capacity assessment; financing & sustainability; sample & data flows; regulatory / ethical issues"
+  ],
+  "practicalUse": "Useful for policy makers drafting national genomic surveillance strategy; gives structured checklist / roadmap; helps ensure strategy is comprehensive and actionable",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

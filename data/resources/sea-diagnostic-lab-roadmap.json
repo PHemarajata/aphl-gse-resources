@@ -1,0 +1,47 @@
+{
+  "id": "sea-diagnostic-lab-roadmap",
+  "title": "South-East Asia Regional Roadmap for Diagnostic Preparedness, Integrated Laboratory Networking and Genomic Surveillance (2023-2027)",
+  "organization": "WHO South-East Asia Region",
+  "description": "WHO regional roadmap for strengthening diagnostic preparedness, integrated laboratory networks, and genomic surveillance across South-East Asia for epidemic and pandemic preparedness.",
+  "url": "https://iris.who.int/bitstream/handle/10665/363333/9789290209942-eng.pdf?sequence=1",
+  "audiences": [
+    "lab-leadership",
+    "policymakers",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy"
+  ],
+  "types": [
+    "policy-document",
+    "guide-manual"
+  ],
+  "geography": [
+    "southeast-asia",
+    "asia",
+    "lmic"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "lab-networking",
+    "diagnostics-integration",
+    "workforce-training",
+    "sustainability"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Roadmap for diagnostic preparedness and integrated laboratory networking.",
+    "Connects genomic surveillance with emergency preparedness and response.",
+    "Covers workforce, referral systems, regulatory issues, financing, and sustainability.",
+    "Designed for WHO South-East Asia Member States and regional partners."
+  ],
+  "practicalUse": "Use this roadmap to align national laboratory and genomic surveillance plans with regional priorities, identify system-strengthening actions, and guide partner coordination.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "PDF roadmap",
+  "legacyTags": [],
+  "validated": false
+}

@@ -1,0 +1,46 @@
+{
+  "id": "mpox-training-sea-2025",
+  "title": "Strengthening Mpox genomic surveillance: Regional training workshop concludes in Thailand",
+  "organization": "WHO SE Asia / Thailand Ministry of Public Health / Asia PGI / ARTIC Network / others",
+  "description": "A regional hands-on training workshop in Nonthaburi (Thailand) for participants from across WHO SE Asia; sequencing, bioinformatics, data sharing, outbreak preparedness for Mpox.",
+  "url": "https://www.who.int/southeastasia/news/detail/14-03-2025-strengng-mpox-genomic-survnws-th",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "epidemiologists",
+    "lab-leadership"
+  ],
+  "stages": [
+    "implementation"
+  ],
+  "types": [
+    "training-material"
+  ],
+  "geography": [
+    "asia",
+    "southeast-asia"
+  ],
+  "topics": [
+    "workforce-training",
+    "outbreak-detection",
+    "regional-networks"
+  ],
+  "pathogenFocus": [
+    "emerging-pathogens",
+    "viral-genomics"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Practical workshop; hands-on with sequencing technologies (Illumina, Nanopore), pipelines; data sharing discussions; networking across countries"
+  ],
+  "practicalUse": "Useful for labs in SE Asia to build capacity for emerging pathogens; useful model for recurring training; can seed networks",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: Tool"
+  ],
+  "validated": true
+}

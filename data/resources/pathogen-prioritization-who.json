@@ -1,0 +1,45 @@
+{
+  "id": "pathogen-prioritization-who",
+  "title": "WHO Pathogens Prioritization Framework (R&D Blueprint)",
+  "organization": "World Health Organization",
+  "description": "Scientific framework and 2024 update outlining global pathogen prioritization process for epidemic and pandemic preparedness.",
+  "url": "https://www.who.int/publications/m/item/pathogens-prioritization-a-scientific-framework-for-epidemic-and-pandemic-research-preparedness",
+  "audiences": [
+    "policymakers",
+    "epidemiologists",
+    "laboratorians"
+  ],
+  "stages": [
+    "planning-strategy"
+  ],
+  "types": [
+    "guide-manual",
+    "policy-document"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "regulatory-frameworks",
+    "outbreak-detection",
+    "genomic-surveillance",
+    "surveillance-design"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Evidence-based prioritization;Global expert consensus process;Inputs for national lists"
+  ],
+  "practicalUse": "Inform national pathogen prioritization for genomic surveillance.",
+  "relatedResources": [
+    "asia-pgi-roadmap",
+    "africa-pgi-framework",
+    "who-global-strategy"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": false
+}

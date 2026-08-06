@@ -1,0 +1,48 @@
+{
+  "id": "galaxy-training",
+  "title": "Galaxy Training Network",
+  "organization": "Galaxy Training Network",
+  "description": "Comprehensive bioinformatics training with genomic epidemiology modules, self-paced learning materials, and hands-on tutorials.",
+  "url": "https://training.galaxyproject.org",
+  "audiences": [
+    "bioinformaticians",
+    "laboratorians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "training-material"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "workforce-training",
+    "pipelines-workflows"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Self-paced learning modules",
+    "Hands-on tutorials",
+    "Genomic epidemiology workflows",
+    "Multi-level difficulty",
+    "Community support"
+  ],
+  "practicalUse": "Skill development, workflow learning, capacity building, training programs",
+  "relatedResources": [
+    "galaxy-platform",
+    "gisaid-training"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "relatedResources removed: ngs-training-programs"
+  ],
+  "validated": false
+}

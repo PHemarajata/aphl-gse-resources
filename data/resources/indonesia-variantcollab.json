@@ -1,0 +1,42 @@
+{
+  "id": "indonesia-variantcollab",
+  "title": "Indonesia SARS-CoV-2 Variant Surveillance Collaboration",
+  "organization": "M Chambers et al. / Indonesia MOH & partners",
+  "description": "A collaboration to assist Indonesia’s MOH and local health offices in laboratory diagnosis, genomic surveillance of SARS-CoV-2, and variant monitoring; includes guidance and capacity building.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11252647/",
+  "audiences": [
+    "laboratorians",
+    "epidemiologists",
+    "lab-leadership"
+  ],
+  "stages": [
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "asia",
+    "southeast-asia"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "variant-monitoring",
+    "diagnostics-integration"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Country-level case of surveillance scaling; includes data flow, sample transport & lab network issues; emphasizes diagnostics + genomic sequencing integration"
+  ],
+  "practicalUse": "Useful for other SE Asian countries scaling variant surveillance; offers lessons in logistics, capacity, variation detection",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: Tool"
+  ],
+  "validated": true
+}

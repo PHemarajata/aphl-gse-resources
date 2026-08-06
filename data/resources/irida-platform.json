@@ -1,0 +1,45 @@
+{
+  "id": "irida-platform",
+  "title": "IRIDA: Integrated Rapid Infectious Disease Analysis",
+  "organization": "IRIDA Consortium",
+  "description": "Open-source web platform for real-time infectious disease analysis with workflows, project management, and REST API.",
+  "url": "https://irida.ca/",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "interactive-tool"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "pipelines-workflows"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Project and sample management;In-browser QC and visualization;Workflow execution;REST API and integrations"
+  ],
+  "practicalUse": "Operate an on-prem/public-health analysis portal for WGS data.",
+  "relatedResources": [
+    "galaxy-platform",
+    "nextstrain-platform",
+    "microreact-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "types: inferred from title/description"
+  ],
+  "validated": false
+}

@@ -1,0 +1,52 @@
+{
+  "id": "pha4ge-org",
+  "title": "Public Health Alliance for Genomic Epidemiology (PHA4GE) – Website",
+  "organization": "Public Health Alliance for Genomic Epidemiology (PHA4GE)",
+  "description": "PHA4GE is a global partnership advancing open, reproducible, and accessible genomics and bioinformatics for public health, developing shared standards, guidance, and best practices to strengthen surveillance and outbreak response. ([pha4ge.org](https://pha4ge.org/))",
+  "url": "https://pha4ge.org/",
+  "audiences": [
+    "laboratorians",
+    "lab-leadership",
+    "bioinformaticians",
+    "public-health-officials"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "framework-strategy",
+    "guide-manual"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "pipelines-workflows",
+    "data-sharing-interoperability",
+    "data-governance",
+    "ethics-legal",
+    "workforce-training"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Open standards and guidance for public health bioinformatics and genomic epidemiology.",
+    "Working groups on data structures, pipelines/visualization, ethics & data sharing, training, and repositories.",
+    "Driver projects applying standards across priority areas (e.g., AMR, wastewater, mpox, cholera).",
+    "Links to training portal and recurring webinar series."
+  ],
+  "practicalUse": "Use this portal to adopt PHA4GE standards, access implementation guidance and tools, and engage with a global community of practice.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Organizational web portal linking to standards, guidance documents, working groups, projects, and training resources.",
+  "legacyTags": [
+    "AI source notes:",
+    "Summary based on the PHA4GE homepage",
+    "accessed April 25, 2026. ([pha4ge.org](https://pha4ge.org/))"
+  ],
+  "validated": true
+}

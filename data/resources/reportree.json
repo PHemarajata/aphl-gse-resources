@@ -1,0 +1,52 @@
+{
+  "id": "reportree",
+  "title": "ReporTree",
+  "organization": "INSA Pathogenomics",
+  "description": "ReporTree is a surveillance-oriented tool for identifying and characterizing pathogen genetic clusters. It links genomic clustering results with epidemiological metadata to support reproducible surveillance reporting.",
+  "url": "https://github.com/insapathogenomics/ReporTree",
+  "audiences": [
+    "bioinformaticians",
+    "epidemiologists",
+    "laboratorians"
+  ],
+  "stages": [
+    "implementation",
+    "operations-scaleup",
+    "evaluation-learning"
+  ],
+  "types": [
+    "interactive-tool"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "outbreak-detection",
+    "pipelines-workflows",
+    "phylogenetics",
+    "epi-integration",
+    "reporting"
+  ],
+  "pathogenFocus": [
+    "bacterial-genomics",
+    "viral-genomics",
+    "emerging-pathogens"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Genetic cluster detection",
+    "Epidemiological metadata integration",
+    "Surveillance-oriented reports",
+    "Reproducible workflow support"
+  ],
+  "practicalUse": "Public health genomics users can use ReporTree to detect clusters from pathogen genomic data, summarize them with epidemiological metadata and produce standardized outputs for surveillance and outbreak review.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "GitHub repository for an open-source pathogen genomic surveillance pipeline.",
+  "legacyTags": [
+    "Classified as interactive-tool because the controlled taxonomy does not include software repository or bioinformatics pipeline."
+  ],
+  "validated": true
+}

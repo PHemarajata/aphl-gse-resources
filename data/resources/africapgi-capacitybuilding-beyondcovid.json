@@ -1,0 +1,45 @@
+{
+  "id": "africapgi-capacitybuilding-beyondcovid",
+  "title": "Building Pathogen Genomic Sequencing Capacity in Africa (CERI/ KRISP fellowship)",
+  "organization": "Agboli et al. / Africa PGI / University of KwaZulu-Natal etc.",
+  "description": "Fellowship & training programme describing how Africa is supporting ongoing sequencing even as COVID-19 fades; focuses on skills transfer, sustainable funding, and keeping up with emerging pathogens.",
+  "url": "https://doi.org/10.3390/tropicalmed10040090",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "lab-leadership",
+    "trainers-educators"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "training-material",
+    "guide-manual"
+  ],
+  "geography": [
+    "africa",
+    "lmic"
+  ],
+  "topics": [
+    "workforce-training",
+    "outbreak-detection",
+    "sustainability"
+  ],
+  "pathogenFocus": [
+    "emerging-pathogens"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Hands-on training; fellowships; mentoring; infrastructure support; continuous monitoring of sequence evolution"
+  ],
+  "practicalUse": "Useful for PHLs (public health labs) wanting to retain capacity; helps plan training curricula; informs funders of long-term investment needs",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

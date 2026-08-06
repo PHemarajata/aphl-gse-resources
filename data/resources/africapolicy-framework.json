@@ -1,0 +1,55 @@
+{
+  "id": "africapolicy-framework",
+  "title": "African Pathogen Genomic Surveillance Policy Framework",
+  "organization": "Africa CDC / AU Member States",
+  "description": "A policy framework intended to guide AU Member States in developing national pathogen genomic surveillance strategies: vision & guiding principles; priority areas; roadmap for implementation over ~5 years.",
+  "url": "https://africacdc.org/download/pathogen-genomic-surveillance-policy-framework/",
+  "audiences": [
+    "laboratorians",
+    "policymakers",
+    "epidemiologists",
+    "lab-leadership",
+    "donors-funders"
+  ],
+  "stages": [
+    "planning-strategy",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "policy-document",
+    "guide-manual"
+  ],
+  "geography": [
+    "africa",
+    "lmic"
+  ],
+  "topics": [
+    "regulatory-frameworks",
+    "genomic-surveillance",
+    "sustainability",
+    "regional-networks"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Priority pathogens; cooperation among states; integration into public health systems; sustainable financing; context-tailored action items",
+    "Helps governments draft national/genomic surveillance strategies; align funding; coordinate regional cooperation; justify investment in genomics"
+  ],
+  "practicalUse": "Aids countries in drafting or refining their national policies/strategies; helps set roadmaps; useful for advocacy & budgeting",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "topics: Includes priority actions",
+    "topics: public health & clinical integration",
+    "topics: multi-country context",
+    "topics: contextualization for different capacity levels",
+    "url repaired: audience list stripped from url field",
+    "audiences recovered from corrupted url: policymakers, lab-leadership, epidemiologists, donors-funders",
+    "merged duplicate record: africa-pgi-policyframework",
+    "needs re-validation after merge"
+  ],
+  "validated": false
+}

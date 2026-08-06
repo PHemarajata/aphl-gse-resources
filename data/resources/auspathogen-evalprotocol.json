@@ -1,0 +1,46 @@
+{
+  "id": "auspathogen-evalprotocol",
+  "title": "Enhancing public health infectious disease response through the Australian Pathogen Genomics program (AusPathoGen): evaluation protocol",
+  "organization": "Ferdinand et al. / Frontiers in Public Health",
+  "description": "Evaluation protocol for the Australian Pathogen Genomics program, describing methods to assess the public health utility, implementation, costs, and decision-making value of whole genome sequencing.",
+  "url": "https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2025.1587112/full",
+  "audiences": [
+    "epidemiologists",
+    "lab-leadership",
+    "bioinformaticians"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "research-evidence",
+    "guide-manual"
+  ],
+  "geography": [
+    "global",
+    "high-income",
+    "oceania-pacific"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "monitoring-evaluation",
+    "costing-financing"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Mixed-methods evaluation protocol for a national pathogen genomics program.",
+    "Includes situation assessment, case studies, expert elicitation, and economic evaluation.",
+    "Focuses on utility of genomics for public health decision-making.",
+    "Can inform evaluation designs for other genomic surveillance programs."
+  ],
+  "practicalUse": "Use this protocol as a model for evaluating genomic surveillance programs, including utility, implementation barriers, costs, and impact on public health response.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Journal article / evaluation protocol",
+  "legacyTags": [],
+  "validated": false
+}

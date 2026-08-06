@@ -1,0 +1,48 @@
+{
+  "id": "gisaid-training",
+  "title": "GISAID Training Workshops",
+  "organization": "GISAID Initiative",
+  "description": "Practical bioinformatics training workshops focusing on phylogenetic analysis, data submission protocols, and surveillance applications.",
+  "url": "https://gisaid.org/events/training-workshops/",
+  "audiences": [
+    "bioinformaticians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "implementation"
+  ],
+  "types": [
+    "training-material"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "workforce-training",
+    "pipelines-workflows",
+    "data-sharing-interoperability",
+    "phylogenetics"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Phylogenetic analysis training",
+    "Data submission protocols",
+    "Surveillance applications",
+    "Hands-on workshops",
+    "Global accessibility"
+  ],
+  "practicalUse": "Phylogenetic skills, data sharing, surveillance training, capacity building",
+  "relatedResources": [
+    "gisaid-platform",
+    "galaxy-training"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "relatedResources removed: phylogenetic-tools"
+  ],
+  "validated": false
+}
