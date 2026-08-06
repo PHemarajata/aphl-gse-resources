@@ -1,0 +1,58 @@
+name: Validate
+
+# Runs on every pull request and on pushes to main.
+#
+# Two gates, both cheap:
+#   1. the committed public/resources-data.js matches what data/ produces
+#   2. every record validates against the taxonomy in public/taxonomy.js
+#
+# No `npm install` step: the build and validator are deliberately
+# zero-dependency, so this runs in a few seconds.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Data build and validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Catches both a hand-edit of the generated file and a forgotten rebuild.
+      - name: Built data file is in sync with data/
+        run: node scripts/build-data.mjs --check
+
+      - name: Resources validate against the taxonomy
+        run: node scripts/validate-resources.mjs
+
+      # Put the human-readable validation summary straight into the PR's
+      # checks tab, so a reviewer sees the result without opening logs.
+      - name: Publish validation summary
+        if: always()
+        run: |
+          if [ -f validation-reports/resource-validation-summary.md ]; then
+            cat validation-reports/resource-validation-summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'No validation summary was produced — the build step probably failed first.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload validation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-reports
+          path: validation-reports/
+          if-no-files-found: warn
