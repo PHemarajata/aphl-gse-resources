@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "wastewaterearlydetection-asia",
   "title": "Wastewater Surveillance for Early Pathogen Detection in Asia",
   "organization": "Duke-NUS et al. / Pang et al.",

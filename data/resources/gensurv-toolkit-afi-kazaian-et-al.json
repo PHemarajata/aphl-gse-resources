@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "gensurv-toolkit-afi-kazaian-et-al",
   "title": "Toolkit for Planning & Implementing Acute Febrile Illness Surveillance",
   "organization": "Kazaian et al.",

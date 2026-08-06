@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "aslm-learning-management",
   "title": "ASLM Learning Management",
   "organization": "African Society for Laboratory Medicine",

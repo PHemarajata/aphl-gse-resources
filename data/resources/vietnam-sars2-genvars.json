@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "vietnam-sars2-genvars",
   "title": "SARS-CoV-2 genomic surveillance in southern Vietnam (2020-2021): Tracking variant evolution and public health impact in a limited-resource setting",
   "organization": "Gladkikh et al. / Vietnam MoH / Pasteur Institute etc.",

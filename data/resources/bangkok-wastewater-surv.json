@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "bangkok-wastewater-surv",
   "title": "Multi-scale wastewater surveillance at a Bangkok tertiary hospital",
   "organization": "Q Hayre et al. / Bangkok hospital & collaborators",

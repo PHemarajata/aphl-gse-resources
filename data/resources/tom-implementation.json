@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "tom-implementation",
   "title": "Target Operating Model (TOM) for Genomic Surveillance",
   "organization": "Frontiers in Public Health",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "malawi-gensurv-ip2",
   "title": "Malawi Genomic Surveillance Implementation Plan 2.0 (2023-2030)",
   "organization": "Malawi Ministry of Health + Africa CDC / PGI",

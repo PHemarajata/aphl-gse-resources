@@ -96,7 +96,8 @@ function main() {
 
   const resources = ordered.map((record) => {
     const copy = orderKeys(record);
-    delete copy.validated; // curator state, not shipped on the record itself
+    delete copy.validated;  // curator state, not shipped on the record itself
+    delete copy.$schema;    // editor hint only, never published
     return copy;
   });
 

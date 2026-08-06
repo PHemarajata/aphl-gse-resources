@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "nigeria-ngss-strategy",
   "title": "Nigeria National Genomic Surveillance Strategy",
   "organization": "Nigeria Centre for Disease Control (NCDC) with partners",

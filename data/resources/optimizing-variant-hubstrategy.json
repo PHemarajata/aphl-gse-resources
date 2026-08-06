@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "optimizing-variant-hubstrategy",
   "title": "Optimizing global genomic surveillance for early detection of emerging SARS-CoV-2 variants",
   "organization": "Gu et al. / arXiv preprint",

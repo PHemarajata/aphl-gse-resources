@@ -47,9 +47,9 @@ jobs:
       # round rather than as an allow-list so a new public asset ships
       # automatically instead of being silently dropped.
       #
-      # The admin panel runs from a curator's own clone — it already writes
-      # files through showDirectoryPicker. Keeping it off the public site
-      # removes the Firebase Auth surface from the internet entirely.
+      # The admin panel was retired outright (see CONTRIBUTING.md), so these
+      # removals are normally no-ops. They stay as a safety net in case a
+      # browser-based editor is ever reintroduced under public/.
       - name: Assemble the published site
         run: |
           cp -r public _site
@@ -62,8 +62,8 @@ jobs:
           echo "Publishing:"
           find _site -type f | sort | sed 's/^/  /'
 
-      # A copy-then-delete assembly is one typo away from publishing the admin
-      # panel. Fail loudly rather than quietly shipping it.
+      # Regression guard: if anyone reintroduces a browser admin panel under
+      # public/, fail loudly rather than quietly publishing it.
       - name: Verify the admin panel was not published
         run: |
           leaked=0

@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "pathogengenomics-investmentcase-framework",
   "title": "National investment case development for pathogen genomics surveillance",
   "organization": "Khoo et al. / The Lancet Microbe",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "africapgi-casestudy",
   "title": "African Pathogen Genomics Initiative Case Study",
   "organization": "Africa CDC & Grand Challenges",

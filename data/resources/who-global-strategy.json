@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "who-global-strategy",
   "title": "WHO Global Genomic Surveillance Strategy for Pathogens with Pandemic & Epidemic Potential, 2022-2032",
   "organization": "World Health Organization",

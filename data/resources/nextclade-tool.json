@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "nextclade-tool",
   "title": "Nextclade",
   "organization": "Nextstrain",

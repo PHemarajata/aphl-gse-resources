@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "malawi-gensurv-strategy-moh",
   "title": "Malawi’s 2nd Edition Pathogen Genomic Surveillance Strategy & Implementation Plan",
   "organization": "Malawi Ministry of Health + Africa CDC / Africa PGI",

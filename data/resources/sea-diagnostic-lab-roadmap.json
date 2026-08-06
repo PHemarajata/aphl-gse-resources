@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "sea-diagnostic-lab-roadmap",
   "title": "South-East Asia Regional Roadmap for Diagnostic Preparedness, Integrated Laboratory Networking and Genomic Surveillance (2023-2027)",
   "organization": "WHO South-East Asia Region",

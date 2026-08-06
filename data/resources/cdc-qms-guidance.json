@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "cdc-qms-guidance",
   "title": "CDC Practical QMS Guidance for NGS Labs",
   "organization": "CDC / Journal of Clinical Microbiology",

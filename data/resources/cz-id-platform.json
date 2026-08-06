@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "cz-id-platform",
   "title": "Chan Zuckerberg ID (CZ ID) Platform",
   "organization": "Chan Zuckerberg Initiative",

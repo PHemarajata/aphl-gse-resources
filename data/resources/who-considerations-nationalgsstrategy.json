@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "who-considerations-nationalgsstrategy",
   "title": "Considerations for developing a national genomic surveillance strategy or action plan for pathogens with pandemic and epidemic potential",
   "organization": "WHO",

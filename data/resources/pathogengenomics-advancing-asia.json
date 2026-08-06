@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "pathogengenomics-advancing-asia",
   "title": "Advancing pathogen genomics in resource-limited settings Framework for prioritizing pathogens & implementing surveillance in Asia",
   "organization": "Pronyk et al. / Asia PGI & partners",

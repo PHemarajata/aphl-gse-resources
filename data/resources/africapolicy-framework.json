@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "africapolicy-framework",
   "title": "African Pathogen Genomic Surveillance Policy Framework",
   "organization": "Africa CDC / AU Member States",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "capacity-assessment",
   "title": "WHO Laboratory Assessment Tool (LAT)",
   "organization": "World Health Organization",

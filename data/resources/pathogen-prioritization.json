@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "pathogen-prioritization",
   "title": "Pathogen Prioritization Frameworks",
   "organization": "Multiple Organizations",

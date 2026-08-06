@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "who-costing-tool",
   "title": "WHO Genomics Costing Tool (GCT)",
   "organization": "World Health Organization",

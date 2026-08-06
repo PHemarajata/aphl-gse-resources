@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "pathogen-prioritization-who",
   "title": "WHO Pathogens Prioritization Framework (R&D Blueprint)",
   "organization": "World Health Organization",

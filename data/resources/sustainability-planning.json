@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "sustainability-planning",
   "title": "Sustainability Planning Frameworks",
   "organization": "Multiple Organizations",

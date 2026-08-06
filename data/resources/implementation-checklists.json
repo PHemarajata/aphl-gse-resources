@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "implementation-checklists",
   "title": "Genomic Surveillance Implementation Checklists",
   "organization": "Multiple Organizations",

@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "mimag-minimum-info",
   "title": "MIMAG: Minimum Information about a Metagenome-Assembled Genome",
   "organization": "Genomic Standards Consortium",

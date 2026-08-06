@@ -1,0 +1,50 @@
+name: Suggest a resource
+description: Propose something for the library. No Git needed.
+title: "Resource: "
+labels: ["resource-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting something. You do not need to know the tagging
+        vocabulary — a curator will handle that. The link and a sentence on why
+        it matters are the parts only you can provide.
+  - type: input
+    id: url
+    attributes:
+      label: Link
+      description: The canonical page for the resource. Prefer the publisher's own page over a PDF mirror.
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: As its publisher writes it. Leave blank if you are not sure.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does this belong here?
+      description: What would a public health laboratory actually use it for? One or two sentences is plenty.
+    validations:
+      required: true
+  - type: input
+    id: organization
+    attributes:
+      label: Publisher or authoring body
+      placeholder: WHO, Africa CDC, a journal, a university...
+  - type: textarea
+    id: tags
+    attributes:
+      label: Suggested tagging (optional)
+      description: If you already know the vocabulary, say what you would tag it. If not, skip this.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have opened the link and it works
+          required: true
+        - label: I searched existing resources and this is not already listed
+          required: true

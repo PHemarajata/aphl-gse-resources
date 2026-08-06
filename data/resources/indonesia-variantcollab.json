@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "indonesia-variantcollab",
   "title": "Indonesia SARS-CoV-2 Variant Surveillance Collaboration",
   "organization": "M Chambers et al. / Indonesia MOH & partners",

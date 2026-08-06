@@ -1,0 +1,382 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://phemarajata.github.io/aphl-gse-resources/resource.schema.json",
+  "title": "APHL genomic epidemiology resource",
+  "description": "One resource in the library. Generated from public/taxonomy.js by scripts/build-schema.mjs — do not edit by hand.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "organization",
+    "description",
+    "url",
+    "audiences",
+    "stages",
+    "types",
+    "geography",
+    "topics",
+    "language"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Editor hint. Stripped from the published data."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Lower-case kebab-case. Must match the filename without .json."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The resource’s own title, as its publisher writes it."
+    },
+    "organization": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Publisher or authoring body."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One or two sentences on what this is. Shown on the card and in the detail view."
+    },
+    "url": {
+      "type": "string",
+      "pattern": "^(https://\\S+|#)$",
+      "description": "Must start with https:// and contain no spaces, or be \"#\" if genuinely unavailable.",
+      "markdownDescription": "**Link to the resource.**\n\nMust start with `https://` and contain **no whitespace** — a space here means a column got misaligned on import, which has happened before and silently broke five links.\n\nUse `#` only if no public URL exists."
+    },
+    "audiences": {
+      "type": "array",
+      "description": "Who this is for. Keep to 5 or fewer — more than that and filtering stops narrowing anything.",
+      "markdownDescription": "**Who this is for**\n\nKeep to **5 or fewer**; beyond that the validator warns, because a tag on most records filters nothing.\n\n- `laboratorians` — Laboratorians\n- `lab-leadership` — Lab Leadership / Managers\n- `bioinformaticians` — Bioinformaticians\n- `epidemiologists` — Epidemiologists\n- `public-health-officials` — Public Health Officials\n- `policymakers` — Policymakers\n- `health-ministry-officials` — Health Ministry Officials\n- `donors-funders` — Donors & Funders\n- `trainers-educators` — Trainers & Educators\n- `one-health-partners` — One Health Partners\n- `environmental-health-teams` — Environmental Health Teams\n- `regional-international-orgs` — Regional / International Organizations",
+      "items": {
+        "type": "string",
+        "enum": [
+          "laboratorians",
+          "lab-leadership",
+          "bioinformaticians",
+          "epidemiologists",
+          "public-health-officials",
+          "policymakers",
+          "health-ministry-officials",
+          "donors-funders",
+          "trainers-educators",
+          "one-health-partners",
+          "environmental-health-teams",
+          "regional-international-orgs"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "stages": {
+      "type": "array",
+      "description": "Programme stage this suits. Keep to 4 or fewer — more than that and filtering stops narrowing anything.",
+      "markdownDescription": "**Programme stage this suits**\n\nKeep to **4 or fewer**; beyond that the validator warns, because a tag on most records filters nothing.\n\n- `readiness-assessment` — Readiness Assessment\n- `planning-strategy` — Planning & Strategy\n- `implementation` — Implementation\n- `operations-scaleup` — Operations & Scale-up\n- `optimization-sustainability` — Optimization & Sustainability\n- `evaluation-learning` — Evaluation & Learning",
+      "items": {
+        "type": "string",
+        "enum": [
+          "readiness-assessment",
+          "planning-strategy",
+          "implementation",
+          "operations-scaleup",
+          "optimization-sustainability",
+          "evaluation-learning"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "types": {
+      "type": "array",
+      "description": "What kind of thing this is. Keep to 3 or fewer — more than that and filtering stops narrowing anything.",
+      "markdownDescription": "**What kind of thing this is**\n\nKeep to **3 or fewer**; beyond that the validator warns, because a tag on most records filters nothing.\n\n- `framework-strategy` — Framework / Strategy\n- `guide-manual` — Guide / Manual\n- `interactive-tool` — Interactive Tool\n- `spreadsheet-tool` — Spreadsheet / Static Tool\n- `training-material` — Training Material\n- `policy-document` — Policy Document\n- `research-evidence` — Research / Evidence Review\n- `case-study` — Case Study\n- `template-checklist` — Template / Checklist\n- `data-dashboard` — Data Resource / Dashboard",
+      "items": {
+        "type": "string",
+        "enum": [
+          "framework-strategy",
+          "guide-manual",
+          "interactive-tool",
+          "spreadsheet-tool",
+          "training-material",
+          "policy-document",
+          "research-evidence",
+          "case-study",
+          "template-checklist",
+          "data-dashboard"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "geography": {
+      "type": "array",
+      "description": "Geographic focus. Keep to 5 or fewer — more than that and filtering stops narrowing anything.",
+      "markdownDescription": "**Geographic focus**\n\nKeep to **5 or fewer**; beyond that the validator warns, because a tag on most records filters nothing.\n\n- `global` — Global\n- `lmic` — LMICs (cross-cutting)\n- `high-income` — High-income Countries\n- `africa` — Africa (general)\n- `east-africa` — East Africa\n- `west-africa` — West Africa\n- `southern-africa` — Southern Africa\n- `north-africa` — North Africa\n- `asia` — Asia (general)\n- `southeast-asia` — Southeast Asia\n- `south-asia` — South Asia\n- `east-asia` — East Asia\n- `central-asia` — Central Asia\n- `americas` — Americas (general)\n- `north-america` — North America\n- `latin-america-caribbean` — Latin America & Caribbean\n- `europe` — Europe\n- `mena` — Middle East & North Africa (MENA)\n- `oceania-pacific` — Oceania & Pacific",
+      "items": {
+        "type": "string",
+        "enum": [
+          "global",
+          "lmic",
+          "high-income",
+          "africa",
+          "east-africa",
+          "west-africa",
+          "southern-africa",
+          "north-africa",
+          "asia",
+          "southeast-asia",
+          "south-asia",
+          "east-asia",
+          "central-asia",
+          "americas",
+          "north-america",
+          "latin-america-caribbean",
+          "europe",
+          "mena",
+          "oceania-pacific"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "topics": {
+      "type": "array",
+      "description": "What this is substantially about. Keep to 5 or fewer — more than that and filtering stops narrowing anything.",
+      "markdownDescription": "**What this is substantially about**\n\nKeep to **5 or fewer**; beyond that the validator warns, because a tag on most records filters nothing.\n\n- `genomic-surveillance` — Genomic Surveillance\n- `amr-surveillance` — AMR Surveillance\n- `environmental-surveillance` — Environmental / Wastewater Surveillance\n- `one-health` — One Health\n- `outbreak-detection` — Outbreak Detection\n- `variant-monitoring` — Variant Monitoring\n- `surveillance-design` — Surveillance Design & Sampling\n- `epi-integration` — Epidemiological Integration\n- `lab-networking` — Laboratory Networking\n- `quality-management` — Quality Management (QMS)\n- `accreditation` — Accreditation\n- `biosafety` — Biosafety & Biosecurity\n- `diagnostics-integration` — Diagnostics Integration\n- `pipelines-workflows` — Pipelines & Workflows\n- `data-sharing-interoperability` — Data Sharing & Interoperability\n- `phylogenetics` — Phylogenetics\n- `visualization` — Visualization\n- `sequencing-platforms` — Sequencing Platforms\n- `metadata-management` — Metadata & Data Management\n- `data-governance` — Data Governance\n- `ethics-legal` — Ethics & Legal Frameworks\n- `privacy-benefit-sharing` — Privacy & Benefit Sharing\n- `investment-cases` — Investment Cases\n- `regulatory-frameworks` — Regulatory Frameworks\n- `costing-financing` — Costing & Financing\n- `sustainability` — Sustainability\n- `monitoring-evaluation` — Monitoring & Evaluation\n- `stakeholder-engagement` — Stakeholder Engagement\n- `resource-mobilization` — Resource Mobilization\n- `reporting` — Reporting & Communication\n- `workforce-training` — Workforce Training\n- `technology-transfer` — Technology Transfer\n- `regional-networks` — Regional Networks\n- `curriculum-development` — Curriculum Development",
+      "items": {
+        "type": "string",
+        "enum": [
+          "genomic-surveillance",
+          "amr-surveillance",
+          "environmental-surveillance",
+          "one-health",
+          "outbreak-detection",
+          "variant-monitoring",
+          "surveillance-design",
+          "epi-integration",
+          "lab-networking",
+          "quality-management",
+          "accreditation",
+          "biosafety",
+          "diagnostics-integration",
+          "pipelines-workflows",
+          "data-sharing-interoperability",
+          "phylogenetics",
+          "visualization",
+          "sequencing-platforms",
+          "metadata-management",
+          "data-governance",
+          "ethics-legal",
+          "privacy-benefit-sharing",
+          "investment-cases",
+          "regulatory-frameworks",
+          "costing-financing",
+          "sustainability",
+          "monitoring-evaluation",
+          "stakeholder-engagement",
+          "resource-mobilization",
+          "reporting",
+          "workforce-training",
+          "technology-transfer",
+          "regional-networks",
+          "curriculum-development"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "pathogenFocus": {
+      "type": "array",
+      "description": "Pathogen focus. Keep to 4 or fewer — more than that and filtering stops narrowing anything.",
+      "markdownDescription": "**Pathogen focus**\n\nKeep to **4 or fewer**; beyond that the validator warns, because a tag on most records filters nothing.\n\n- `respiratory-pathogens` — Respiratory Pathogens\n- `amr-bacteria` — AMR Bacteria\n- `arboviruses-vectorborne` — Arboviruses & Vector-borne\n- `enteric-pathogens` — Enteric Pathogens\n- `emerging-pathogens` — Emerging / Unknown Pathogens\n- `viral-genomics` — Viral Genomics\n- `bacterial-genomics` — Bacterial Genomics",
+      "items": {
+        "type": "string",
+        "enum": [
+          "respiratory-pathogens",
+          "amr-bacteria",
+          "arboviruses-vectorborne",
+          "enteric-pathogens",
+          "emerging-pathogens",
+          "viral-genomics",
+          "bacterial-genomics"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "language": {
+      "type": "array",
+      "description": "Languages available.",
+      "markdownDescription": "**Languages available**\n\n- `en` — English\n- `fr` — French\n- `es` — Spanish\n- `pt` — Portuguese\n- `th` — Thai\n- `vi` — Vietnamese\n- `id` — Indonesian\n- `bn` — Bangla\n- `other` — Other",
+      "items": {
+        "type": "string",
+        "enum": [
+          "en",
+          "fr",
+          "es",
+          "pt",
+          "th",
+          "vi",
+          "id",
+          "bn",
+          "other"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "unknown"
+      ],
+      "default": "unknown",
+      "description": "Independent of stage. A programme at Optimization starting phylodynamics still needs beginner material.",
+      "markdownDescription": "**Level**\n\nIndependent of stage. A programme at Optimization starting phylodynamics still needs beginner material.\n\n- `beginner` — Beginner\n- `intermediate` — Intermediate\n- `advanced` — Advanced\n- `unknown` — Not assessed"
+    },
+    "connectivity": {
+      "type": "string",
+      "enum": [
+        "offline-capable",
+        "online-setup-then-offline",
+        "online-required",
+        "unknown"
+      ],
+      "default": "unknown",
+      "description": "Whether the resource is usable without a reliable connection. 39 of the 79 resources are tagged LMIC, so this is a real access question rather than a technical footnote.",
+      "markdownDescription": "**Connectivity**\n\nWhether the resource is usable without a reliable connection. 39 of the 79 resources are tagged LMIC, so this is a real access question rather than a technical footnote.\n\n- `offline-capable` — Works offline\n- `online-setup-then-offline` — Online to set up, then offline\n- `online-required` — Needs a connection\n- `unknown` — Not known"
+    },
+    "cost": {
+      "type": "string",
+      "enum": [
+        "free",
+        "free-tier",
+        "paid",
+        "institutional",
+        "unknown"
+      ],
+      "default": "unknown",
+      "description": "Cost",
+      "markdownDescription": "**Cost**\n\n- `free` — Free\n- `free-tier` — Free tier available\n- `paid` — Paid\n- `institutional` — Institutional or consumable cost\n- `unknown` — Not known"
+    },
+    "effort": {
+      "type": "string",
+      "enum": [
+        "minutes",
+        "hours",
+        "days",
+        "weeks",
+        "months",
+        "unknown"
+      ],
+      "default": "unknown",
+      "description": "Time to get going",
+      "markdownDescription": "**Time to get going**\n\n- `minutes` — Minutes\n- `hours` — Hours\n- `days` — Days\n- `weeks` — Weeks\n- `months` — Months\n- `unknown` — Not known"
+    },
+    "reuseTerms": {
+      "type": "string",
+      "enum": [
+        "adapt-freely",
+        "share-unchanged",
+        "use-only",
+        "ask-first",
+        "unknown"
+      ],
+      "default": "unknown",
+      "description": "What a training programme may legally do with this material. Named for the question curators actually ask — can we adapt it for our course — rather than for the licence instrument behind it.",
+      "markdownDescription": "**Reuse terms**\n\nWhat a training programme may legally do with this material. Named for the question curators actually ask — can we adapt it for our course — rather than for the licence instrument behind it.\n\n- `adapt-freely` — Adapt and redistribute freely\n- `share-unchanged` — Share unchanged\n- `use-only` — Use as provided\n- `ask-first` — Permission needed\n- `unknown` — Not stated"
+    },
+    "maintenance": {
+      "type": "string",
+      "enum": [
+        "active",
+        "stable",
+        "unmaintained",
+        "archived",
+        "unknown"
+      ],
+      "default": "unknown",
+      "description": "Preferred over version numbers, which go stale within weeks and answer the wrong question. Always shown on the card: \"active\" is itself reassuring for someone about to commit weeks to a tool, and hiding it until something is wrong trains people not to look.",
+      "markdownDescription": "**Maintenance**\n\nPreferred over version numbers, which go stale within weeks and answer the wrong question. Always shown on the card: \"active\" is itself reassuring for someone about to commit weeks to a tool, and hiding it until something is wrong trains people not to look.\n\n- `active` — Actively developed\n- `stable` — Stable\n- `unmaintained` — Unmaintained\n- `archived` — Archived\n- `unknown` — Not known"
+    },
+    "access": {
+      "type": "string",
+      "enum": [
+        "open",
+        "free-account",
+        "registration",
+        "restricted",
+        "unknown"
+      ],
+      "default": "unknown",
+      "description": "A real barrier that cost and connectivity do not capture. \"Free\" and \"you must create an account before you see anything\" are different experiences, especially where institutional email or card verification is required.",
+      "markdownDescription": "**Access**\n\nA real barrier that cost and connectivity do not capture. \"Free\" and \"you must create an account before you see anything\" are different experiences, especially where institutional email or card verification is required.\n\n- `open` — No account needed\n- `free-account` — Free account needed\n- `registration` — Application or approval\n- `restricted` — Restricted\n- `unknown` — Not known"
+    },
+    "endorsement": {
+      "type": "string",
+      "enum": [
+        "not-assessed",
+        "widely-adopted",
+        "course-recommended",
+        "superseded"
+      ],
+      "default": "not-assessed",
+      "description": "Optional editorial signal. Defaults to not assessed, and an entry with no endorsement is not a judgement against it. Use sparingly and only where a curator can point at a reason.",
+      "markdownDescription": "**Endorsement**\n\nOptional editorial signal. Defaults to not assessed, and an entry with no endorsement is not a judgement against it. Use sparingly and only where a curator can point at a reason.\n\n- `not-assessed` — Not assessed\n- `widely-adopted` — Widely adopted\n- `course-recommended` — Recommended in course\n- `superseded` — Superseded"
+    },
+    "keyFeatures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Short bullet points shown in the detail view."
+    },
+    "practicalUse": {
+      "type": "string",
+      "description": "How a programme would actually use this."
+    },
+    "relatedResources": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "uniqueItems": true,
+      "description": "Ids of other records. The build fails on an id that does not exist."
+    },
+    "lastUpdated": {
+      "type": "string",
+      "description": "ISO date the resource itself was last updated, if known. May be empty."
+    },
+    "formatDetails": {
+      "type": "string",
+      "description": "Free text, e.g. \"Journal article / assessment framework\"."
+    },
+    "sourceNotes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Provenance notes."
+    },
+    "legacyTags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Audit trail from migrations and repairs. Append-only; do not tidy."
+    },
+    "validated": {
+      "type": "boolean",
+      "description": "True once a curator has read this record and stands behind it.",
+      "markdownDescription": "**Curator sign-off.**\n\nSet `true` only when you have actually opened the URL and checked the tagging. The build collects these into `metadata.validatedResources`."
+    }
+  }
+}

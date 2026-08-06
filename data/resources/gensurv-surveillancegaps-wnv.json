@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "gensurv-surveillancegaps-wnv",
   "title": "Identifying genomic surveillance gaps in Africa for West Nile Virus (WNV)",
   "organization": "Moir et al. / Africa labs network",

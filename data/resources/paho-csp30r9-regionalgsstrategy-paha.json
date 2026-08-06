@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "paho-csp30r9-regionalgsstrategy-paha",
   "title": "Resolution CSP30.R9 Strategy on Regional Genomic Surveillance for Epidemic and Pandemic Preparedness and Response",
   "organization": "Pan American Health Organization (PAHO)",

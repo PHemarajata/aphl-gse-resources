@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "pathogenwatch",
   "title": "Pathogenwatch",
   "organization": "Centre for Genomic Pathogen Surveillance",

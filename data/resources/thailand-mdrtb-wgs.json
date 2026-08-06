@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "thailand-mdrtb-wgs",
   "title": "Genomic decoding of drug-resistant tuberculosis in Thailand",
   "organization": "N Thawong et al. / Thailand TB Programs & Research Institutions",

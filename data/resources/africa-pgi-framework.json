@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "africa-pgi-framework",
   "title": "Africa PGI 2.0 Initiative & Policy Framework",
   "organization": "Africa CDC",

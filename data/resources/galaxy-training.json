@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "galaxy-training",
   "title": "Galaxy Training Network",
   "organization": "Galaxy Training Network",

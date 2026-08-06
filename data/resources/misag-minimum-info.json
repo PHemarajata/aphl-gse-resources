@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "misag-minimum-info",
   "title": "MISAG: Minimum Information about a Single Amplified Genome",
   "organization": "Genomic Standards Consortium",

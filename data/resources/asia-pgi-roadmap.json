@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "asia-pgi-roadmap",
   "title": "Asia PGI Roadmap for Pathogen Genomics",
   "organization": "Asia Pathogen Genomics Initiative / Duke-NUS",

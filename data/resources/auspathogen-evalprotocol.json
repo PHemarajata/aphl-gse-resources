@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "auspathogen-evalprotocol",
   "title": "Enhancing public health infectious disease response through the Australian Pathogen Genomics program (AusPathoGen): evaluation protocol",
   "organization": "Ferdinand et al. / Frontiers in Public Health",

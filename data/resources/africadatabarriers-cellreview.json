@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "africadatabarriers-cellreview",
   "title": "Africa in the era of pathogen genomics: Unlocking data barriers",
   "organization": "Cell / Mboowa et al.",

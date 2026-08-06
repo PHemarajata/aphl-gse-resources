@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "gisaid-platform",
   "title": "GISAID Global Database",
   "organization": "GISAID Initiative",

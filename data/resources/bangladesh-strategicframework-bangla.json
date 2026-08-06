@@ -1,4 +1,5 @@
 {
+  "$schema": "../resource.schema.json",
   "id": "bangladesh-strategicframework-bangla",
   "title": "A Strategic Framework of SARS-CoV-2 Genomic Surveillance in Bangladesh",
   "organization": "Bangladesh MoH + collaborators (Institutes/Hospitals)",
