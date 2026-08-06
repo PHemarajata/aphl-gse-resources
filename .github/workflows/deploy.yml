@@ -3,7 +3,12 @@ name: Deploy to GitHub Pages
 # Publishes the public site on every merge to main. Merging a pull request is
 # therefore publishing — that is the point of the move off a CLI-only deploy.
 #
-# The admin panel is deliberately NOT published. See "Assemble" below.
+# public/resources-data.js is built here, not committed. See validate.yml for
+# why. Nothing in the repository has to be kept in sync by hand.
+#
+# The retired admin panel is deliberately NOT published. See "Assemble" below.
+# public/curate.html IS published: it only ever builds a record and hands it to
+# GitHub, so it cannot write to the site or lose anyone's work.
 
 on:
   push:
@@ -34,11 +39,13 @@ jobs:
         with:
           node-version: '22'
 
-      # The same two gates the pull request ran. Deploy does not assume they
-      # passed earlier — main can be pushed to by a bypass, and a green PR can
-      # go stale.
-      - name: Built data file is in sync with data/
-        run: node scripts/build-data.mjs --check
+      # The same gates the pull request ran. Deploy does not assume they passed
+      # earlier — main can be pushed to by a bypass, and a green PR can go stale.
+      - name: Record schema is in sync with the taxonomy
+        run: node scripts/build-schema.mjs --check
+
+      - name: Build the data file from data/
+        run: node scripts/build-data.mjs
 
       - name: Resources validate against the taxonomy
         run: node scripts/validate-resources.mjs
@@ -47,9 +54,9 @@ jobs:
       # round rather than as an allow-list so a new public asset ships
       # automatically instead of being silently dropped.
       #
-      # The admin panel was retired outright (see CONTRIBUTING.md), so these
-      # removals are normally no-ops. They stay as a safety net in case a
-      # browser-based editor is ever reintroduced under public/.
+      # The browser admin panel was retired outright (see CONTRIBUTING.md), so
+      # these removals are normally no-ops. They stay as a safety net in case
+      # something that writes data is ever reintroduced under public/.
       - name: Assemble the published site
         run: |
           cp -r public _site
@@ -64,7 +71,7 @@ jobs:
 
       # Regression guard: if anyone reintroduces a browser admin panel under
       # public/, fail loudly rather than quietly publishing it.
-      - name: Verify the admin panel was not published
+      - name: Verify the published output is what we expect
         run: |
           leaked=0
           for f in admin.html admin.js admin-auth.js validation.js gpt-json-import-prompt.txt; do
@@ -73,10 +80,12 @@ jobs:
               leaked=1
             fi
           done
-          if [ -e "_site/index.html" ]; then :; else
-            echo "::error::index.html is missing from the build output"
-            leaked=1
-          fi
+          for f in index.html curate.html resources-data.js taxonomy.js; do
+            if [ ! -e "_site/$f" ]; then
+              echo "::error::$f is missing from the build output"
+              leaked=1
+            fi
+          done
           exit $leaked
 
       - name: Upload Pages artifact

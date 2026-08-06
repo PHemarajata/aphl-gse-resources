@@ -2,10 +2,14 @@ name: Validate
 
 # Runs on every pull request and on pushes to main.
 #
-# Two gates, both cheap:
-#   1. the committed public/resources-data.js matches what data/ produces
-#   2. data/resource.schema.json matches the taxonomy it is generated from
-#   3. every record validates against the taxonomy in public/taxonomy.js
+# Two gates:
+#   1. data/resource.schema.json matches the taxonomy it is generated from
+#   2. every record validates against the taxonomy in public/taxonomy.js
+#
+# There is deliberately no "the committed build artifact matches data/" gate any
+# more. public/resources-data.js is not committed: it is built here, and built
+# again at deploy time. That is what lets a curator open a pull request from a
+# browser — with no terminal, they could never have satisfied a drift check.
 #
 # No `npm install` step: the build and validator are deliberately
 # zero-dependency, so this runs in a few seconds.
@@ -32,15 +36,17 @@ jobs:
         with:
           node-version: '22'
 
-      # Catches both a hand-edit of the generated file and a forgotten rebuild.
-      - name: Built data file is in sync with data/
-        run: node scripts/build-data.mjs --check
-
       # The record schema is generated from the taxonomy. If someone adds a
       # vocabulary value without regenerating, curators' editors would keep
       # flagging the new value as invalid.
       - name: Record schema is in sync with the taxonomy
         run: node scripts/build-schema.mjs --check
+
+      # Build first — the validator reads the built file, and it no longer
+      # exists in the repository. A failure here means data/ itself is broken:
+      # a bad filename, a duplicate id, unreadable JSON.
+      - name: Build the data file from data/
+        run: node scripts/build-data.mjs
 
       - name: Resources validate against the taxonomy
         run: node scripts/validate-resources.mjs

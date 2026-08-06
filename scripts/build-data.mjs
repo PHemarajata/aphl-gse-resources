@@ -7,7 +7,10 @@
  *   data/order.json             display order (the site renders in array order)
  *   data/resources/<id>.json    one file per resource
  *
- * public/resources-data.js is a BUILD ARTIFACT. Do not hand-edit it.
+ * public/resources-data.js is a BUILD ARTIFACT. It is NOT committed: it is
+ * built here, by CI on every pull request, and again at deploy time. Nothing
+ * in the repository has to be kept in sync with it by hand — which is what
+ * lets a curator open a pull request from a browser, with no terminal.
  *
  * Deliberately zero-dependency: runs with plain `node scripts/build-data.mjs`,
  * in CI, with no install step.
@@ -73,13 +76,18 @@ function main() {
   // requires touching order.json.
   const order = readJson(path.join(dataDir, 'order.json'));
   const seen = new Set();
+  const stale = [];
   const ordered = [];
   for (const id of order) {
-    if (!byId.has(id)) { problems.push(`order.json lists "${id}", which has no file in data/resources/`); continue; }
+    // A listed id with no file is a stale entry, not a failure: it is exactly
+    // what a pull request that deletes one record looks like. Note it and move
+    // on, so removing a resource never requires editing a second file.
+    if (!byId.has(id)) { stale.push(id); continue; }
     if (seen.has(id)) { problems.push(`order.json lists "${id}" more than once`); continue; }
     seen.add(id);
     ordered.push(byId.get(id));
   }
+  if (stale.length) console.log(`  note: ${stale.length} id(s) in order.json no longer have a file, ignored: ${stale.join(', ')}`);
   const unlisted = [...byId.keys()].filter((id) => !seen.has(id)).sort();
   for (const id of unlisted) ordered.push(byId.get(id));
   if (unlisted.length) console.log(`  note: ${unlisted.length} record(s) not in order.json, appended alphabetically: ${unlisted.join(', ')}`);

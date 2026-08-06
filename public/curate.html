@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curate — Genomic Epidemiology Resources</title>
+<meta name="robots" content="noindex">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+  :root {
+    --aphl-teal: #00A0AF;
+    --aphl-teal-dark: #009999;
+    --aphl-rust: #B42E34;
+    --aphl-rust-dark: #990000;
+    --aphl-gray-light: #f8f9fa;
+  }
+  /* Defined locally as well as by Tailwind: if the CDN is blocked — which
+     happens on some institutional networks — the page must still hide what
+     it means to hide, rather than showing every panel at once. */
+  .hidden { display: none !important; }
+  body { font-family: 'Franklin Gothic Medium', Arial, sans-serif; color: #000; line-height: 1.6; background: var(--aphl-gray-light); }
+  h1, h2, h3 { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.03em; }
+  .gradient-bg { background: linear-gradient(135deg, #00A0AF 0%, #009999 100%); }
+  .btn-teal { background: var(--aphl-teal); color: #fff; }
+  .btn-teal:hover { background: var(--aphl-teal-dark); }
+  .btn-rust { background: var(--aphl-rust); color: #fff; }
+  .btn-rust:hover { background: var(--aphl-rust-dark); }
+  .field-box { border: 1px solid #e2e8f0; border-radius: .375rem; background: #fff; }
+  .opt { display: inline-flex; align-items: flex-start; gap: .4rem; padding: .2rem .5rem; border: 1px solid #e2e8f0; border-radius: .3rem; margin: .15rem; font-size: .82rem; cursor: pointer; background: #fff; }
+  .opt:hover { border-color: var(--aphl-teal); }
+  .opt input { margin-top: .3rem; }
+  .opt.checked { border-color: var(--aphl-teal); background: #e6f7f8; }
+  input[type=text], input[type=url], input[type=date], textarea, select {
+    width: 100%; border: 1px solid #cbd5e0; border-radius: .3rem; padding: .45rem .6rem; font-size: .9rem; background: #fff;
+  }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--aphl-teal); outline-offset: -1px; }
+  .err { color: #9b1c1c; }
+  .warn { color: #92400e; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; }
+  .sticky-panel { position: sticky; top: 1rem; }
+  label.lbl { font-weight: 700; font-size: .85rem; display: block; margin-bottom: .15rem; }
+  .hint { font-size: .78rem; color: #4a5568; margin-bottom: .35rem; }
+  .group-head { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: #718096; margin: .5rem 0 .1rem; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header class="gradient-bg text-white">
+  <div class="max-w-6xl mx-auto px-4 py-6">
+    <div class="flex items-center justify-between flex-wrap gap-2">
+      <div>
+        <h1 class="text-2xl">Curate a resource</h1>
+        <p class="text-sm opacity-90">Fill in the form. It writes the record for you and hands it to GitHub, which opens a pull request for review.</p>
+      </div>
+      <a href="./index.html" class="text-sm underline opacity-90 hover:opacity-100"><i class="fa-solid fa-arrow-left mr-1"></i>Back to the resource list</a>
+    </div>
+  </div>
+</header>
+
+<div class="max-w-6xl mx-auto px-4 py-6">
+
+  <div id="loadError" class="hidden field-box p-4 mb-4 err"></div>
+
+  <!-- Mode -->
+  <div class="field-box p-4 mb-5">
+    <label class="lbl">What do you want to do?</label>
+    <div class="flex flex-wrap gap-4 items-center">
+      <label class="inline-flex items-center gap-2 text-sm"><input type="radio" name="mode" value="add" checked> Add a new resource</label>
+      <label class="inline-flex items-center gap-2 text-sm"><input type="radio" name="mode" value="edit"> Edit an existing one</label>
+      <label class="inline-flex items-center gap-2 text-sm"><input type="radio" name="mode" value="remove"> Remove one</label>
+    </div>
+    <div id="pickWrap" class="hidden mt-3">
+      <label class="lbl" for="pickRecord">Which resource?</label>
+      <select id="pickRecord"><option value="">— choose —</option></select>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- FORM -->
+    <div class="lg:col-span-2" id="formCol">
+      <div id="removeNotice" class="hidden field-box p-4 mb-4">
+        <h2 class="text-lg mb-1">Removing a resource</h2>
+        <p class="text-sm">Choose the resource above, then use the button on the right. GitHub will open its delete-file page with a pull request option. Nothing is removed until someone approves and merges that pull request.</p>
+      </div>
+
+      <div id="formBody">
+
+        <div class="field-box p-4 mb-4">
+          <h2 class="text-lg mb-3">The basics</h2>
+
+          <div class="mb-3">
+            <label class="lbl" for="f-title">Title <span class="err">*</span></label>
+            <input type="text" id="f-title" data-field="title" placeholder="WHO Global Genomic Surveillance Strategy">
+          </div>
+
+          <div class="mb-3">
+            <label class="lbl" for="f-id">Record ID <span class="err">*</span></label>
+            <div class="hint">Lowercase, words joined by hyphens. Becomes the filename: <span class="mono">data/resources/&lt;id&gt;.json</span>. Generated from the title; edit if you want something shorter.</div>
+            <input type="text" id="f-id" data-field="id" class="mono" placeholder="who-global-strategy">
+          </div>
+
+          <div class="mb-3">
+            <label class="lbl" for="f-organization">Organization <span class="err">*</span></label>
+            <input type="text" id="f-organization" data-field="organization" placeholder="World Health Organization">
+          </div>
+
+          <div class="mb-3">
+            <label class="lbl" for="f-url">URL <span class="err">*</span></label>
+            <div class="hint">Prefer a DOI (<span class="mono">https://doi.org/…</span>) for anything published — publisher URLs move, DOIs do not.</div>
+            <input type="url" id="f-url" data-field="url" class="mono" placeholder="https://doi.org/10.1038/nbt.3893">
+          </div>
+
+          <div class="mb-1">
+            <label class="lbl" for="f-description">Description <span class="err">*</span></label>
+            <div class="hint">What it is and what it is for, in a few sentences. Written by you, not copied from the source's marketing text.</div>
+            <textarea id="f-description" data-field="description" rows="4"></textarea>
+          </div>
+        </div>
+
+        <div class="field-box p-4 mb-4">
+          <h2 class="text-lg mb-1">Tagging</h2>
+          <p class="hint mb-3">Tag for how someone would look for this, not for everything it touches. A tag that fits almost every resource does not help anyone find this one.</p>
+          <div id="primaryFields"></div>
+        </div>
+
+        <div class="field-box p-4 mb-4">
+          <h2 class="text-lg mb-3">Detail <span class="text-sm font-normal text-gray-600">— all optional</span></h2>
+
+          <div class="mb-3">
+            <label class="lbl" for="f-keyFeatures">Key features</label>
+            <div class="hint">One per line.</div>
+            <textarea id="f-keyFeatures" data-field="keyFeatures" rows="4" placeholder="Genetic cluster detection&#10;Epidemiological metadata integration"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="lbl" for="f-practicalUse">Practical use</label>
+            <div class="hint">How a programme would actually use this.</div>
+            <textarea id="f-practicalUse" data-field="practicalUse" rows="3"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="lbl" for="f-formatDetails">Format details</label>
+            <input type="text" id="f-formatDetails" data-field="formatDetails" placeholder="PDF, 48 pages">
+          </div>
+
+          <div class="mb-3">
+            <label class="lbl" for="f-sourceNotes">Source notes</label>
+            <div class="hint">Anything a future curator should know — edition, supersedes, caveats.</div>
+            <textarea id="f-sourceNotes" data-field="sourceNotes" rows="2"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="lbl" for="f-lastUpdated">Date the source was last updated</label>
+            <input type="date" id="f-lastUpdated" data-field="lastUpdated">
+          </div>
+
+          <div class="mb-1">
+            <label class="lbl" for="f-relatedResources">Related resources</label>
+            <div class="hint">Hold Cmd (Mac) or Ctrl to select more than one.</div>
+            <select id="f-relatedResources" multiple size="6"></select>
+          </div>
+        </div>
+
+        <div class="field-box p-4 mb-4">
+          <h2 class="text-lg mb-1">Secondary facets <span class="text-sm font-normal text-gray-600">— all optional</span></h2>
+          <p class="hint mb-3">Leave anything you have not assessed on its default. An honest "not assessed" is more useful than a guess.</p>
+          <div id="secondaryFields" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div>
+      <div class="sticky-panel">
+        <div class="field-box p-4 mb-4">
+          <h2 class="text-lg mb-2">Checks</h2>
+          <div id="checks" class="text-sm"></div>
+        </div>
+
+        <div class="field-box p-4 mb-4">
+          <h2 class="text-lg mb-2">Submit</h2>
+          <div id="submitHelp" class="hint mb-3"></div>
+          <button id="btnPrimary" class="btn-teal w-full px-3 py-2 rounded font-bold text-sm mb-2"></button>
+          <button id="btnCopy" class="w-full px-3 py-2 rounded text-sm border border-gray-300 bg-white hover:bg-gray-50 mb-2">Copy the JSON</button>
+          <button id="btnDownload" class="w-full px-3 py-2 rounded text-sm border border-gray-300 bg-white hover:bg-gray-50">Download the .json file</button>
+          <p id="copyNote" class="hint mt-2"></p>
+        </div>
+
+        <div class="field-box p-4">
+          <h2 class="text-lg mb-2">The record</h2>
+          <pre id="preview" class="mono overflow-auto bg-gray-50 p-2 rounded" style="max-height: 24rem;"></pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="text-xs text-gray-600 mt-8 pb-8">
+    <p>This page never writes to the site. It builds a record and hands it to GitHub; a pull request is created there and published only once someone with write access approves and merges it.</p>
+    <p class="mt-1">Vocabulary: taxonomy <span id="taxVersion" class="mono"></span>. If a tag you need does not exist here, it has to be added to <span class="mono">public/taxonomy.js</span> first — open an issue rather than forcing a near-enough tag.</p>
+  </footer>
+</div>
+
+<script src="./taxonomy.js"></script>
+<script src="./resources-data.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ---------------------------------------------------------------- config
+  var REPO   = 'PHemarajata/aphl-gse-resources';
+  var BRANCH = 'main';
+  var DIR    = 'data/resources';
+  // GitHub's prefilled new-file page carries the record in the query string.
+  // Well under any real browser limit for our records, but bail out loudly
+  // rather than silently truncating if a record ever gets enormous.
+  var URL_BUDGET = 7000;
+
+  var T = window.APHL_TAXONOMY;
+  var DB = window.resourcesDatabase;
+
+  var loadError = document.getElementById('loadError');
+  if (!T || !DB || !Array.isArray(DB.resources)) {
+    loadError.classList.remove('hidden');
+    loadError.textContent =
+      'Could not load taxonomy.js or resources-data.js from this folder. ' +
+      'If you opened this file directly from disk, serve the folder instead (npm run preview) — ' +
+      'browsers block local file loads.';
+    return;
+  }
+
+  document.getElementById('taxVersion').textContent = 'v' + T.VERSION;
+
+  var EXISTING = DB.resources.slice();
+  var EXISTING_IDS = EXISTING.map(function (r) { return r.id; });
+  var VALIDATED = (DB.metadata && DB.metadata.validatedResources) || [];
+
+  // Key order must match KEY_ORDER in scripts/build-data.mjs, so that a record
+  // written here and a record rebuilt by the build produce the same diff.
+  var KEY_ORDER = [
+    'id', 'title', 'organization', 'description', 'url',
+    'audiences', 'stages', 'types', 'geography', 'topics', 'pathogenFocus', 'language',
+    'keyFeatures', 'practicalUse', 'relatedResources',
+    'lastUpdated', 'formatDetails', 'sourceNotes', 'legacyTags',
+    'validated'
+  ];
+
+  var REQUIRED_SCALARS = ['id', 'title', 'description', 'organization', 'url'];
+  var REQUIRED_ARRAYS  = ['audiences', 'stages', 'types', 'geography', 'topics'];
+
+  var state = { mode: 'add', editingId: null, idTouched: false };
+
+  // ------------------------------------------------------------- rendering
+  function optionEl(field, opt, multiple) {
+    var wrap = document.createElement('label');
+    wrap.className = 'opt';
+    var input = document.createElement('input');
+    input.type = multiple ? 'checkbox' : 'radio';
+    input.name = 'tax-' + field;
+    input.value = opt.id;
+    input.setAttribute('data-tax', field);
+    var span = document.createElement('span');
+    span.textContent = opt.label;
+    wrap.appendChild(input);
+    wrap.appendChild(span);
+    input.addEventListener('change', function () {
+      wrap.classList.toggle('checked', input.checked);
+      if (!multiple) {
+        var others = document.querySelectorAll('input[name="tax-' + field + '"]');
+        Array.prototype.forEach.call(others, function (o) {
+          o.parentNode.classList.toggle('checked', o.checked);
+        });
+      }
+      refresh();
+    });
+    return wrap;
+  }
+
+  function renderPrimary() {
+    var host = document.getElementById('primaryFields');
+    T.PRIMARY_FIELDS.forEach(function (field) {
+      var def = T.TAXONOMY[field];
+      if (!def) return;
+
+      var block = document.createElement('div');
+      block.className = 'mb-4';
+
+      var head = document.createElement('div');
+      head.className = 'flex items-baseline justify-between';
+      var lbl = document.createElement('span');
+      lbl.className = 'lbl';
+      lbl.textContent = def.label + (REQUIRED_ARRAYS.indexOf(field) > -1 ? ' *' : '');
+      var count = document.createElement('span');
+      count.className = 'text-xs text-gray-600';
+      count.id = 'count-' + field;
+      head.appendChild(lbl);
+      head.appendChild(count);
+      block.appendChild(head);
+
+      if (def.help) {
+        var help = document.createElement('div');
+        help.className = 'hint';
+        help.textContent = def.help;
+        block.appendChild(help);
+      }
+
+      var box = document.createElement('div');
+      if (Array.isArray(def.groups)) {
+        def.groups.forEach(function (group) {
+          var gh = document.createElement('div');
+          gh.className = 'group-head';
+          gh.textContent = group.label || '';
+          box.appendChild(gh);
+          var row = document.createElement('div');
+          (group.options || []).forEach(function (opt) { row.appendChild(optionEl(field, opt, true)); });
+          box.appendChild(row);
+        });
+      } else {
+        (def.options || []).forEach(function (opt) { box.appendChild(optionEl(field, opt, true)); });
+      }
+      block.appendChild(box);
+      host.appendChild(block);
+    });
+  }
+
+  function renderSecondary() {
+    var host = document.getElementById('secondaryFields');
+    T.SECONDARY_FIELDS.forEach(function (field) {
+      var def = T.TAXONOMY[field];
+      if (!def) return;
+      var wrap = document.createElement('div');
+      var lbl = document.createElement('label');
+      lbl.className = 'lbl';
+      lbl.textContent = def.label;
+      lbl.setAttribute('for', 'sec-' + field);
+      var sel = document.createElement('select');
+      sel.id = 'sec-' + field;
+      sel.setAttribute('data-secondary', field);
+      T.flattenOptions(field).forEach(function (opt) {
+        var o = document.createElement('option');
+        o.value = opt.id;
+        o.textContent = opt.label;
+        sel.appendChild(o);
+      });
+      sel.value = def.default;
+      sel.addEventListener('change', refresh);
+      wrap.appendChild(lbl);
+      wrap.appendChild(sel);
+      host.appendChild(wrap);
+    });
+  }
+
+  function renderRecordPickers() {
+    var sorted = EXISTING.slice().sort(function (a, b) {
+      return String(a.title || '').localeCompare(String(b.title || ''));
+    });
+
+    var pick = document.getElementById('pickRecord');
+    var rel = document.getElementById('f-relatedResources');
+    sorted.forEach(function (r) {
+      var a = document.createElement('option');
+      a.value = r.id; a.textContent = r.title + '  (' + r.id + ')';
+      pick.appendChild(a);
+      var b = document.createElement('option');
+      b.value = r.id; b.textContent = r.title;
+      rel.appendChild(b);
+    });
+    rel.addEventListener('change', refresh);
+  }
+
+  // ------------------------------------------------------------ form <-> record
+  function slugify(text) {
+    return String(text || '')
+      .toLowerCase()
+      .replace(/['’]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 60)
+      .replace(/-+$/g, '');
+  }
+
+  function selectedValues(field) {
+    var nodes = document.querySelectorAll('input[data-tax="' + field + '"]:checked');
+    return Array.prototype.map.call(nodes, function (n) { return n.value; });
+  }
+
+  function setSelectedValues(field, values) {
+    var nodes = document.querySelectorAll('input[data-tax="' + field + '"]');
+    Array.prototype.forEach.call(nodes, function (n) {
+      n.checked = (values || []).indexOf(n.value) > -1;
+      n.parentNode.classList.toggle('checked', n.checked);
+    });
+  }
+
+  function val(id) { return (document.getElementById(id).value || '').trim(); }
+
+  function linesToArray(text) {
+    return String(text || '').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  function buildRecord() {
+    var rec = {};
+    rec.id = val('f-id');
+    rec.title = val('f-title');
+    rec.organization = val('f-organization');
+    rec.description = val('f-description');
+    rec.url = val('f-url');
+
+    var previous = (state.mode === 'edit' && state.editingId)
+      ? EXISTING.filter(function (r) { return r.id === state.editingId; })[0]
+      : null;
+
+    T.PRIMARY_FIELDS.forEach(function (field) {
+      var picked = selectedValues(field);
+      if (previous && Array.isArray(previous[field])) {
+        // Keep what was already there in its stored order, then append anything
+        // newly ticked. Without this, an unrelated edit reorders every tag array
+        // into taxonomy order and buries the real change in diff noise.
+        var kept = previous[field].filter(function (v) { return picked.indexOf(v) > -1; });
+        var added = picked.filter(function (v) { return kept.indexOf(v) === -1; });
+        rec[field] = kept.concat(added);
+      } else {
+        rec[field] = picked;
+      }
+    });
+
+    var kf = linesToArray(document.getElementById('f-keyFeatures').value);
+    if (kf.length) rec.keyFeatures = kf;
+
+    var pu = val('f-practicalUse');
+    if (pu) rec.practicalUse = pu;
+
+    var relSel = document.getElementById('f-relatedResources');
+    var rel = Array.prototype.filter.call(relSel.options, function (o) { return o.selected; })
+                   .map(function (o) { return o.value; });
+    rec.relatedResources = rel;
+
+    rec.lastUpdated = val('f-lastUpdated');
+
+    var fd = val('f-formatDetails');
+    if (fd) rec.formatDetails = fd;
+    var sn = val('f-sourceNotes');
+    if (sn) rec.sourceNotes = sn;
+
+    T.SECONDARY_FIELDS.forEach(function (field) {
+      var sel = document.getElementById('sec-' + field);
+      if (!sel) return;
+      if (!T.isUnset(field, sel.value)) rec[field] = sel.value;
+    });
+
+    if (state.mode === 'edit' && state.editingId) {
+      if (previous && Array.isArray(previous.legacyTags)) rec.legacyTags = previous.legacyTags;
+      rec.validated = VALIDATED.indexOf(state.editingId) > -1;
+    } else {
+      // A new record has not been reviewed by a second pair of eyes yet.
+      rec.validated = false;
+    }
+    return rec;
+  }
+
+  function orderedJson(rec) {
+    var out = { '$schema': '../resource.schema.json' };
+    KEY_ORDER.forEach(function (k) { if (k in rec) out[k] = rec[k]; });
+    Object.keys(rec).sort().forEach(function (k) { if (!(k in out)) out[k] = rec[k]; });
+    return JSON.stringify(out, null, 2) + '\n';
+  }
+
+  function loadRecordIntoForm(id) {
+    var r = EXISTING.filter(function (x) { return x.id === id; })[0];
+    if (!r) return;
+    document.getElementById('f-id').value = r.id || '';
+    document.getElementById('f-title').value = r.title || '';
+    document.getElementById('f-organization').value = r.organization || '';
+    document.getElementById('f-description').value = r.description || '';
+    document.getElementById('f-url').value = r.url || '';
+    T.PRIMARY_FIELDS.forEach(function (field) { setSelectedValues(field, r[field] || []); });
+    document.getElementById('f-keyFeatures').value = (r.keyFeatures || []).join('\n');
+    document.getElementById('f-practicalUse').value = r.practicalUse || '';
+    document.getElementById('f-formatDetails').value = r.formatDetails || '';
+    document.getElementById('f-sourceNotes').value = r.sourceNotes || '';
+    document.getElementById('f-lastUpdated').value = /^\d{4}-\d{2}-\d{2}$/.test(r.lastUpdated || '') ? r.lastUpdated : '';
+    var rel = document.getElementById('f-relatedResources');
+    Array.prototype.forEach.call(rel.options, function (o) {
+      o.selected = (r.relatedResources || []).indexOf(o.value) > -1;
+    });
+    T.SECONDARY_FIELDS.forEach(function (field) {
+      var sel = document.getElementById('sec-' + field);
+      if (sel) sel.value = r[field] || T.TAXONOMY[field].default;
+    });
+    state.idTouched = true;
+  }
+
+  function clearForm() {
+    ['f-id','f-title','f-organization','f-description','f-url','f-keyFeatures',
+     'f-practicalUse','f-formatDetails','f-sourceNotes','f-lastUpdated'].forEach(function (id) {
+      document.getElementById(id).value = '';
+    });
+    T.PRIMARY_FIELDS.forEach(function (field) { setSelectedValues(field, []); });
+    var rel = document.getElementById('f-relatedResources');
+    Array.prototype.forEach.call(rel.options, function (o) { o.selected = false; });
+    T.SECONDARY_FIELDS.forEach(function (field) {
+      var sel = document.getElementById('sec-' + field);
+      if (sel) sel.value = T.TAXONOMY[field].default;
+    });
+    state.idTouched = false;
+  }
+
+  // ------------------------------------------------------------- validation
+  // Mirrors scripts/validate-resources.mjs. Anything reported as an error here
+  // would fail the Validate workflow on the pull request; catching it now saves
+  // a round trip.
+  function check(rec) {
+    var errors = [], warnings = [];
+
+    REQUIRED_SCALARS.forEach(function (f) {
+      if (!rec[f]) errors.push('"' + f + '" is required.');
+    });
+
+    if (rec.id && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rec.id)) {
+      errors.push('The ID must be lowercase words joined by single hyphens.');
+    }
+
+    if (state.mode === 'add' && rec.id && EXISTING_IDS.indexOf(rec.id) > -1) {
+      errors.push('A resource with the ID "' + rec.id + '" already exists. Switch to Edit, or choose another ID.');
+    }
+
+    REQUIRED_ARRAYS.forEach(function (f) {
+      if (!rec[f] || !rec[f].length) errors.push('Pick at least one ' + T.TAXONOMY[f].label.toLowerCase() + '.');
+    });
+
+    if (rec.url && rec.url !== '#') {
+      var ok = false;
+      try {
+        var u = new URL(rec.url);
+        ok = (u.protocol === 'https:' || u.protocol === 'http:');
+      } catch (e) { ok = false; }
+      if (!ok) errors.push('The URL must be a full http(s) address, including the https:// part.');
+      else if (/^http:/.test(rec.url)) warnings.push('This is a plain http:// link. Use https:// if the site supports it.');
+    }
+
+    if (rec.lastUpdated && isNaN(Date.parse(rec.lastUpdated))) {
+      errors.push('The date is not a real date.');
+    }
+
+    (rec.relatedResources || []).forEach(function (id) {
+      if (EXISTING_IDS.indexOf(id) === -1) warnings.push('Related resource "' + id + '" does not exist.');
+    });
+
+    T.PRIMARY_FIELDS.forEach(function (f) {
+      var def = T.TAXONOMY[f];
+      var n = (rec[f] || []).length;
+      if (def && def.maxRecommended && n > def.maxRecommended) {
+        warnings.push(def.label + ': ' + n + ' selected, ' + def.maxRecommended + ' is the recommended maximum. Trim the weakest.');
+      }
+    });
+
+    if (rec.description && rec.description.length < 40) {
+      warnings.push('The description is very short. A sentence or two helps people judge relevance.');
+    }
+
+    return { errors: errors, warnings: warnings };
+  }
+
+  // ----------------------------------------------------------------- output
+  function newFileUrl(rec) {
+    return 'https://github.com/' + REPO + '/new/' + BRANCH +
+      '?filename=' + encodeURIComponent(DIR + '/' + rec.id + '.json') +
+      '&value=' + encodeURIComponent(orderedJson(rec));
+  }
+  function editFileUrl(id) {
+    return 'https://github.com/' + REPO + '/edit/' + BRANCH + '/' + DIR + '/' + id + '.json';
+  }
+  function deleteFileUrl(id) {
+    return 'https://github.com/' + REPO + '/delete/' + BRANCH + '/' + DIR + '/' + id + '.json';
+  }
+
+  function copyText(text, done) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+      return;
+    }
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    done(ok);
+  }
+
+  function note(text, isError) {
+    var el = document.getElementById('copyNote');
+    el.textContent = text;
+    el.className = 'hint mt-2' + (isError ? ' err' : '');
+  }
+
+  // ---------------------------------------------------------------- refresh
+  function refresh() {
+    T.PRIMARY_FIELDS.forEach(function (field) {
+      var el = document.getElementById('count-' + field);
+      if (!el) return;
+      var def = T.TAXONOMY[field];
+      var n = selectedValues(field).length;
+      el.textContent = n + (def.maxRecommended ? ' of ' + def.maxRecommended + ' recommended' : ' selected');
+      el.className = 'text-xs ' + (def.maxRecommended && n > def.maxRecommended ? 'warn font-bold' : 'text-gray-600');
+    });
+
+    var rec = buildRecord();
+    var result = check(rec);
+    var checks = document.getElementById('checks');
+    checks.innerHTML = '';
+
+    if (state.mode === 'remove') {
+      checks.innerHTML = state.editingId
+        ? '<p class="text-sm">Ready to remove <span class="mono">' + state.editingId + '</span>.</p>'
+        : '<p class="text-sm warn">Choose a resource above.</p>';
+    } else if (!result.errors.length && !result.warnings.length) {
+      checks.innerHTML = '<p class="text-sm"><i class="fa-solid fa-check aphl-text-teal"></i> Everything checks out. This would pass the automated review.</p>';
+    } else {
+      var ul = document.createElement('ul');
+      ul.className = 'list-disc pl-5 space-y-1';
+      result.errors.forEach(function (m) {
+        var li = document.createElement('li'); li.className = 'err'; li.textContent = m; ul.appendChild(li);
+      });
+      result.warnings.forEach(function (m) {
+        var li = document.createElement('li'); li.className = 'warn'; li.textContent = m; ul.appendChild(li);
+      });
+      checks.appendChild(ul);
+      if (result.errors.length) {
+        var p = document.createElement('p');
+        p.className = 'text-xs mt-2 text-gray-600';
+        p.textContent = 'Red items would fail the automated check on the pull request. Amber items are judgement calls — you can proceed.';
+        checks.appendChild(p);
+      }
+    }
+
+    document.getElementById('preview').textContent =
+      state.mode === 'remove' ? '(no record — this deletes a file)' : orderedJson(rec);
+
+    var btn = document.getElementById('btnPrimary');
+    var help = document.getElementById('submitHelp');
+
+    if (state.mode === 'remove') {
+      btn.textContent = 'Open the delete page on GitHub';
+      btn.className = 'btn-rust w-full px-3 py-2 rounded font-bold text-sm mb-2';
+      btn.disabled = !state.editingId;
+      help.textContent = 'GitHub will ask you to confirm, then offer to open a pull request.';
+    } else if (state.mode === 'edit') {
+      btn.textContent = 'Copy, then open the file on GitHub';
+      btn.className = 'btn-teal w-full px-3 py-2 rounded font-bold text-sm mb-2';
+      btn.disabled = !state.editingId || result.errors.length > 0;
+      help.textContent = 'This copies the record, then opens the existing file on GitHub. Select everything there, paste, and choose "Create a new branch and start a pull request".';
+    } else {
+      btn.textContent = 'Open a pull request on GitHub';
+      btn.className = 'btn-teal w-full px-3 py-2 rounded font-bold text-sm mb-2';
+      btn.disabled = result.errors.length > 0;
+      help.textContent = 'This opens GitHub with the new file already filled in. Choose "Create a new branch and start a pull request" at the bottom of that page.';
+    }
+    btn.style.opacity = btn.disabled ? '.5' : '1';
+    btn.style.cursor = btn.disabled ? 'not-allowed' : 'pointer';
+  }
+
+  // ----------------------------------------------------------------- wiring
+  renderPrimary();
+  renderSecondary();
+  renderRecordPickers();
+
+  document.getElementById('f-title').addEventListener('input', function () {
+    if (state.mode === 'add' && !state.idTouched) {
+      document.getElementById('f-id').value = slugify(this.value);
+    }
+    refresh();
+  });
+  document.getElementById('f-id').addEventListener('input', function () {
+    state.idTouched = true;
+    refresh();
+  });
+  ['f-organization','f-description','f-url','f-keyFeatures','f-practicalUse',
+   'f-formatDetails','f-sourceNotes','f-lastUpdated'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', refresh);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="mode"]'), function (radio) {
+    radio.addEventListener('change', function () {
+      state.mode = this.value;
+      state.editingId = null;
+      document.getElementById('pickRecord').value = '';
+      document.getElementById('pickWrap').classList.toggle('hidden', state.mode === 'add');
+      document.getElementById('formBody').classList.toggle('hidden', state.mode === 'remove');
+      document.getElementById('removeNotice').classList.toggle('hidden', state.mode !== 'remove');
+      clearForm();
+      note('');
+      refresh();
+    });
+  });
+
+  document.getElementById('pickRecord').addEventListener('change', function () {
+    state.editingId = this.value || null;
+    if (state.mode === 'edit') {
+      clearForm();
+      if (state.editingId) loadRecordIntoForm(state.editingId);
+    }
+    refresh();
+  });
+
+  document.getElementById('btnPrimary').addEventListener('click', function () {
+    if (this.disabled) return;
+    if (state.mode === 'remove') {
+      window.open(deleteFileUrl(state.editingId), '_blank', 'noopener');
+      return;
+    }
+    var rec = buildRecord();
+    var json = orderedJson(rec);
+
+    if (state.mode === 'edit') {
+      copyText(json, function (ok) {
+        note(ok ? 'Copied. Paste over everything in the GitHub editor that just opened.'
+                : 'Could not copy automatically — use "Copy the JSON" below, then paste.', !ok);
+      });
+      window.open(editFileUrl(state.editingId), '_blank', 'noopener');
+      return;
+    }
+
+    var url = newFileUrl(rec);
+    if (url.length > URL_BUDGET) {
+      copyText(json, function () {});
+      note('This record is too long to pass through the address bar, so it has been copied instead. ' +
+           'Open GitHub, create ' + DIR + '/' + rec.id + '.json by hand, and paste.', true);
+      window.open('https://github.com/' + REPO + '/new/' + BRANCH, '_blank', 'noopener');
+      return;
+    }
+    window.open(url, '_blank', 'noopener');
+    note('GitHub opened in a new tab. Scroll to the bottom and choose "Create a new branch and start a pull request".');
+  });
+
+  document.getElementById('btnCopy').addEventListener('click', function () {
+    copyText(orderedJson(buildRecord()), function (ok) {
+      note(ok ? 'Copied to the clipboard.' : 'Could not copy — select the record below and copy it by hand.', !ok);
+    });
+  });
+
+  document.getElementById('btnDownload').addEventListener('click', function () {
+    var rec = buildRecord();
+    var blob = new Blob([orderedJson(rec)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (rec.id || 'resource') + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+    note('Downloaded.');
+  });
+
+  refresh();
+})();
+</script>
+</body>
+</html>
