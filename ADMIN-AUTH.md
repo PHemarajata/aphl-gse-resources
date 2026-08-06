@@ -82,5 +82,10 @@ The user must sign out and back in for a new claim to appear in their token.
 - Domain comparison is exact, not `endsWith`. `evil.com@aphl.org` style local
   parts do not match.
 - The server rejects tokens whose `email_verified` is explicitly `false`.
-- Publishing is still a maintainer-only step: `saveResources` returns 501 by
-  design, and Firebase Hosting is deployed from a checkout with the CLI.
+- The admin panel is no longer published to the public site. It is excluded
+  from the GitHub Pages build and runs from a curator's own clone — see
+  `DEPLOY.md`. That removes this browser-side layer from the public internet;
+  the server-side allow-list above still matters, because the AI endpoints on
+  Firebase remain reachable.
+- `saveResources` returns 501 by design. Publishing now happens by merging to
+  `main`, not from the admin panel.

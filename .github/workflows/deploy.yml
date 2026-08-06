@@ -1,0 +1,97 @@
+name: Deploy to GitHub Pages
+
+# Publishes the public site on every merge to main. Merging a pull request is
+# therefore publishing — that is the point of the move off a CLI-only deploy.
+#
+# The admin panel is deliberately NOT published. See "Assemble" below.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race. Queue rather than cancel, so a merge is never
+# silently dropped in favour of a later one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build the published site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # The same two gates the pull request ran. Deploy does not assume they
+      # passed earlier — main can be pushed to by a bypass, and a green PR can
+      # go stale.
+      - name: Built data file is in sync with data/
+        run: node scripts/build-data.mjs --check
+
+      - name: Resources validate against the taxonomy
+        run: node scripts/validate-resources.mjs
+
+      # Copy everything, then remove what must not be public. Done this way
+      # round rather than as an allow-list so a new public asset ships
+      # automatically instead of being silently dropped.
+      #
+      # The admin panel runs from a curator's own clone — it already writes
+      # files through showDirectoryPicker. Keeping it off the public site
+      # removes the Firebase Auth surface from the internet entirely.
+      - name: Assemble the published site
+        run: |
+          cp -r public _site
+          rm -f _site/admin.html \
+                _site/admin.js \
+                _site/admin-auth.js \
+                _site/validation.js \
+                _site/gpt-json-import-prompt.txt
+          rm -f _site/resources-data-backup-*.js
+          echo "Publishing:"
+          find _site -type f | sort | sed 's/^/  /'
+
+      # A copy-then-delete assembly is one typo away from publishing the admin
+      # panel. Fail loudly rather than quietly shipping it.
+      - name: Verify the admin panel was not published
+        run: |
+          leaked=0
+          for f in admin.html admin.js admin-auth.js validation.js gpt-json-import-prompt.txt; do
+            if [ -e "_site/$f" ]; then
+              echo "::error::$f is present in the build output and must not be published"
+              leaked=1
+            fi
+          done
+          if [ -e "_site/index.html" ]; then :; else
+            echo "::error::index.html is missing from the build output"
+            leaked=1
+          fi
+          exit $leaked
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy to Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
