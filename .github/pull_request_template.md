@@ -1,19 +1,24 @@
 ## What changed
 
-<!-- One or two lines. If you added or edited a resource, name it. -->
+<!-- One or two lines. If you added or edited a resource, name it and say why
+     it belongs in the collection. That is the part no automated check can do. -->
 
 ## Checklist
 
-- [ ] Edited files under `data/`, **not** `public/resources-data.js` (that file is generated)
-- [ ] Ran `npm run build` and committed the regenerated `public/resources-data.js`
-- [ ] Ran `npm run validate` locally and it passed
-- [ ] New or changed facet values come from the vocabulary in `public/taxonomy.js`
-- [ ] If a resource was added, its URL was opened and actually resolves
+Most pull requests come from the curation form, which handles the first three
+of these for you. Tick what applies and delete the rest.
+
+- [ ] Edited files under `data/` — never `public/resources-data.js`, which is generated and not committed
+- [ ] Tags come from the vocabulary in `public/taxonomy.js`, and each field is within its recommended maximum
+- [ ] If a resource was added or its link changed, the URL was opened and actually resolves
+- [ ] For a developer change: `npm run validate` passes locally
 
 <!--
-The Validate check runs both gates automatically:
-  1. the committed data file matches data/  (catches a forgotten rebuild)
-  2. every record validates against the taxonomy
+The Validate check runs automatically:
+  1. data/resource.schema.json matches the taxonomy it is generated from
+  2. the data builds cleanly from data/
+  3. every record validates against the taxonomy
 
-If it fails on drift, run `npm run build` and commit the result.
+There is no "did you rebuild the artifact" gate any more — the artifact is not
+committed. That is what lets a curator open a pull request from a browser.
 -->
