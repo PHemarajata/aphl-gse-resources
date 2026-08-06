@@ -3,34 +3,98 @@
 Everything here lives in `data/`. There is no admin panel and no login — a
 resource is a small JSON file, and changing one is a pull request.
 
-## Adding a resource
+## One-time setup
 
-    npm run new -- some-resource-id
-    # fill in data/resources/some-resource-id.json
+You need the repository on your machine and Node installed. Nothing else: the
+build and validator have no dependencies, so there is no `npm install` step.
+
+    git clone https://github.com/PHemarajata/aphl-gse-resources.git
+    cd aphl-gse-resources
+    node --version        # any Node 20+ is fine
+
+Open the folder in an editor that understands JSON Schema — VS Code does out of
+the box. Each record points at `data/resource.schema.json`, so every vocabulary
+field autocompletes, hovering a field explains what the values mean, and an
+invalid value is underlined as you type.
+
+## The loop, exactly
+
+Four commands, every time, in this order:
+
+    git checkout main && git pull          # 1. start from current main
+    git checkout -b fix-something          # 2. never work on main; it is protected
+
+    # 3. edit the file(s) under data/
+
+    npm run validate                       # 4. rebuild + check everything
+
+`npm run validate` is not optional and not a formality. It regenerates
+`public/resources-data.js` from your edit. **If you skip it, CI rejects the
+pull request**, because the committed data file will no longer match its source.
+
+Then:
+
+    git add data public
+    git commit -m "fix: shorter description of what changed"
+    git push -u origin fix-something
+
+Open the pull request on GitHub, wait for the green check, merge. Merging
+publishes the site.
+
+## Worked example: fixing a broken link
+
+The weekly link check has opened an issue saying `who-costing-tool` is dead.
+
+    git checkout main && git pull
+    git checkout -b fix-who-costing-tool
+
+Open `data/resources/who-costing-tool.json`. Find the current URL by hand —
+search for the resource on the publisher's own site. Prefer the publisher's
+canonical page over a mirror, and a DOI over whichever host currently serves an
+article. Change one line:
+
+    "url": "https://www.who.int/publications/i/item/9789240118843",
+
+Then:
+
     npm run validate
-    git add data/ public/resources-data.js && git commit && git push
 
-Open a pull request. CI checks it, you merge, and the site publishes. That is
-the whole loop.
+You should see three lines of output ending in `Validation status: PASS`. If
+instead you see `DRIFT`, you edited the generated file by mistake — undo that
+and edit the record under `data/` instead.
 
-**Open the file in an editor that understands JSON Schema** — VS Code does out
-of the box. Each record points at `data/resource.schema.json`, so every
-vocabulary field autocompletes, hovering a field explains what the values mean,
-and an invalid value is underlined as you type. That is the job the old admin
-panel used to do, done better and without a browser.
+    git add data public
+    git commit -m "fix: who-costing-tool now points at the 2nd edition"
+    git push -u origin fix-who-costing-tool
 
-The schema is generated from `public/taxonomy.js`, so it cannot drift from the
-real vocabulary. If you change the taxonomy, run `npm run build` and commit the
-regenerated schema alongside it; CI fails if you forget.
+Open the PR, merge it, and close the link-check issue.
 
-## Editing a resource
+## Where you can edit
 
-Edit its file. Run `npm run validate`. Commit both the record and the rebuilt
-`public/resources-data.js`.
+**On your own machine — the only route that completes on its own.** Everything
+above assumes this.
 
-**Never edit `public/resources-data.js` by hand.** It is generated. CI compares
-it against `data/` and fails if they disagree, which catches both a hand-edit
-and a forgotten rebuild.
+**In the browser (github.dev, or GitHub's pencil icon).** Pressing `.` on the
+repository opens VS Code in a browser tab, and the schema autocomplete works
+there. It is a genuinely good place to *read* records, and fine for editing
+anything that is not under `data/`.
+
+But it **cannot finish a data change**, because there is no terminal, so you
+cannot run `npm run validate`. A pull request made this way will fail CI with a
+drift error. If you have already made one, it is not lost — someone with a
+clone can check out your branch, run `npm run validate`, and push the result to
+it. Just do not expect a browser-only edit to merge by itself.
+
+**Not editing at all.** Open an issue with the "Suggest a resource" template. A
+link and a sentence on why it matters is enough; a curator handles the rest.
+
+## Never edit these
+
+    public/resources-data.js     generated from data/ — CI compares them
+    data/resource.schema.json    generated from public/taxonomy.js
+
+Both are build outputs. `npm run build` regenerates them; CI fails if a commit
+contains one that does not match its source.
 
 ## Tagging: the part that actually matters
 
