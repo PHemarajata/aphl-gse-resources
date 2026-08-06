@@ -91,11 +91,19 @@ if (blocked.length) {
 if (noUrl.length) {
   L.push('## No URL at all');
   L.push('');
-  for (const n of noUrl) L.push(`- \`${n.r.id}\` — ${n.r.title}`);
+  for (const n of noUrl) L.push(`- \`${n.id}\` — ${n.title}`);
   L.push('');
 }
 if (!dead.length && !moved.length && !noUrl.length) L.push('All links resolved. Nothing to do.');
 
 fs.writeFileSync(path.join(repoRoot, 'link-report.md'), L.join('\n') + '\n');
 console.log(L.slice(0, 4).join('\n'));
-process.exit(dead.length ? 1 : 0);
+
+// Deliberately exit 0 even when links are broken. Finding a dead link is this
+// script working, not failing, and the report is how that gets communicated.
+//
+// A non-zero exit is therefore reserved for the script itself breaking — which
+// is what happened on the first run: a crash here exited 1, the workflow had
+// continue-on-error set, and the job went green having done nothing at all. A
+// check that fails silently is worse than no check.
+process.exit(0);
