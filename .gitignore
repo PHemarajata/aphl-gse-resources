@@ -74,3 +74,6 @@ validation-reports/*.md
 
 # Admin-generated local resource backups
 public/resources-data-backup-*.js
+
+# Cowork session scratch — retired files and orphaned git locks
+_to_delete/

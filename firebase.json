@@ -1,24 +1,6 @@
 {
-  "functions": {
-    "source": "functions",
-    "runtime": "nodejs22"
-  },
   "hosting": {
     "public": "public",
-    "rewrites": [
-      {
-        "source": "/api/categorize-resource",
-        "function": "categorizeResource"
-      },
-      {
-        "source": "/api/ai-health",
-        "function": "aiHealth"
-      },
-      {
-        "source": "/api/saveResources",
-        "function": "saveResources"
-      }
-    ],
     "predeploy": [
       "node scripts/validate-resources.mjs"
     ],

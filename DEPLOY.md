@@ -49,15 +49,19 @@ build. See `CONTRIBUTING.md` for how curation works now.
 The removals above are therefore normally no-ops, kept as a safety net in case a
 browser editor is ever reintroduced under `public/`.
 
-## Firebase
+## There is no server side
 
-Untouched by this change. `aphlgseresources.web.app` continues to serve
-whatever was last deployed with the Firebase CLI, including the admin panel.
+The Cloud Functions were deleted along with the admin panel that was their only
+caller. `categorizeResource` spent OpenAI credit and was reachable by anyone
+holding a Firebase token for the project; AI drafting now runs in
+`.github/workflows/ai-draft.yml` instead, against a repository secret, and
+produces a reviewable pull request.
 
-Once the Pages site is confirmed working, the sensible follow-up is to point
-Firebase Hosting at it with a redirect so the old URL keeps resolving. That is
-deliberately not done in the same change: if the redirect went live before
-Pages did, the site would break.
+`firebase.json` keeps only its hosting block. `aphlgseresources.web.app` still
+serves whatever was last deployed there and is now stale; it was never
+advertised, so it is being left to lapse rather than redirected. If that ever
+changes, add a redirect to the Pages URL — but only after confirming Pages is
+healthy, or the site breaks.
 
 ## The data file
 

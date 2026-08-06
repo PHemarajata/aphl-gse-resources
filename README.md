@@ -4,187 +4,86 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/APHL-Global_Health-00A0AF?style=flat-square&labelColor=006E79" alt="APHL Global Health" />
-  <img src="https://img.shields.io/badge/Hosting-Firebase-B42E34?style=flat-square&labelColor=404040" alt="Firebase Hosting" />
+  <img src="https://img.shields.io/badge/Hosting-GitHub_Pages-181717?style=flat-square&labelColor=404040" alt="GitHub Pages" />
   <img src="https://img.shields.io/badge/Status-Active-68BD49?style=flat-square&labelColor=404040" alt="Status: Active" />
-  <img src="https://img.shields.io/badge/Curator_Access-Google_Sign--in-EBAB21?style=flat-square&labelColor=404040" alt="Curator Access: Google Sign-in" />
+  <img src="https://img.shields.io/badge/Curation-Pull_requests-00A0AF?style=flat-square&labelColor=404040" alt="Curation: Pull requests" />
 </p>
 
 <p align="center">
-  <a href="https://aphlgseresources.web.app/">
-    <img src="https://img.shields.io/badge/%E2%86%92%20Visit%20the%20Resource-aphlgseresources.web.app-00A0AF?style=for-the-badge&labelColor=006E79" alt="Visit the Resource at aphlgseresources.web.app" height="42" />
+  <a href="https://phemarajata.github.io/aphl-gse-resources/">
+    <img src="https://img.shields.io/badge/%E2%86%92%20Visit%20the%20Resource-phemarajata.github.io-00A0AF?style=for-the-badge&labelColor=006E79" alt="Visit the resource" height="42" />
   </a>
 </p>
 
 <p align="center">
-  <sub>Live site: <a href="https://aphlgseresources.web.app/"><b>https://aphlgseresources.web.app/</b></a></sub>
+  <sub>Live site: <a href="https://phemarajata.github.io/aphl-gse-resources/"><b>https://phemarajata.github.io/aphl-gse-resources/</b></a></sub>
 </p>
 
 ---
 
 ## Overview
 
-Public resource portal and curator admin tools for APHL Global Health genomic epidemiology resources.
+A curated, faceted library of genomic epidemiology resources for public health
+laboratories, with an emphasis on lower-resource settings.
 
-The site is hosted on Firebase Hosting. Resource data currently lives in `public/resources-data.js`, with validation and admin tools to help curators add, review and export updates.
+The site is a static page. There is no server, no database and no login. A
+resource is a small JSON file in `data/`, and changing one is a pull request.
 
-> **APHL** — the Association of Public Health Laboratories — works to strengthen laboratory systems serving the public's health in the US and globally.
+## How it works
 
----
+    data/resources/<id>.json   one file per resource — the source of truth
+    data/order.json            display order (the site renders in array order)
+    data/metadata.json         version and validation metadata
+    data/resource.schema.json  generated from the taxonomy; drives editor autocomplete
+    public/taxonomy.js         every controlled vocabulary, in one place
+    public/resources-data.js   BUILD ARTIFACT — never edit by hand
 
-## Public Site
+`scripts/build-data.mjs` compiles `data/` into `public/resources-data.js`.
+Everything is zero-dependency: the build, the schema generator and the
+validator all run on plain `node`, with no install step.
 
-**🔗 Live at [aphlgseresources.web.app](https://aphlgseresources.web.app/)**
+## Curating
 
-- Browse and search genomic epidemiology resources.
-- Filter by audience, stage, resource type, geography, topics and pathogen focus.
-- Open resource details and source links from the public browser.
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** — how to add and edit a resource,
+what each facet means, and the tagging discipline that keeps filtering useful.
 
----
+    npm run new -- some-resource-id   scaffold a record
+    npm run validate                  drift checks + full validation
 
-## Curator Access
+Open a record in an editor that understands JSON Schema and every vocabulary
+field autocompletes, with invalid values underlined as you type.
 
-Admin access is granted by the APHL Global Health system administrator and uses a Google credential. This repository intentionally does not publish administrator contact details, private email addresses, API keys or deployment credentials.
+No Git? Open an issue with the **Suggest a resource** template instead.
 
-Curators normally do **not** need Firebase CLI access or deployment permissions. The recommended workflow is:
+## Publishing
 
-| Step | Action |
-| :---: | :--- |
-| **1** | Request admin access from the APHL Global Health system administrator using the Google account you will use for curation. |
-| **2** | Open the hosted admin panel. |
-| **3** | Sign in with Google. |
-| **4** | Add, edit, batch import or AI-assisted import resources. |
-| **5** | Run validation for new/modified resources, then full validation for release candidates. |
-| **6** | Use **Save Review File** or export JSON/JS to create a reviewable data file. |
-| **7** | Send the exported file or change request to the maintainer for review and live deployment. |
+See **[DEPLOY.md](DEPLOY.md)**. Short version: merging a pull request to `main`
+publishes the site. Every pull request is checked automatically for data-file
+drift, schema drift, and taxonomy validity, and `main` is protected so nothing
+reaches the site without passing.
 
-The admin panel records version/audit metadata. If the **Saved By** field is blank, it defaults to the signed-in Google email.
+The admin panel and Cloud Functions that predated this were removed — the panel
+wrote the generated file directly and would have had its work silently
+overwritten by the next build.
 
----
+## Automation
 
-## AI-Assisted Intake
-
-Curators with an OpenAI API key can use the built-in AI Intake panel.
-
-- The OpenAI key is used only for the browser session.
-- The key is not saved in the repository, Firebase config, local storage or exported resource data.
-- Single URL and batch URL intake still require curator review before saving.
-
-Curators without an API key can download **GPT JSON Import Prompt** from the admin panel, paste it into GPT and import the generated `.json` file through **Import JSON**.
-
----
-
-## Data Quality Rules
-
-Before sending changes for deployment:
-
-- Run validation and fix all blocking errors.
-- Review warnings and fix them when they indicate real data quality issues.
-- Keep `id` values lowercase kebab-case.
-- Use only controlled taxonomy values.
-- Keep `relatedResources` limited to internal resource IDs selected from the admin picker.
-- Do not place URLs, citations or free text in `relatedResources`.
-- For journal articles, use the article title as `title` and put authors/journal in `organization` or `formatDetails`.
-
----
-
-## Maintainer Setup
-
-Maintainers who publish live changes need repository and Firebase project access.
-
-**1. Clone the repository**
-
-```bash
-git clone <repository-url>
-cd aphl-gse-resources
-```
-
-**2. Install Firebase CLI if needed**
-
-```bash
-npm install -g firebase-tools
-firebase login
-```
-
-**3. Confirm the Firebase project**
-
-```bash
-firebase use aphlgseresources
-```
-
-**4. Install Cloud Functions dependencies**
-
-```bash
-cd functions
-npm install
-cd ..
-```
-
-**5. Validate resources**
-
-```bash
-node scripts/validate-resources.mjs
-```
-
-**6. Deploy static site/data changes**
-
-```bash
-firebase deploy --only hosting --project aphlgseresources
-```
-
-**7. Deploy function changes when AI intake or admin endpoints change**
-
-```bash
-firebase deploy --only functions,hosting --project aphlgseresources
-```
-
----
-
-## Review and Release Checklist
-
-Before committing or deploying:
-
-- [ ] `node scripts/validate-resources.mjs` passes.
-- [ ] Syntax checks pass for changed JavaScript files, for example:
-
-  ```bash
-  node --check functions/index.js
-  ```
-
-- [ ] Review the `resources-data.js` diff for accidental field swaps, duplicates or AI-generated citation clutter.
-- [ ] Confirm no API keys, private credentials or personal administrator contact details are committed.
-- [ ] Commit the code/data changes after the live workflow is confirmed.
-
----
-
-## Troubleshooting
-
-| Issue | Resolution |
+| Workflow | What it does |
 | :--- | :--- |
-| **Admin says auth is not configured** | Use **Configure Auth**, then **Use Hosting Config**, then sign in again. |
-| **Signed in but not authorized** | Request admin access from the APHL Global Health system administrator using the same Google account. |
-| **AI intake says no OpenAI key** | Paste a key and click **Use for Session** or **Test**. The key clears on refresh/logout. |
-| **AI intake times out** | Paste an abstract or source summary into **Optional context** and retry. |
-| **Generated JSON import fails** | Ensure GPT returned raw JSON only, with no markdown/code fences, and that the file is a JSON array or an object with a `resources` array. |
-| **Save did not update the live site** | Curator save/export creates a review file. A maintainer still needs to deploy Hosting. |
+| `validate.yml` | Three gates on every pull request |
+| `deploy.yml` | Publishes to GitHub Pages on merge |
+| `link-check.yml` | Weekly sweep of every resource URL; opens one issue with what broke |
+| `ai-draft.yml` | Drafts a record from a URL and opens a pull request for review |
 
----
+`ai-draft.yml` needs an `OPENAI_API_KEY` repository secret. Values the model
+invents are filtered against the real vocabulary before anything is written.
 
-## Security Notes
+## Data quality
 
-- Do not commit API keys or Firebase private credentials.
-- Firebase Web App config is not a secret, but deployment credentials and admin permissions are sensitive.
-- Public documentation should refer curators to the APHL Global Health system administrator without listing personal contact details.
+`npm run validate` must pass before a change can merge. It checks that the
+committed data file matches its source, that the schema matches the taxonomy,
+and that every record's facet values exist in the vocabulary.
 
----
-
-<p align="center">
-  <a href="https://aphl.org">
-    <img src="assets/aphl-logo.png" alt="Association of Public Health Laboratories" width="320" />
-  </a>
-</p>
-
-<p align="center">
-  <sub><b>Association of Public Health Laboratories</b><br/>
-  7700 Wisconsin Avenue, Suite 1000 &nbsp;·&nbsp; Bethesda, MD 20814<br/>
-  <a href="https://aphl.org">aphl.org</a></sub>
-</p>
+Warnings that do not block, but are worth heeding: a resource carrying more
+tags than the facet's recommended cap. A tag on most of the collection filters
+nothing — see the tagging section of CONTRIBUTING.md for why that matters here.
