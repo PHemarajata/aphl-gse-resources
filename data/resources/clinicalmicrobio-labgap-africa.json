@@ -4,7 +4,7 @@
   "title": "Enhancing Clinical Microbiology for Genomic AMR Surveillance in Africa",
   "organization": "Antimicrobial Resistance & Infection Control / African laboratory collaborators",
   "description": "Review of clinical microbiology lab gaps in Africa that limit AMR / genomic surveillance: low isolate recovery, access inequity, lack of representativeness, QC etc.",
-  "url": "https://aricjournal.biomedcentral.com/articles/10.1186/s13756-024-01472-8",
+  "url": "https://doi.org/10.1186/s13756-024-01472-8",
   "audiences": [
     "laboratorians",
     "policymakers",
@@ -44,6 +44,8 @@
   "relatedResources": [],
   "lastUpdated": "",
   "formatDetails": "Journal review article",
-  "legacyTags": [],
+  "legacyTags": [
+    "url updated 2026-08-06: BMC content now serves from link.springer.com; the DOI is stable across such moves"
+  ],
   "validated": true
 }

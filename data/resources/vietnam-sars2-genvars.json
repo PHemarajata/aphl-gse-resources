@@ -4,7 +4,7 @@
   "title": "SARS-CoV-2 genomic surveillance in southern Vietnam (2020-2021): Tracking variant evolution and public health impact in a limited-resource setting",
   "organization": "Gladkikh et al. / Vietnam MoH / Pasteur Institute etc.",
   "description": "A WGS surveillance study of 126 SARS-CoV-2 genomes from southern Vietnam (2020-21), identifying local variant dynamics, distribution of variants, and impact of control measures.",
-  "url": "https://bmcinfectdis.biomedcentral.com/articles/10.1186/s12879-023-08814-8",
+  "url": "https://doi.org/10.1186/s12879-023-08814-8",
   "audiences": [
     "laboratorians",
     "epidemiologists",
@@ -37,6 +37,8 @@
   "relatedResources": [],
   "lastUpdated": "",
   "formatDetails": "",
-  "legacyTags": [],
+  "legacyTags": [
+    "url updated 2026-08-06: BMC content now serves from link.springer.com; the DOI is stable across such moves"
+  ],
   "validated": true
 }

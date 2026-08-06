@@ -4,7 +4,7 @@
   "title": "MIMAG: Minimum Information about a Metagenome-Assembled Genome",
   "organization": "Genomic Standards Consortium",
   "description": "Reporting guideline for metagenome-assembled genomes (MAGs), defining metadata and quality metrics including completeness, contamination and strain heterogeneity.",
-  "url": "https://gensc.org/misag-mimag/",
+  "url": "https://doi.org/10.1038/nbt.3893",
   "audiences": [
     "bioinformaticians",
     "laboratorians"
@@ -37,6 +37,8 @@
   ],
   "lastUpdated": "",
   "formatDetails": "",
-  "legacyTags": [],
+  "legacyTags": [
+    "url updated 2026-08-06: gensc.org/misag-mimag/ is gone; the standard is defined in Bowers et al., Nat Biotechnol"
+  ],
   "validated": true
 }

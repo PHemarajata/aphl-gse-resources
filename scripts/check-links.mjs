@@ -17,12 +17,13 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 const dir = path.join(repoRoot, 'data', 'resources');
 
 const UA = 'Mozilla/5.0 (compatible; aphl-gse-resources link check; +https://github.com/PHemarajata/aphl-gse-resources)';
-const TIMEOUT_MS = 20000;
+const TIMEOUT_MS = 30000;
+const SLOW_RETRY_MS = 60000;
 
 async function probe(url) {
-  const attempt = async (method) => {
+  const attempt = async (method, timeoutMs) => {
     const ac = new AbortController();
-    const timer = setTimeout(() => ac.abort(), TIMEOUT_MS);
+    const timer = setTimeout(() => ac.abort(), timeoutMs);
     try {
       const res = await fetch(url, { method, redirect: 'follow', signal: ac.signal, headers: { 'user-agent': UA } });
       return { status: res.status, finalUrl: res.url };
@@ -31,13 +32,38 @@ async function probe(url) {
     }
   };
   try {
-    let r = await attempt('HEAD');
-    // Plenty of servers reject HEAD but serve GET perfectly well.
-    if (r.status === 405 || r.status === 403 || r.status === 501) r = await attempt('GET');
+    let r = await attempt('HEAD', TIMEOUT_MS);
+    // Many servers reject or mishandle HEAD but serve GET perfectly well —
+    // including CDNs that answer 404 to a HEAD for a file that plainly exists.
+    // The first real run called four live pages dead this way.
+    if ([403, 404, 405, 429, 501].includes(r.status)) r = await attempt('GET', TIMEOUT_MS);
     return r;
   } catch (err) {
-    return { status: 0, error: err.name === 'AbortError' ? 'timeout' : err.message };
+    if (err.name !== 'AbortError') return { status: 0, error: err.message };
+    // A timeout usually means a slow origin, not a dead one. Two africacdc.org
+    // pages were reported broken on the first run and both load fine. Give a
+    // timeout one more attempt on a longer budget before calling it dead.
+    try {
+      return await attempt('GET', SLOW_RETRY_MS);
+    } catch (err2) {
+      return { status: 0, error: err2.name === 'AbortError' ? 'timeout (twice)' : err2.message };
+    }
   }
+}
+
+// Not every redirect is worth acting on, and following some would make the
+// stored link worse. Suppress the traps:
+//   - a one-time auth/session transit URL (Nature sends you through
+//     idp.nature.com/transit?...code=..., which works once, for you)
+//   - an https -> http downgrade, which the record schema now rejects anyway
+//   - a DOI resolving to whichever publisher host currently serves it. The DOI
+//     is the durable identifier; "following" it is exactly the wrong move.
+function redirectWorthReporting(from, to) {
+  if (from.protocol === 'https:' && to.protocol === 'http:') return false;
+  if (from.hostname === 'doi.org' || from.hostname === 'dx.doi.org') return false;
+  if (/(^|\.)idp\./.test(to.hostname)) return false;
+  if (/[?&](code|token|session|redirect_uri)=/.test(to.search)) return false;
+  return true;
 }
 
 const records = fs.readdirSync(dir).filter((f) => f.endsWith('.json'))
@@ -55,7 +81,9 @@ for (const r of records) {
   else {
     ok++;
     const a = new URL(r.url), b = new URL(res.finalUrl);
-    if (a.origin + a.pathname !== b.origin + b.pathname) moved.push({ r, to: res.finalUrl });
+    if (a.origin + a.pathname !== b.origin + b.pathname && redirectWorthReporting(a, b)) {
+      moved.push({ r, to: res.finalUrl });
+    }
   }
 }
 
@@ -73,7 +101,11 @@ if (dead.length) {
   L.push('');
 }
 if (moved.length) {
-  L.push('## Redirected — worth updating so the stored URL is the real one');
+  L.push('## Redirected — worth a look, not an instruction');
+  L.push('');
+  L.push('The stored URL still works. Update it only if the destination is genuinely');
+  L.push('more canonical — a publisher restructuring its paths, say. Prefer a DOI over');
+  L.push('whichever host currently serves the article.');
   L.push('');
   L.push('| resource | stored | resolves to |');
   L.push('|---|---|---|');

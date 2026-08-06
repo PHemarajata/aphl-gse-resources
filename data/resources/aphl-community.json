@@ -4,7 +4,7 @@
   "title": "APHL Genomic Epidemiology Community",
   "organization": "Association of Public Health Laboratories",
   "description": "Association of Public Health Laboratories community of practice with training programs, implementation guides, and professional networking.",
-  "url": "https://www.aphl.org/",
+  "url": "https://aphl.org/",
   "audiences": [
     "laboratorians",
     "epidemiologists"
@@ -42,7 +42,8 @@
   "legacyTags": [
     "relatedResources removed: professional-networks",
     "relatedResources removed: training-programs",
-    "relatedResources removed: implementation-support"
+    "relatedResources removed: implementation-support",
+    "url updated 2026-08-06: canonical host drops the www"
   ],
   "validated": false
 }

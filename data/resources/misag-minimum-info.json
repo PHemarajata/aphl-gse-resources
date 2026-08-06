@@ -4,7 +4,7 @@
   "title": "MISAG: Minimum Information about a Single Amplified Genome",
   "organization": "Genomic Standards Consortium",
   "description": "Standardized metadata for single-amplified genomes (SAGs), covering assembly quality, completeness, contamination and contextual fields aligned to MIxS.",
-  "url": "https://gensc.org/misag-mimag/",
+  "url": "https://doi.org/10.1038/nbt.3893",
   "audiences": [
     "bioinformaticians",
     "laboratorians"
@@ -37,6 +37,8 @@
   ],
   "lastUpdated": "",
   "formatDetails": "",
-  "legacyTags": [],
+  "legacyTags": [
+    "url updated 2026-08-06: gensc.org/misag-mimag/ is gone; the standard is defined in Bowers et al., Nat Biotechnol"
+  ],
   "validated": true
 }

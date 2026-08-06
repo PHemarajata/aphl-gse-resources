@@ -123,7 +123,7 @@ const resourcesDatabase = {
       "title": "WHO Genomics Costing Tool (GCT)",
       "organization": "World Health Organization",
       "description": "Microsoft Excel-based comprehensive budgeting tool for genomic surveillance infrastructure, workforce, biosafety, and quality assurance with detailed user manual.",
-      "url": "https://www.who.int/publications/i/item/9789240090866",
+      "url": "https://www.who.int/publications/i/item/9789240118843",
       "audiences": [
         "policymakers",
         "laboratorians"
@@ -164,7 +164,8 @@ const resourcesDatabase = {
       "formatDetails": "",
       "legacyTags": [
         "types: tool",
-        "types: inferred from title/description"
+        "types: inferred from title/description",
+        "url updated 2026-08-06: 1st edition withdrawn; superseded by the 2nd edition user manual (19 Mar 2026)"
       ]
     },
     {
@@ -272,7 +273,7 @@ const resourcesDatabase = {
       "title": "Target Operating Model (TOM) for Genomic Surveillance",
       "organization": "Frontiers in Public Health",
       "description": "Systematic implementation framework decomposing workflows into prioritized sampling, capacity determination, site assessment, and sustainability design.",
-      "url": "https://www.frontiersin.org/articles/10.3389/fpubh.2022.871114/full",
+      "url": "https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2022.871114/full",
       "audiences": [
         "policymakers",
         "laboratorians",
@@ -314,7 +315,9 @@ const resourcesDatabase = {
       ],
       "lastUpdated": "",
       "formatDetails": "",
-      "legacyTags": []
+      "legacyTags": [
+        "url updated 2026-08-06: Frontiers restructured article URLs"
+      ]
     },
     {
       "id": "cdc-qms-guidance",
@@ -978,7 +981,7 @@ const resourcesDatabase = {
       "title": "APHL Genomic Epidemiology Community",
       "organization": "Association of Public Health Laboratories",
       "description": "Association of Public Health Laboratories community of practice with training programs, implementation guides, and professional networking.",
-      "url": "https://www.aphl.org/",
+      "url": "https://aphl.org/",
       "audiences": [
         "laboratorians",
         "epidemiologists"
@@ -1016,7 +1019,8 @@ const resourcesDatabase = {
       "legacyTags": [
         "relatedResources removed: professional-networks",
         "relatedResources removed: training-programs",
-        "relatedResources removed: implementation-support"
+        "relatedResources removed: implementation-support",
+        "url updated 2026-08-06: canonical host drops the www"
       ]
     },
     {
@@ -1518,7 +1522,7 @@ const resourcesDatabase = {
       "title": "Toolkit for Planning & Implementing Acute Febrile Illness Surveillance",
       "organization": "Kazaian et al.",
       "description": "Toolkit and framework for acute febrile illness surveillance that includes planning, laboratory, data, and integration modules with flexibility for multiple settings.",
-      "url": "https://www.ncbi.nlm.nih.gov/articles/PMC11025857/",
+      "url": "https://doi.org/10.1371/journal.pgph.0003115",
       "audiences": [
         "laboratorians"
       ],
@@ -1558,7 +1562,8 @@ const resourcesDatabase = {
         "topics: Key modules",
         "topics: sample design",
         "topics: integration with diagnostics & laboratory capacity",
-        "types: inferred from title/description"
+        "types: inferred from title/description",
+        "url updated 2026-08-06: was a broken PMC mirror URL (wrong host); PLOS Global Public Health is the publisher — DOI is the durable canonical"
       ]
     },
     {
@@ -2062,7 +2067,7 @@ const resourcesDatabase = {
       "title": "SARS-CoV-2 genomic surveillance in southern Vietnam (2020-2021): Tracking variant evolution and public health impact in a limited-resource setting",
       "organization": "Gladkikh et al. / Vietnam MoH / Pasteur Institute etc.",
       "description": "A WGS surveillance study of 126 SARS-CoV-2 genomes from southern Vietnam (2020-21), identifying local variant dynamics, distribution of variants, and impact of control measures.",
-      "url": "https://bmcinfectdis.biomedcentral.com/articles/10.1186/s12879-023-08814-8",
+      "url": "https://doi.org/10.1186/s12879-023-08814-8",
       "audiences": [
         "laboratorians",
         "epidemiologists",
@@ -2095,7 +2100,9 @@ const resourcesDatabase = {
       "relatedResources": [],
       "lastUpdated": "",
       "formatDetails": "",
-      "legacyTags": []
+      "legacyTags": [
+        "url updated 2026-08-06: BMC content now serves from link.springer.com; the DOI is stable across such moves"
+      ]
     },
     {
       "id": "mpox-training-sea-2025",
@@ -2631,7 +2638,7 @@ const resourcesDatabase = {
       "title": "Enhancing Clinical Microbiology for Genomic AMR Surveillance in Africa",
       "organization": "Antimicrobial Resistance & Infection Control / African laboratory collaborators",
       "description": "Review of clinical microbiology lab gaps in Africa that limit AMR / genomic surveillance: low isolate recovery, access inequity, lack of representativeness, QC etc.",
-      "url": "https://aricjournal.biomedcentral.com/articles/10.1186/s13756-024-01472-8",
+      "url": "https://doi.org/10.1186/s13756-024-01472-8",
       "audiences": [
         "laboratorians",
         "policymakers",
@@ -2671,7 +2678,9 @@ const resourcesDatabase = {
       "relatedResources": [],
       "lastUpdated": "",
       "formatDetails": "Journal review article",
-      "legacyTags": []
+      "legacyTags": [
+        "url updated 2026-08-06: BMC content now serves from link.springer.com; the DOI is stable across such moves"
+      ]
     },
     {
       "id": "worldbank-landscapeanalysis-africa",
@@ -3002,7 +3011,7 @@ const resourcesDatabase = {
       "title": "MISAG: Minimum Information about a Single Amplified Genome",
       "organization": "Genomic Standards Consortium",
       "description": "Standardized metadata for single-amplified genomes (SAGs), covering assembly quality, completeness, contamination and contextual fields aligned to MIxS.",
-      "url": "https://gensc.org/misag-mimag/",
+      "url": "https://doi.org/10.1038/nbt.3893",
       "audiences": [
         "bioinformaticians",
         "laboratorians"
@@ -3035,14 +3044,16 @@ const resourcesDatabase = {
       ],
       "lastUpdated": "",
       "formatDetails": "",
-      "legacyTags": []
+      "legacyTags": [
+        "url updated 2026-08-06: gensc.org/misag-mimag/ is gone; the standard is defined in Bowers et al., Nat Biotechnol"
+      ]
     },
     {
       "id": "mimag-minimum-info",
       "title": "MIMAG: Minimum Information about a Metagenome-Assembled Genome",
       "organization": "Genomic Standards Consortium",
       "description": "Reporting guideline for metagenome-assembled genomes (MAGs), defining metadata and quality metrics including completeness, contamination and strain heterogeneity.",
-      "url": "https://gensc.org/misag-mimag/",
+      "url": "https://doi.org/10.1038/nbt.3893",
       "audiences": [
         "bioinformaticians",
         "laboratorians"
@@ -3075,7 +3086,9 @@ const resourcesDatabase = {
       ],
       "lastUpdated": "",
       "formatDetails": "",
-      "legacyTags": []
+      "legacyTags": [
+        "url updated 2026-08-06: gensc.org/misag-mimag/ is gone; the standard is defined in Bowers et al., Nat Biotechnol"
+      ]
     },
     {
       "id": "pha4ge-org",
@@ -3533,7 +3546,7 @@ const resourcesDatabase = {
       "title": "ASLM Learning Management",
       "organization": "African Society for Laboratory Medicine",
       "description": "ASLM Learning Management provides access to online and hybrid learning resources for laboratory professionals. Course areas include infectious disease, AMR, biosafety, quality management, monitoring and evaluation and NGS.",
-      "url": "https://aslm.org/learning-management/",
+      "url": "https://aslm.org/training-and-workforce-development/learning-management/",
       "audiences": [
         "laboratorians",
         "lab-leadership",
@@ -3582,7 +3595,8 @@ const resourcesDatabase = {
       "formatDetails": "Learning management website and e-learning platform with course categories and training resources.",
       "legacyTags": [
         "Arabic appears as an available platform language but is mapped to other because it is not in the controlled language taxonomy.",
-        "Not all ASLM courses are genomics-specific."
+        "Not all ASLM courses are genomics-specific.",
+        "url updated 2026-08-06: ASLM restructured the path"
       ]
     }
   ]

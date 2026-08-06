@@ -4,7 +4,7 @@
   "title": "WHO Genomics Costing Tool (GCT)",
   "organization": "World Health Organization",
   "description": "Microsoft Excel-based comprehensive budgeting tool for genomic surveillance infrastructure, workforce, biosafety, and quality assurance with detailed user manual.",
-  "url": "https://www.who.int/publications/i/item/9789240090866",
+  "url": "https://www.who.int/publications/i/item/9789240118843",
   "audiences": [
     "policymakers",
     "laboratorians"
@@ -45,7 +45,8 @@
   "formatDetails": "",
   "legacyTags": [
     "types: tool",
-    "types: inferred from title/description"
+    "types: inferred from title/description",
+    "url updated 2026-08-06: 1st edition withdrawn; superseded by the 2nd edition user manual (19 Mar 2026)"
   ],
   "validated": false
 }
