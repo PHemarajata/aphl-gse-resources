@@ -1,0 +1,44 @@
+{
+  "id": "usher-tool",
+  "title": "UShER: Ultrafast Sample placement on Existing tRees",
+  "organization": "UCSC / UShER Team",
+  "description": "Rapid placement of new sequences onto large existing phylogenies; available via CLI and web portals.",
+  "url": "https://usher-wiki.readthedocs.io/en/latest/UShER.html",
+  "audiences": [
+    "bioinformaticians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "phylogenetics"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Maximum parsimony placement;Handles very large trees;Fast turnaround;Web and command-line interfaces"
+  ],
+  "practicalUse": "Contextualize new genomes against global phylogenies during investigations.",
+  "relatedResources": [
+    "nextstrain-platform",
+    "nextclade-tool",
+    "itol-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "types: inferred from title/description"
+  ],
+  "validated": false
+}

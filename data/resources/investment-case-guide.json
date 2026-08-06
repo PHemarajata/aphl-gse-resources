@@ -1,0 +1,48 @@
+{
+  "id": "investment-case-guide",
+  "title": "National Investment Case Development",
+  "organization": "Multiple Organizations",
+  "description": "Frameworks for developing economic investment cases for genomic surveillance with cost-effectiveness analysis and ROI calculations.",
+  "url": "#",
+  "audiences": [
+    "policymakers"
+  ],
+  "stages": [
+    "planning-strategy"
+  ],
+  "types": [
+    "guide-manual",
+    "policy-document"
+  ],
+  "geography": [
+    "lmic"
+  ],
+  "topics": [
+    "stakeholder-engagement",
+    "costing-financing",
+    "regulatory-frameworks",
+    "investment-cases"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Investment case templates",
+    "Cost-effectiveness frameworks",
+    "ROI calculation methods",
+    "Stakeholder engagement",
+    "Funding advocacy tools"
+  ],
+  "practicalUse": "Funding advocacy, economic analysis, policy development, stakeholder engagement",
+  "relatedResources": [
+    "who-costing-tool",
+    "sustainability-planning"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "relatedResources removed: policy-advocacy"
+  ],
+  "validated": false
+}

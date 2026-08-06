@@ -1,0 +1,44 @@
+{
+  "id": "africapgi-detect",
+  "title": "Africa PGI Integrated Genomic Surveillance for Outbreak Detection (DETECT)",
+  "organization": "Africa CDC / APHF",
+  "description": "Continental initiative to strengthen molecular diagnostic and genomic sequencing for outbreak detection, characterization, and response across Africa; includes guidance, diagnostic algorithms, training & capacity building.",
+  "url": "https://africacdc.org/download/the-africa-pathogen-genomics-initative-africa-pgi-integrated-genomic-surveillance-for-outbreak-detection-detect/",
+  "audiences": [
+    "laboratorians",
+    "public-health-officials",
+    "policymakers",
+    "lab-leadership"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "africa",
+    "lmic"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "outbreak-detection",
+    "lab-networking"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Focuses on outbreak detection & response; scalable diagnostic/genomic sequencing integration; strengthening lab networks & training; includes guidance docs & protocols"
+  ],
+  "practicalUse": "Useful for ministries / health agencies building or scaling outbreak-genomic surveillance systems; support for diagnostics + sequencing planning; capacity building",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: Tool"
+  ],
+  "validated": true
+}

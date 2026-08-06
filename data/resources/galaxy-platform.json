@@ -1,0 +1,49 @@
+{
+  "id": "galaxy-platform",
+  "title": "Galaxy Project Training & Workflows",
+  "organization": "Galaxy Project Consortium",
+  "description": "Comprehensive web-based bioinformatics platform with extensive genomic epidemiology workflows, training materials, and collaborative analysis environment.",
+  "url": "https://galaxyproject.org",
+  "audiences": [
+    "bioinformaticians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "training-material"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "workforce-training",
+    "pipelines-workflows"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Web-based analysis platform",
+    "Extensive workflow library",
+    "Training materials and tutorials",
+    "Public server access",
+    "Collaborative workspaces"
+  ],
+  "practicalUse": "Bioinformatics training, workflow development, accessible analysis, skill building",
+  "relatedResources": [
+    "galaxy-training",
+    "nextstrain-platform",
+    "irida-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool"
+  ],
+  "validated": false
+}

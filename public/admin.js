@@ -17,17 +17,35 @@
   }
 
 
-  const TAXONOMY_API = window.APHL_TAXONOMY || {};
-  const TAXONOMY = TAXONOMY_API.TAXONOMY || {};
-  const TAXONOMY_ENUMS = TAXONOMY_API.enumFields ? TAXONOMY_API.enumFields() : {
-    audiences: ['laboratorians', 'epidemiologists', 'bioinformaticians', 'policymakers'],
-    stages: ['planning', 'implementation', 'optimization'],
-    types: ['guide', 'tool', 'training', 'policy'],
-    geography: ['global', 'africa', 'asia', 'lmic'],
-    topics: ['surveillance', 'implementation', 'policy', 'qms', 'bioinformatics', 'training', 'costing', 'prioritization'],
-    pathogenFocus: [],
-    language: ['en']
-  };
+  // taxonomy.js is the single source of truth for the vocabulary.
+  //
+  // There is deliberately NO inline fallback here. Until v2.0.0 this block
+  // carried a hardcoded copy that had drifted badly — stages of
+  // planning/implementation/optimization, types of guide/tool/training/policy —
+  // sharing zero IDs with the real taxonomy. If taxonomy.js ever failed to
+  // load, that fallback silently marked all 79 live resources critically
+  // invalid on every facet, and any curator who saved through that state
+  // would have written corrupted records. Failing loudly is the safe default.
+  const TAXONOMY_API = window.APHL_TAXONOMY;
+  if (!TAXONOMY_API || typeof TAXONOMY_API.enumFields !== 'function') {
+    const msg = 'Taxonomy failed to load (taxonomy.js). Admin has been disabled to prevent saving records validated against the wrong vocabulary. Reload the page; if this persists, confirm taxonomy.js is deployed alongside admin.js.';
+    const showBanner = () => {
+      if (!document.body) return;
+      const banner = document.createElement('div');
+      banner.setAttribute('role', 'alert');
+      banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#b91c1c;color:#fff;padding:16px 20px;font:14px/1.5 system-ui,-apple-system,sans-serif';
+      banner.textContent = msg;
+      document.body.prepend(banner);
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', showBanner);
+    } else {
+      showBanner();
+    }
+    throw new Error(msg);
+  }
+  const TAXONOMY = TAXONOMY_API.TAXONOMY;
+  const TAXONOMY_ENUMS = TAXONOMY_API.enumFields();
   const RESOURCE_SCHEMA = {
     idPattern: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
     requiredFields: ['id', 'title', 'organization', 'description', 'url'],
@@ -207,25 +225,38 @@
     ].map(x => String(x)).join('\t'));
     return [head].concat(lines).join('\n');
   }
-  function toJS(resources){
-    const database = {
-      metadata: {
-        version: '2.0.0',
-        lastUpdated: new Date().toISOString(),
-        totalResources: resources.length,
-        generatedBy: 'APHL Admin Panel v2.0'
-      },
-      resources
-    };
+  // Single serializer for the data file. Byte-for-byte identical to
+  // scripts/migrate-taxonomy.mjs serializeDatabase(), so a file written here and
+  // a file written by the CLI produce the same output and no spurious diff.
+  function serializeDatabase(database){
     return `// Auto-generated resources database with metadata
 const resourcesDatabase = ${JSON.stringify(database, null, 2)};
 
+// Backward compatibility - expose resourcesData for existing code
 const resourcesData = resourcesDatabase.resources;
 
+// Make both available globally for the admin panel
 if (typeof window !== 'undefined') {
   window.resourcesDatabase = resourcesDatabase;
   window.resourcesData = resourcesData;
 }`;
+  }
+
+  // Serialize a resource array, PRESERVING the metadata block it came with.
+  //
+  // This used to rebuild metadata from scratch with a hardcoded version string,
+  // which silently discarded currentVersionId, lastValidated, validatedResources,
+  // taxonomyVersion, versionHistory and auditLog. A curator exporting through the
+  // admin panel lost the entire validation and version history without any warning.
+  // Pass the metadata you loaded; only the fields that genuinely change are touched.
+  function toJS(resources, sourceMetadata){
+    const metadata = Object.assign({}, sourceMetadata || {}, {
+      lastUpdated: new Date().toISOString(),
+      totalResources: resources.length,
+      generatedBy: 'APHL Admin Panel'
+    });
+    if (!metadata.version) metadata.version = '1.0.0';
+    return serializeDatabase({ metadata, resources });
   }
 
   function deepClone(obj){
@@ -466,7 +497,7 @@ class AdminApp {
     this.on('#importJsBtn', 'click', () => { file.accept = '.js'; file.onchange = e => this.importFile(e, 'js'); file.click(); });
     this.on('#importJsonBtn', 'click', () => { file.accept = '.json'; file.onchange = e => this.importFile(e, 'json'); file.click(); });
 
-    this.on('#exportJsonBtn', 'click', () => downloadText('resources-data.js', toJS(this.data)));
+    this.on('#exportJsonBtn', 'click', () => downloadText('resources-data.js', toJS(this.data, this.database?.metadata)));
     this.on('#exportTsvBtn', 'click', () => downloadText('genomic-epi-resources.tsv', toTSV(this.data)));
 
       // Templates: multi-click safe, works on file://
@@ -1559,18 +1590,8 @@ class AdminApp {
       });
       
       const backupName = `resources-data-backup-${new Date().toISOString().replace(/[:.]/g,'-')}.js`;
-      const backupText = toJS(this.original);
-      const newText = `// Auto-generated resources database with metadata
-const resourcesDatabase = ${JSON.stringify(updatedDatabase, null, 2)};
-
-// Backward compatibility - expose resourcesData for existing code
-const resourcesData = resourcesDatabase.resources;
-
-// Make both available globally for the admin panel
-if (typeof window !== 'undefined') {
-  window.resourcesDatabase = resourcesDatabase;
-  window.resourcesData = resourcesData;
-}`;
+      const backupText = toJS(this.original, this.database?.metadata);
+      const newText = serializeDatabase(updatedDatabase);
       
       if ('showDirectoryPicker' in window){
         const dir = await window.showDirectoryPicker({id:'site-root', mode:'readwrite'});
@@ -1619,13 +1640,16 @@ if (typeof window !== 'undefined') {
 
       return {
         metadata: {
-          version: "1.8.1",
+          // Carry forward whatever the file already declared. Hardcoding this
+          // downgraded the data version on every save.
+          ...metadata,
+          version: metadata.version || "1.0.0",
           currentVersionId: options.versionId || metadata.currentVersionId || null,
           lastUpdated: options.lastUpdated || new Date().toISOString(),
           totalResources: resources.length,
           lastValidated: this.lastValidationTime,
           validatedResources: Array.from(this.validatedIds),
-          generatedBy: "APHL Admin Panel v1.8",
+          generatedBy: "APHL Admin Panel",
           versionHistory,
           auditLog
         },

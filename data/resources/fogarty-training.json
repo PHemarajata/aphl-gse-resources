@@ -1,0 +1,47 @@
+{
+  "id": "fogarty-training",
+  "title": "Fogarty Genomic Surveillance Training",
+  "organization": "NIH Fogarty International Center",
+  "description": "NIH Fogarty International Center capacity-building programs for genomic surveillance and epidemiology with focus on LMIC institutions.",
+  "url": "https://www.fic.nih.gov/About/Staff/epidemiology-population-studies/Pages/Capacity-Building-in-Genomic-Surveillance-and-Epidemiology.aspx",
+  "audiences": [
+    "epidemiologists",
+    "bioinformaticians",
+    "policymakers"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "training-material"
+  ],
+  "geography": [
+    "lmic"
+  ],
+  "topics": [
+    "workforce-training"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "LMIC-focused programs",
+    "Institutional capacity building",
+    "Long-term training partnerships",
+    "Research collaboration",
+    "Sustainable development"
+  ],
+  "practicalUse": "Institutional development, research partnerships, capacity building, training programs",
+  "relatedResources": [
+    "africa-pgi-framework"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "relatedResources removed: ngs-training-programs",
+    "relatedResources removed: capacity-building"
+  ],
+  "validated": false
+}

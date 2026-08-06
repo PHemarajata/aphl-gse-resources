@@ -1,0 +1,50 @@
+{
+  "id": "card-database",
+  "title": "CARD Antibiotic Resistance Database",
+  "organization": "McMaster University",
+  "description": "Comprehensive antibiotic resistance database with RGI (Resistance Gene Identifier) tool for AMR gene annotation and analysis.",
+  "url": "https://card.mcmaster.ca",
+  "audiences": [
+    "bioinformaticians",
+    "laboratorians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "interactive-tool"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "pipelines-workflows",
+    "amr-surveillance"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Comprehensive resistance gene database",
+    "RGI analysis tool",
+    "AMR mechanism annotation",
+    "Regular database updates",
+    "Integration capabilities"
+  ],
+  "practicalUse": "AMR surveillance, resistance gene identification, genotype-phenotype correlation",
+  "relatedResources": [
+    "cz-id-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "types: inferred from title/description",
+    "relatedResources removed: amr-surveillance",
+    "relatedResources removed: resistance-analysis"
+  ],
+  "validated": false
+}

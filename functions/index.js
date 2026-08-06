@@ -86,9 +86,27 @@ async function requireAdmin(req) {
   const allowedDomains = String(process.env.ADMIN_ALLOWED_DOMAINS || '').toLowerCase().split(',').map((value) => value.trim()).filter(Boolean);
   const requireAdminClaim = String(process.env.ADMIN_REQUIRE_CLAIM || '').toLowerCase() === 'true';
   if (requireAdminClaim) throw new Error('Authenticated user is missing the admin claim.');
+  // Only trust an email the identity provider actually verified.
+  if (email && decoded.email_verified === false) {
+    throw new Error('Authenticated user has an unverified email address.');
+  }
+  // Exact domain comparison; endsWith() would also match a local part containing '@'.
+  const emailParts = email.split('@');
+  const emailDomain = emailParts.length === 2 ? emailParts[1] : '';
   if (email && allowedEmails.includes(email)) return decoded;
-  if (email && allowedDomains.some((domain) => email.endsWith(`@${domain}`))) return decoded;
-  if (email && allowedEmails.length === 0 && allowedDomains.length === 0) return decoded;
+  if (emailDomain && allowedDomains.includes(emailDomain)) return decoded;
+
+  // Fail closed.
+  //
+  // This used to `return decoded` when both allow-lists were empty, authorizing
+  // ANY verified Firebase user. Because requireAdmin() also guards
+  // categorizeResource (which spends OpenAI credit), an unset env var left a
+  // billable endpoint open to any Google account.
+  if (allowedEmails.length === 0 && allowedDomains.length === 0) {
+    throw new Error('Server authorization is not configured. Set ADMIN_ALLOWED_DOMAINS ' +
+      'and/or ADMIN_ALLOWED_EMAILS on the deployed functions, or grant the caller an ' +
+      'admin custom claim. See ADMIN-AUTH.md.');
+  }
   throw new Error('Authenticated user is not authorized.');
 }
 

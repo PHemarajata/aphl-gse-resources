@@ -1,0 +1,44 @@
+{
+  "id": "pathogengenomics-advancing-asia",
+  "title": "Advancing pathogen genomics in resource-limited settings Framework for prioritizing pathogens & implementing surveillance in Asia",
+  "organization": "Pronyk et al. / Asia PGI & partners",
+  "description": "A framework to help countries prioritize which pathogens to include in genomic surveillance, considering burden, actionability, capacity; includes stakeholder input & regional examples.",
+  "url": "https://www.cell.com/cell-genomics/fulltext/S2666-979X(23)00278-1",
+  "audiences": [
+    "policymakers",
+    "lab-leadership",
+    "bioinformaticians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual",
+    "policy-document"
+  ],
+  "geography": [
+    "asia",
+    "lmic"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "outbreak-detection",
+    "regulatory-frameworks",
+    "surveillance-design"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Criteria for prioritization; burden vs feasibility; alignment with national health priorities; capacity matching"
+  ],
+  "practicalUse": "Useful for decision making in choosing which pathogens to invest in; aligning surveillance expansions with capacity; justifying resource use",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": false
+}

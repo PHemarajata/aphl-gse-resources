@@ -1,0 +1,54 @@
+{
+  "id": "wellcome-connecting-science-global-training",
+  "title": "Global Training",
+  "organization": "Wellcome Connecting Science",
+  "description": "Wellcome Connecting Science Global Training lists capacity-building courses for research and healthcare communities in Latin America, Africa and Asia. Listed courses include computational, laboratory and genomic surveillance training events.",
+  "url": "https://coursesandconferences.wellcomeconnectingscience.org/our-events/global-training/",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "epidemiologists",
+    "trainers-educators"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "training-material"
+  ],
+  "geography": [
+    "global",
+    "lmic",
+    "africa",
+    "asia",
+    "latin-america-caribbean"
+  ],
+  "topics": [
+    "workforce-training",
+    "curriculum-development",
+    "sequencing-platforms",
+    "pipelines-workflows"
+  ],
+  "pathogenFocus": [
+    "bacterial-genomics",
+    "emerging-pathogens"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Global training course listings",
+    "Laboratory and computational courses",
+    "Application deadlines and event dates",
+    "Regional capacity-building focus"
+  ],
+  "practicalUse": "Public health genomics users can identify upcoming training opportunities for staff development in genomic sequencing, genome analysis and pathogen surveillance.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Training events website with course listings, dates, application information and event details.",
+  "legacyTags": [
+    "Course offerings change over time; tagging reflects examples visible on the Global Training page."
+  ],
+  "validated": true
+}

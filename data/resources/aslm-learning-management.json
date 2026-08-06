@@ -1,0 +1,58 @@
+{
+  "id": "aslm-learning-management",
+  "title": "ASLM Learning Management",
+  "organization": "African Society for Laboratory Medicine",
+  "description": "ASLM Learning Management provides access to online and hybrid learning resources for laboratory professionals. Course areas include infectious disease, AMR, biosafety, quality management, monitoring and evaluation and NGS.",
+  "url": "https://aslm.org/learning-management/",
+  "audiences": [
+    "laboratorians",
+    "lab-leadership",
+    "trainers-educators",
+    "health-ministry-officials"
+  ],
+  "stages": [
+    "implementation",
+    "operations-scaleup",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "training-material"
+  ],
+  "geography": [
+    "africa",
+    "lmic"
+  ],
+  "topics": [
+    "workforce-training",
+    "quality-management",
+    "biosafety",
+    "amr-surveillance",
+    "sequencing-platforms"
+  ],
+  "pathogenFocus": [
+    "amr-bacteria",
+    "bacterial-genomics",
+    "emerging-pathogens"
+  ],
+  "language": [
+    "en",
+    "fr",
+    "pt",
+    "other"
+  ],
+  "keyFeatures": [
+    "Online and hybrid courses",
+    "Laboratory workforce development",
+    "NGS and AMR course categories",
+    "Biosafety and quality management training"
+  ],
+  "practicalUse": "Public health genomics programs can use the ASLM learning platform to find staff training in laboratory systems, biosafety, quality management, AMR and NGS-related topics.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Learning management website and e-learning platform with course categories and training resources.",
+  "legacyTags": [
+    "Arabic appears as an available platform language but is mapped to other because it is not in the controlled language taxonomy.",
+    "Not all ASLM courses are genomics-specific."
+  ],
+  "validated": true
+}

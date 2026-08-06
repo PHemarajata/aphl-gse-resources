@@ -1,0 +1,56 @@
+{
+  "id": "asiapgi-surveystatus",
+  "title": "Pathogen genomic surveillance status among lower resource settings in Asia",
+  "organization": "Getchell et al. / Nature Microbiology",
+  "description": "Journal article and assessment framework describing pathogen genomic surveillance capacity across 13 South and Southeast Asian countries, with findings on financing, quality assurance, workforce, supply chains, and data sharing.",
+  "url": "https://www.nature.com/articles/s41564-024-01809-4",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "lab-leadership",
+    "policymakers"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "research-evidence",
+    "guide-manual",
+    "policy-document"
+  ],
+  "geography": [
+    "asia",
+    "southeast-asia",
+    "south-asia",
+    "lmic"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "lab-networking",
+    "quality-management",
+    "data-sharing-interoperability",
+    "workforce-training"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Assessment framework applied across 42 institutions in 13 countries.",
+    "Benchmarks pathogen genomics capacity in lower-resource Asian settings.",
+    "Identifies gaps in financing, quality assurance, workforce, supply chains, and data sharing.",
+    "Supports regional planning, investment cases, and capacity-building priorities.",
+    "Includes indicators on enabling environment, capacity, QA, strategic plan existence; shows variation between countries; identified priority pathogen types & low use of environmental or animal-human interface surveillance"
+  ],
+  "practicalUse": "Use this article to benchmark national or regional pathogen genomics capacity, identify priority system gaps, and support planning or funding proposals for genomic surveillance strengthening.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Journal article / assessment framework",
+  "legacyTags": [
+    "merged duplicate record: sea-ngs-assessment",
+    "alternate url: https://pmc.ncbi.nlm.nih.gov/articles/PMC11445059/",
+    "needs re-validation after merge"
+  ],
+  "validated": false
+}

@@ -1,0 +1,43 @@
+{
+  "id": "africa-genomicdata-sharingplatform",
+  "title": "A pan-African pathogen genomics data sharing platform (trusted archive)",
+  "organization": "Christoffels et al.",
+  "description": "A proposed / conceptual platform for data management and sharing of pathogen genomic data in Africa: aims for trusted local repositories, governance, stakeholder workshop outcomes, linking with global databases.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12181013/",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "epidemiologists",
+    "policymakers"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "africa"
+  ],
+  "topics": [
+    "stakeholder-engagement",
+    "genomic-surveillance",
+    "data-sharing-interoperability"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Designed with stakeholder input; governance focus; digital infrastructure & interoperability; data security and locality concerns addressed"
+  ],
+  "practicalUse": "Useful for countries building data platforms; supports local data sovereignty; helps PHLs plan infrastructure for storage / retrieval / sharing of genomic datasets",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: Tool"
+  ],
+  "validated": true
+}

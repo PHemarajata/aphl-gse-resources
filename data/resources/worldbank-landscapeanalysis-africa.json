@@ -1,0 +1,45 @@
+{
+  "id": "worldbank-landscapeanalysis-africa",
+  "title": "Landscape analysis of networks supporting genomic surveillance (Africa)",
+  "organization": "World Bank / African partners",
+  "description": "PDF analysis of the landscape of networks, laboratories, workforce, capabilities, and gaps in genomic surveillance across African region; looks also at policy, funding & regional linkages.",
+  "url": "https://documents1.worldbank.org/curated/en/099716212222240993/pdf/P17618002a6bfd00c09e39087a18be85684.pdf",
+  "audiences": [
+    "laboratorians",
+    "public-health-officials",
+    "policymakers",
+    "donors-funders"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "policy-document",
+    "guide-manual",
+    "research-evidence"
+  ],
+  "geography": [
+    "africa",
+    "lmic"
+  ],
+  "topics": [
+    "regulatory-frameworks",
+    "genomic-surveillance",
+    "lab-networking",
+    "workforce-training"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Key network mapping; device / lab numbers; workforce gaps; regional disparities; recommendations for sustaining infrastructure"
+  ],
+  "practicalUse": "Useful for government & donors to see a regional baseline; guide investment; set priorities for capacity expansion & network strengthening; can feed into strategy documents",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

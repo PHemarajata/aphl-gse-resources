@@ -1,0 +1,45 @@
+{
+  "id": "wastewaterearlydetection-asia",
+  "title": "Wastewater Surveillance for Early Pathogen Detection in Asia",
+  "organization": "Duke-NUS et al. / Pang et al.",
+  "description": "Assessment of wastewater surveillance projects in 19 Asian countries: what’s working, what types of pathogens, funding, gaps & how integrated into public health.",
+  "url": "https://pubmed.ncbi.nlm.nih.gov/40828164/",
+  "audiences": [
+    "laboratorians",
+    "environmental-health-teams",
+    "bioinformaticians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global",
+    "asia",
+    "lmic"
+  ],
+  "topics": [
+    "environmental-surveillance",
+    "surveillance-design"
+  ],
+  "pathogenFocus": [
+    "viral-genomics",
+    "bacterial-genomics"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Method comparisons; frequency & source of sampling; embedding into surveillance; funding sources; pathogen focus (SARS-CoV-2, AMR, Enterovirus etc.)"
+  ],
+  "practicalUse": "Useful for labs of public health to design or scale wastewater surveillance; supports early detection systems; case for integrating into national surveillance systems",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": false
+}

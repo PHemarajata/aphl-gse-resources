@@ -1,0 +1,46 @@
+{
+  "id": "pangia-workflow",
+  "title": "PanGIA Metagenomics Workflow",
+  "organization": "Tropical Medicine and Infectious Disease",
+  "description": "End-to-end sample-to-answer metagenomics pipeline using Illumina MiSeq for clinical and environmental pathogen detection with validation protocols.",
+  "url": "https://www.mdpi.com/2414-6366/8/2/121",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians"
+  ],
+  "stages": [
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "pipelines-workflows"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Illumina MiSeq protocols",
+    "Clinical sample processing",
+    "Environmental surveillance",
+    "Validation frameworks",
+    "Quality control metrics"
+  ],
+  "practicalUse": "Pathogen detection, metagenomics analysis, clinical surveillance, environmental monitoring",
+  "relatedResources": [
+    "cz-id-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "relatedResources removed: illumina-protocols",
+    "relatedResources removed: ngs-workflows"
+  ],
+  "validated": false
+}

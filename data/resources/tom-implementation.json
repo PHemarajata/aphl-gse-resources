@@ -1,0 +1,50 @@
+{
+  "id": "tom-implementation",
+  "title": "Target Operating Model (TOM) for Genomic Surveillance",
+  "organization": "Frontiers in Public Health",
+  "description": "Systematic implementation framework decomposing workflows into prioritized sampling, capacity determination, site assessment, and sustainability design.",
+  "url": "https://www.frontiersin.org/articles/10.3389/fpubh.2022.871114/full",
+  "audiences": [
+    "policymakers",
+    "laboratorians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global",
+    "lmic"
+  ],
+  "topics": [
+    "sustainability",
+    "genomic-surveillance",
+    "surveillance-design"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Workflow decomposition framework",
+    "Site-specific capacity planning",
+    "Procurement and workforce guidance",
+    "Analytics and decision support",
+    "Sustainability design principles"
+  ],
+  "practicalUse": "Operational planning, capacity assessment, workflow design, sustainability planning",
+  "relatedResources": [
+    "who-global-strategy",
+    "implementation-checklists",
+    "capacity-assessment"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": false
+}

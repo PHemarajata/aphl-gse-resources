@@ -1,0 +1,50 @@
+{
+  "id": "microreact-platform",
+  "title": "Microreact Phylogeographic Visualization",
+  "organization": "Centre for Genomic Pathogen Surveillance",
+  "description": "Collaborative platform for phylogenetic and geographic visualization with epidemiological data integration and publication-quality outputs.",
+  "url": "https://microreact.org",
+  "audiences": [
+    "epidemiologists",
+    "bioinformaticians"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "interactive-tool"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "visualization",
+    "phylogenetics",
+    "epi-integration"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Geographic mapping integration",
+    "Phylogenetic visualization",
+    "Epidemiological data overlay",
+    "Collaborative sharing",
+    "Publication-ready outputs"
+  ],
+  "practicalUse": "Outbreak investigation, geographic analysis, data presentation, collaborative research",
+  "relatedResources": [
+    "nextstrain-platform",
+    "gisaid-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "types: inferred from title/description",
+    "relatedResources removed: outbreak-analysis"
+  ],
+  "validated": false
+}

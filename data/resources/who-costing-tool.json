@@ -1,0 +1,50 @@
+{
+  "id": "who-costing-tool",
+  "title": "WHO Genomics Costing Tool (GCT)",
+  "organization": "World Health Organization",
+  "description": "Microsoft Excel-based comprehensive budgeting tool for genomic surveillance infrastructure, workforce, biosafety, and quality assurance with detailed user manual.",
+  "url": "https://www.who.int/publications/i/item/9789240090866",
+  "audiences": [
+    "policymakers",
+    "laboratorians"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "spreadsheet-tool"
+  ],
+  "geography": [
+    "global",
+    "lmic"
+  ],
+  "topics": [
+    "costing-financing",
+    "resource-mobilization"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Infrastructure cost calculation",
+    "Workforce planning and budgeting",
+    "Biosafety requirement costing",
+    "Quality assurance budgeting",
+    "Resource mobilization templates"
+  ],
+  "practicalUse": "Budget development, investment case preparation, donor engagement, resource planning",
+  "relatedResources": [
+    "who-global-strategy",
+    "investment-case-guide",
+    "tom-implementation"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "types: inferred from title/description"
+  ],
+  "validated": false
+}

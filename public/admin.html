@@ -380,6 +380,31 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="admin.js"></script>
+
+  <!-- Admin authorization policy.
+       The ONLY place the browser-side allow-list is configured. Must load before
+       admin-auth.js.
+
+       This is UI gating, not a security boundary: it disables the admin controls
+       for unauthorized users, nothing more. Real enforcement lives server-side in
+       functions/index.js, driven by the ADMIN_ALLOWED_DOMAINS and
+       ADMIN_ALLOWED_EMAILS environment variables on the deployed functions. Set
+       both. See ADMIN-AUTH.md.
+
+       Recovery: a Firebase custom claim of {admin: true} always authorizes,
+       regardless of these lists. Use it if this file ever locks you out. -->
+  <script>
+    window.__ADMIN_AUTH_POLICY__ = {
+      // Anyone with an email at these domains may use the admin panel.
+      allowedDomains: ['aphl.org'],
+      // Individual exceptions, e.g. an external collaborator.
+      allowedEmails: [],
+      // Enforce the lists above rather than falling back to signed-in-only.
+      allowDomainOrEmailFallback: true,
+      // Set true to require a Firebase custom claim and ignore the lists entirely.
+      requireAdminClaim: false
+    };
+  </script>
   <script src="admin-auth.js"></script>
 </body>
 </html>

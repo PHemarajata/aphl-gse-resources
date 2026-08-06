@@ -1,10 +1,54 @@
 // Canonical APHL-GSEI resource taxonomy shared by admin, public UI, and scripts.
+//
+// v2.0.0 — merged taxonomy.
+//   The live vocabulary (v1.x) is preserved verbatim: no ID renamed, no ID
+//   removed, no cardinality tightened into a hard cap. Every one of the 79
+//   live resources validates against this file unchanged.
+//
+//   Added from the August 2026 prototype (taxonomy.yaml v0.2.0), which was
+//   drafted against 15 sample records without access to the live data and is
+//   therefore treated as a source of ideas, not as a replacement vocabulary:
+//     - eight secondary facets (difficulty, connectivity, cost, effort,
+//       reuseTerms, maintenance, access, endorsement), all optional, all
+//       single-select, all carrying an explicit unknown/not-assessed value so
+//       existing records remain valid with no edits;
+//     - four topics filling genuine gaps in the collection's own subject area;
+//     - the draft/verified text gate, scoped to the optional `summary` and
+//       `notes` fields only. It deliberately does NOT gate `description`,
+//       which is curator-written and populated on all 79 records.
+//
+//   Deliberately NOT adopted: the prototype's replacement stage axis (NIRN),
+//   and its replacement topic/audience/type vocabularies. They share zero IDs
+//   with the live data and adopting them would have required retagging roughly
+//   70 of 79 records by hand.
+
 (function (root) {
   'use strict';
 
+  const TAXONOMY_VERSION = '2.0.0';
+
+  // Multi-select array fields. These are the legacy contract: every record has
+  // all seven, and `enumFields()` returns exactly these for the validators.
+  const PRIMARY_FIELDS = [
+    'audiences', 'stages', 'types', 'geography', 'topics', 'pathogenFocus', 'language'
+  ];
+
+  // Single-select optional scalar fields, new in v2.0.0.
+  const SECONDARY_FIELDS = [
+    'difficulty', 'connectivity', 'cost', 'effort',
+    'reuseTerms', 'maintenance', 'access', 'endorsement'
+  ];
+
   const TAXONOMY = {
+
+    // ==================================================================
+    // PRIMARY — unchanged from v1.x
+    // ==================================================================
+
     audiences: {
       label: 'Audiences',
+      role: 'primary',
+      multiple: true,
       maxRecommended: 5,
       options: [
         { id: 'laboratorians', label: 'Laboratorians' },
@@ -21,9 +65,14 @@
         { id: 'regional-international-orgs', label: 'Regional / International Organizations' }
       ]
     },
+
     stages: {
       label: 'Stages',
+      role: 'primary',
+      multiple: true,
       maxRecommended: 4,
+      // Framing borrowed from the prototype; the six live stages are unchanged.
+      help: 'Where a programme sits in standing up this capability. Stage describes position, not elapsed time — a programme five years in with unstable reagent supply is still at Implementation, not Optimization.',
       options: [
         { id: 'readiness-assessment', label: 'Readiness Assessment' },
         { id: 'planning-strategy', label: 'Planning & Strategy' },
@@ -33,8 +82,11 @@
         { id: 'evaluation-learning', label: 'Evaluation & Learning' }
       ]
     },
+
     types: {
       label: 'Resource Type',
+      role: 'primary',
+      multiple: true,
       maxRecommended: 3,
       options: [
         { id: 'framework-strategy', label: 'Framework / Strategy' },
@@ -49,8 +101,11 @@
         { id: 'data-dashboard', label: 'Data Resource / Dashboard' }
       ]
     },
+
     geography: {
       label: 'Geography',
+      role: 'primary',
+      multiple: true,
       maxRecommended: 5,
       groups: [
         { label: 'Global / Cross-cutting', options: [
@@ -84,9 +139,15 @@
         ] }
       ]
     },
+
     topics: {
       label: 'Topics',
-      maxRecommended: 8,
+      role: 'primary',
+      multiple: true,
+      // Tightened from 8 to 5 in v2.0.0. Still a warning, not a hard cap.
+      // At 5, only 7 of the 79 live records warn. Revert by setting this to 8.
+      maxRecommended: 5,
+      help: 'Tag what the resource is substantially about. Tagging defensively makes filtering stop narrowing anything.',
       groups: [
         { label: 'Surveillance & Epidemiology', options: [
           { id: 'genomic-surveillance', label: 'Genomic Surveillance' },
@@ -94,7 +155,11 @@
           { id: 'environmental-surveillance', label: 'Environmental / Wastewater Surveillance' },
           { id: 'one-health', label: 'One Health' },
           { id: 'outbreak-detection', label: 'Outbreak Detection' },
-          { id: 'variant-monitoring', label: 'Variant Monitoring' }
+          { id: 'variant-monitoring', label: 'Variant Monitoring' },
+          { id: 'surveillance-design', label: 'Surveillance Design & Sampling', sinceVersion: '2.0.0',
+            summary: 'Deciding what to sequence, why, and how specimens reach the laboratory.' },
+          { id: 'epi-integration', label: 'Epidemiological Integration', sinceVersion: '2.0.0',
+            summary: 'Joining genomic results to case, contact, and surveillance data.' }
         ] },
         { label: 'Laboratory Systems', options: [
           { id: 'lab-networking', label: 'Laboratory Networking' },
@@ -108,7 +173,9 @@
           { id: 'data-sharing-interoperability', label: 'Data Sharing & Interoperability' },
           { id: 'phylogenetics', label: 'Phylogenetics' },
           { id: 'visualization', label: 'Visualization' },
-          { id: 'sequencing-platforms', label: 'Sequencing Platforms' }
+          { id: 'sequencing-platforms', label: 'Sequencing Platforms' },
+          { id: 'metadata-management', label: 'Metadata & Data Management', sinceVersion: '2.0.0',
+            summary: 'Capturing complete, structured contextual data and keeping it usable.' }
         ] },
         { label: 'Governance & Policy', options: [
           { id: 'data-governance', label: 'Data Governance' },
@@ -122,7 +189,9 @@
           { id: 'sustainability', label: 'Sustainability' },
           { id: 'monitoring-evaluation', label: 'Monitoring & Evaluation' },
           { id: 'stakeholder-engagement', label: 'Stakeholder Engagement' },
-          { id: 'resource-mobilization', label: 'Resource Mobilization' }
+          { id: 'resource-mobilization', label: 'Resource Mobilization' },
+          { id: 'reporting', label: 'Reporting & Communication', sinceVersion: '2.0.0',
+            summary: 'Turning findings into something a non-specialist can act on.' }
         ] },
         { label: 'Capacity Building', options: [
           { id: 'workforce-training', label: 'Workforce Training' },
@@ -132,8 +201,11 @@
         ] }
       ]
     },
+
     pathogenFocus: {
       label: 'Pathogen Focus',
+      role: 'primary',
+      multiple: true,
       maxRecommended: 4,
       options: [
         { id: 'respiratory-pathogens', label: 'Respiratory Pathogens' },
@@ -145,8 +217,11 @@
         { id: 'bacterial-genomics', label: 'Bacterial Genomics' }
       ]
     },
+
     language: {
       label: 'Language',
+      role: 'primary',
+      multiple: true,
       options: [
         { id: 'en', label: 'English' },
         { id: 'fr', label: 'French' },
@@ -158,7 +233,155 @@
         { id: 'bn', label: 'Bangla' },
         { id: 'other', label: 'Other' }
       ]
+    },
+
+    // ==================================================================
+    // SECONDARY — new in v2.0.0, adapted from taxonomy.yaml v0.2.0
+    //
+    // All are optional and single-select. Each carries an explicit
+    // unknown/not-assessed value which is also its default, so importing
+    // them costs nothing and no existing record becomes invalid.
+    // ==================================================================
+
+    difficulty: {
+      label: 'Level',
+      role: 'secondary',
+      multiple: false,
+      optional: true,
+      default: 'unknown',
+      // Demoted from the prototype's "primary" because no live record carries
+      // it. Promote once enough resources are assessed to make it filterable.
+      help: 'Independent of stage. A programme at Optimization starting phylodynamics still needs beginner material.',
+      options: [
+        { id: 'beginner', label: 'Beginner', summary: 'No prior experience assumed.' },
+        { id: 'intermediate', label: 'Intermediate', summary: 'Assumes working familiarity with the area.' },
+        { id: 'advanced', label: 'Advanced', summary: 'Assumes established practice; extends or deepens it.' },
+        { id: 'unknown', label: 'Not assessed' }
+      ]
+    },
+
+    connectivity: {
+      label: 'Connectivity',
+      role: 'secondary',
+      multiple: false,
+      optional: true,
+      default: 'unknown',
+      help: 'Whether the resource is usable without a reliable connection. 39 of the 79 resources are tagged LMIC, so this is a real access question rather than a technical footnote.',
+      options: [
+        { id: 'offline-capable', label: 'Works offline' },
+        { id: 'online-setup-then-offline', label: 'Online to set up, then offline' },
+        { id: 'online-required', label: 'Needs a connection' },
+        { id: 'unknown', label: 'Not known' }
+      ]
+    },
+
+    cost: {
+      label: 'Cost',
+      role: 'secondary',
+      multiple: false,
+      optional: true,
+      default: 'unknown',
+      options: [
+        { id: 'free', label: 'Free' },
+        { id: 'free-tier', label: 'Free tier available' },
+        { id: 'paid', label: 'Paid' },
+        { id: 'institutional', label: 'Institutional or consumable cost' },
+        { id: 'unknown', label: 'Not known' }
+      ]
+    },
+
+    effort: {
+      label: 'Time to get going',
+      role: 'secondary',
+      multiple: false,
+      optional: true,
+      default: 'unknown',
+      options: [
+        { id: 'minutes', label: 'Minutes' },
+        { id: 'hours', label: 'Hours' },
+        { id: 'days', label: 'Days' },
+        { id: 'weeks', label: 'Weeks' },
+        { id: 'months', label: 'Months' },
+        { id: 'unknown', label: 'Not known' }
+      ]
+    },
+
+    reuseTerms: {
+      label: 'Reuse terms',
+      role: 'secondary',
+      multiple: false,
+      optional: true,
+      default: 'unknown',
+      help: 'What a training programme may legally do with this material. Named for the question curators actually ask — can we adapt it for our course — rather than for the licence instrument behind it.',
+      options: [
+        { id: 'adapt-freely', label: 'Adapt and redistribute freely', summary: 'Open licence permitting modification, usually with attribution.' },
+        { id: 'share-unchanged', label: 'Share unchanged', summary: 'May be redistributed, but not modified.' },
+        { id: 'use-only', label: 'Use as provided', summary: 'Free to use; no redistribution or adaptation rights granted.' },
+        { id: 'ask-first', label: 'Permission needed', summary: 'Contact the publisher before reuse in training.' },
+        { id: 'unknown', label: 'Not stated', summary: 'No terms found. Assume permission is needed.' }
+      ]
+    },
+
+    maintenance: {
+      label: 'Maintenance',
+      role: 'secondary',
+      multiple: false,
+      optional: true,
+      default: 'unknown',
+      help: 'Preferred over version numbers, which go stale within weeks and answer the wrong question. Always shown on the card: "active" is itself reassuring for someone about to commit weeks to a tool, and hiding it until something is wrong trains people not to look.',
+      options: [
+        { id: 'active', label: 'Actively developed', summary: 'Changed recently; issues are being answered.' },
+        { id: 'stable', label: 'Stable', summary: 'Not changing, and does not need to. Normal for a standard or protocol.' },
+        { id: 'unmaintained', label: 'Unmaintained', summary: 'No recent activity. Usable, but nobody is fixing it.' },
+        { id: 'archived', label: 'Archived', summary: 'Formally retired by its authors.' },
+        { id: 'unknown', label: 'Not known', summary: 'Not yet assessed.' }
+      ]
+    },
+
+    access: {
+      label: 'Access',
+      role: 'secondary',
+      multiple: false,
+      optional: true,
+      default: 'unknown',
+      help: 'A real barrier that cost and connectivity do not capture. "Free" and "you must create an account before you see anything" are different experiences, especially where institutional email or card verification is required.',
+      options: [
+        { id: 'open', label: 'No account needed', summary: 'Open on the web; nothing to sign up for.' },
+        { id: 'free-account', label: 'Free account needed', summary: 'Registration required, at no cost.' },
+        { id: 'registration', label: 'Application or approval', summary: 'Access is granted, not self-serve.' },
+        { id: 'restricted', label: 'Restricted', summary: 'Membership, institutional agreement, or payment required.' },
+        { id: 'unknown', label: 'Not known' }
+      ]
+    },
+
+    endorsement: {
+      label: 'Endorsement',
+      role: 'secondary',
+      multiple: false,
+      optional: true,
+      default: 'not-assessed',
+      help: 'Optional editorial signal. Defaults to not assessed, and an entry with no endorsement is not a judgement against it. Use sparingly and only where a curator can point at a reason.',
+      options: [
+        { id: 'not-assessed', label: 'Not assessed' },
+        { id: 'widely-adopted', label: 'Widely adopted', summary: 'In routine use across many public health laboratories.' },
+        { id: 'course-recommended', label: 'Recommended in course', summary: 'Used or recommended in the APHL/CDC training course.' },
+        { id: 'superseded', label: 'Superseded', summary: 'Still listed, but a newer resource is preferred.' }
+      ]
     }
+  };
+
+  // Status gate for machine-draftable prose. Scoped to the OPTIONAL fields
+  // only. `description` is curator-written and filled on all 79 records, so it
+  // is deliberately out of scope — gating it would blank the site on import.
+  const TEXT_STATUS = {
+    label: 'Status for written fields',
+    appliesTo: ['summary', 'notes'],
+    default: 'draft',
+    help: 'Only verified text is published. A withheld summary falls back to `description`; a withheld note simply does not appear.',
+    options: [
+      { id: 'draft', label: 'Draft', summary: 'Machine-generated or unreviewed. Not published.' },
+      { id: 'verified', label: 'Verified', summary: 'A curator has read it and stands behind it.' }
+    ]
   };
 
   const GEOGRAPHY_PARENT_MAP = {
@@ -190,19 +413,69 @@
     return option ? option.label : String(id || '').replace(/-/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase());
   }
 
+  // Unchanged contract: the seven legacy multi-select array fields only.
+  // Existing validators keep working exactly as before.
   function enumFields() {
-    return {
-      audiences: valuesFor('audiences'),
-      stages: valuesFor('stages'),
-      types: valuesFor('types'),
-      geography: valuesFor('geography'),
-      topics: valuesFor('topics'),
-      pathogenFocus: valuesFor('pathogenFocus'),
-      language: valuesFor('language')
-    };
+    return PRIMARY_FIELDS.reduce((acc, field) => {
+      acc[field] = valuesFor(field);
+      return acc;
+    }, {});
   }
 
-  const api = { TAXONOMY, GEOGRAPHY_PARENT_MAP, flattenOptions, valuesFor, labelFor, enumFields };
+  // New in v2.0.0 — single-select optional fields, kept separate so that
+  // callers expecting the legacy shape are unaffected.
+  function secondaryEnumFields() {
+    return SECONDARY_FIELDS.reduce((acc, field) => {
+      acc[field] = valuesFor(field);
+      return acc;
+    }, {});
+  }
+
+  function defaults() {
+    return SECONDARY_FIELDS.reduce((acc, field) => {
+      acc[field] = TAXONOMY[field].default;
+      return acc;
+    }, {});
+  }
+
+  // Fill any missing secondary field with its unknown/not-assessed default.
+  // Never overwrites a value a curator has already set.
+  function applyDefaults(record) {
+    const filled = Object.assign({}, record);
+    SECONDARY_FIELDS.forEach((field) => {
+      if (filled[field] === undefined || filled[field] === null || filled[field] === '') {
+        filled[field] = TAXONOMY[field].default;
+      }
+    });
+    return filled;
+  }
+
+  function isUnset(field, value) {
+    const def = TAXONOMY[field];
+    return !def || value === undefined || value === null || value === '' || value === def.default;
+  }
+
+  function fieldsByRole(role) {
+    return Object.keys(TAXONOMY).filter((field) => TAXONOMY[field].role === role);
+  }
+
+  const api = {
+    VERSION: TAXONOMY_VERSION,
+    TAXONOMY,
+    TEXT_STATUS,
+    PRIMARY_FIELDS,
+    SECONDARY_FIELDS,
+    GEOGRAPHY_PARENT_MAP,
+    flattenOptions,
+    valuesFor,
+    labelFor,
+    enumFields,
+    secondaryEnumFields,
+    defaults,
+    applyDefaults,
+    isUnset,
+    fieldsByRole
+  };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.APHL_TAXONOMY = api;

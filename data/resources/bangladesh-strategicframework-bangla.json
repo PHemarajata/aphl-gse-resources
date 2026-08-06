@@ -1,0 +1,44 @@
+{
+  "id": "bangladesh-strategicframework-bangla",
+  "title": "A Strategic Framework of SARS-CoV-2 Genomic Surveillance in Bangladesh",
+  "organization": "Bangladesh MoH + collaborators (Institutes/Hospitals)",
+  "description": "Document describing framework developed between mid-2021 and end-2022 for SARS-CoV-2 variant surveillance across 13 hospitals and institutes; sets priorities, QC, data pipelines.",
+  "url": "https://pubmed.ncbi.nlm.nih.gov/39440811/",
+  "audiences": [
+    "laboratorians",
+    "epidemiologists",
+    "policymakers",
+    "lab-leadership"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global",
+    "lmic",
+    "asia"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "variant-monitoring",
+    "quality-management",
+    "surveillance-design"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Includes sample selection; QC; workflows; turn-around times; coordination among hospitals and public health labs; variant tracking pipelines"
+  ],
+  "practicalUse": "Useful for countries designing national scale variant surveillance; illustrating hospital ↔ public health Lab coordination; designing QC & variant tracking systems",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

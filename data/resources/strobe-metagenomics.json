@@ -1,0 +1,45 @@
+{
+  "id": "strobe-metagenomics",
+  "title": "STROBE-metagenomics: reporting guideline for metagenomic sequencing studies",
+  "organization": "The Lancet Infectious Diseases (Bharucha et al.)",
+  "description": "International guideline extending STROBE/STROME-ID for metagenomics; defines essential reporting items across sampling, lab methods, bioinformatics and QC to improve transparency and reproducibility.",
+  "url": "https://doi.org/10.1016/S1473-3099(20)30199-7",
+  "audiences": [
+    "laboratorians",
+    "epidemiologists",
+    "bioinformaticians",
+    "policymakers"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual",
+    "policy-document"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "regulatory-frameworks",
+    "reporting",
+    "quality-management"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Structured checklist for metagenomics studies; Covers specimen handling, sequencing and bioinformatics QC; Promotes transparency, reproducibility and bias reporting"
+  ],
+  "practicalUse": "Use during study design, protocol writing and peer review to ensure complete reporting and interpretable public health metagenomics results.",
+  "relatedResources": [
+    "minseqe-minimum-info",
+    "mixs-minimum-info"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

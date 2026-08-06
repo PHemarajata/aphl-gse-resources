@@ -1,0 +1,47 @@
+{
+  "id": "sea-eid-capabilities",
+  "title": "Infectious Disease Detection Capabilities of Southeast Asian Countries: A Landscape Analysis of Surveillance Systems and Stakeholders",
+  "organization": "Vital Strategies",
+  "description": "Landscape analysis comparing infectious disease detection, surveillance, laboratory, stakeholder, and genomic surveillance capabilities across selected Southeast Asian countries.",
+  "url": "https://www.vitalstrategies.org/wp-content/uploads/Infectious-Disease-Detection-Capabilities-of-Southeast-Asian-Countries.pdf",
+  "audiences": [
+    "public-health-officials",
+    "epidemiologists",
+    "lab-leadership",
+    "policymakers"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual",
+    "policy-document"
+  ],
+  "geography": [
+    "southeast-asia",
+    "lmic"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "lab-networking",
+    "diagnostics-integration",
+    "regulatory-frameworks"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Compares detection and surveillance capabilities across Southeast Asian countries.",
+    "Maps gaps in laboratory systems, supply chains, data sharing, and coordination.",
+    "Identifies stakeholders and enabling factors for stronger detection systems.",
+    "Useful for cross-country learning and investment planning."
+  ],
+  "practicalUse": "Use this report to identify system gaps, compare country readiness, prioritize capacity-building investments, and support planning for stronger infectious disease detection and genomic surveillance.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "PDF landscape analysis",
+  "legacyTags": [],
+  "validated": true
+}

@@ -1,0 +1,42 @@
+{
+  "id": "precisionbio-asiagaps",
+  "title": "Precision Medicine Gaps & Bioinformatics Capacity in Asia",
+  "organization": "Phanthunane et al.",
+  "description": "Study identifying gaps in precision medicine / genomics & bioinformatic capacity in Asia; challenges in data integration, regulation, equity, ethics.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11197108/",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "policymakers"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "research-evidence"
+  ],
+  "geography": [
+    "global",
+    "asia"
+  ],
+  "topics": [
+    "pipelines-workflows",
+    "ethics-legal",
+    "workforce-training",
+    "data-governance"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Mapping of gap areas; case studies of countries; recommendations for capacity strengthening; data regulation challenges"
+  ],
+  "practicalUse": "Useful for setting policy & training agendas; identifying priority regulatory / data sharing reforms; planning bioinformatics infrastructure",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": false
+}

@@ -1,0 +1,55 @@
+{
+  "id": "pathogenwatch",
+  "title": "Pathogenwatch",
+  "organization": "Centre for Genomic Pathogen Surveillance",
+  "description": "Pathogenwatch is a web-based platform for genomic surveillance of microbial pathogens. It supports analysis and visualization of pathogen genomes with phylogenetic, geographic and epidemiologic context.",
+  "url": "https://pathogen.watch/",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "epidemiologists",
+    "public-health-officials"
+  ],
+  "stages": [
+    "implementation",
+    "operations-scaleup",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "interactive-tool",
+    "data-dashboard"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "amr-surveillance",
+    "outbreak-detection",
+    "variant-monitoring",
+    "phylogenetics",
+    "visualization"
+  ],
+  "pathogenFocus": [
+    "amr-bacteria",
+    "bacterial-genomics",
+    "viral-genomics",
+    "emerging-pathogens"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Genome analysis workflows",
+    "Phylogenetic and geographic visualization",
+    "AMR and lineage context",
+    "Public health surveillance outputs"
+  ],
+  "practicalUse": "Public health genomics users can upload or review pathogen genome data, place sequences in broader genomic context and generate interpretable outputs for surveillance, cluster investigation and reporting.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Web-based genomic surveillance and visualization platform.",
+  "legacyTags": [
+    "Conservative tagging applied because supported organisms and features may vary by pathogen module."
+  ],
+  "validated": true
+}

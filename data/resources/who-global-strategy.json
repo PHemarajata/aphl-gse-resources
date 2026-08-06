@@ -1,0 +1,68 @@
+{
+  "id": "who-global-strategy",
+  "title": "WHO Global Genomic Surveillance Strategy for Pathogens with Pandemic & Epidemic Potential, 2022-2032",
+  "organization": "World Health Organization",
+  "description": "Comprehensive 10-year global framework with step-by-step national strategy development guide, monitoring indicators, and implementation roadmap.",
+  "url": "https://www.who.int/initiatives/genomic-surveillance-strategy",
+  "audiences": [
+    "policymakers",
+    "health-ministry-officials",
+    "laboratorians",
+    "epidemiologists",
+    "donors-funders"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation",
+    "optimization-sustainability",
+    "readiness-assessment"
+  ],
+  "types": [
+    "guide-manual",
+    "policy-document"
+  ],
+  "geography": [
+    "global",
+    "lmic"
+  ],
+  "topics": [
+    "stakeholder-engagement",
+    "regulatory-frameworks",
+    "genomic-surveillance",
+    "sustainability",
+    "data-sharing-interoperability"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "10-year strategic framework",
+    "Step-by-step national guide",
+    "Monitoring and evaluation indicators",
+    "Stakeholder engagement templates",
+    "Implementation milestones",
+    "Objectives over 10 years; strategic actions; alignment with pandemic & epidemic priorities; normative guidance & indicators",
+    "Useful to align national plans with global norms; can serve as model framework; useful for donor proposals and national policy drafting"
+  ],
+  "practicalUse": "National strategy development, stakeholder alignment, monitoring framework setup",
+  "relatedResources": [
+    "who-costing-tool",
+    "asia-pgi-roadmap",
+    "africa-pgi-framework",
+    "tom-implementation"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "topics: Outlines objectives, steps for strategy development",
+    "topics: normative guidance for standards & data sharing",
+    "url repaired: audience list stripped from url field",
+    "audiences recovered from corrupted url: regional-international-orgs, policymakers, health-ministry-officials, donors-funders, one-health-partners",
+    "merged duplicate record: globalgenomicsurvstrategy-2022",
+    "merged duplicate record: who-globalstrategy2022",
+    "alternate url: https://iris.who.int/bitstream/handle/10665/374757/9789240084773-eng.pdf?sequence=1",
+    "needs re-validation after merge"
+  ],
+  "validated": false
+}

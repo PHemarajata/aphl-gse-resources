@@ -1,0 +1,52 @@
+{
+  "id": "africa-datasharing-principles",
+  "title": "Attributes & Principles for Genomic Data-Sharing Platforms supporting Surveillance (WHO consultation)",
+  "organization": "WHO / Genomics & Analytics Unit / Emergency Zoonotic Diseases Unit",
+  "description": "Document describing the desired attributes & principles for genomic data-sharing platforms used in pathogen surveillance, to guide policy / platform developers / donors.",
+  "url": "https://www.who.int/news-room/articles-detail/online-public-consultation-attributes-and-principles-for-genomic-data-sharing-platforms-supporting-surveillance-of-pathogens-with-epidemic-and-pandemic-potential",
+  "audiences": [
+    "policymakers",
+    "donors-funders",
+    "public-health-officials",
+    "bioinformaticians"
+  ],
+  "stages": [
+    "planning-strategy"
+  ],
+  "types": [
+    "policy-document",
+    "guide-manual"
+  ],
+  "geography": [
+    "global",
+    "africa",
+    "lmic"
+  ],
+  "topics": [
+    "regulatory-frameworks",
+    "data-sharing-interoperability",
+    "genomic-surveillance",
+    "data-governance",
+    "privacy-benefit-sharing"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Helps shape policies / regulations on how data is shared; useful for drafting legal or governance frameworks; input for national strategy documents"
+  ],
+  "practicalUse": "",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "topics: Transparency",
+    "topics: ease of access",
+    "topics: stability of platforms",
+    "url repaired: audience list stripped from url field",
+    "audiences recovered from corrupted url: policymakers, donors-funders, public-health-officials, bioinformaticians",
+    "audiences unmapped: Platform developers"
+  ],
+  "validated": true
+}

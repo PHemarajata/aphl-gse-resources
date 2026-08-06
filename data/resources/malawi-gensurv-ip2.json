@@ -1,0 +1,53 @@
+{
+  "id": "malawi-gensurv-ip2",
+  "title": "Malawi Genomic Surveillance Implementation Plan 2.0 (2023-2030)",
+  "organization": "Malawi Ministry of Health + Africa CDC / PGI",
+  "description": "Costed implementation plan with seven thematic areas (e.g. surveillance & research; health system strengthening; capacity building; governance; regulation & policy; financing etc.), developed with government, partners, stakeholders.",
+  "url": "https://africacdc.org/wp-content/uploads/2025/07/Malawi-Genomic-Surveillance-Implementation-Plan-FINAL-3-JULY.pdf",
+  "audiences": [
+    "policymakers",
+    "public-health-officials",
+    "lab-leadership",
+    "epidemiologists",
+    "donors-funders",
+    "health-ministry-officials"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "policy-document",
+    "guide-manual"
+  ],
+  "geography": [
+    "africa",
+    "lmic",
+    "southern-africa"
+  ],
+  "topics": [
+    "stakeholder-engagement",
+    "regulatory-frameworks",
+    "genomic-surveillance",
+    "costing-financing",
+    "sustainability"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Serves as a blueprint for other countries; helps stakeholders understand what’s involved in implementation; guides budgeting and policy alignment"
+  ],
+  "practicalUse": "",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "topics: SWOT analysis",
+    "url repaired: audience list stripped from url field",
+    "audiences recovered from corrupted url: public-health-officials, lab-leadership, epidemiologists, donors-funders, health-ministry-officials"
+  ],
+  "validated": true
+}

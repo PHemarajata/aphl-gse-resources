@@ -1,0 +1,61 @@
+{
+  "id": "who-ipsn",
+  "title": "International Pathogen Surveillance Network (IPSN)",
+  "organization": "World Health Organization (WHO)",
+  "description": "WHO-led global network, convened by the WHO Hub for Pandemic and Epidemic Intelligence, to advance pathogen genomic surveillance by harmonizing data standards, accelerating country capacity scale-up, coordinating funding, and fostering partnerships to improve public-health decision-making. ([who.int](https://www.who.int/initiatives/international-pathogen-surveillance-network))",
+  "url": "https://www.who.int/initiatives/international-pathogen-surveillance-network",
+  "audiences": [
+    "lab-leadership",
+    "bioinformaticians",
+    "public-health-officials",
+    "policymakers",
+    "donors-funders",
+    "regional-international-orgs"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation",
+    "operations-scaleup"
+  ],
+  "types": [
+    "framework-strategy"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "data-sharing-interoperability",
+    "privacy-benefit-sharing",
+    "stakeholder-engagement",
+    "regional-networks"
+  ],
+  "pathogenFocus": [
+    "emerging-pathogens",
+    "viral-genomics",
+    "bacterial-genomics"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Vision: equitable access for every country to sustained sequencing and analytics capacity. ([who.int](https://www.who.int/initiatives/international-pathogen-surveillance-network))",
+    "Mission: a mutually supportive global network to improve access and equity. ([who.int](https://www.who.int/initiatives/international-pathogen-surveillance-network))",
+    "Communities of practice on genomics data to harmonize standards, ensure tools are fit for purpose, and enhance data and benefits sharing. ([who.int](https://www.who.int/initiatives/international-pathogen-surveillance-network))",
+    "Country Scale-Up Accelerator to build capacity and enable South–South exchange, producing capacity-building tools as global goods. ([who.int](https://www.who.int/initiatives/international-pathogen-surveillance-network))",
+    "Funders forum and small grants to coordinate donor efforts and power IPSN projects. ([who.int](https://www.who.int/initiatives/international-pathogen-surveillance-network)); One-slide overview summarizing scope and offerings. ([cdn.who.int](https://cdn.who.int/media/docs/default-source/ipsn/ipsn-one-slide-overview.pdf?sfvrsn=69a89431_2))"
+  ],
+  "practicalUse": "Orient to IPSN’s scope and participation options; identify collaboration channels, events, and funding; access a concise overview slide for internal briefings. ([who.int](https://www.who.int/initiatives/international-pathogen-surveillance-network))",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "WHO initiative landing page with overview, areas of work, membership, funding, events/multimedia, and a one-slide overview PDF. ([who.int](https://www.who.int/initiatives/international-pathogen-surveillance-network))",
+  "sourceNotes": [
+    "Related source found during AI intake: https://cdn.who.int/media/docs/default-source/ipsn/ipsn-one-slide-overview.pdf?sfvrsn=69a89431_2"
+  ],
+  "legacyTags": [
+    "AI source notes:",
+    "Primary source: WHO IPSN initiative page (accessed April 25, 2026). ([who.int](https://www.who.int/initiatives/international-pathogen-surveillance-network))",
+    "Supplement: IPSN one-slide overview PDF (accessed April 25, 2026). ([cdn.who.int](https://cdn.who.int/media/docs/default-source/ipsn/ipsn-one-slide-overview.pdf?sfvrsn=69a89431_2))"
+  ],
+  "validated": true
+}

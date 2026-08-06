@@ -1,0 +1,41 @@
+{
+  "id": "minseqe-minimum-info",
+  "title": "MINSEQE: Minimum Information about a High-Throughput Sequencing Experiment",
+  "organization": "FGED Society / FGED Consortium",
+  "description": "Checklist specifying minimal metadata for HTS experiments so results are interpretable and reproducible, including raw/processed data, protocols and sample-data relationships.",
+  "url": "https://www.fged.org/projects/minseqe/",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "metadata-management",
+    "quality-management"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Requires raw and processed data with provenance; Documents library prep, instruments and analysis steps; Links samples to datasets for full traceability"
+  ],
+  "practicalUse": "Include MINSEQE fields in protocols and publications to meet repository/journal expectations and support QA/QC.",
+  "relatedResources": [
+    "strobe-metagenomics"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

@@ -1,0 +1,47 @@
+{
+  "id": "gensurv-genvirusesframework",
+  "title": "Genomic Surveillance for Viruses of Public Health Importance",
+  "organization": "Expert Review of Anti-infective Therapy",
+  "description": "Suggested frameworks for applying genomic surveillance to viruses of public health importance, especially national-level plans and technical-policy guidance.",
+  "url": "https://www.tandfonline.com/doi/full/10.1080/14737159.2025.2543750",
+  "audiences": [
+    "policymakers"
+  ],
+  "stages": [
+    "planning-strategy"
+  ],
+  "types": [
+    "policy-document",
+    "guide-manual"
+  ],
+  "geography": [
+    "global",
+    "lmic"
+  ],
+  "topics": [
+    "regulatory-frameworks",
+    "genomic-surveillance",
+    "outbreak-detection",
+    "surveillance-design"
+  ],
+  "pathogenFocus": [
+    "viral-genomics"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "\"Guides for ministries / agencies to draft viral genomic surveillance programs; aligning policy, workflows & sampling\""
+  ],
+  "practicalUse": "",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "source column repair: URL/audience/organization fields were shifted in source data",
+    "pathogen/audience text from shifted URL field: SARS viruses etc., Epidemiologists; Policymakers; Bioinformaticians",
+    "topics: Suggested national-level plan structure",
+    "topics: case studies & best practices"
+  ],
+  "validated": false
+}

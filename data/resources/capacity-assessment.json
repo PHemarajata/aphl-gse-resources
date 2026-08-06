@@ -1,0 +1,43 @@
+{
+  "id": "capacity-assessment",
+  "title": "WHO Laboratory Assessment Tool (LAT)",
+  "organization": "World Health Organization",
+  "description": "Standardized tool to assess national laboratory systems and individual labs; adaptable for genomics capacity planning.",
+  "url": "https://www.who.int/publications/i/item/WHO-HSE-GCR-LYO-2012.2",
+  "audiences": [
+    "policymakers",
+    "laboratorians"
+  ],
+  "stages": [
+    "planning-strategy"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global",
+    "lmic"
+  ],
+  "topics": [
+    "workforce-training",
+    "quality-management"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "System and facility questionnaires;Customizable assessment modules;Gap analysis and action planning"
+  ],
+  "practicalUse": "Baseline assessment and prioritization for genomics integration in lab systems.",
+  "relatedResources": [
+    "tom-implementation",
+    "who-global-strategy"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool"
+  ],
+  "validated": false
+}

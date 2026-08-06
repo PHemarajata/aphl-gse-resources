@@ -1,0 +1,49 @@
+{
+  "id": "gensurv-toolkit-afi-kazaian-et-al",
+  "title": "Toolkit for Planning & Implementing Acute Febrile Illness Surveillance",
+  "organization": "Kazaian et al.",
+  "description": "Toolkit and framework for acute febrile illness surveillance that includes planning, laboratory, data, and integration modules with flexibility for multiple settings.",
+  "url": "https://www.ncbi.nlm.nih.gov/articles/PMC11025857/",
+  "audiences": [
+    "laboratorians"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global",
+    "lmic"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "diagnostics-integration",
+    "surveillance-design",
+    "epi-integration"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Useful for planning AFI surveillance; integrating labs with epidemiology; adapting to low-resource settings"
+  ],
+  "practicalUse": "",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "source column repair: URL/audience/organization fields were shifted in source data",
+    "audiences from shifted URL field: Laboratorians; Epidemiologists; Lab leadership",
+    "stages: Tool",
+    "geography: Data Integration",
+    "topics: Key modules",
+    "topics: sample design",
+    "topics: integration with diagnostics & laboratory capacity",
+    "types: inferred from title/description"
+  ],
+  "validated": false
+}

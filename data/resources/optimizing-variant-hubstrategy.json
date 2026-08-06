@@ -1,0 +1,48 @@
+{
+  "id": "optimizing-variant-hubstrategy",
+  "title": "Optimizing global genomic surveillance for early detection of emerging SARS-CoV-2 variants",
+  "organization": "Gu et al. / arXiv preprint",
+  "description": "Modeling study evaluating how targeted genomic surveillance at international travel hubs can improve early detection of emerging SARS-CoV-2 variants and reduce delays compared with broader sampling approaches.",
+  "url": "https://arxiv.org/abs/2502.00934",
+  "audiences": [
+    "epidemiologists",
+    "policymakers",
+    "bioinformaticians"
+  ],
+  "stages": [
+    "planning-strategy"
+  ],
+  "types": [
+    "research-evidence",
+    "policy-document"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "outbreak-detection",
+    "variant-monitoring",
+    "costing-financing",
+    "surveillance-design"
+  ],
+  "pathogenFocus": [
+    "respiratory-pathogens",
+    "viral-genomics"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Models targeted surveillance strategies for emerging SARS-CoV-2 variant detection.",
+    "Compares travel-hub sampling with broader surveillance allocation approaches.",
+    "Uses resource allocation and detection-delay metrics relevant to early warning systems.",
+    "Supports planning discussions on where limited sequencing capacity may have greatest impact."
+  ],
+  "practicalUse": "Use this study to inform strategic allocation of sequencing and sampling resources for early variant detection, especially when surveillance capacity is limited.",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Preprint / modeling study",
+  "legacyTags": [],
+  "validated": false
+}

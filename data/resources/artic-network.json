@@ -1,0 +1,64 @@
+{
+  "id": "artic-network",
+  "title": "ARTIC network",
+  "organization": "ARTIC network",
+  "description": "Wellcome Trust–funded project providing open resources, protocols, pipelines, software and training to enable end‑to‑end pathogen (primarily viral) genomics from sample to response.",
+  "url": "https://artic.network/",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "epidemiologists",
+    "trainers-educators"
+  ],
+  "stages": [
+    "implementation",
+    "operations-scaleup",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "guide-manual",
+    "training-material"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "pipelines-workflows",
+    "phylogenetics",
+    "visualization",
+    "sequencing-platforms",
+    "workforce-training"
+  ],
+  "pathogenFocus": [
+    "respiratory-pathogens",
+    "emerging-pathogens",
+    "viral-genomics"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Virus-specific resource collections for EBOV, MeV, MPXV, and SARS‑CoV‑2.",
+    "Protocols for tiled amplicon and metagenomic sequencing workflows.",
+    "Nextflow analysis pipeline for viral amplicon data (amplicon‑nf).",
+    "Software suite for primer design, real-time analysis, phylogenetics, and QC (e.g., Fieldbioinformatics, PrimalScheme, RAMPART, PearTree).",
+    "Training materials including tutorials, guides, and workshop resources."
+  ],
+  "practicalUse": "Adopt standardized viral sequencing and analysis workflows in public health labs; design primer schemes; run real-time analysis and phylogenetics; train staff with tutorials and guides for implementation and scale-up.",
+  "relatedResources": [],
+  "lastUpdated": "2026-04-23",
+  "formatDetails": "Website hub with sections for Viruses, Sequencing Protocols (tiled amplicon and metagenomic), Analysis Pipelines (e.g., amplicon-nf), Software (e.g., Fieldbioinformatics, PrimalScheme, RAMPART, PearTree), and Training (guides, tutorials, workshops).",
+  "legacyTags": [
+    "AI source notes:",
+    "Homepage describes ARTIC as a Wellcome Trust–funded project developing systems, protocols and bioinformatics for end‑to‑end pathogen genomics",
+    "site last generated Apr 23, 2026. ([artic.network](https://artic.network/))",
+    "Current virus resources list EBOV, MeV, MPXV, and SARS‑CoV‑2. ([artic.network](https://artic.network/viruses))",
+    "Protocols page lists tiled amplicon and metagenomic sequencing. ([artic.network](https://artic.network/protocols))",
+    "Analysis Pipelines page includes amplicon‑nf for viral amplicon data. ([artic.network](https://artic.network/pipelines))",
+    "Software page lists Fieldbioinformatics, PearTree, PrimalScheme, raccoon, RAMPART, Sealion, and Squirrel. ([artic.network](https://artic.network/software))",
+    "Training page includes guides, tutorials, workshops (e.g., tiling amplicon guide",
+    "phylogenetics",
+    "metagenomics). ([artic.network](https://artic.network/training))"
+  ],
+  "validated": true
+}

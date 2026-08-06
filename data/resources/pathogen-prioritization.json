@@ -1,0 +1,47 @@
+{
+  "id": "pathogen-prioritization",
+  "title": "Pathogen Prioritization Frameworks",
+  "organization": "Multiple Organizations",
+  "description": "Evidence-based frameworks for selecting priority pathogens for genomic surveillance with decision matrices and expert panel guidance.",
+  "url": "#",
+  "audiences": [
+    "epidemiologists",
+    "policymakers"
+  ],
+  "stages": [
+    "planning-strategy"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "lmic"
+  ],
+  "topics": [
+    "outbreak-detection",
+    "genomic-surveillance",
+    "surveillance-design"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Multi-criteria decision matrices",
+    "Expert panel frameworks",
+    "Evidence-based selection",
+    "Resource optimization",
+    "Regional adaptation guidance"
+  ],
+  "practicalUse": "Priority setting, resource allocation, strategic planning, expert panel setup",
+  "relatedResources": [
+    "asia-pgi-roadmap",
+    "who-global-strategy"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "relatedResources removed: surveillance-design"
+  ],
+  "validated": false
+}

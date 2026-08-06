@@ -1,0 +1,45 @@
+{
+  "id": "itol-platform",
+  "title": "iTOL: Interactive Tree Of Life",
+  "organization": "EMBL",
+  "description": "Online phylogenetic tree viewer for display, annotation, and management with publication-quality outputs.",
+  "url": "https://itol.embl.de/",
+  "audiences": [
+    "bioinformaticians",
+    "epidemiologists",
+    "laboratorians"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "visualization",
+    "phylogenetics"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Browser-based tree visualization;Rich annotation datasets and styles;High-resolution exports;Project management and sharing"
+  ],
+  "practicalUse": "Present and annotate phylogenies for investigations and reports.",
+  "relatedResources": [
+    "nextstrain-platform",
+    "microreact-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "types: inferred from title/description"
+  ],
+  "validated": false
+}

@@ -1,0 +1,41 @@
+{
+  "id": "vietnam-sars2-genvars",
+  "title": "SARS-CoV-2 genomic surveillance in southern Vietnam (2020-2021): Tracking variant evolution and public health impact in a limited-resource setting",
+  "organization": "Gladkikh et al. / Vietnam MoH / Pasteur Institute etc.",
+  "description": "A WGS surveillance study of 126 SARS-CoV-2 genomes from southern Vietnam (2020-21), identifying local variant dynamics, distribution of variants, and impact of control measures.",
+  "url": "https://bmcinfectdis.biomedcentral.com/articles/10.1186/s12879-023-08814-8",
+  "audiences": [
+    "laboratorians",
+    "epidemiologists",
+    "bioinformaticians"
+  ],
+  "stages": [
+    "implementation"
+  ],
+  "types": [
+    "research-evidence"
+  ],
+  "geography": [
+    "asia",
+    "southeast-asia"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "variant-monitoring"
+  ],
+  "pathogenFocus": [
+    "viral-genomics"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Relatively complete genomes; good metadata for location/time; shows how variants move and establish; reflecting public health interventions effect"
+  ],
+  "practicalUse": "Useful for Vietnam & similar settings to learn about variant emergence, timing; informs local response & planning",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

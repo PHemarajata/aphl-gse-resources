@@ -1,0 +1,43 @@
+{
+  "id": "africapgi-casestudy",
+  "title": "African Pathogen Genomics Initiative Case Study",
+  "organization": "Africa CDC & Grand Challenges",
+  "description": "A case study of the African Pathogen Genomics Initiative: how sequencing capacity was scaled continent-wide; detailing how many countries gained local sequencing, infrastructure, software, and the impact on outbreak detection.",
+  "url": "https://gcgh.grandchallenges.org/case-study/african-pathogen-genomics-initiative",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "lab-leadership",
+    "epidemiologists"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "africa",
+    "lmic"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "workforce-training"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Shows scale-up of lab + bioinformatics; timelines; partnerships; supply chain & reagent issues addressed"
+  ],
+  "practicalUse": "Informs other countries how to plan & scale genomics; helps with proposal writing; gives models of capacity building steps",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: Tool"
+  ],
+  "validated": true
+}

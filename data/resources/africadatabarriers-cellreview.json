@@ -1,0 +1,47 @@
+{
+  "id": "africadatabarriers-cellreview",
+  "title": "Africa in the era of pathogen genomics: Unlocking data barriers",
+  "organization": "Cell / Mboowa et al.",
+  "description": "Review of expansion of pathogen sequencing in Africa; focuses on local generation of genomic data, data governance, infrastructure barriers, equity; what’s needed to embed genomic surveillance into health systems.",
+  "url": "https://www.cell.com/cell/fulltext/S0092-8674(24)00960-7",
+  "audiences": [
+    "laboratorians",
+    "policymakers",
+    "bioinformaticians",
+    "health-ministry-officials"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "research-evidence",
+    "policy-document"
+  ],
+  "geography": [
+    "global",
+    "africa"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "data-sharing-interoperability",
+    "regulatory-frameworks",
+    "data-governance"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Reviews barriers to pathogen genomic data generation and sharing in Africa.",
+    "Highlights governance, sovereignty, interoperability, infrastructure, and equity issues.",
+    "Discusses how local repositories and policy frameworks can support surveillance.",
+    "Useful for policy and donor discussions on sustainable genomic data systems."
+  ],
+  "practicalUse": "Useful for stakeholders / policy makers to understand current gaps in data sharing & governance; to inform regulation & policy; for donor / funder advocacy",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "Journal review article",
+  "legacyTags": [],
+  "validated": true
+}

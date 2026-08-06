@@ -1,0 +1,43 @@
+{
+  "id": "gensurv-surveillancegaps-wnv",
+  "title": "Identifying genomic surveillance gaps in Africa for West Nile Virus (WNV)",
+  "organization": "Moir et al. / Africa labs network",
+  "description": "A review of the status of molecular testing and sequencing of WNV in African countries; mapping which countries test/sequence, where gaps are, challenges (logistics, reagents, labs), and what needed to improve.",
+  "url": "https://www.sciencedirect.com/science/article/pii/S2666524725001041",
+  "audiences": [
+    "laboratorians",
+    "epidemiologists",
+    "bioinformaticians"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "research-evidence"
+  ],
+  "geography": [
+    "global",
+    "africa"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "outbreak-detection"
+  ],
+  "pathogenFocus": [
+    "arboviruses-vectorborne",
+    "viral-genomics"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Mapping surveillance coverage; identifying countries with minimal or no sequencing; highlighting supply chain, funding, technical training gaps; geographic & temporal gaps"
+  ],
+  "practicalUse": "Informs planning of coverage expansion; helps allocate funding; useful for arbovirus surveillance planning",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

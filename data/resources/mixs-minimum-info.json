@@ -1,0 +1,42 @@
+{
+  "id": "mixs-minimum-info",
+  "title": "MIxS: Minimum Information about any (x) Sequence",
+  "organization": "Genomic Standards Consortium",
+  "description": "Metadata framework with core and environmental packages for genomic, metagenomic and marker-gene data; enables consistent capture of contextual information for integration and reuse.",
+  "url": "https://genomicsstandardsconsortium.github.io/gensc.github.io/pages/projects/mixs-gsc-project.html",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "epidemiologists"
+  ],
+  "stages": [
+    "planning-strategy",
+    "implementation"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "metadata-management",
+    "data-sharing-interoperability"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Core and extension checklists; Environmental/context packages with controlled vocabularies; Supports FAIR data, interoperability and reuse"
+  ],
+  "practicalUse": "Adopt MIxS fields in LIMS and submission templates to standardize metadata for surveillance sequencing projects.",
+  "relatedResources": [
+    "misag-minimum-info",
+    "mimag-minimum-info"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

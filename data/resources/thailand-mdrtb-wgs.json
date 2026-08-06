@@ -1,0 +1,44 @@
+{
+  "id": "thailand-mdrtb-wgs",
+  "title": "Genomic decoding of drug-resistant tuberculosis in Thailand",
+  "organization": "N Thawong et al. / Thailand TB Programs & Research Institutions",
+  "description": "A large-sample (2005 isolates, including 1,189 newly sequenced) WGS study of drug-resistant Mycobacterium tuberculosis in Thailand (1994-2020); looks at strain lineage, resistance mutations, and using WGS for surveillance and outbreak detection.",
+  "url": "https://www.nature.com/articles/s41598-025-15093-7",
+  "audiences": [
+    "laboratorians",
+    "epidemiologists",
+    "bioinformaticians"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "guide-manual",
+    "research-evidence"
+  ],
+  "geography": [
+    "asia",
+    "lmic",
+    "southeast-asia"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "amr-surveillance"
+  ],
+  "pathogenFocus": [
+    "amr-bacteria"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "High sample size over long timeframe; linkage of phenotypic drug resistance with genomic data; establishes baseline of circulating lineages in Thailand"
+  ],
+  "practicalUse": "Helps Thai NTP (National TB Program) plan integrating WGS for routine resistance surveillance; training needs/capacity building; baseline mutation / lineage mapping",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [],
+  "validated": true
+}

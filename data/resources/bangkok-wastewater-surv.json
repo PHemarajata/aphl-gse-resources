@@ -1,0 +1,45 @@
+{
+  "id": "bangkok-wastewater-surv",
+  "title": "Multi-scale wastewater surveillance at a Bangkok tertiary hospital",
+  "organization": "Q Hayre et al. / Bangkok hospital & collaborators",
+  "description": "A hospital-based wastewater genomics surveillance study, tracking SARS-CoV-2 over time with sequencing; shows variation, detection dynamics in low vs high patient counts.",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11978038/",
+  "audiences": [
+    "laboratorians",
+    "environmental-health-teams",
+    "epidemiologists",
+    "lab-leadership"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "research-evidence"
+  ],
+  "geography": [
+    "asia",
+    "southeast-asia",
+    "global"
+  ],
+  "topics": [
+    "environmental-surveillance"
+  ],
+  "pathogenFocus": [
+    "viral-genomics"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Time series data; compares hospital vs community wastewater; shows detection during low prevalence; method for continuous monitoring"
+  ],
+  "practicalUse": "Useful for hospital public health units & city health authorities to set wastewater surveillance protocols; early warning systems; resource allocation for environmental sampling",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: Tool"
+  ],
+  "validated": true
+}

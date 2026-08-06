@@ -1,0 +1,46 @@
+{
+  "id": "gensurv-frameworks-toolkit",
+  "title": "Public Health / Illumina (Marketplace)",
+  "organization": "Genomic-based Public Health Surveillance Approaches and Methods (Illumina)",
+  "description": "\"Resource page / toolkit presenting NGS methods for pathogen surveillance: early detection, outbreak response, AMR detection, environmental surveillance etc.\"",
+  "url": "https://sapac.illumina.com/areas-of-interest/microbiology/public-health-surveillance.html",
+  "audiences": [
+    "laboratorians",
+    "bioinformaticians",
+    "lab-leadership"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "guide-manual"
+  ],
+  "geography": [
+    "global",
+    "lmic"
+  ],
+  "topics": [
+    "genomic-surveillance",
+    "amr-surveillance",
+    "pipelines-workflows",
+    "surveillance-design"
+  ],
+  "pathogenFocus": [
+    "amr-bacteria"
+  ],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Descriptions of workflows; sample types; environmental / zoonotic reservoir surveillance; combining outbreak & clinical surveillance; visualization / analytic examples"
+  ],
+  "practicalUse": "Useful for labs choosing methods; informing procurement; building capacity in surveillance & outbreak responses",
+  "relatedResources": [],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: Tool"
+  ],
+  "validated": false
+}

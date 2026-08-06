@@ -1,0 +1,49 @@
+{
+  "id": "gisaid-platform",
+  "title": "GISAID Global Database",
+  "organization": "GISAID Initiative",
+  "description": "Global genomic surveillance database with rapid data sharing capabilities, phylogenetic analysis tools, and collaborative research platform.",
+  "url": "https://gisaid.org",
+  "audiences": [
+    "epidemiologists",
+    "bioinformaticians",
+    "laboratorians"
+  ],
+  "stages": [
+    "implementation",
+    "optimization-sustainability"
+  ],
+  "types": [
+    "interactive-tool"
+  ],
+  "geography": [
+    "global"
+  ],
+  "topics": [
+    "data-sharing-interoperability"
+  ],
+  "pathogenFocus": [],
+  "language": [
+    "en"
+  ],
+  "keyFeatures": [
+    "Global genomic database",
+    "Rapid data sharing",
+    "Phylogenetic analysis tools",
+    "Quality control systems",
+    "Collaborative platform"
+  ],
+  "practicalUse": "Data sharing, global surveillance, phylogenetic analysis, collaborative research",
+  "relatedResources": [
+    "nextstrain-platform",
+    "microreact-platform"
+  ],
+  "lastUpdated": "",
+  "formatDetails": "",
+  "legacyTags": [
+    "types: tool",
+    "types: inferred from title/description",
+    "relatedResources removed: data-sharing-protocols"
+  ],
+  "validated": false
+}
