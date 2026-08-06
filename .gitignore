@@ -75,5 +75,8 @@ validation-reports/*.md
 # Admin-generated local resource backups
 public/resources-data-backup-*.js
 
+# Build artifact. Source of truth is data/. Rebuild with: npm run build
+public/resources-data.js
+
 # Cowork session scratch — retired files and orphaned git locks
 _to_delete/

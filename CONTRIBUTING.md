@@ -1,199 +1,175 @@
-# Curating this library
+# Contributing
 
-Everything here lives in `data/`. There is no admin panel and no login — a
-resource is a small JSON file, and changing one is a pull request.
+This is a curated collection. The value is in the judgement, not the volume — a
+resource that is merely relevant makes the collection worse, because it dilutes
+the ones that are genuinely useful.
 
-## One-time setup
+Everything below assumes you have a GitHub account and write access to this
+repository. Ask the repository owner if you do not.
 
-You need the repository on your machine and Node installed. Nothing else: the
-build and validator have no dependencies, so there is no `npm install` step.
+## The short version
 
-    git clone https://github.com/PHemarajata/aphl-gse-resources.git
-    cd aphl-gse-resources
-    node --version        # any Node 20+ is fine
+Go to **[the curation form](https://phemarajata.github.io/aphl-gse-resources/curate.html)**,
+fill it in, press the button at the bottom right. GitHub opens a pull request.
+Someone with write access approves it, and merging publishes the site.
 
-Open the folder in an editor that understands JSON Schema — VS Code does out of
-the box. Each record points at `data/resource.schema.json`, so every vocabulary
-field autocompletes, hovering a field explains what the values mean, and an
-invalid value is underlined as you type.
+You do not need to install anything, clone anything, or use a terminal.
 
-## The loop, exactly
+## The curation form
 
-Four commands, every time, in this order:
+The form is a page on the site itself. It reads the same vocabulary file the
+site and the automated checks read, so the tags it offers are exactly the tags
+that are valid — you cannot invent one by mistyping.
 
-    git checkout main && git pull          # 1. start from current main
-    git checkout -b fix-something          # 2. never work on main; it is protected
+It does three things.
 
-    # 3. edit the file(s) under data/
+**Add a new resource.** Fill in the fields. The record ID is generated from the
+title; change it if you want something shorter. As you type, the panel on the
+right tells you what would fail the automated check and what is merely a
+judgement call. When it is clean, press *Open a pull request on GitHub*. GitHub
+opens with the new file already written for you. Scroll to the bottom of that
+page, choose **Create a new branch and start a pull request**, and describe why
+the resource belongs here.
 
-    npm run validate                       # 4. rebuild + check everything
+**Edit an existing one.** Choose *Edit an existing one* and pick the resource.
+The form fills itself in from what is currently published. Change what you need
+to, then press *Copy, then open the file on GitHub*. That copies the corrected
+record and opens the existing file in GitHub's editor. Select everything there,
+paste, and choose **Create a new branch and start a pull request**.
 
-`npm run validate` is not optional and not a formality. It regenerates
-`public/resources-data.js` from your edit. **If you skip it, CI rejects the
-pull request**, because the committed data file will no longer match its source.
+**Remove one.** Choose *Remove one*, pick the resource, press the button. GitHub
+opens its delete-file page and offers the same pull request option. You do not
+need to touch anything else — the display order file tolerates a removed record.
 
-Then:
+In all three cases nothing changes on the live site until a pull request is
+approved and merged. The form has no ability to write to the site. That is
+deliberate: the previous browser admin panel *could* write, and could silently
+destroy work, which is why it was retired.
 
-    git add data public
-    git commit -m "fix: shorter description of what changed"
-    git push -u origin fix-something
+## What happens after you submit
 
-Open the pull request on GitHub, wait for the green check, merge. Merging
-publishes the site.
+Two automated checks run on the pull request:
 
-## Worked example: fixing a broken link
+- **Validate** — rebuilds the data from your record and checks every resource
+  against the vocabulary. If the form said you were clean, this passes.
+- **Link check** — runs weekly rather than per pull request, so a new URL is not
+  verified until the following week's run.
 
-The weekly link check has opened an issue saying `who-costing-tool` is dead.
+A reviewer then reads the record itself, which is the part no machine can do:
+is this resource actually good, is it already covered by something in the
+collection, are the tags the ones someone would search by.
 
-    git checkout main && git pull
-    git checkout -b fix-who-costing-tool
-
-Open `data/resources/who-costing-tool.json`. Find the current URL by hand —
-search for the resource on the publisher's own site. Prefer the publisher's
-canonical page over a mirror, and a DOI over whichever host currently serves an
-article. Change one line:
-
-    "url": "https://www.who.int/publications/i/item/9789240118843",
-
-Then:
-
-    npm run validate
-
-You should see three lines of output ending in `Validation status: PASS`. If
-instead you see `DRIFT`, you edited the generated file by mistake — undo that
-and edit the record under `data/` instead.
-
-    git add data public
-    git commit -m "fix: who-costing-tool now points at the 2nd edition"
-    git push -u origin fix-who-costing-tool
-
-Open the PR, merge it, and close the link-check issue.
-
-## Where you can edit
-
-**On your own machine — the only route that completes on its own.** Everything
-above assumes this.
-
-**In the browser (github.dev, or GitHub's pencil icon).** Pressing `.` on the
-repository opens VS Code in a browser tab, and the schema autocomplete works
-there. It is a genuinely good place to *read* records, and fine for editing
-anything that is not under `data/`.
-
-But it **cannot finish a data change**, because there is no terminal, so you
-cannot run `npm run validate`. A pull request made this way will fail CI with a
-drift error. If you have already made one, it is not lost — someone with a
-clone can check out your branch, run `npm run validate`, and push the result to
-it. Just do not expect a browser-only edit to merge by itself.
-
-**Not editing at all.** Open an issue with the "Suggest a resource" template. A
-link and a sentence on why it matters is enough; a curator handles the rest.
-
-## Never edit these
-
-    public/resources-data.js     generated from data/ — CI compares them
-    data/resource.schema.json    generated from public/taxonomy.js
-
-Both are build outputs. `npm run build` regenerates them; CI fails if a commit
-contains one that does not match its source.
+On merge, the site rebuilds and publishes automatically. There is no separate
+deploy step.
 
 ## Tagging: the part that actually matters
 
-The failure mode of a faceted library is not wrong tags. It is *too many* tags.
+The form will happily let you tick fifteen boxes. Do not.
 
-This collection has already been through it. `stakeholder-engagement` ended up
-on 68 of 79 records — 86% — which meant filtering by it excluded almost nothing.
-It had arrived through a migration that mapped three unrelated source terms onto
-it, and nobody noticed because nothing was obviously broken. Nine records
-genuinely concerned stakeholder engagement. The other 59 tags were noise that
-made the facet useless.
+Tag for **how someone would look for this**, not for everything it touches. A
+national genomic surveillance strategy touches workforce, financing, data
+sharing, and laboratory networks — but if you tag all four, it appears in every
+search and helps in none of them.
 
-So:
+Two specific traps, both learned the hard way from this collection's own
+history:
 
-**Tag what a resource is _about_, not what it touches.** Nextclade is a quality
-control tool. It is used within genomic surveillance, but it is not *about*
-genomic surveillance, and tagging it so makes `genomic-surveillance` mean
-nothing. A tree viewer is not a phylogenetics primer.
+- **`genomic-surveillance`** applies to nearly everything here. Use it only
+  where the surveillance system, programme, or strategy *is* the subject — not
+  for a tool that happens to be used in surveillance.
+- **`stakeholder-engagement`** should mean convening, engaging, or coordinating
+  stakeholders. It should not mean "this document mentions planning". At one
+  point 86% of records carried it, which made it worthless as a filter.
 
-**Prefer the specific tag over the general one.** If `environmental-surveillance`
-fits, you rarely also need `genomic-surveillance`. Two tags where one is a
-superset of the other is one tag too many.
+Each field shows a recommended maximum. Exceeding it is allowed and will not
+fail the automated check — it is a judgement call, and the form flags it in
+amber so you make that call deliberately. Topics recommend a maximum of five.
 
-**Stay inside the caps.** One to three topics is usually right; the validator
-warns above five. Audiences the same. If you find yourself wanting six, you are
-probably describing the field rather than the resource.
-
-**A tag on most records is a broken tag.** If you notice a facet value creeping
-past roughly half the collection, that is a signal to narrow it, not to keep
-going. Check with:
-
-    node -e 'const d=require("./public/resources-data.js");' 2>/dev/null || \
-      node -e '
-        const fs=require("fs");const db=new Function(fs.readFileSync("public/resources-data.js","utf8")+";return resourcesDatabase;")();
-        const t={};db.resources.forEach(r=>r.topics.forEach(x=>t[x]=(t[x]||0)+1));
-        Object.entries(t).sort((a,b)=>b[1]-a[1]).slice(0,5)
-          .forEach(([k,v])=>console.log(k,v,Math.round(100*v/db.resources.length)+"%"));'
-
-**Empty is allowed.** `pathogenFocus` is blank on most records and that is
-correct. A facet that does not apply should be left alone, not filled in.
+If the tag you need genuinely does not exist, do not force a near-enough one.
+Open an issue. Adding vocabulary is a small change to `public/taxonomy.js`, but
+it needs a developer, because the record schema is generated from it.
 
 ## URLs
 
-Use the publisher's own canonical page, not a mirror or an aggregator, and
-prefer a landing page over a direct PDF where both exist.
+Prefer a DOI (`https://doi.org/…`) for anything published. Publisher URLs move
+and platforms get reorganised; DOIs do not. Four of this collection's dead links
+were publisher URLs whose content had simply been relocated.
 
-The URL must start with `https://` and contain no whitespace. This is enforced
-by the schema for a reason: five records once had an audience list concatenated
-onto the end of their URL by a bad import, which broke every one of those links
-and went unnoticed because the value still started with `https://`.
+For a tool or an organisation, link the thing itself — the project homepage or
+repository — rather than a news article about it.
 
-If no public URL exists, use `#`. Four records currently do, and they lead
-nowhere — better to fix or remove them than to add more.
+## The `validated` flag
 
-## `validated`
+New records are created with `"validated": false`. It means "not yet checked by
+a second pair of eyes", not "bad". A reviewer sets it to `true` once they have
+confirmed the record is accurate and well tagged. Editing an existing record
+preserves whatever it already had; if your edit is substantial, say so in the
+pull request so the reviewer knows to look again.
 
-Set `validated: true` only when you have opened the URL and checked the tagging
-yourself. It is a curator's signature, not a formality. The build collects these
-into `metadata.validatedResources`.
+## Proposing a resource without a GitHub account
 
-Records that arrive from `.github/workflows/ai-draft.yml` are always
-`validated: false` and carry a `machine-drafted` legacy tag. Every field in them
-is a suggestion.
-
-## Reviewing someone else's pull request
-
-- Does the URL open, and is it the canonical page?
-- Do title and organization match what the publisher says?
-- Is the description factual, and free of marketing language?
-- Do the topics describe what it is *about*?
-- Is anything tagged so broadly it stops filtering narrowing?
-- Is `validated` honest?
-
-## Proposing without Git
-
-Open an issue with the "Suggest a resource" template. A link and a sentence on
-why it matters is enough; a curator handles the tagging.
+Open an issue using the **Add a resource** template. Someone with access will
+turn it into a pull request. Slower, but nothing is lost.
 
 ## Drafting with AI
 
-Actions → "Draft a resource record" → run with a URL. It fetches the page,
-drafts a record against the current taxonomy, and opens a pull request for
-review. Values the model invents are filtered out against the real vocabulary
-before anything is written, and reported in the PR body so you can see what it
-tried. Requires an `OPENAI_API_KEY` repository secret.
+There is a workflow that drafts a record from a URL. It is a starting point, not
+a submission: it always marks the result `validated: false`, and it filters its
+own output against the real vocabulary so it cannot invent a tag. Read what it
+produced before opening a pull request — particularly the description, which is
+where a model will confidently write something plausible and wrong.
 
-## Commands
+## For developers
 
-    npm run new -- <id>   scaffold a record
-    npm run build         regenerate resources-data.js and the schema
-    npm run check         verify both are in sync with their sources
-    npm run validate      check + full taxonomy validation
+You only need this section if you are changing the site, the scripts, or the
+taxonomy. Curation does not require it.
+
+```bash
+git clone https://github.com/PHemarajata/aphl-gse-resources.git
+cd aphl-gse-resources
+```
+
+Node 20 or newer. There is no `npm install` — every script here is
+zero-dependency on purpose, so nothing rots.
+
+```bash
+npm run build      # data/ -> public/resources-data.js, and the record schema
+npm run validate   # build, then check the schema and every record
+npm run preview    # build, then serve the site on http://localhost:8080
+npm run new -- my-resource-id   # scaffold a new record file
+```
+
+`public/resources-data.js` is a build artifact and is **not** committed. It is
+built by CI on every pull request and again at deploy time. Run `npm run build`
+after pulling, or `npm run preview`, which does it for you.
+
+The normal loop:
+
+```bash
+git checkout main && git pull
+git checkout -b short-description-of-change
+# edit
+npm run validate
+git add -A
+git commit -m "what changed, and why"
+git push -u origin short-description-of-change
+```
+
+Then open a pull request.
+
+### Never edit these by hand
+
+- **`public/resources-data.js`** — generated from `data/`. Not committed. Any
+  hand edit is erased by the next build.
+- **`data/resource.schema.json`** — generated from `public/taxonomy.js`. Edit
+  the taxonomy and run `npm run build`. CI fails if these two disagree, and that
+  check is the one thing a browser cannot satisfy, which is why taxonomy changes
+  need a clone.
 
 ## The taxonomy
 
-`public/taxonomy.js` is the single source of truth for every controlled
-vocabulary. Adding a value there, running `npm run build`, and committing the
-result is all that is needed — the schema, the editor autocomplete, the
-validator and the site filters all follow from it.
-
-Be slow to add topics. An empty facet value renders as a filter that returns
-nothing; there are currently 11 such options, which is already too many.
+`public/taxonomy.js` is the single source of truth for the controlled
+vocabulary. The site, the curation form, the record schema, and the validators
+all read it. Version 2.0.0 keeps every v1 value unchanged and adds eight
+optional secondary facets, all defaulting to "not assessed" — an honest blank is
+more useful than a guess.
