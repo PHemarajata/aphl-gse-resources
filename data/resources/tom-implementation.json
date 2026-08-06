@@ -4,7 +4,7 @@
   "title": "Target Operating Model (TOM) for Genomic Surveillance",
   "organization": "Frontiers in Public Health",
   "description": "Systematic implementation framework decomposing workflows into prioritized sampling, capacity determination, site assessment, and sustainability design.",
-  "url": "https://www.frontiersin.org/articles/10.3389/fpubh.2022.871114/full",
+  "url": "https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2022.871114/full",
   "audiences": [
     "policymakers",
     "laboratorians",
@@ -46,6 +46,8 @@
   ],
   "lastUpdated": "",
   "formatDetails": "",
-  "legacyTags": [],
+  "legacyTags": [
+    "url updated 2026-08-06: Frontiers restructured article URLs"
+  ],
   "validated": false
 }
