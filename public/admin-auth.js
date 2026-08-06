@@ -160,11 +160,22 @@
 
     const allowFallback = POLICY.allowDomainOrEmailFallback === true || hasAllowList;
     if (!allowFallback) {
-      // Backward-compatible default for environments that only need signed-in gating.
-      return true;
+      // Fail closed.
+      //
+      // This used to `return true`, which authorized ANY signed-in Google account
+      // whenever no policy was configured — and no policy ever was, because
+      // window.__ADMIN_AUTH_POLICY__ was never set anywhere in the repo. The admin
+      // panel was therefore open to anyone who could complete a Google sign-in.
+      console.error('[admin-auth] No authorization policy is configured. ' +
+        'Set window.__ADMIN_AUTH_POLICY__ in admin.html. Denying access.');
+      return false;
     }
 
-    const domainMatch = ALLOWED_DOMAINS.some((domain) => email.endsWith('@' + domain));
+    // Compare the domain exactly rather than with endsWith(), which would also
+    // match a local part that itself contains an '@'.
+    const parts = email.split('@');
+    const domain = parts.length === 2 ? parts[1] : '';
+    const domainMatch = domain !== '' && ALLOWED_DOMAINS.includes(domain);
     const emailMatch = ALLOWED_EMAILS.includes(email);
     return domainMatch || emailMatch;
   }
